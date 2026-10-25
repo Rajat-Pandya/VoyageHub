@@ -1,0 +1,77 @@
+<div class="page-header">
+  <div>
+    <h2>New Travel Request</h2>
+    <p class="subtitle">Submit travel plans and estimated expenses for manager approval.</p>
+  </div>
+  <a mat-stroked-button routerLink="/requests">
+    <mat-icon>arrow_back</mat-icon> Back to Requests
+  </a>
+</div>
+
+<mat-card class="form-card">
+  <mat-card-content>
+    <form class="request-form">
+      <div class="form-section-title">Trip Overview</div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Destination City</mat-label>
+          <input matInput placeholder="e.g. Mumbai, Singapore" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Travel Purpose</mat-label>
+          <mat-select required>
+            <mat-option value="client">Client Meeting</mat-option>
+            <mat-option value="conference">Conference / Training</mat-option>
+            <mat-option value="onsite">On-site Delivery</mat-option>
+            <mat-option value="internal">Internal Company Event</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Departure Date</mat-label>
+          <input title="Departure date is required" matInput [matDatepicker]="departurePicker" required />
+          <mat-datepicker-toggle matIconSuffix [for]="departurePicker"></mat-datepicker-toggle>
+          <mat-datepicker #departurePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Return Date</mat-label>
+          <input title="Return date is required" matInput [matDatepicker]="returnPicker" required />
+          <mat-datepicker-toggle matIconSuffix [for]="returnPicker"></mat-datepicker-toggle>
+          <mat-datepicker #returnPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-section-title">Details & Estimates</div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Estimated Budget (₹)</mat-label>
+          <input matInput type="number" placeholder="e.g. 25000" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Approving Manager</mat-label>
+          <mat-select required>
+            <mat-option value="priya">Priya Sharma (Engineering Lead)</mat-option>
+            <mat-option value="amit">Amit Verma (Operations Director)</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Business Justification & Notes</mat-label>
+        <textarea matInput rows="3" placeholder="Provide context on client deliverables and expected ROI"></textarea>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-stroked-button type="button" routerLink="/requests">Cancel</button>
+        <button mat-raised-button color="primary" type="button">Submit Request</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,73 @@
+<div class="page-header">
+  <div>
+    <h2>Travel Spend & Analytics</h2>
+    <p class="subtitle">Budget utilization, department breakdowns, and corporate travel metrics.</p>
+  </div>
+  <button mat-stroked-button>
+    <mat-icon>download</mat-icon> Export CSV
+  </button>
+</div>
+
+<section class="summary-cards">
+  <mat-card>
+    <mat-card-content>
+      <span class="card-label">Q4 Total Budget</span>
+      <span class="card-value">₹60,00,000</span>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content>
+      <span class="card-label">Actual Spend</span>
+      <span class="card-value">₹52,50,000</span>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content>
+      <span class="card-label">Remaining Budget</span>
+      <span class="card-value">₹7,50,000</span>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content>
+      <span class="card-label">Active Travelers</span>
+      <span class="card-value">34</span>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section class="department-spend">
+  <h3>Department Spend Breakdown</h3>
+  <div class="table-container">
+    <table mat-table [dataSource]="spendData">
+      <ng-container matColumnDef="department">
+        <th mat-header-cell *matHeaderCellDef>Department</th>
+        <td mat-cell *matCellDef="let s">
+          <strong>{{ s.department }}</strong>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="budget">
+        <th mat-header-cell *matHeaderCellDef>Allocated Budget</th>
+        <td mat-cell *matCellDef="let s">{{ s.budget }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="spent">
+        <th mat-header-cell *matHeaderCellDef>YTD Spent</th>
+        <td mat-cell *matCellDef="let s">{{ s.spent }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="variance">
+        <th mat-header-cell *matHeaderCellDef>Variance</th>
+        <td mat-cell *matCellDef="let s">
+          <span class="variance-positive">{{ s.variance }}</span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,77 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.page-header {
+  @include flex-between;
+  margin-bottom: $space-6;
+
+  h2 {
+    margin-bottom: $space-1;
+  }
+
+  .subtitle {
+    font-size: $font-size-sm;
+    color: $color-neutral-600;
+    margin-bottom: 0;
+  }
+
+  button mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-right: $space-1;
+  }
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-4;
+  margin-bottom: $space-8;
+
+  @include respond-to('tablet') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('mobile') {
+    grid-template-columns: 1fr;
+  }
+
+  mat-card {
+    mat-card-content {
+      @include flex-column($space-2);
+
+      .card-label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        color: $color-neutral-600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .card-value {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: $color-neutral-900;
+        @include font-tabular;
+        line-height: $line-height-tight;
+      }
+    }
+  }
+}
+
+.department-spend {
+  h3 {
+    margin-bottom: $space-4;
+  }
+
+  .variance-positive {
+    color: $color-primary;
+    font-weight: $font-weight-semibold;
+    @include font-tabular;
+  }
+}

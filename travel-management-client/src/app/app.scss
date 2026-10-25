@@ -1,0 +1,180 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// ------------------------------------------------------------------------------
+// Top Toolbar
+// ------------------------------------------------------------------------------
+.app-toolbar {
+  height: $toolbar-height;
+  background-color: $color-surface !important;
+  color: $color-neutral-900 !important;
+  border-bottom: 1px solid $color-border;
+  padding: 0 $space-4;
+  box-shadow: $shadow-xs;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+
+  .menu-toggle {
+    margin-right: $space-2;
+    color: $color-neutral-700;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+
+    .brand-icon {
+      color: $color-primary;
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
+
+    .brand-title {
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $color-neutral-900;
+      letter-spacing: -0.01em;
+    }
+  }
+
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: $radius-full;
+      background-color: $color-primary-tint;
+      color: $color-primary-dark;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $color-primary-light;
+    }
+
+    .user-meta {
+      display: flex;
+      flex-direction: column;
+
+      @include tablet-down {
+        display: none;
+      }
+
+      .user-name {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-neutral-900;
+        line-height: 1.2;
+      }
+
+      .user-role {
+        font-size: $font-size-xs;
+        color: $color-neutral-500;
+        line-height: 1.2;
+      }
+    }
+  }
+}
+
+// ------------------------------------------------------------------------------
+// Layout & Sidenav
+// ------------------------------------------------------------------------------
+.layout-container {
+  flex: 1;
+  height: calc(100vh - #{$toolbar-height});
+  background-color: $color-background;
+
+  .sidebar {
+    width: $sidenav-width;
+    background-color: $color-surface;
+    border-right: 1px solid $color-border;
+    padding: $space-4 0;
+    box-sizing: border-box;
+
+    .nav-section-label {
+      padding: $space-2 $space-4;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      color: $color-neutral-500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    mat-nav-list {
+      padding: 0 $space-2;
+
+      a.mat-mdc-list-item {
+        border-radius: $radius-sm;
+        margin-bottom: $space-1;
+        color: $color-neutral-700;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        border-left: 3px solid transparent;
+        transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast;
+
+        mat-icon {
+          color: $color-neutral-500;
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          margin-right: $space-3;
+          transition: color $transition-fast;
+        }
+
+        &:hover {
+          background-color: $color-neutral-100;
+          color: $color-neutral-900;
+
+          mat-icon {
+            color: $color-neutral-800;
+          }
+        }
+
+        &.active-link {
+          background-color: $color-primary-tint !important;
+          color: $color-primary-dark !important;
+          border-left: 3px solid $color-primary !important;
+          font-weight: $font-weight-semibold !important;
+
+          mat-icon {
+            color: $color-primary !important;
+          }
+        }
+      }
+    }
+  }
+
+  .content-wrapper {
+    background-color: $color-background;
+    height: 100%;
+    overflow-y: auto;
+
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: $space-6;
+
+      @include tablet-down {
+        padding: $space-4;
+      }
+    }
+  }
+}

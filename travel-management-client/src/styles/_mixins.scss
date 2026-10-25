@@ -1,0 +1,145 @@
+// ==============================================================================
+// REUSABLE MIXINS — TRAVEL MANAGEMENT SYSTEM
+// ==============================================================================
+
+@use 'variables' as *;
+
+// ------------------------------------------------------------------------------
+// 1. Layout & Flexbox Helpers
+// ------------------------------------------------------------------------------
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin flex-column($gap: null) {
+  display: flex;
+  flex-direction: column;
+  @if $gap != null {
+    gap: $gap;
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 2. Card Panel Mixin
+// ------------------------------------------------------------------------------
+@mixin card($padding: $space-6) {
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  padding: $padding;
+  box-sizing: border-box;
+}
+
+// ------------------------------------------------------------------------------
+// 3. Text & Typography Helpers
+// ------------------------------------------------------------------------------
+@mixin truncate-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin font-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+// ------------------------------------------------------------------------------
+// 4. Accessible Focus Ring
+// ------------------------------------------------------------------------------
+@mixin focus-ring($color: $color-primary, $offset: 2px) {
+  outline: 2px solid $color;
+  outline-offset: $offset;
+}
+
+// ------------------------------------------------------------------------------
+// 5. Responsive Breakpoint Mixins
+// ------------------------------------------------------------------------------
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'mobile' or $breakpoint == 'sm' {
+    @media (max-width: #{$breakpoint-sm - 1}) {
+      @content;
+    }
+  } @else if $breakpoint == 'tablet' or $breakpoint == 'md' {
+    @media (max-width: #{$breakpoint-md - 1}) {
+      @content;
+    }
+  } @else if $breakpoint == 'desktop' or $breakpoint == 'lg' {
+    @media (min-width: #{$breakpoint-md}) {
+      @content;
+    }
+  } @else if $breakpoint == 'wide' or $breakpoint == 'xl' {
+    @media (min-width: #{$breakpoint-xl}) {
+      @content;
+    }
+  } @else {
+    @media (max-width: #{$breakpoint}) {
+      @content;
+    }
+  }
+}
+
+@mixin tablet-down {
+  @media (max-width: #{$breakpoint-md - 1}) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 6. Contained Table Wrapper (Responsive horizontal scrolling)
+// ------------------------------------------------------------------------------
+@mixin table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background-color: $color-surface;
+
+  table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 7. Status Chip Mixin
+// ------------------------------------------------------------------------------
+@mixin status-badge($bg, $color, $border) {
+  background-color: $bg !important;
+  color: $color !important;
+  border: 1px solid $border !important;
+  font-weight: $font-weight-medium !important;
+  font-size: $font-size-xs !important;
+  letter-spacing: 0.02em;
+  padding: 2px 8px !important;
+  border-radius: $radius-sm !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.4;
+  height: auto !important;
+  min-height: 22px;
+}

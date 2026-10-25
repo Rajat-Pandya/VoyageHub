@@ -1,1 +1,354 @@
-/* You can add global styles to this file, and also import other style files */
+// ==============================================================================
+// GLOBAL STYLES — TRAVEL MANAGEMENT SYSTEM (ENTERPRISE B2B SAAS)
+// ==============================================================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'theme' as theme;
+
+// ------------------------------------------------------------------------------
+// 1. Angular Material M3 Theme Application
+// ------------------------------------------------------------------------------
+html {
+  height: 100%;
+  @include theme.apply-theme;
+}
+
+// ------------------------------------------------------------------------------
+// 2. Base Document & Reset
+// ------------------------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: #{$line-height-base};
+  color: var(--color-neutral-800);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light;
+}
+
+// ------------------------------------------------------------------------------
+// 3. Typography Defaults (Linear / Notion Style)
+// ------------------------------------------------------------------------------
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-neutral-900);
+  font-weight: #{$font-weight-semibold};
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.015em;
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+  line-height: #{$line-height-tight};
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  line-height: #{$line-height-tight};
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+  line-height: #{$line-height-tight};
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  color: var(--color-neutral-700);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color #{$transition-fast};
+
+  &:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 4. Accessibility & Focus States
+// ------------------------------------------------------------------------------
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.cdk-keyboard-focused,
+.mat-mdc-button:focus-visible,
+.mat-mdc-raised-button:focus-visible,
+.mat-mdc-stroked-button:focus-visible,
+.mat-mdc-list-item:focus-visible {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 2px !important;
+}
+
+// ------------------------------------------------------------------------------
+// 5. Status Chip Color-Coding (WCAG AA Compliant)
+// ------------------------------------------------------------------------------
+// Reusable status utility classes and Material chip overrides
+.status-draft,
+mat-chip.status-draft,
+.mat-mdc-chip.status-draft {
+  @include status-badge(var(--status-draft-bg), var(--status-draft-text), var(--status-draft-border));
+}
+
+.status-submitted,
+mat-chip.status-submitted,
+.mat-mdc-chip.status-submitted {
+  @include status-badge(var(--status-submitted-bg), var(--status-submitted-text), var(--status-submitted-border));
+}
+
+.status-manager-approved,
+mat-chip.status-manager-approved,
+.mat-mdc-chip.status-manager-approved {
+  @include status-badge(var(--status-manager-approved-bg), var(--status-manager-approved-text), var(--status-manager-approved-border));
+}
+
+.status-finance-approved,
+mat-chip.status-finance-approved,
+.mat-mdc-chip.status-finance-approved {
+  @include status-badge(var(--status-finance-approved-bg), var(--status-finance-approved-text), var(--status-finance-approved-border));
+}
+
+.status-rejected,
+mat-chip.status-rejected,
+.mat-mdc-chip.status-rejected {
+  @include status-badge(var(--status-rejected-bg), var(--status-rejected-text), var(--status-rejected-border));
+}
+
+.status-closed,
+mat-chip.status-closed,
+.mat-mdc-chip.status-closed {
+  @include status-badge(var(--status-closed-bg), var(--status-closed-text), var(--status-closed-border));
+}
+
+// ------------------------------------------------------------------------------
+// 6. Angular Material Card Overrides (Consistent elevation & padding)
+// ------------------------------------------------------------------------------
+mat-card,
+.mat-mdc-card {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-card) !important;
+  transition: box-shadow #{$transition-fast}, border-color #{$transition-fast};
+
+  .mat-mdc-card-content {
+    padding: var(--space-6) !important;
+  }
+
+  .mat-mdc-card-header {
+    padding: var(--space-4) var(--space-6) var(--space-2) !important;
+  }
+
+  .mat-mdc-card-actions {
+    padding: var(--space-3) var(--space-6) var(--space-4) !important;
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 7. Angular Material Table Overrides (Zebra striping & header styling)
+// ------------------------------------------------------------------------------
+.table-container,
+.table-responsive {
+  @include table-container;
+}
+
+table.mat-mdc-table {
+  background-color: var(--color-surface);
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+
+  // Header Row
+  tr.mat-mdc-header-row {
+    background-color: var(--color-neutral-50) !important;
+    height: 44px;
+    border-bottom: 1px solid var(--color-border);
+
+    th.mat-mdc-header-cell {
+      color: var(--color-neutral-900) !important;
+      font-weight: #{$font-weight-semibold} !important;
+      font-size: var(--font-size-xs) !important;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--color-border) !important;
+      padding: var(--space-2) var(--space-4) !important;
+    }
+  }
+
+  // Data Rows
+  tr.mat-mdc-row {
+    height: 48px;
+    transition: background-color #{$transition-fast};
+    border-bottom: 1px solid var(--color-border-subtle);
+
+    // Zebra striping on even rows
+    &:nth-child(even) {
+      background-color: var(--color-background);
+    }
+
+    // Subtle row hover
+    &:hover {
+      background-color: var(--color-primary-tint) !important;
+    }
+
+    td.mat-mdc-cell {
+      color: var(--color-neutral-800);
+      font-size: var(--font-size-base);
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding: var(--space-2) var(--space-4) !important;
+    }
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 8. Buttons & Actions (Single primary button per view convention)
+// ------------------------------------------------------------------------------
+.mat-mdc-raised-button.mat-primary,
+button[mat-raised-button][color='primary'],
+a[mat-raised-button][color='primary'] {
+  background-color: var(--color-primary) !important;
+  color: #FFFFFF !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-xs) !important;
+  font-weight: #{$font-weight-medium} !important;
+  font-size: var(--font-size-base) !important;
+  transition: background-color #{$transition-fast}, box-shadow #{$transition-fast};
+
+  &:hover {
+    background-color: var(--color-primary-hover) !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+}
+
+.mat-mdc-stroked-button,
+button[mat-stroked-button],
+a[mat-stroked-button] {
+  border-color: var(--color-neutral-300) !important;
+  color: var(--color-neutral-800) !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: #{$font-weight-medium} !important;
+  font-size: var(--font-size-base) !important;
+  background-color: var(--color-surface);
+  transition: background-color #{$transition-fast}, border-color #{$transition-fast};
+
+  &:hover {
+    background-color: var(--color-neutral-50) !important;
+    border-color: var(--color-neutral-400) !important;
+  }
+}
+
+.mat-mdc-button,
+button[mat-button],
+a[mat-button] {
+  color: var(--color-accent) !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: #{$font-weight-medium} !important;
+
+  &:hover {
+    background-color: var(--color-accent-light) !important;
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 9. Forms & Form Fields (Appearance Outline & Uniform Spacing)
+// ------------------------------------------------------------------------------
+.mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: var(--space-4);
+
+  .mat-mdc-text-field-wrapper {
+    background-color: var(--color-surface) !important;
+    border-radius: var(--radius-sm) !important;
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: var(--color-neutral-300) !important;
+  }
+
+  &:hover .mdc-notched-outline__leading,
+  &:hover .mdc-notched-outline__notch,
+  &:hover .mdc-notched-outline__trailing {
+    border-color: var(--color-neutral-400) !important;
+  }
+
+  &.mat-focused .mdc-notched-outline__leading,
+  &.mat-focused .mdc-notched-outline__notch,
+  &.mat-focused .mdc-notched-outline__trailing {
+    border-color: var(--color-primary) !important;
+    border-width: 2px !important;
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 10. Stepper Customization (Corporate, minimal)
+// ------------------------------------------------------------------------------
+mat-stepper.mat-stepper-horizontal {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-6);
+
+  .mat-step-header {
+    border-radius: var(--radius-sm);
+
+    &:hover {
+      background-color: var(--color-neutral-50);
+    }
+
+    &.cdk-keyboard-focused,
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+    }
+  }
+
+  .mat-step-icon-state-number,
+  .mat-step-icon-selected {
+    background-color: var(--color-primary) !important;
+    color: #FFFFFF !important;
+  }
+
+  .mat-step-icon-state-done {
+    background-color: var(--color-primary) !important;
+    color: #FFFFFF !important;
+  }
+}
+
+// ------------------------------------------------------------------------------
+// 11. Tabs Customization
+// ------------------------------------------------------------------------------
+mat-tab-group {
+  .mat-mdc-tab-header {
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-4);
+  }
+
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: var(--color-primary) !important;
+    font-weight: #{$font-weight-semibold};
+  }
+
+  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border-color: var(--color-primary) !important;
+    border-top-width: 2px !important;
+  }
+}

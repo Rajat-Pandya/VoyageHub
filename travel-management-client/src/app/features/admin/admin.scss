@@ -1,0 +1,28 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.page-header {
+  @include flex-between;
+  margin-bottom: $space-6;
+
+  h2 {
+    margin-bottom: $space-1;
+  }
+
+  .subtitle {
+    font-size: $font-size-sm;
+    color: $color-neutral-600;
+    margin-bottom: 0;
+  }
+
+  button mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-right: $space-1;
+  }
+}

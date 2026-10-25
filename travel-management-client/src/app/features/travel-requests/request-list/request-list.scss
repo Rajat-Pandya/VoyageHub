@@ -1,0 +1,38 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+// ------------------------------------------------------------------------------
+// Page Header
+// ------------------------------------------------------------------------------
+.page-header {
+  @include flex-between;
+  margin-bottom: $space-6;
+
+  h2 {
+    margin-bottom: 0;
+  }
+}
+
+// ------------------------------------------------------------------------------
+// Filters Bar (Uniform $space-4 spacing)
+// ------------------------------------------------------------------------------
+.filters {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  margin-bottom: $space-6;
+  flex-wrap: wrap;
+
+  mat-form-field {
+    width: 220px;
+    margin-bottom: 0;
+
+    @include respond-to('mobile') {
+      width: 100%;
+    }
+  }
+}

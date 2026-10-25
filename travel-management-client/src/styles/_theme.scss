@@ -1,0 +1,66 @@
+// ==============================================================================
+// ANGULAR MATERIAL M3 THEME CUSTOMIZATION — TRAVEL MANAGEMENT SYSTEM
+// ==============================================================================
+
+@use '@angular/material' as mat;
+@use 'variables' as *;
+
+// ------------------------------------------------------------------------------
+// 1. Theme Configuration
+// ------------------------------------------------------------------------------
+// Custom M3 theme definition using teal primary and blue tertiary/accent palettes
+$theme-config: (
+  color: (
+    theme-type: light,
+    primary: mat.$spring-green-palette,
+    tertiary: mat.$azure-palette,
+    use-system-variables: true,
+  ),
+  typography: (
+    plain-family: ('Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif),
+    brand-family: ('Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif),
+    bold-weight: 600,
+    medium-weight: 500,
+    regular-weight: 400,
+  ),
+  density: (
+    scale: 0,
+  ),
+);
+
+// Define theme object via Angular Material M3 API
+$theme: mat.define-theme($theme-config);
+
+// ------------------------------------------------------------------------------
+// 2. M3 System Overrides — Pin exact enterprise palette tokens
+// ------------------------------------------------------------------------------
+$theme-overrides: (
+  primary: $color-primary,
+  on-primary: #FFFFFF,
+  primary-container: $color-primary-tint,
+  on-primary-container: $color-primary-dark,
+  secondary: $color-accent,
+  on-secondary: #FFFFFF,
+  tertiary: $color-accent,
+  on-tertiary: #FFFFFF,
+  error: $color-warn,
+  on-error: #FFFFFF,
+  surface: $color-surface,
+  on-surface: $color-neutral-900,
+  surface-container: $color-background,
+  surface-container-low: $color-surface,
+  surface-container-high: $color-neutral-100,
+  surface-container-highest: $color-neutral-200,
+  outline: $color-neutral-300,
+  outline-variant: $color-neutral-200,
+  background: $color-background,
+  on-background: $color-neutral-900,
+);
+
+// ------------------------------------------------------------------------------
+// 3. Global Theme Applicator Mixin
+// ------------------------------------------------------------------------------
+@mixin apply-theme {
+  @include mat.all-component-themes($theme);
+  @include mat.theme($theme-config, $theme-overrides);
+}

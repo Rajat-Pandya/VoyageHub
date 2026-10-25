@@ -1,0 +1,65 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: $space-2 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+    width: 2px;
+    background-color: $color-border;
+  }
+
+  .timeline-entry {
+    position: relative;
+    padding-left: $space-7;
+    margin-bottom: $space-5;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: $color-primary;
+      background-color: $color-surface;
+      border-radius: $radius-full;
+      z-index: 1;
+    }
+
+    .timeline-body {
+      p {
+        margin-bottom: $space-1;
+        font-size: $font-size-sm;
+        color: $color-neutral-800;
+
+        strong {
+          color: $color-neutral-900;
+          font-weight: $font-weight-semibold;
+        }
+      }
+
+      .timeline-timestamp {
+        font-size: $font-size-xs;
+        color: $color-neutral-500;
+        @include font-tabular;
+      }
+    }
+  }
+}

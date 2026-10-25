@@ -1,0 +1,45 @@
+<div class="page-header">
+  <div>
+    <h2>Travel Policies & Administration</h2>
+    <p class="subtitle">Configure corporate travel allowances, per-diem rates, and tier-based limits.</p>
+  </div>
+  <button mat-raised-button color="primary">
+    <mat-icon>add</mat-icon> New Policy Tier
+  </button>
+</div>
+
+<div class="table-container">
+  <table mat-table [dataSource]="policies">
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef>Employee Band</th>
+      <td mat-cell *matCellDef="let p">
+        <strong>{{ p.level }}</strong>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="flightClass">
+      <th mat-header-cell *matHeaderCellDef>Flight Allowance</th>
+      <td mat-cell *matCellDef="let p">{{ p.flightClass }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="hotelLimit">
+      <th mat-header-cell *matHeaderCellDef>Hotel Cap</th>
+      <td mat-cell *matCellDef="let p">{{ p.hotelLimit }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="perDiem">
+      <th mat-header-cell *matHeaderCellDef>Daily Allowance</th>
+      <td mat-cell *matCellDef="let p">{{ p.perDiem }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let p">
+        <button mat-button>Edit</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="policyColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: policyColumns;"></tr>
+  </table>
+</div>

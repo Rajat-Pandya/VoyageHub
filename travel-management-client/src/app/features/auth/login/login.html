@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="login-wrapper">
+  <mat-card class="login-card">
+    <mat-card-content>
+      <div class="login-header">
+        <div class="brand-badge">
+          <mat-icon>flight_takeoff</mat-icon>
+        </div>
+        <h2>Travel Management System</h2>
+        <p class="subtitle">Internal corporate travel & expense portal</p>
+      </div>
+
+      <form class="login-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Corporate Email</mat-label>
+          <input matInput type="email" placeholder="name@company.com" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input title="Password is required" matInput type="password" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="button" routerLink="/dashboard" class="submit-btn">
+          Sign In
+        </button>
+
+        <div class="divider">
+          <span>or sign in with</span>
+        </div>
+
+        <button mat-stroked-button type="button" routerLink="/dashboard" class="sso-btn">
+          <mat-icon>security</mat-icon> Single Sign-On (Okta / SAML)
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

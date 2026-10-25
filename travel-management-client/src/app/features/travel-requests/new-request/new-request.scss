@@ -1,0 +1,72 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.page-header {
+  @include flex-between;
+  margin-bottom: $space-6;
+
+  h2 {
+    margin-bottom: $space-1;
+  }
+
+  .subtitle {
+    font-size: $font-size-sm;
+    color: $color-neutral-600;
+    margin-bottom: 0;
+  }
+
+  a mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-right: $space-1;
+  }
+}
+
+.form-card {
+  max-width: 800px;
+  margin: 0 auto;
+
+  .request-form {
+    .form-section-title {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $color-neutral-900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-bottom: $space-2;
+      border-bottom: 1px solid $color-border;
+      margin-top: $space-2;
+      margin-bottom: $space-4;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $space-4;
+
+      @include respond-to('mobile') {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: $space-3;
+      margin-top: $space-6;
+      padding-top: $space-4;
+      border-top: 1px solid $color-border;
+    }
+  }
+}

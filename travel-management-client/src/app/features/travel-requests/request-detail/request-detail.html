@@ -1,0 +1,82 @@
+<!-- request-detail.component.html -->
+<mat-card class="request-header">
+    <div class="header-row">
+        <div class="header-info">
+            <h2>{{ request.destination }}</h2>
+            <p class="header-meta">{{ request.dates }} · {{ request.purpose }}</p>
+        </div>
+        <mat-chip [class]="'status-' + request.status.toLowerCase().replace(' ', '-')">{{ request.status }}</mat-chip>
+    </div>
+</mat-card>
+
+<mat-stepper [selectedIndex]="currentStepIndex" orientation="horizontal">
+    <mat-step label="Submitted" [editable]="false" [completed]="currentStepIndex > 0"></mat-step>
+    <mat-step label="Manager Approved" [editable]="false" [completed]="currentStepIndex > 1"></mat-step>
+    <mat-step label="Finance Approved" [editable]="false" [completed]="currentStepIndex > 2"></mat-step>
+    <mat-step label="Closed" [editable]="false" [completed]="currentStepIndex > 3"></mat-step>
+</mat-stepper>
+
+<mat-tab-group>
+    <mat-tab label="Itinerary">
+        <div class="tab-content">
+            <div class="tab-actions">
+                <button mat-stroked-button><mat-icon>add</mat-icon> Add Segment</button>
+                <button mat-stroked-button><mat-icon>add</mat-icon> Add Stay</button>
+            </div>
+            <div class="table-container">
+                <table mat-table [dataSource]="itinerary">
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef>Type</th>
+                        <td mat-cell *matCellDef="let i">{{ i.type }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="details">
+                        <th mat-header-cell *matHeaderCellDef>Details</th>
+                        <td mat-cell *matCellDef="let i">{{ i.details }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dates">
+                        <th mat-header-cell *matHeaderCellDef>Dates</th>
+                        <td mat-cell *matCellDef="let i">{{ i.dates }}</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="itineraryColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: itineraryColumns;"></tr>
+                </table>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Expenses">
+        <div class="tab-content">
+            <div class="tab-actions">
+                <button mat-stroked-button><mat-icon>add</mat-icon> Add Expense</button>
+            </div>
+            <div class="table-container">
+                <table mat-table [dataSource]="expenses">
+                    <ng-container matColumnDef="category">
+                        <th mat-header-cell *matHeaderCellDef>Category</th>
+                        <td mat-cell *matCellDef="let e">{{ e.category }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef>Amount</th>
+                        <td mat-cell *matCellDef="let e">{{ e.amount }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="proof">
+                        <th mat-header-cell *matHeaderCellDef>Proof</th>
+                        <td mat-cell *matCellDef="let e">{{ e.proof }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>Status</th>
+                        <td mat-cell *matCellDef="let e"><mat-chip [class]="'status-' + e.status.toLowerCase().replace(' ', '-')">{{ e.status }}</mat-chip></td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="expenseColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: expenseColumns;"></tr>
+                </table>
+            </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Approval History">
+        <div class="tab-content">
+            <app-timeline [entries]="history"></app-timeline>
+        </div>
+    </mat-tab>
+</mat-tab-group>
