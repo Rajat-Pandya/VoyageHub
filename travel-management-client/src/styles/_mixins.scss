@@ -112,7 +112,6 @@
 @mixin table-container {
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   border-radius: $radius-md;
   border: 1px solid $color-border;
   background-color: $color-surface;
