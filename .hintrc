@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "user-select",
+          "backdrop-filter",
+          "scrollbar-width",
+          "scrollbar-width: none",
+          "border: 1.75px solid color-mix(in srgb, currentColor 25%, transparent)",
+          "border: 0.5px solid color-mix(in srgb, var(--border-strong) 30%, transparent)"
+        ]
+      }
+    ],
+    "no-inline-styles": "off",
+    "axe/text-alternatives": [
+      "default",
+      {
+        "document-title": "off"
+      }
+    ],
+    "axe/language": [
+      "default",
+      {
+        "html-has-lang": "off"
+      }
+    ]
+  }
+}

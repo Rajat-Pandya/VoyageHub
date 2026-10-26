@@ -11,14 +11,22 @@
 .page-header {
   @include flex-between;
   margin-bottom: $space-6;
+  flex-wrap: wrap;
+  gap: $space-3;
 
   h2 {
-    margin-bottom: 0;
+    margin-bottom: $space-1;
+  }
+
+  .subtitle {
+    font-size: $font-size-sm;
+    color: $color-neutral-600;
+    margin: 0;
   }
 }
 
 // ------------------------------------------------------------------------------
-// Filters Bar (Uniform $space-4 spacing)
+// Filters Bar
 // ------------------------------------------------------------------------------
 .filters {
   display: flex;
@@ -27,12 +35,112 @@
   margin-bottom: $space-6;
   flex-wrap: wrap;
 
-  mat-form-field {
-    width: 220px;
+  .filter-field {
+    width: 280px;
     margin-bottom: 0;
 
     @include respond-to('mobile') {
       width: 100%;
     }
   }
+}
+
+.table-subtext {
+  font-size: $font-size-xs;
+  color: $color-neutral-500;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.budget-num {
+  font-weight: $font-weight-semibold;
+  @include font-tabular;
+}
+
+.policy-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  padding: 2px 7px;
+  border-radius: $radius-sm;
+
+  .tiny-icon {
+    font-size: 13px;
+    width: 13px;
+    height: 13px;
+  }
+
+  &.policy-ok {
+    background-color: #e1f5ee;
+    color: #085041;
+  }
+
+  &.policy-flag {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+}
+
+.status-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  padding: 2px 8px;
+  border-radius: $radius-full;
+
+  &.status-draft {
+    background-color: $status-draft-bg;
+    color: $status-draft-text;
+  }
+
+  &.status-submitted {
+    background-color: $status-submitted-bg;
+    color: $status-submitted-text;
+  }
+
+  &.status-manager-approved {
+    background-color: $status-manager-approved-bg;
+    color: $status-manager-approved-text;
+  }
+
+  &.status-finance-approved {
+    background-color: $status-finance-approved-bg;
+    color: $status-finance-approved-text;
+  }
+
+  &.status-closed {
+    background-color: $status-closed-bg;
+    color: $status-closed-text;
+  }
+
+  &.status-rejected {
+    background-color: $status-rejected-bg;
+    color: $status-rejected-text;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: $space-8 $space-4;
+  color: $color-neutral-500;
+
+  mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: $space-2;
+  }
+
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+  }
+}
+
+.full-width {
+  width: 100%;
 }

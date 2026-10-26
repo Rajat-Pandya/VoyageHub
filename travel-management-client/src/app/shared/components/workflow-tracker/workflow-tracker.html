@@ -1,0 +1,69 @@
+<div class="workflow-tracker-container">
+  <div class="tracker-header">
+    <div class="tracker-title-group">
+      <mat-icon class="flow-icon">account_tree</mat-icon>
+      <div>
+        <h4 class="tracker-title">End-to-End Application Workflow</h4>
+        <span class="tracker-subtitle">
+          Live stage tracking per TMS Governance & Approval Policy
+        </span>
+      </div>
+    </div>
+
+    <!-- Status legend matching the Mermaid diagram classDefs -->
+    <div class="tracker-legend">
+      <span class="legend-badge legend-employee">Employee Action</span>
+      <span class="legend-badge legend-decision">Policy / Check</span>
+      <span class="legend-badge legend-approver">Approver Decision</span>
+      <span class="legend-badge legend-terminal">Terminal State</span>
+      @if (showRejectionBranch) {
+        <span class="legend-badge legend-reject">Rejected State</span>
+      }
+    </div>
+  </div>
+
+  @if (showRejectionBranch) {
+    <div class="rejection-callout">
+      <mat-icon class="reject-icon">cancel</mat-icon>
+      <div class="rejection-text">
+        <strong>Workflow Terminated: Rejected at {{ request.rejectionStage }} Review</strong>
+        <p>{{ request.rejectionComment }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- Interactive Pipeline Track -->
+  <div class="pipeline-track">
+    @for (step of pipelineSteps; track step.id; let idx = $index; let last = $last) {
+      <div
+        class="pipeline-node-wrapper"
+        [class.is-current]="isCurrent(step.id)"
+        [class.is-completed]="isCompleted(step.id)"
+        [class.is-dimmed]="showRejectionBranch && !isCompleted(step.id)"
+      >
+        <div class="node-box" [attr.data-role]="step.roleType">
+          <div class="node-icon-circle">
+            @if (isCompleted(step.id)) {
+              <mat-icon class="node-check">done</mat-icon>
+            } @else {
+              <mat-icon class="node-icon">{{ step.icon }}</mat-icon>
+            }
+          </div>
+          <div class="node-info">
+            <span class="node-label">{{ step.label }}</span>
+            <span class="node-sublabel">{{ step.sublabel }}</span>
+          </div>
+          @if (isCurrent(step.id)) {
+            <span class="current-indicator">ACTIVE STAGE</span>
+          }
+        </div>
+
+        @if (!last) {
+          <div class="node-connector" [class.connector-active]="isCompleted(step.id)">
+            <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

@@ -75,3 +75,59 @@
     @include font-tabular;
   }
 }
+
+.chart-placeholder {
+  margin-bottom: $space-6;
+
+  .fake-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: $space-4;
+    height: 180px;
+    padding-top: $space-4;
+
+    .bar {
+      flex: 1;
+      max-width: 80px;
+      border-radius: $radius-sm $radius-sm 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: $space-2;
+      transition: height $transition-base;
+
+      span {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+      }
+
+      &.bar-sales {
+        height: 60%;
+        background-color: $color-primary;
+
+        span {
+          color: $color-surface;
+        }
+      }
+
+      &.bar-engg {
+        height: 35%;
+        background-color: $color-accent;
+
+        span {
+          color: $color-surface;
+        }
+      }
+
+      &.bar-mktg {
+        height: 25%;
+        background-color: $color-neutral-400;
+
+        span {
+          color: $color-neutral-900;
+        }
+      }
+    }
+  }
+}
+

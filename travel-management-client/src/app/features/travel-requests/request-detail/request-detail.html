@@ -1,82 +1,507 @@
-<!-- request-detail.component.html -->
-<mat-card class="request-header">
-    <div class="header-row">
-        <div class="header-info">
-            <h2>{{ request.destination }}</h2>
-            <p class="header-meta">{{ request.dates }} · {{ request.purpose }}</p>
-        </div>
-        <mat-chip [class]="'status-' + request.status.toLowerCase().replace(' ', '-')">{{ request.status }}</mat-chip>
+<!-- Navigation Back & Role Simulator Bar -->
+<div class="top-nav-bar">
+  <a mat-button routerLink="/requests" class="back-link">
+    <mat-icon>arrow_back</mat-icon> Back to Requests
+  </a>
+
+  <!-- Demo Role Switcher to test and view every stage of the workflow -->
+  <div class="role-switcher">
+    <span class="role-label">Test Workflow as:</span>
+    <div class="role-buttons">
+      <button
+        mat-button
+        [class.active-role]="currentUserRole === 'Employee'"
+        (click)="setRole('Employee')"
+      >
+        Employee
+      </button>
+      <button
+        mat-button
+        [class.active-role]="currentUserRole === 'Manager'"
+        (click)="setRole('Manager')"
+      >
+        Manager
+      </button>
+      <button
+        mat-button
+        [class.active-role]="currentUserRole === 'Finance'"
+        (click)="setRole('Finance')"
+      >
+        Finance
+      </button>
+      <button
+        mat-button
+        [class.active-role]="currentUserRole === 'Admin'"
+        (click)="setRole('Admin')"
+      >
+        Admin
+      </button>
     </div>
+  </div>
+</div>
+
+<!-- Request Header Card -->
+<mat-card class="request-header">
+  <div class="header-row">
+    <div class="header-info">
+      <div class="title-with-badge">
+        <h2>{{ request().destination }}</h2>
+        <span
+          class="status-chip"
+          [class]="'status-' + request().status.toLowerCase().replace(' ', '-')"
+        >
+          {{ request().status }}
+        </span>
+      </div>
+      <p class="header-meta">
+        <strong>{{ request().employee }}</strong> ({{ request().department }}) · {{ request().dates }} ·
+        Estimated Budget: <strong>₹{{ request().estimatedBudget.toLocaleString('en-IN') }}</strong>
+      </p>
+      <p class="purpose-text"><strong>Purpose:</strong> {{ request().purpose }}</p>
+    </div>
+
+    <!-- Quick Status indicator badge -->
+    <div class="policy-indicator">
+      @if (request().policyCheck.passed) {
+        <span class="policy-badge policy-ok">
+          <mat-icon>check_circle</mat-icon> Policy Compliant
+        </span>
+      } @else {
+        <span class="policy-badge policy-flag">
+          <mat-icon>warning</mat-icon> Policy Flagged
+        </span>
+      }
+    </div>
+  </div>
 </mat-card>
 
-<mat-stepper [selectedIndex]="currentStepIndex" orientation="horizontal">
-    <mat-step label="Submitted" [editable]="false" [completed]="currentStepIndex > 0"></mat-step>
-    <mat-step label="Manager Approved" [editable]="false" [completed]="currentStepIndex > 1"></mat-step>
-    <mat-step label="Finance Approved" [editable]="false" [completed]="currentStepIndex > 2"></mat-step>
-    <mat-step label="Closed" [editable]="false" [completed]="currentStepIndex > 3"></mat-step>
-</mat-stepper>
+<!-- End-to-End Workflow Tracker Component -->
+<app-workflow-tracker [request]="request()"></app-workflow-tracker>
 
-<mat-tab-group>
-    <mat-tab label="Itinerary">
-        <div class="tab-content">
-            <div class="tab-actions">
-                <button mat-stroked-button><mat-icon>add</mat-icon> Add Segment</button>
-                <button mat-stroked-button><mat-icon>add</mat-icon> Add Stay</button>
-            </div>
-            <div class="table-container">
-                <table mat-table [dataSource]="itinerary">
-                    <ng-container matColumnDef="type">
-                        <th mat-header-cell *matHeaderCellDef>Type</th>
-                        <td mat-cell *matCellDef="let i">{{ i.type }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="details">
-                        <th mat-header-cell *matHeaderCellDef>Details</th>
-                        <td mat-cell *matCellDef="let i">{{ i.details }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="dates">
-                        <th mat-header-cell *matHeaderCellDef>Dates</th>
-                        <td mat-cell *matCellDef="let i">{{ i.dates }}</td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="itineraryColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: itineraryColumns;"></tr>
-                </table>
-            </div>
+<!-- Rejection Notice (if rejected) -->
+@if (isRejected) {
+  <mat-card class="rejection-banner">
+    <mat-icon color="warn">error_outline</mat-icon>
+    <div class="rejection-details">
+      <strong>Request Rejected at {{ request().rejectionStage }} Review Stage</strong>
+      <p>{{ request().rejectionComment }}</p>
+    </div>
+  </mat-card>
+}
+
+<!-- Workflow Action Panel: Dynamic per Workflow Stage and Role -->
+@if (canSubmitDraft) {
+  <mat-card class="action-panel draft-action-panel">
+    <div class="action-info">
+      <mat-icon class="info-icon">info</mat-icon>
+      <div>
+        <strong>Ready to Submit?</strong>
+        <p>Submitting triggers automated policy check and routes directly to your Manager for review.</p>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="submitDraft()">
+      <mat-icon>send</mat-icon> Submit for Approval
+    </button>
+  </mat-card>
+}
+
+@if (canApprove) {
+  <mat-card class="action-panel">
+    <div class="action-panel-header">
+      <mat-icon class="pending-icon">hourglass_top</mat-icon>
+      <div>
+        <strong>
+          Action Required: {{ currentUserRole === 'Manager' ? 'Manager Review' : 'Finance Review' }}
+        </strong>
+        <p>Review the details, itinerary, and budget before authorizing this trip.</p>
+      </div>
+    </div>
+
+    <div class="action-buttons-row">
+      <button mat-raised-button color="primary" (click)="approve()">
+        <mat-icon>check</mat-icon> Approve Request
+      </button>
+      <button mat-stroked-button color="warn" (click)="showRejectForm = !showRejectForm">
+        <mat-icon>close</mat-icon> Reject Request
+      </button>
+    </div>
+
+    @if (showRejectForm) {
+      <div class="reject-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Reason for rejection (mandatory per policy)</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="rejectComment"
+            rows="3"
+            placeholder="Explain why this request cannot be approved..."
+          ></textarea>
+        </mat-form-field>
+        <div class="reject-actions">
+          <button mat-button (click)="cancelReject()">Cancel</button>
+          <button
+            mat-raised-button
+            color="warn"
+            [disabled]="!rejectComment.trim()"
+            (click)="reject()"
+          >
+            Confirm Rejection
+          </button>
         </div>
+      </div>
+    }
+  </mat-card>
+}
+
+@if (canCloseRequest && currentUserRole !== 'Employee') {
+  <mat-card class="action-panel close-panel">
+    <div class="action-info">
+      <mat-icon class="success-icon">task_alt</mat-icon>
+      <div>
+        <strong>Trip Fulfilled & Expenses Processed</strong>
+        <p>All itinerary bookings and expense reimbursements are resolved. Close this request to finalize records.</p>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="closeTravelRequest()">
+      <mat-icon>done_all</mat-icon> Mark Closed
+    </button>
+  </mat-card>
+}
+
+<!-- Detailed Tabs for Itinerary, Expenses, and Audit History -->
+<mat-card class="details-tabs-card">
+  <mat-tab-group animationDuration="200ms">
+    <!-- TAB 1: Itinerary Segments & Stays (Node K) -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">flight</mat-icon>
+        Itinerary & Stays ({{ request().itinerary.length }})
+      </ng-template>
+
+      <div class="tab-content">
+        @if (!isRequestActive && request().status !== 'Draft' && !isRejected) {
+          <div class="info-callout">
+            <mat-icon>info</mat-icon>
+            <span>
+              Itinerary segments and hotel bookings can be added once the travel request is approved by Finance.
+            </span>
+          </div>
+        }
+
+        <div class="tab-actions">
+          <h3>Travel Segments & Bookings</h3>
+          @if (isRequestActive || currentUserRole === 'Employee') {
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="showAddItinerary = !showAddItinerary"
+            >
+              <mat-icon>add</mat-icon> Add Segment / Stay
+            </button>
+          }
+        </div>
+
+        @if (showAddItinerary) {
+          <mat-card class="inline-form-card">
+            <h4>Add New Itinerary Segment</h4>
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Segment Type</mat-label>
+                <mat-select [(ngModel)]="newItinerary.type">
+                  <mat-option value="Flight">Flight</mat-option>
+                  <mat-option value="Train">Train</mat-option>
+                  <mat-option value="Stay">Hotel / Stay</mat-option>
+                  <mat-option value="Cab">Cab / Transport</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="flex-2">
+                <mat-label>Details (e.g. Airline, Hotel Name, Route)</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="newItinerary.details"
+                  placeholder="e.g. Indigo 6E 421 or Taj Lands End"
+                />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Dates / Times</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="newItinerary.dates"
+                  placeholder="e.g. 12 Nov, 08:00 AM"
+                />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Confirmation / PNR</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="newItinerary.confirmationCode"
+                  placeholder="e.g. 6E-VJ98"
+                />
+              </mat-form-field>
+            </div>
+            <div class="inline-form-actions">
+              <button mat-button (click)="showAddItinerary = false">Cancel</button>
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!newItinerary.details || !newItinerary.dates"
+                (click)="addItinerarySegment()"
+              >
+                Save Segment
+              </button>
+            </div>
+          </mat-card>
+        }
+
+        @if (request().itinerary.length === 0) {
+          <div class="empty-state">
+            <mat-icon>luggage</mat-icon>
+            <p>No itinerary segments or hotel stays added yet.</p>
+          </div>
+        } @else {
+          <table mat-table [dataSource]="request().itinerary" class="mat-elevation-z1 full-width">
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef>Type</th>
+              <td mat-cell *matCellDef="let item">
+                <span class="type-pill type-{{ item.type.toLowerCase() }}">
+                  <mat-icon class="small-icon">
+                    @if (item.type === 'Flight') { flight }
+                    @else if (item.type === 'Train') { train }
+                    @else if (item.type === 'Stay') { hotel }
+                    @else { directions_car }
+                  </mat-icon>
+                  {{ item.type }}
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="details">
+              <th mat-header-cell *matHeaderCellDef>Details</th>
+              <td mat-cell *matCellDef="let item">
+                <strong>{{ item.details }}</strong>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dates">
+              <th mat-header-cell *matHeaderCellDef>Dates / Schedule</th>
+              <td mat-cell *matCellDef="let item">{{ item.dates }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="confirmationCode">
+              <th mat-header-cell *matHeaderCellDef>Confirmation Code</th>
+              <td mat-cell *matCellDef="let item">
+                <code>{{ item.confirmationCode || '—' }}</code>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="itineraryColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: itineraryColumns"></tr>
+          </table>
+        }
+      </div>
     </mat-tab>
 
-    <mat-tab label="Expenses">
-        <div class="tab-content">
-            <div class="tab-actions">
-                <button mat-stroked-button><mat-icon>add</mat-icon> Add Expense</button>
-            </div>
-            <div class="table-container">
-                <table mat-table [dataSource]="expenses">
-                    <ng-container matColumnDef="category">
-                        <th mat-header-cell *matHeaderCellDef>Category</th>
-                        <td mat-cell *matCellDef="let e">{{ e.category }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="amount">
-                        <th mat-header-cell *matHeaderCellDef>Amount</th>
-                        <td mat-cell *matCellDef="let e">{{ e.amount }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="proof">
-                        <th mat-header-cell *matHeaderCellDef>Proof</th>
-                        <td mat-cell *matCellDef="let e">{{ e.proof }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="status">
-                        <th mat-header-cell *matHeaderCellDef>Status</th>
-                        <td mat-cell *matCellDef="let e"><mat-chip [class]="'status-' + e.status.toLowerCase().replace(' ', '-')">{{ e.status }}</mat-chip></td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="expenseColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: expenseColumns;"></tr>
-                </table>
-            </div>
+    <!-- TAB 2: Expenses & Reimbursement (Node L -> M -> N/O) -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">receipt</mat-icon>
+        Expenses & Reimbursements ({{ request().expenses.length }})
+      </ng-template>
+
+      <div class="tab-content">
+        @if (!isRequestActive && request().status !== 'Draft' && !isRejected) {
+          <div class="info-callout">
+            <mat-icon>info</mat-icon>
+            <span>
+              Expenses can be submitted with bill proofs after Finance grants trip approval.
+            </span>
+          </div>
+        }
+
+        <div class="tab-actions">
+          <div>
+            <h3>Submitted Expenses</h3>
+            <span class="tab-subtitle">Submit bills & receipts for Finance reimbursement review</span>
+          </div>
+          @if (isRequestActive || currentUserRole === 'Employee') {
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="showAddExpense = !showAddExpense"
+            >
+              <mat-icon>upload_file</mat-icon> Submit Expense + Proof
+            </button>
+          }
         </div>
+
+        @if (showAddExpense) {
+          <mat-card class="inline-form-card">
+            <h4>Submit Expense with Proof</h4>
+            <div class="form-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Expense Category</mat-label>
+                <mat-select [(ngModel)]="newExpense.category">
+                  <mat-option value="Transport">Transport (Cab/Flight/Train)</mat-option>
+                  <mat-option value="Stay">Hotel / Stay</mat-option>
+                  <mat-option value="Meals">Meals</mat-option>
+                  <mat-option value="Client Entertainment">Client Entertainment</mat-option>
+                  <mat-option value="Incidental">Incidental</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Amount (₹)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="newExpense.amount"
+                  placeholder="e.g. 2500"
+                />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="flex-2">
+                <mat-label>Receipt Proof / Bill Filename</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="newExpense.proofName"
+                  placeholder="e.g. hotel_invoice.pdf"
+                />
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Expense Description / Notes</mat-label>
+              <input
+                matInput
+                [(ngModel)]="newExpense.notes"
+                placeholder="Optional explanation for Finance review..."
+              />
+            </mat-form-field>
+
+            <div class="inline-form-actions">
+              <button mat-button (click)="showAddExpense = false">Cancel</button>
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!newExpense.amount || newExpense.amount <= 0"
+                (click)="submitExpenseItem()"
+              >
+                Submit Expense
+              </button>
+            </div>
+          </mat-card>
+        }
+
+        @if (request().expenses.length === 0) {
+          <div class="empty-state">
+            <mat-icon>receipt_long</mat-icon>
+            <p>No expenses filed yet for this travel request.</p>
+          </div>
+        } @else {
+          <table mat-table [dataSource]="request().expenses" class="mat-elevation-z1 full-width">
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef>Category</th>
+              <td mat-cell *matCellDef="let exp">
+                <strong>{{ exp.category }}</strong>
+                @if (exp.notes) {
+                  <div class="expense-notes">{{ exp.notes }}</div>
+                }
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef>Amount</th>
+              <td mat-cell *matCellDef="let exp">
+                <span class="amount-value">{{ exp.amount }}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="proof">
+              <th mat-header-cell *matHeaderCellDef>Proof Attachment</th>
+              <td mat-cell *matCellDef="let exp">
+                <span class="proof-chip">
+                  <mat-icon class="file-icon">attach_file</mat-icon> {{ exp.proof }}
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Reimbursement Status</th>
+              <td mat-cell *matCellDef="let exp">
+                <span
+                  class="expense-status-badge"
+                  [class]="'exp-' + exp.status.toLowerCase()"
+                >
+                  {{ exp.status }}
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Finance Action</th>
+              <td mat-cell *matCellDef="let exp">
+                @if (exp.status === 'Pending' && (currentUserRole === 'Finance' || currentUserRole === 'Admin')) {
+                  <div class="expense-actions">
+                    <button
+                      mat-button
+                      color="primary"
+                      class="btn-approve-sm"
+                      (click)="approveExpense(exp.id)"
+                    >
+                      <mat-icon>check</mat-icon> Reimburse
+                    </button>
+                    <button
+                      mat-button
+                      color="warn"
+                      class="btn-reject-sm"
+                      (click)="rejectExpense(exp.id)"
+                    >
+                      <mat-icon>close</mat-icon> Reject
+                    </button>
+                  </div>
+                } @else {
+                  <span class="resolved-text">
+                    {{ exp.status === 'Reimbursed' ? 'Reimbursed to Payroll' : exp.status === 'Rejected' ? 'Rejected' : 'Awaiting Review' }}
+                  </span>
+                }
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="expenseColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: expenseColumns"></tr>
+          </table>
+        }
+      </div>
     </mat-tab>
 
-    <mat-tab label="Approval History">
-        <div class="tab-content">
-            <app-timeline [entries]="history"></app-timeline>
+    <!-- TAB 3: Governance, Policy & History -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">history</mat-icon>
+        Policy & Audit History
+      </ng-template>
+
+      <div class="tab-content">
+        <!-- Policy Evaluation Card -->
+        <div class="policy-eval-card" [class.policy-card-fail]="!request().policyCheck.passed">
+          <div class="eval-header">
+            <mat-icon>{{ request().policyCheck.passed ? 'verified' : 'report_problem' }}</mat-icon>
+            <h4>Corporate Travel Policy Assessment</h4>
+          </div>
+          <p>{{ request().policyCheck.message }}</p>
+          <div class="policy-meta">
+            <span>Threshold Cap: <strong>₹50,000</strong></span>
+            <span>Requested Budget: <strong>₹{{ request().estimatedBudget.toLocaleString('en-IN') }}</strong></span>
+            <span>Routing: <strong>{{ request().policyCheck.passed ? 'Standard 2-Tier Approval' : 'Secondary Escalation Flagged' }}</strong></span>
+          </div>
         </div>
+
+        <h3 class="audit-trail-title">Workflow Audit Trail</h3>
+        <app-timeline [entries]="request().history"></app-timeline>
+      </div>
     </mat-tab>
-</mat-tab-group>
+  </mat-tab-group>
+</mat-card>

@@ -1,28 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
+import { TravelRequestService } from '../../../core/services/travel-request.service';
 
 @Component({
   selector: 'app-request-list',
-  imports: [RouterLink, MatTableModule, MatChipsModule, MatButtonModule,
-    MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule,
-    MatNativeDateModule, MatIconModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    FormsModule,
+    MatTableModule,
+    MatChipsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatIconModule,
+  ],
   templateUrl: './request-list.html',
   styleUrl: './request-list.scss',
 })
 export class RequestList {
-  displayedColumns = ['destination', 'dates', 'status', 'submitted', 'actions'];
-  requests = [
-    { id: 1, destination: 'Mumbai', dates: '12 Nov – 15 Nov', status: 'Submitted', submitted: '05 Oct' },
-    { id: 2, destination: 'Bangalore', dates: '20 Nov – 22 Nov', status: 'Draft', submitted: '—' },
-    { id: 3, destination: 'Delhi', dates: '01 Dec – 03 Dec', status: 'Rejected', submitted: '28 Sep' },
-  ];
+  readonly travelService = inject(TravelRequestService);
+
+  readonly selectedStatus = signal<string>('all');
+
+  readonly filteredRequests = computed(() => {
+    const list = this.travelService.requests();
+    const filter = this.selectedStatus();
+    if (filter === 'all') return list;
+    return list.filter(r => r.status.toLowerCase().replace(' ', '-') === filter);
+  });
+
+  displayedColumns = ['destination', 'dates', 'budget', 'policy', 'status', 'actions'];
 }

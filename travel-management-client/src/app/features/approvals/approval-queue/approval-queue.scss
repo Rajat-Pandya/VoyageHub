@@ -6,7 +6,6 @@
 }
 
 .page-header {
-  @include flex-between;
   margin-bottom: $space-6;
 
   h2 {
@@ -16,7 +15,170 @@
   .subtitle {
     font-size: $font-size-sm;
     color: $color-neutral-600;
-    margin-bottom: 0;
+    margin: 0;
+  }
+}
+
+.queue-tabs-card {
+  padding: 0;
+  overflow: hidden;
+
+  .tab-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-right: $space-2;
+    vertical-align: middle;
+  }
+}
+
+.tab-content {
+  padding: $space-5;
+}
+
+.filters-bar {
+  @include flex-between;
+  margin-bottom: $space-4;
+  flex-wrap: wrap;
+  gap: $space-3;
+
+  .filter-field {
+    min-width: 240px;
+  }
+
+  .queue-summary {
+    font-size: $font-size-xs;
+    color: $color-neutral-600;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.expense-queue-header {
+  margin-bottom: $space-4;
+  .subtitle {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $color-neutral-600;
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.dept-text {
+  font-size: $font-size-xs;
+  color: $color-neutral-600;
+}
+
+.purpose-snippet {
+  font-size: $font-size-xs;
+  color: $color-neutral-500;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.budget-value {
+  font-weight: $font-weight-semibold;
+  @include font-tabular;
+}
+
+.policy-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  padding: 2px 7px;
+  border-radius: $radius-sm;
+
+  .xs-icon {
+    font-size: 13px;
+    width: 13px;
+    height: 13px;
+  }
+
+  &.policy-ok {
+    background-color: #e1f5ee;
+    color: #085041;
+  }
+
+  &.policy-flag {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+}
+
+.stage-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  padding: 2px 8px;
+  border-radius: $radius-full;
+
+  &.stage-manager {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+  }
+
+  &.stage-finance {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+  }
+}
+
+.status-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: $font-weight-semibold;
+  padding: 2px 8px;
+  border-radius: $radius-full;
+
+  &.status-submitted {
+    background-color: $status-submitted-bg;
+    color: $status-submitted-text;
+  }
+
+  &.status-manager-approved {
+    background-color: $status-manager-approved-bg;
+    color: $status-manager-approved-text;
+  }
+}
+
+.trip-link {
+  color: $color-primary;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.expense-notes {
+  font-size: $font-size-xs;
+  color: $color-neutral-600;
+}
+
+.proof-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  background-color: $color-neutral-100;
+  padding: 2px 8px;
+  border-radius: $radius-sm;
+  color: $color-neutral-700;
+
+  .xs-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+    color: $color-neutral-500;
   }
 }
 
@@ -24,4 +186,41 @@
   display: flex;
   align-items: center;
   gap: $space-2;
+
+  .btn-xs {
+    font-size: 11px;
+    line-height: 26px;
+    padding: 0 10px;
+    min-width: unset;
+
+    .xs-icon {
+      font-size: 13px;
+      width: 13px;
+      height: 13px;
+      margin-right: 2px;
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: $space-8 $space-4;
+  color: $color-neutral-500;
+
+  mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: $space-2;
+    color: $color-primary;
+  }
+
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+  }
+}
+
+.full-width {
+  width: 100%;
 }

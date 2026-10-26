@@ -1,10 +1,14 @@
 <!-- timeline.component.html -->
 <ul class="timeline">
-    <li *ngFor="let entry of entries" class="timeline-entry">
-        <mat-icon class="timeline-dot">fiber_manual_record</mat-icon>
-        <div class="timeline-body">
-            <p><strong>{{ entry.actor }}</strong> — {{ entry.action }}</p>
-            <span class="timeline-timestamp">{{ entry.timestamp }}</span>
-        </div>
+  @for (entry of entries; track entry) {
+    <li class="timeline-entry">
+      <mat-icon class="timeline-dot">fiber_manual_record</mat-icon>
+      <div class="timeline-body">
+        <p>
+          <strong>{{ entry.actor }}</strong> — {{ entry.action }}
+        </p>
+        <span class="timeline-timestamp">{{ entry.timestamp }}</span>
+      </div>
     </li>
+  }
 </ul>

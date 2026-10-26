@@ -1,61 +1,83 @@
 <!-- src/app/app.component.html -->
-<mat-toolbar class="app-toolbar">
-  @if (isMobile()) {
-    <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle navigation menu" class="menu-toggle">
-      <mat-icon>menu</mat-icon>
-    </button>
-  }
-  
-  <div class="brand">
-    <mat-icon class="brand-icon">flight_takeoff</mat-icon>
-    <span class="brand-title">Travel Management System</span>
-  </div>
-
-  <span class="toolbar-spacer"></span>
-
-  <div class="user-profile">
-    <div class="user-avatar">RS</div>
-    <div class="user-meta">
-      <span class="user-name">Rajat Sharma</span>
-      <span class="user-role">Corporate Travel</span>
+@if (!isLoggedIn()) {
+  <main class="auth-viewport">
+    <router-outlet />
+  </main>
+} @else {
+  <mat-toolbar class="app-toolbar">
+    @if (isMobile()) {
+      <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle navigation menu" class="menu-toggle">
+        <mat-icon>menu</mat-icon>
+      </button>
+    }
+    
+    <div class="brand">
+      <mat-icon class="brand-icon">flight_takeoff</mat-icon>
+      <span class="brand-title">Travel Management System</span>
     </div>
-  </div>
-</mat-toolbar>
 
-<mat-sidenav-container class="layout-container">
-  <mat-sidenav #sidenav [mode]="isMobile() ? 'over' : 'side'" [opened]="!isMobile()" class="sidebar">
-    <div class="nav-section-label">MAIN MENU</div>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link" (click)="onNavClick()">
-        <mat-icon matListItemIcon>dashboard</mat-icon>
-        <span matListItemTitle>Dashboard</span>
-      </a>
-      <a mat-list-item routerLink="/requests" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" (click)="onNavClick()">
-        <mat-icon matListItemIcon>list_alt</mat-icon>
-        <span matListItemTitle>My Requests</span>
-      </a>
-      <a mat-list-item routerLink="/requests/new" routerLinkActive="active-link" (click)="onNavClick()">
-        <mat-icon matListItemIcon>add_circle_outline</mat-icon>
-        <span matListItemTitle>New Request</span>
-      </a>
-      <a mat-list-item routerLink="/approvals" routerLinkActive="active-link" (click)="onNavClick()">
-        <mat-icon matListItemIcon>fact_check</mat-icon>
-        <span matListItemTitle>Approvals</span>
-      </a>
-      <a mat-list-item routerLink="/reports" routerLinkActive="active-link" (click)="onNavClick()">
-        <mat-icon matListItemIcon>bar_chart</mat-icon>
-        <span matListItemTitle>Reports</span>
-      </a>
-      <a mat-list-item routerLink="/admin" routerLinkActive="active-link" (click)="onNavClick()">
-        <mat-icon matListItemIcon>settings</mat-icon>
-        <span matListItemTitle>Admin</span>
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
+    <span class="toolbar-spacer"></span>
 
-  <mat-sidenav-content class="content-wrapper">
-    <main class="page-container">
-      <router-outlet />
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <!-- Live Backend API Status Indicator -->
+    <div
+      class="api-status-badge"
+      [class.api-online]="isBackendConnected()"
+      [class.api-offline]="!isBackendConnected()"
+      title="{{ isBackendConnected() ? 'Live connection to ASP.NET Core Web API (http://localhost:5201)' : 'API offline — using local state' }}"
+    >
+      <span class="status-dot"></span>
+      <span class="api-text">{{ isBackendConnected() ? '.NET 8 API Live (5201)' : 'Offline / Standalone' }}</span>
+    </div>
+
+    <div class="user-profile">
+      <div class="user-avatar">{{ currentUser()?.avatarInitials || 'US' }}</div>
+      <div class="user-meta">
+        <span class="user-name">{{ currentUser()?.name }}</span>
+        <span class="user-role">{{ currentUser()?.role }} · {{ currentUser()?.department }}</span>
+      </div>
+      <button mat-icon-button title="Sign Out" aria-label="Sign Out" class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="layout-container">
+    <mat-sidenav #sidenav [mode]="isMobile() ? 'over' : 'side'" [opened]="!isMobile()" class="sidebar">
+      <div class="nav-section-label">MAIN MENU</div>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link" (click)="onNavClick()">
+          <mat-icon matListItemIcon>dashboard</mat-icon>
+          <span matListItemTitle>Dashboard</span>
+        </a>
+        <a mat-list-item routerLink="/requests" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" (click)="onNavClick()">
+          <mat-icon matListItemIcon>list_alt</mat-icon>
+          <span matListItemTitle>My Requests</span>
+        </a>
+        <a mat-list-item routerLink="/requests/new" routerLinkActive="active-link" (click)="onNavClick()">
+          <mat-icon matListItemIcon>add_circle_outline</mat-icon>
+          <span matListItemTitle>New Request</span>
+        </a>
+        <a mat-list-item routerLink="/approvals" routerLinkActive="active-link" (click)="onNavClick()">
+          <mat-icon matListItemIcon>fact_check</mat-icon>
+          <span matListItemTitle>Approvals</span>
+        </a>
+        <a mat-list-item routerLink="/reports" routerLinkActive="active-link" (click)="onNavClick()">
+          <mat-icon matListItemIcon>bar_chart</mat-icon>
+          <span matListItemTitle>Reports</span>
+        </a>
+        @if (currentUser()?.role === 'Admin') {
+          <a mat-list-item routerLink="/admin" routerLinkActive="active-link" (click)="onNavClick()">
+            <mat-icon matListItemIcon>settings</mat-icon>
+            <span matListItemTitle>Admin</span>
+          </a>
+        }
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content-wrapper">
+      <main class="page-container">
+        <router-outlet />
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+}

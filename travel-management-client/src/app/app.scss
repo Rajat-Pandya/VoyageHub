@@ -51,6 +51,49 @@
     flex: 1 1 auto;
   }
 
+  .api-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: $radius-full;
+    font-size: 11px;
+    font-weight: $font-weight-medium;
+    margin-right: $space-3;
+    border: 1px solid transparent;
+    transition: all $transition-fast;
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: $radius-full;
+      display: inline-block;
+    }
+
+    &.api-online {
+      background-color: #ecfdf5;
+      color: #047857;
+      border-color: #a7f3d0;
+      .status-dot {
+        background-color: #10b981;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+      }
+    }
+
+    &.api-offline {
+      background-color: #fef3c7;
+      color: #b45309;
+      border-color: #fde68a;
+      .status-dot {
+        background-color: #f59e0b;
+      }
+    }
+
+    @include respond-to('mobile') {
+      display: none;
+    }
+  }
+
   .user-profile {
     display: flex;
     align-items: center;
@@ -178,3 +221,20 @@
     }
   }
 }
+
+.auth-viewport {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  background-color: $color-background;
+}
+
+.logout-btn {
+  color: $color-neutral-600;
+  margin-left: $space-2;
+
+  &:hover {
+    color: $color-warn;
+  }
+}
+

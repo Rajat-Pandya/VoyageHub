@@ -1,52 +1,231 @@
 <div class="page-header">
   <div>
     <h2>Approvals Queue</h2>
-    <p class="subtitle">Review and authorize travel requests and expense reimbursements.</p>
+    <p class="subtitle">
+      Review and authorize travel requests and expense reimbursements across the governance pipeline.
+    </p>
   </div>
 </div>
 
-<div class="table-container">
-  <table mat-table [dataSource]="pendingApprovals">
-    <ng-container matColumnDef="employee">
-      <th mat-header-cell *matHeaderCellDef>Employee</th>
-      <td mat-cell *matCellDef="let a">
-        <strong>{{ a.employee }}</strong>
-      </td>
-    </ng-container>
+<mat-card class="queue-tabs-card">
+  <mat-tab-group animationDuration="200ms">
+    <!-- TAB 1: Travel Requests Queue (Manager & Finance Review) -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">flight_takeoff</mat-icon>
+        Travel Requests ({{ pendingRequests().length }})
+      </ng-template>
 
-    <ng-container matColumnDef="destination">
-      <th mat-header-cell *matHeaderCellDef>Destination</th>
-      <td mat-cell *matCellDef="let a">{{ a.destination }}</td>
-    </ng-container>
+      <div class="tab-content">
+        <div class="filters-bar">
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Approval Stage</mat-label>
+            <mat-select [value]="stageFilter()" (selectionChange)="stageFilter.set($event.value)">
+              <mat-option value="all">All Pending Stages</mat-option>
+              <mat-option value="manager">Stage 1: Manager Review</mat-option>
+              <mat-option value="finance">Stage 2: Finance Review</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-    <ng-container matColumnDef="dates">
-      <th mat-header-cell *matHeaderCellDef>Dates</th>
-      <td mat-cell *matCellDef="let a">{{ a.dates }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef>Amount</th>
-      <td mat-cell *matCellDef="let a">{{ a.amount }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let a">
-        <mat-chip [class]="'status-' + a.status.toLowerCase().replace(' ', '-')">{{ a.status }}</mat-chip>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let a">
-        <div class="action-buttons">
-          <a mat-button [routerLink]="['/requests', a.id]">Review</a>
-          <button mat-stroked-button color="primary">Approve</button>
+          <span class="queue-summary">
+            {{ pendingRequests().length }} requests awaiting decision
+          </span>
         </div>
-      </td>
-    </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
+        @if (pendingRequests().length === 0) {
+          <div class="empty-state">
+            <mat-icon>done_all</mat-icon>
+            <p>All travel requests in this queue have been approved or resolved.</p>
+          </div>
+        } @else {
+          <div class="table-container">
+            <table mat-table [dataSource]="pendingRequests()" class="full-width">
+              <!-- Employee Column -->
+              <ng-container matColumnDef="employee">
+                <th mat-header-cell *matHeaderCellDef>Employee</th>
+                <td mat-cell *matCellDef="let r">
+                  <strong>{{ r.employee }}</strong>
+                  <div class="dept-text">{{ r.department }}</div>
+                </td>
+              </ng-container>
+
+              <!-- Destination Column -->
+              <ng-container matColumnDef="destination">
+                <th mat-header-cell *matHeaderCellDef>Destination</th>
+                <td mat-cell *matCellDef="let r">
+                  <strong>{{ r.destination }}</strong>
+                  <div class="purpose-snippet">{{ r.purpose }}</div>
+                </td>
+              </ng-container>
+
+              <!-- Dates Column -->
+              <ng-container matColumnDef="dates">
+                <th mat-header-cell *matHeaderCellDef>Dates</th>
+                <td mat-cell *matCellDef="let r">{{ r.dates }}</td>
+              </ng-container>
+
+              <!-- Amount Column -->
+              <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef>Estimated Budget</th>
+                <td mat-cell *matCellDef="let r">
+                  <span class="budget-value">₹{{ r.estimatedBudget.toLocaleString('en-IN') }}</span>
+                </td>
+              </ng-container>
+
+              <!-- Policy Column -->
+              <ng-container matColumnDef="policy">
+                <th mat-header-cell *matHeaderCellDef>Policy Check</th>
+                <td mat-cell *matCellDef="let r">
+                  @if (r.policyCheck.passed) {
+                    <span class="policy-chip policy-ok">
+                      <mat-icon class="xs-icon">check</mat-icon> Compliant
+                    </span>
+                  } @else {
+                    <span class="policy-chip policy-flag" title="{{ r.policyCheck.message }}">
+                      <mat-icon class="xs-icon">warning</mat-icon> Flagged
+                    </span>
+                  }
+                </td>
+              </ng-container>
+
+              <!-- Stage Column -->
+              <ng-container matColumnDef="stage">
+                <th mat-header-cell *matHeaderCellDef>Review Stage</th>
+                <td mat-cell *matCellDef="let r">
+                  <span class="stage-badge" [class.stage-manager]="r.status === 'Submitted'" [class.stage-finance]="r.status === 'Manager Approved'">
+                    {{ r.status === 'Submitted' ? 'Manager Review' : 'Finance Review' }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Status Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let r">
+                  <span class="status-pill status-{{ r.status.toLowerCase().replace(' ', '-') }}">
+                    {{ r.status }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Actions Column -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let r">
+                  <div class="action-buttons">
+                    <a mat-button color="primary" [routerLink]="['/requests', r.id]">Review</a>
+                    <button mat-raised-button color="primary" class="btn-xs" (click)="quickApprove(r)">
+                      Approve
+                    </button>
+                    <button mat-stroked-button color="warn" class="btn-xs" (click)="quickReject(r)">
+                      Reject
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
+        }
+      </div>
+    </mat-tab>
+
+    <!-- TAB 2: Expense Reimbursement Queue (Finance Review) -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">receipt</mat-icon>
+        Expense Reimbursements ({{ pendingExpenses().length }})
+      </ng-template>
+
+      <div class="tab-content">
+        <div class="expense-queue-header">
+          <p class="subtitle">
+            Finance verification of bills and receipts submitted by employees for approved travel.
+          </p>
+        </div>
+
+        @if (pendingExpenses().length === 0) {
+          <div class="empty-state">
+            <mat-icon>task_alt</mat-icon>
+            <p>No pending expense reimbursement requests. All submitted expenses are processed.</p>
+          </div>
+        } @else {
+          <div class="table-container">
+            <table mat-table [dataSource]="pendingExpenses()" class="full-width">
+              <ng-container matColumnDef="employee">
+                <th mat-header-cell *matHeaderCellDef>Employee</th>
+                <td mat-cell *matCellDef="let item">
+                  <strong>{{ item.employee }}</strong>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="destination">
+                <th mat-header-cell *matHeaderCellDef>Travel Trip</th>
+                <td mat-cell *matCellDef="let item">
+                  <a [routerLink]="['/requests', item.requestId]" class="trip-link">
+                    {{ item.destination }} (Req #{{ item.requestId }})
+                  </a>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef>Category & Notes</th>
+                <td mat-cell *matCellDef="let item">
+                  <strong>{{ item.expense.category }}</strong>
+                  @if (item.expense.notes) {
+                    <div class="expense-notes">{{ item.expense.notes }}</div>
+                  }
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef>Claimed Amount</th>
+                <td mat-cell *matCellDef="let item">
+                  <span class="budget-value">{{ item.expense.amount }}</span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="proof">
+                <th mat-header-cell *matHeaderCellDef>Receipt Proof</th>
+                <td mat-cell *matCellDef="let item">
+                  <span class="proof-badge">
+                    <mat-icon class="xs-icon">description</mat-icon> {{ item.expense.proof }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Finance Decision</th>
+                <td mat-cell *matCellDef="let item">
+                  <div class="action-buttons">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="btn-xs"
+                      (click)="approveExpense(item)"
+                    >
+                      <mat-icon class="xs-icon">check</mat-icon> Reimburse
+                    </button>
+                    <button
+                      mat-stroked-button
+                      color="warn"
+                      class="btn-xs"
+                      (click)="rejectExpense(item)"
+                    >
+                      <mat-icon class="xs-icon">close</mat-icon> Reject
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="expenseDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: expenseDisplayedColumns"></tr>
+            </table>
+          </div>
+        }
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

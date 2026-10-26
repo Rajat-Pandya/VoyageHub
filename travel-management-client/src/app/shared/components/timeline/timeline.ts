@@ -1,7 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-
 
 export interface TimelineEntry {
   actor: string;
@@ -11,10 +9,10 @@ export interface TimelineEntry {
 
 @Component({
   selector: 'app-timeline',
-  imports: [CommonModule, MatIconModule],
+  imports: [MatIconModule],
   templateUrl: './timeline.html',
   styleUrl: './timeline.scss',
 })
 export class Timeline {
-  @Input() entries! : TimelineEntry[];
+  @Input() entries!: TimelineEntry[];
 }

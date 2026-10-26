@@ -1,0 +1,284 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  margin-bottom: $space-6;
+}
+
+.workflow-tracker-container {
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $space-5;
+  box-shadow: $shadow-card;
+}
+
+.tracker-header {
+  @include flex-between;
+  margin-bottom: $space-4;
+  padding-bottom: $space-3;
+  border-bottom: 1px solid $color-border-subtle;
+  flex-wrap: wrap;
+  gap: $space-3;
+
+  .tracker-title-group {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+
+    .flow-icon {
+      color: $color-primary;
+      font-size: 26px;
+      width: 26px;
+      height: 26px;
+    }
+
+    .tracker-title {
+      margin: 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $color-neutral-900;
+    }
+
+    .tracker-subtitle {
+      font-size: $font-size-xs;
+      color: $color-neutral-600;
+    }
+  }
+
+  .tracker-legend {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+
+    .legend-badge {
+      font-size: 11px;
+      font-weight: $font-weight-medium;
+      padding: 2px 8px;
+      border-radius: $radius-full;
+      border: 1px solid transparent;
+
+      &.legend-employee {
+        background-color: #cfe2f3;
+        border-color: #2e74b5;
+        color: #1b4f72;
+      }
+
+      &.legend-decision {
+        background-color: #fdebd0;
+        border-color: #b98900;
+        color: #7d5a00;
+      }
+
+      &.legend-approver {
+        background-color: #e1f5ee;
+        border-color: #0f6e56;
+        color: #04342c;
+      }
+
+      &.legend-terminal {
+        background-color: #e8e8e8;
+        border-color: #73726c;
+        color: #3d3d3a;
+      }
+
+      &.legend-reject {
+        background-color: #f5d5d5;
+        border-color: #b33a3a;
+        color: #7a1f1f;
+      }
+    }
+  }
+}
+
+.rejection-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  margin-bottom: $space-4;
+  color: #991b1b;
+
+  .reject-icon {
+    color: #dc2626;
+  }
+
+  .rejection-text {
+    p {
+      margin: $space-1 0 0;
+      font-size: $font-size-sm;
+      color: #7f1d1d;
+    }
+  }
+}
+
+.pipeline-track {
+  display: flex;
+  align-items: stretch;
+  gap: $space-2;
+  overflow-x: auto;
+  padding: $space-2 0;
+
+  @include respond-to('mobile') {
+    flex-direction: column;
+    gap: $space-3;
+  }
+}
+
+.pipeline-node-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 140px;
+
+  @include respond-to('mobile') {
+    flex-direction: column;
+    min-width: 100%;
+  }
+
+  &.is-dimmed {
+    opacity: 0.45;
+    filter: grayscale(0.5);
+  }
+
+  .node-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: $space-3 $space-2;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+    background-color: $color-neutral-50;
+    transition: all $transition-base;
+    position: relative;
+    min-height: 98px;
+    justify-content: center;
+
+    @include respond-to('mobile') {
+      width: 100%;
+    }
+
+    &[data-role='employee'] {
+      background-color: #f2f7fc;
+      border-color: #bad3eb;
+      .node-icon-circle {
+        background-color: #cfe2f3;
+        color: #1b4f72;
+      }
+    }
+
+    &[data-role='decision'] {
+      background-color: #fefaf3;
+      border-color: #f8dfb4;
+      .node-icon-circle {
+        background-color: #fdebd0;
+        color: #7d5a00;
+      }
+    }
+
+    &[data-role='approver'] {
+      background-color: #f3faf7;
+      border-color: #b7e5d5;
+      .node-icon-circle {
+        background-color: #e1f5ee;
+        color: #04342c;
+      }
+    }
+
+    &[data-role='terminal'] {
+      background-color: #f9f9f9;
+      border-color: #d1d1d1;
+      .node-icon-circle {
+        background-color: #e8e8e8;
+        color: #3d3d3a;
+      }
+    }
+
+    .node-icon-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: $radius-full;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: $space-2;
+
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .node-label {
+      font-size: 12px;
+      font-weight: $font-weight-semibold;
+      color: $color-neutral-900;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .node-sublabel {
+      font-size: 10px;
+      color: $color-neutral-600;
+      line-height: 1.2;
+      display: block;
+    }
+
+    .current-indicator {
+      position: absolute;
+      top: -9px;
+      background-color: $color-primary;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: $font-weight-bold;
+      padding: 1px 6px;
+      border-radius: $radius-full;
+      letter-spacing: 0.05em;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &.is-current .node-box {
+    border: 2px solid $color-primary;
+    box-shadow: 0 0 0 3px rgba(15, 110, 86, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &.is-completed .node-box {
+    .node-icon-circle {
+      background-color: $color-primary;
+      color: #ffffff;
+    }
+  }
+
+  .node-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2px;
+    color: $color-neutral-400;
+
+    .arrow-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+
+    &.connector-active {
+      color: $color-primary;
+    }
+
+    @include respond-to('mobile') {
+      transform: rotate(90deg);
+      padding: 4px 0;
+    }
+  }
+}
