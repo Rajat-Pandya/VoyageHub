@@ -5,23 +5,39 @@
   display: block;
 }
 
+// ------------------------------------------------------------------------------
+// Page Header Alignment & Spacing
+// ------------------------------------------------------------------------------
 .page-header {
-  margin-bottom: $space-6;
+  margin-bottom: $space-7;
 
   h2 {
-    margin-bottom: $space-1;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-neutral-900;
+    margin-bottom: 6px;
+    line-height: 1.2;
   }
 
   .subtitle {
     font-size: $font-size-sm;
     color: $color-neutral-600;
     margin: 0;
+    line-height: 1.4;
   }
 }
 
+// ------------------------------------------------------------------------------
+// Queue Tabs Card Alignment & Spacing
+// ------------------------------------------------------------------------------
 .queue-tabs-card {
-  padding: 0;
+  border-radius: $radius-lg !important;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-card !important;
+  background-color: $color-surface;
+  padding: 0 !important;
   overflow: hidden;
+  margin-bottom: $space-6;
 
   .tab-icon {
     font-size: 18px;
@@ -33,28 +49,45 @@
 }
 
 .tab-content {
-  padding: $space-5;
+  padding: 32px 28px;
+
+  @include respond-to('mobile') {
+    padding: 20px 16px;
+  }
 }
 
 .filters-bar {
   @include flex-between;
-  margin-bottom: $space-4;
+  margin-bottom: 20px;
   flex-wrap: wrap;
-  gap: $space-3;
+  gap: $space-4;
 
   .filter-field {
-    min-width: 240px;
+    min-width: 280px;
+    margin-bottom: 0 !important;
+
+    ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+      display: none !important;
+    }
   }
 
   .queue-summary {
-    font-size: $font-size-xs;
+    font-size: 12px;
     color: $color-neutral-600;
-    font-weight: $font-weight-medium;
+    font-weight: $font-weight-semibold;
   }
 }
 
 .expense-queue-header {
-  margin-bottom: $space-4;
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-neutral-900;
+    margin-bottom: 4px;
+  }
+
   .subtitle {
     margin: 0;
     font-size: $font-size-sm;
@@ -64,63 +97,72 @@
 
 .table-container {
   overflow-x: auto;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
 }
 
 .dept-text {
-  font-size: $font-size-xs;
-  color: $color-neutral-600;
+  font-size: 11px;
+  color: $color-neutral-500;
+  margin-top: 2px;
 }
 
 .purpose-snippet {
-  font-size: $font-size-xs;
+  font-size: 11px;
   color: $color-neutral-500;
-  max-width: 220px;
+  max-width: 240px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: 2px;
 }
 
 .budget-value {
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-bold;
+  color: $color-neutral-900;
   @include font-tabular;
 }
 
 .policy-chip {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   font-size: 11px;
   font-weight: $font-weight-semibold;
-  padding: 2px 7px;
+  padding: 3px 8px;
   border-radius: $radius-sm;
 
   .xs-icon {
-    font-size: 13px;
-    width: 13px;
-    height: 13px;
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
   }
 
   &.policy-ok {
-    background-color: #e1f5ee;
-    color: #085041;
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
   }
 
   &.policy-flag {
-    background-color: #fef3c7;
-    color: #92400e;
+    background-color: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
   }
 }
 
 .stage-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 11px;
-  font-weight: $font-weight-semibold;
-  padding: 2px 8px;
+  font-weight: $font-weight-bold;
+  padding: 3px 10px;
   border-radius: $radius-full;
 
   &.stage-manager {
     background-color: #eff6ff;
-    color: #1d4ed8;
+    color: #1e40af;
     border: 1px solid #bfdbfe;
   }
 
@@ -132,27 +174,32 @@
 }
 
 .status-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 11px;
-  font-weight: $font-weight-semibold;
-  padding: 2px 8px;
+  font-weight: $font-weight-bold;
+  padding: 4px 12px;
   border-radius: $radius-full;
+  line-height: 1.3;
 
   &.status-submitted {
     background-color: $status-submitted-bg;
     color: $status-submitted-text;
+    border: 1px solid $status-submitted-border;
   }
 
   &.status-manager-approved {
     background-color: $status-manager-approved-bg;
     color: $status-manager-approved-text;
+    border: 1px solid $status-manager-approved-border;
   }
 }
 
 .trip-link {
   color: $color-primary;
   text-decoration: none;
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-semibold;
 
   &:hover {
     text-decoration: underline;
@@ -160,24 +207,25 @@
 }
 
 .expense-notes {
-  font-size: $font-size-xs;
-  color: $color-neutral-600;
+  font-size: 11px;
+  color: $color-neutral-500;
+  margin-top: 2px;
 }
 
 .proof-badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 12px;
   background-color: $color-neutral-100;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: $radius-sm;
   color: $color-neutral-700;
 
   .xs-icon {
-    font-size: 14px;
-    width: 14px;
-    height: 14px;
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
     color: $color-neutral-500;
   }
 }
@@ -188,30 +236,31 @@
   gap: $space-2;
 
   .btn-xs {
-    font-size: 11px;
-    line-height: 26px;
-    padding: 0 10px;
+    font-size: 12px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
     min-width: unset;
 
     .xs-icon {
-      font-size: 13px;
-      width: 13px;
-      height: 13px;
-      margin-right: 2px;
+      font-size: 15px;
+      width: 15px;
+      height: 15px;
+      margin-right: 4px;
     }
   }
 }
 
 .empty-state {
   text-align: center;
-  padding: $space-8 $space-4;
+  padding: 48px 24px;
   color: $color-neutral-500;
 
   mat-icon {
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
-    margin-bottom: $space-2;
+    font-size: 44px;
+    width: 44px;
+    height: 44px;
+    margin-bottom: $space-3;
     color: $color-primary;
   }
 

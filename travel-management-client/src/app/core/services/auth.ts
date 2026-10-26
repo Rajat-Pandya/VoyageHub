@@ -67,17 +67,17 @@ export class Auth {
   }
 
   private getInitialUser(): User | null {
-    if (typeof localStorage === 'undefined') return DEMO_USERS.Employee;
+    if (typeof localStorage === 'undefined') return null;
     const stored = localStorage.getItem('tms_user');
-    if (stored) {
+    const token = localStorage.getItem('token');
+    if (stored && token) {
       try {
         return JSON.parse(stored) as User;
       } catch {
-        return DEMO_USERS.Employee;
+        return null;
       }
     }
-    // Default to initial logged-in user for developer ease
-    return DEMO_USERS.Employee;
+    return null;
   }
 
   login(email: string, _password?: string): boolean {

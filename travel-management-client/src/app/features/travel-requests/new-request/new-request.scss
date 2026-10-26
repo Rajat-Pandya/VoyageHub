@@ -5,43 +5,74 @@
   display: block;
 }
 
+// ------------------------------------------------------------------------------
+// Page Header Alignment & Spacing
+// ------------------------------------------------------------------------------
 .page-header {
   @include flex-between;
-  margin-bottom: $space-6;
+  margin-bottom: $space-7;
+  flex-wrap: wrap;
+  gap: $space-4;
 
   h2 {
-    margin-bottom: $space-1;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-neutral-900;
+    margin-bottom: 6px;
+    line-height: 1.2;
   }
 
   .subtitle {
     font-size: $font-size-sm;
     color: $color-neutral-600;
     margin-bottom: 0;
+    line-height: 1.4;
   }
 
-  a mat-icon {
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
-    margin-right: $space-1;
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    font-weight: $font-weight-semibold;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
   }
 }
 
+// ------------------------------------------------------------------------------
+// Form Card Alignment & Spacing
+// ------------------------------------------------------------------------------
 .form-card {
-  max-width: 800px;
+  max-width: 860px;
   margin: 0 auto;
+  border-radius: $radius-lg !important;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-card !important;
+  background-color: $color-surface;
+
+  mat-card-content {
+    padding: 36px 40px !important;
+
+    @include respond-to('mobile') {
+      padding: 24px 20px !important;
+    }
+  }
 
   .request-form {
     .form-section-title {
-      font-size: $font-size-sm;
-      font-weight: $font-weight-semibold;
-      color: $color-neutral-900;
-      letter-spacing: 0.04em;
+      font-size: 12px;
+      font-weight: $font-weight-bold;
+      color: $color-neutral-700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding-bottom: $space-2;
+      padding-bottom: 8px;
       border-bottom: 1px solid $color-border;
-      margin-top: $space-2;
-      margin-bottom: $space-4;
+      margin-top: 28px;
+      margin-bottom: 20px;
 
       &:first-child {
         margin-top: 0;
@@ -51,7 +82,8 @@
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: $space-4;
+      gap: 20px;
+      margin-bottom: 6px;
 
       @include respond-to('mobile') {
         grid-template-columns: 1fr;
@@ -59,14 +91,28 @@
       }
     }
 
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
     .form-actions {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      gap: $space-3;
-      margin-top: $space-6;
-      padding-top: $space-4;
+      gap: $space-4;
+      margin-top: 32px;
+      padding-top: 24px;
       border-top: 1px solid $color-border;
+
+      @include respond-to('mobile') {
+        flex-direction: column-reverse;
+        width: 100%;
+
+        button {
+          width: 100%;
+        }
+      }
     }
   }
 }

@@ -10,58 +10,68 @@
 // ------------------------------------------------------------------------------
 .top-nav-bar {
   @include flex-between;
-  margin-bottom: $space-4;
+  margin-bottom: $space-6;
   flex-wrap: wrap;
-  gap: $space-3;
+  gap: $space-4;
 
   .back-link {
     color: $color-primary;
-    font-weight: $font-weight-medium;
+    font-weight: $font-weight-semibold;
     display: inline-flex;
     align-items: center;
-    gap: $space-1;
+    gap: 6px;
+    font-size: $font-size-sm;
 
     mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      color: $color-primary-hover;
     }
   }
 
   .role-switcher {
     display: flex;
     align-items: center;
-    gap: $space-2;
-    background-color: $color-neutral-100;
-    padding: 4px 8px;
+    gap: $space-3;
+    background-color: $color-surface;
+    padding: 6px 12px;
     border-radius: $radius-full;
     border: 1px solid $color-border;
+    box-shadow: $shadow-xs;
 
     .role-label {
-      font-size: $font-size-xs;
-      color: $color-neutral-700;
-      font-weight: $font-weight-medium;
+      font-size: 11px;
+      color: $color-neutral-600;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       padding-left: 4px;
     }
 
     .role-buttons {
       display: flex;
-      gap: 2px;
+      gap: 4px;
 
       button {
         font-size: 12px;
-        line-height: 24px;
-        padding: 0 10px;
+        line-height: 28px;
+        height: 28px;
+        padding: 0 12px;
         min-width: unset;
         border-radius: $radius-full;
         color: $color-neutral-700;
+        font-weight: $font-weight-medium;
         transition: all $transition-fast;
 
         &.active-role {
           background-color: $color-primary;
           color: #ffffff;
-          font-weight: $font-weight-semibold;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          font-weight: $font-weight-bold;
+          box-shadow: 0 1px 3px rgba(30, 64, 175, 0.3);
         }
       }
     }
@@ -69,15 +79,20 @@
 }
 
 // ------------------------------------------------------------------------------
-// Request Header Card
+// Request Header Card Alignment & Spacing
 // ------------------------------------------------------------------------------
 .request-header {
-  margin-bottom: $space-5;
+  border-radius: $radius-lg !important;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-card !important;
+  background-color: $color-surface;
+  padding: 28px !important;
+  margin-bottom: $space-6 !important;
 
   .header-row {
     @include flex-between;
     align-items: flex-start;
-    gap: $space-4;
+    gap: $space-5;
 
     @include respond-to('mobile') {
       flex-direction: column;
@@ -89,71 +104,76 @@
       .title-with-badge {
         display: flex;
         align-items: center;
-        gap: $space-3;
-        margin-bottom: $space-2;
+        gap: 14px;
+        margin-bottom: 10px;
         flex-wrap: wrap;
 
         h2 {
           margin: 0;
-          font-size: $font-size-2xl;
+          font-size: 26px;
+          font-weight: $font-weight-bold;
         }
 
         .status-chip {
-          display: inline-block;
-          font-size: 12px;
-          font-weight: $font-weight-semibold;
-          padding: 3px 10px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          font-weight: $font-weight-bold;
+          padding: 4px 12px;
           border-radius: $radius-full;
-          border: 1px solid transparent;
+          line-height: 1.3;
 
           &.status-draft {
             background-color: $status-draft-bg;
             color: $status-draft-text;
-            border-color: $status-draft-border;
+            border: 1px solid $status-draft-border;
           }
 
           &.status-submitted {
             background-color: $status-submitted-bg;
             color: $status-submitted-text;
-            border-color: $status-submitted-border;
+            border: 1px solid $status-submitted-border;
           }
 
           &.status-manager-approved {
             background-color: $status-manager-approved-bg;
             color: $status-manager-approved-text;
-            border-color: $status-manager-approved-border;
+            border: 1px solid $status-manager-approved-border;
           }
 
           &.status-finance-approved {
             background-color: $status-finance-approved-bg;
             color: $status-finance-approved-text;
-            border-color: $status-finance-approved-border;
+            border: 1px solid $status-finance-approved-border;
           }
 
           &.status-rejected {
             background-color: $status-rejected-bg;
             color: $status-rejected-text;
-            border-color: $status-rejected-border;
+            border: 1px solid $status-rejected-border;
           }
 
           &.status-closed {
             background-color: $status-closed-bg;
             color: $status-closed-text;
-            border-color: $status-closed-border;
+            border: 1px solid $status-closed-border;
           }
         }
       }
 
       .header-meta {
         font-size: $font-size-sm;
-        color: $color-neutral-700;
-        margin-bottom: $space-1;
+        color: $color-neutral-600;
+        margin-bottom: 8px;
+        line-height: 1.4;
       }
 
       .purpose-text {
         font-size: $font-size-sm;
         color: $color-neutral-800;
         margin: 0;
+        line-height: 1.5;
       }
     }
 
@@ -161,27 +181,27 @@
       .policy-badge {
         display: inline-flex;
         align-items: center;
-        gap: $space-1;
-        font-size: $font-size-xs;
+        gap: 6px;
+        font-size: 12px;
         font-weight: $font-weight-semibold;
-        padding: 4px 10px;
+        padding: 6px 14px;
         border-radius: $radius-md;
 
         mat-icon {
-          font-size: 16px;
-          width: 16px;
-          height: 16px;
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
         }
 
         &.policy-ok {
-          background-color: #e1f5ee;
-          color: #085041;
-          border: 1px solid #9fe1cb;
+          background-color: #ecfdf5;
+          color: #047857;
+          border: 1px solid #a7f3d0;
         }
 
         &.policy-flag {
-          background-color: #fef3c7;
-          color: #92400e;
+          background-color: #fffbeb;
+          color: #b45309;
           border: 1px solid #fde68a;
         }
       }
@@ -195,23 +215,25 @@
 .rejection-banner {
   display: flex;
   align-items: flex-start;
-  gap: $space-3;
+  gap: $space-4;
   background-color: #fef2f2;
   border: 1px solid #fecaca;
   color: #991b1b;
-  margin-bottom: $space-5;
-  padding: $space-4;
+  margin-bottom: $space-6;
+  padding: 20px 24px;
+  border-radius: $radius-lg;
 
   .rejection-details {
     strong {
       font-size: $font-size-base;
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
     p {
       margin: 0;
       font-size: $font-size-sm;
       color: #7f1d1d;
+      line-height: 1.4;
     }
   }
 }
@@ -220,15 +242,19 @@
 // Action Panels
 // ------------------------------------------------------------------------------
 .action-panel {
-  margin-bottom: $space-5;
-  padding: $space-4 $space-5;
-  border-left: 4px solid $color-primary;
+  border-radius: $radius-lg !important;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-card !important;
+  background-color: $color-surface;
+  margin-bottom: $space-6 !important;
+  padding: 24px 28px !important;
+  border-left: 5px solid $color-primary !important;
 
   &.draft-action-panel {
-    border-left-color: $color-accent;
+    border-left-color: $color-accent !important;
     @include flex-between;
     flex-wrap: wrap;
-    gap: $space-3;
+    gap: $space-4;
 
     .action-info {
       display: flex;
@@ -237,11 +263,15 @@
 
       .info-icon {
         color: $color-accent;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
       }
 
       strong {
         display: block;
         color: $color-neutral-900;
+        margin-bottom: 2px;
       }
 
       p {
@@ -253,10 +283,10 @@
   }
 
   &.close-panel {
-    border-left-color: #10b981;
+    border-left-color: #10b981 !important;
     @include flex-between;
     flex-wrap: wrap;
-    gap: $space-3;
+    gap: $space-4;
 
     .action-info {
       display: flex;
@@ -265,11 +295,15 @@
 
       .success-icon {
         color: #10b981;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
       }
 
       strong {
         display: block;
         color: $color-neutral-900;
+        margin-bottom: 2px;
       }
 
       p {
@@ -284,16 +318,20 @@
     display: flex;
     align-items: flex-start;
     gap: $space-3;
-    margin-bottom: $space-3;
+    margin-bottom: $space-4;
 
     .pending-icon {
       color: $color-primary;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
     }
 
     strong {
       font-size: $font-size-base;
       color: $color-neutral-900;
       display: block;
+      margin-bottom: 2px;
     }
 
     p {
@@ -306,27 +344,35 @@
   .action-buttons-row {
     display: flex;
     gap: $space-3;
-    margin-top: $space-2;
+    margin-top: $space-3;
   }
 
   .reject-form {
-    margin-top: $space-4;
-    padding-top: $space-3;
+    margin-top: $space-5;
+    padding-top: $space-4;
     border-top: 1px dashed $color-border;
+
+    mat-form-field {
+      margin-bottom: $space-3;
+    }
 
     .reject-actions {
       display: flex;
       justify-content: flex-end;
-      gap: $space-2;
+      gap: $space-3;
     }
   }
 }
 
 // ------------------------------------------------------------------------------
-// Tabs & Content
+// Tabs & Content Alignment & Spacing
 // ------------------------------------------------------------------------------
 .details-tabs-card {
-  padding: 0;
+  border-radius: $radius-lg !important;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-card !important;
+  background-color: $color-surface;
+  padding: 0 !important;
   overflow: hidden;
 
   .tab-icon {
@@ -339,61 +385,77 @@
 }
 
 .tab-content {
-  padding: $space-5;
+  padding: 32px 28px;
+
+  @include respond-to('mobile') {
+    padding: 20px 16px;
+  }
 
   .info-callout {
     display: flex;
     align-items: center;
     gap: $space-3;
-    background-color: #f0f7ff;
+    background-color: #eff6ff;
     border: 1px solid #bfdbfe;
     color: #1e40af;
-    padding: $space-3 $space-4;
+    padding: 14px 18px;
     border-radius: $radius-md;
-    margin-bottom: $space-4;
+    margin-bottom: $space-5;
     font-size: $font-size-sm;
+    line-height: 1.4;
   }
 
   .tab-actions {
     @include flex-between;
-    margin-bottom: $space-4;
+    margin-bottom: 20px;
     flex-wrap: wrap;
-    gap: $space-3;
+    gap: $space-4;
 
     h3 {
       margin: 0;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
     }
 
     .tab-subtitle {
       font-size: $font-size-xs;
-      color: $color-neutral-600;
+      color: $color-neutral-500;
       display: block;
+      margin-top: 2px;
     }
   }
 }
 
 // ------------------------------------------------------------------------------
-// Inline Forms
+// Inline Forms Alignment & Spacing
 // ------------------------------------------------------------------------------
 .inline-form-card {
   background-color: $color-neutral-50;
   border: 1px solid $color-border;
-  padding: $space-4;
-  margin-bottom: $space-5;
+  border-radius: $radius-md;
+  padding: 24px;
+  margin-bottom: $space-6;
 
   h4 {
-    margin: 0 0 $space-3 0;
+    margin: 0 0 16px 0;
     font-size: $font-size-base;
+    font-weight: $font-weight-bold;
     color: $color-primary;
   }
 
   .form-row {
     display: flex;
-    gap: $space-3;
+    gap: $space-4;
     flex-wrap: wrap;
 
     @include respond-to('mobile') {
       flex-direction: column;
+    }
+
+    mat-form-field {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 12px;
     }
 
     .flex-2 {
@@ -404,8 +466,8 @@
   .inline-form-actions {
     display: flex;
     justify-content: flex-end;
-    gap: $space-2;
-    margin-top: $space-2;
+    gap: $space-3;
+    margin-top: $space-3;
   }
 }
 
@@ -414,15 +476,15 @@
 // ------------------------------------------------------------------------------
 .empty-state {
   text-align: center;
-  padding: $space-8 $space-4;
+  padding: 48px 24px;
   color: $color-neutral-500;
 
   mat-icon {
-    font-size: 40px;
-    width: 40px;
-    height: 40px;
-    margin-bottom: $space-2;
-    opacity: 0.6;
+    font-size: 44px;
+    width: 44px;
+    height: 44px;
+    margin-bottom: $space-3;
+    color: $color-neutral-400;
   }
 
   p {
@@ -434,10 +496,10 @@
 .type-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 11px;
   font-weight: $font-weight-semibold;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: $radius-sm;
 
   .small-icon {
@@ -468,79 +530,82 @@
 }
 
 .expense-notes {
-  font-size: $font-size-xs;
-  color: $color-neutral-600;
-  margin-top: 2px;
+  font-size: 11px;
+  color: $color-neutral-500;
+  margin-top: 3px;
 }
 
 .amount-value {
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-bold;
+  color: $color-neutral-900;
   @include font-tabular;
 }
 
 .proof-chip {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 12px;
   color: $color-neutral-700;
   background-color: $color-neutral-100;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: $radius-sm;
 
   .file-icon {
-    font-size: 14px;
-    width: 14px;
-    height: 14px;
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
     color: $color-neutral-500;
   }
 }
 
 .expense-status-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 11px;
-  font-weight: $font-weight-semibold;
-  padding: 2px 8px;
+  font-weight: $font-weight-bold;
+  padding: 3px 10px;
   border-radius: $radius-full;
+  line-height: 1.3;
 
   &.exp-pending {
-    background-color: #fef3c7;
+    background-color: #fffbeb;
     color: #92400e;
+    border: 1px solid #fde68a;
   }
 
   &.exp-reimbursed {
-    background-color: #d1fae5;
+    background-color: #ecfdf5;
     color: #065f46;
+    border: 1px solid #a7f3d0;
   }
 
   &.exp-rejected {
-    background-color: #fee2e2;
+    background-color: #fef2f2;
     color: #991b1b;
+    border: 1px solid #fecaca;
   }
 }
 
 .expense-actions {
   display: flex;
-  gap: $space-1;
+  gap: $space-2;
 
-  .btn-approve-sm {
-    font-size: 12px;
-    padding: 0 8px;
-    min-width: unset;
-    line-height: 28px;
-  }
-
+  .btn-approve-sm,
   .btn-reject-sm {
     font-size: 12px;
-    padding: 0 8px;
+    padding: 0 10px;
     min-width: unset;
-    line-height: 28px;
+    height: 32px;
+    line-height: 32px;
   }
 }
 
 .resolved-text {
   font-size: 12px;
-  color: $color-neutral-600;
+  color: $color-neutral-500;
+  font-style: italic;
 }
 
 // ------------------------------------------------------------------------------
@@ -550,7 +615,7 @@
   background-color: #f0fdf4;
   border: 1px solid #bbf7d0;
   border-radius: $radius-md;
-  padding: $space-4;
+  padding: 24px;
   margin-bottom: $space-6;
 
   &.policy-card-fail {
@@ -561,38 +626,45 @@
   .eval-header {
     display: flex;
     align-items: center;
-    gap: $space-2;
-    margin-bottom: $space-2;
+    gap: $space-3;
+    margin-bottom: 12px;
 
     mat-icon {
       color: $color-primary;
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
     }
 
     h4 {
       margin: 0;
       font-size: $font-size-base;
+      font-weight: $font-weight-bold;
     }
   }
 
   p {
     font-size: $font-size-sm;
     color: $color-neutral-800;
-    margin: 0 0 $space-3 0;
+    margin: 0 0 16px 0;
+    line-height: 1.5;
   }
 
   .policy-meta {
     display: flex;
-    gap: $space-5;
-    font-size: $font-size-xs;
+    gap: 32px;
+    font-size: 12px;
     color: $color-neutral-700;
     flex-wrap: wrap;
-    border-top: 1px dashed $color-border;
-    padding-top: $space-3;
+    border-top: 1px dashed rgba(0, 0, 0, 0.12);
+    padding-top: 16px;
   }
 }
 
 .audit-trail-title {
-  margin-bottom: $space-4;
+  margin-bottom: 20px;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
 }
 
 .full-width {

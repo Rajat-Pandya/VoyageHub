@@ -9,41 +9,45 @@
 }
 
 // ------------------------------------------------------------------------------
-// Top Toolbar
+// Top Toolbar Alignment & Spacing
 // ------------------------------------------------------------------------------
 .app-toolbar {
-  height: $toolbar-height;
+  height: 60px;
   background-color: $color-surface !important;
   color: $color-neutral-900 !important;
   border-bottom: 1px solid $color-border;
-  padding: 0 $space-4;
+  padding: 0 $space-6;
   box-shadow: $shadow-xs;
   z-index: 100;
   display: flex;
   align-items: center;
 
+  @include respond-to('mobile') {
+    padding: 0 $space-3;
+  }
+
   .menu-toggle {
-    margin-right: $space-2;
+    margin-right: $space-3;
     color: $color-neutral-700;
   }
 
   .brand {
     display: flex;
     align-items: center;
-    gap: $space-2;
+    gap: $space-3;
 
     .brand-icon {
       color: $color-primary;
-      font-size: 22px;
-      width: 22px;
-      height: 22px;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
     }
 
     .brand-title {
-      font-size: $font-size-base;
-      font-weight: $font-weight-semibold;
+      font-size: $font-size-md;
+      font-weight: $font-weight-bold;
       color: $color-neutral-900;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
     }
   }
 
@@ -54,18 +58,18 @@
   .api-status-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
+    gap: 8px;
+    padding: 6px 14px;
     border-radius: $radius-full;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: $font-weight-medium;
-    margin-right: $space-3;
+    margin-right: $space-4;
     border: 1px solid transparent;
     transition: all $transition-fast;
 
     .status-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: $radius-full;
       display: inline-block;
     }
@@ -81,7 +85,7 @@
     }
 
     &.api-offline {
-      background-color: #fef3c7;
+      background-color: #fffbeb;
       color: #b45309;
       border-color: #fde68a;
       .status-dot {
@@ -97,16 +101,18 @@
   .user-profile {
     display: flex;
     align-items: center;
-    gap: $space-2;
+    gap: $space-3;
+    padding-left: $space-3;
+    border-left: 1px solid $color-border;
 
     .user-avatar {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: $radius-full;
       background-color: $color-primary-tint;
       color: $color-primary-dark;
       font-size: $font-size-xs;
-      font-weight: $font-weight-semibold;
+      font-weight: $font-weight-bold;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -116,6 +122,7 @@
     .user-meta {
       display: flex;
       flex-direction: column;
+      gap: 2px;
 
       @include tablet-down {
         display: none;
@@ -123,13 +130,13 @@
 
       .user-name {
         font-size: $font-size-sm;
-        font-weight: $font-weight-medium;
+        font-weight: $font-weight-semibold;
         color: $color-neutral-900;
         line-height: 1.2;
       }
 
       .user-role {
-        font-size: $font-size-xs;
+        font-size: 11px;
         color: $color-neutral-500;
         line-height: 1.2;
       }
@@ -138,35 +145,38 @@
 }
 
 // ------------------------------------------------------------------------------
-// Layout & Sidenav
+// Layout & Sidenav Alignment & Spacing
 // ------------------------------------------------------------------------------
 .layout-container {
   flex: 1;
-  height: calc(100vh - #{$toolbar-height});
+  height: calc(100vh - 60px);
   background-color: $color-background;
 
   .sidebar {
-    width: $sidenav-width;
+    width: 256px;
     background-color: $color-surface;
     border-right: 1px solid $color-border;
-    padding: $space-4 0;
+    padding: $space-5 0;
     box-sizing: border-box;
 
     .nav-section-label {
-      padding: $space-2 $space-4;
-      font-size: $font-size-xs;
-      font-weight: $font-weight-semibold;
+      padding: $space-2 $space-5;
+      margin-bottom: $space-2;
+      font-size: 11px;
+      font-weight: $font-weight-bold;
       color: $color-neutral-500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     mat-nav-list {
-      padding: 0 $space-2;
+      padding: 0 $space-3;
 
       a.mat-mdc-list-item {
-        border-radius: $radius-sm;
-        margin-bottom: $space-1;
+        border-radius: $radius-md;
+        margin-bottom: 4px;
+        padding: 0 $space-4 !important;
+        height: 44px;
         color: $color-neutral-700;
         font-size: $font-size-sm;
         font-weight: $font-weight-medium;
@@ -187,7 +197,7 @@
           color: $color-neutral-900;
 
           mat-icon {
-            color: $color-neutral-800;
+            color: $color-neutral-900;
           }
         }
 
@@ -195,7 +205,7 @@
           background-color: $color-primary-tint !important;
           color: $color-primary-dark !important;
           border-left: 3px solid $color-primary !important;
-          font-weight: $font-weight-semibold !important;
+          font-weight: $font-weight-bold !important;
 
           mat-icon {
             color: $color-primary !important;
@@ -211,12 +221,17 @@
     overflow-y: auto;
 
     .page-container {
-      max-width: 1200px;
+      max-width: 1360px;
       margin: 0 auto;
-      padding: $space-6;
+      padding: 32px 36px 56px;
+      box-sizing: border-box;
 
-      @include tablet-down {
-        padding: $space-4;
+      @include respond-to('tablet') {
+        padding: 24px 20px 40px;
+      }
+
+      @include respond-to('mobile') {
+        padding: 16px 14px 32px;
       }
     }
   }
@@ -230,11 +245,11 @@
 }
 
 .logout-btn {
-  color: $color-neutral-600;
+  color: $color-neutral-500;
   margin-left: $space-2;
+  transition: color $transition-fast;
 
   &:hover {
     color: $color-warn;
   }
 }
-

@@ -3,29 +3,29 @@
 
 :host {
   display: block;
-  margin-bottom: $space-6;
+  margin-bottom: $space-7;
 }
 
 .workflow-tracker-container {
   background-color: $color-surface;
   border: 1px solid $color-border;
   border-radius: $radius-lg;
-  padding: $space-5;
+  padding: 24px 28px;
   box-shadow: $shadow-card;
 }
 
 .tracker-header {
   @include flex-between;
-  margin-bottom: $space-4;
-  padding-bottom: $space-3;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
   border-bottom: 1px solid $color-border-subtle;
   flex-wrap: wrap;
-  gap: $space-3;
+  gap: $space-4;
 
   .tracker-title-group {
     display: flex;
     align-items: center;
-    gap: $space-3;
+    gap: 12px;
 
     .flow-icon {
       color: $color-primary;
@@ -37,57 +37,59 @@
     .tracker-title {
       margin: 0;
       font-size: $font-size-base;
-      font-weight: $font-weight-semibold;
+      font-weight: $font-weight-bold;
       color: $color-neutral-900;
     }
 
     .tracker-subtitle {
       font-size: $font-size-xs;
-      color: $color-neutral-600;
+      color: $color-neutral-500;
+      display: block;
+      margin-top: 2px;
     }
   }
 
   .tracker-legend {
     display: flex;
     align-items: center;
-    gap: $space-2;
+    gap: 8px;
     flex-wrap: wrap;
 
     .legend-badge {
       font-size: 11px;
-      font-weight: $font-weight-medium;
-      padding: 2px 8px;
+      font-weight: $font-weight-semibold;
+      padding: 3px 10px;
       border-radius: $radius-full;
       border: 1px solid transparent;
 
       &.legend-employee {
         background-color: #cfe2f3;
-        border-color: #2e74b5;
-        color: #1b4f72;
+        border-color: #93c5fd;
+        color: #1e40af;
       }
 
       &.legend-decision {
-        background-color: #fdebd0;
-        border-color: #b98900;
-        color: #7d5a00;
+        background-color: #fffbeb;
+        border-color: #fde68a;
+        color: #92400e;
       }
 
       &.legend-approver {
-        background-color: #e1f5ee;
-        border-color: #0f6e56;
-        color: #04342c;
+        background-color: #ecfdf5;
+        border-color: #a7f3d0;
+        color: #047857;
       }
 
       &.legend-terminal {
-        background-color: #e8e8e8;
-        border-color: #73726c;
-        color: #3d3d3a;
+        background-color: #f1f5f9;
+        border-color: #cbd5e1;
+        color: #334155;
       }
 
       &.legend-reject {
-        background-color: #f5d5d5;
-        border-color: #b33a3a;
-        color: #7a1f1f;
+        background-color: #fef2f2;
+        border-color: #fecaca;
+        color: #991b1b;
       }
     }
   }
@@ -100,19 +102,29 @@
   background-color: #fef2f2;
   border: 1px solid #fecaca;
   border-radius: $radius-md;
-  padding: $space-3 $space-4;
-  margin-bottom: $space-4;
+  padding: 14px 18px;
+  margin-bottom: 20px;
   color: #991b1b;
 
   .reject-icon {
     color: #dc2626;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
   }
 
   .rejection-text {
+    strong {
+      font-size: $font-size-sm;
+      display: block;
+    }
+
     p {
-      margin: $space-1 0 0;
+      margin: 4px 0 0;
       font-size: $font-size-sm;
       color: #7f1d1d;
+      line-height: 1.4;
     }
   }
 }
@@ -120,13 +132,13 @@
 .pipeline-track {
   display: flex;
   align-items: stretch;
-  gap: $space-2;
+  gap: 8px;
   overflow-x: auto;
-  padding: $space-2 0;
+  padding: 6px 0;
 
   @include respond-to('mobile') {
     flex-direction: column;
-    gap: $space-3;
+    gap: 12px;
   }
 }
 
@@ -152,13 +164,13 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: $space-3 $space-2;
+    padding: 16px 12px;
     border-radius: $radius-md;
     border: 1px solid $color-border;
     background-color: $color-neutral-50;
     transition: all $transition-base;
     position: relative;
-    min-height: 98px;
+    min-height: 104px;
     justify-content: center;
 
     @include respond-to('mobile') {
@@ -166,89 +178,89 @@
     }
 
     &[data-role='employee'] {
-      background-color: #f2f7fc;
-      border-color: #bad3eb;
+      background-color: #f8fafc;
+      border-color: #e2e8f0;
       .node-icon-circle {
-        background-color: #cfe2f3;
-        color: #1b4f72;
+        background-color: #eff6ff;
+        color: #1e40af;
       }
     }
 
     &[data-role='decision'] {
-      background-color: #fefaf3;
-      border-color: #f8dfb4;
+      background-color: #fffdf5;
+      border-color: #fef08a;
       .node-icon-circle {
-        background-color: #fdebd0;
-        color: #7d5a00;
+        background-color: #fffbeb;
+        color: #92400e;
       }
     }
 
     &[data-role='approver'] {
-      background-color: #f3faf7;
-      border-color: #b7e5d5;
+      background-color: #f8fafc;
+      border-color: #e2e8f0;
       .node-icon-circle {
-        background-color: #e1f5ee;
-        color: #04342c;
+        background-color: #eff6ff;
+        color: #1e40af;
       }
     }
 
     &[data-role='terminal'] {
-      background-color: #f9f9f9;
-      border-color: #d1d1d1;
+      background-color: #f8fafc;
+      border-color: #e2e8f0;
       .node-icon-circle {
-        background-color: #e8e8e8;
-        color: #3d3d3a;
+        background-color: #f1f5f9;
+        color: #475569;
       }
     }
 
     .node-icon-circle {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border-radius: $radius-full;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: $space-2;
+      margin-bottom: 8px;
 
       mat-icon {
-        font-size: 16px;
-        width: 16px;
-        height: 16px;
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
       }
     }
 
     .node-label {
       font-size: 12px;
-      font-weight: $font-weight-semibold;
+      font-weight: $font-weight-bold;
       color: $color-neutral-900;
       display: block;
       margin-bottom: 2px;
     }
 
     .node-sublabel {
-      font-size: 10px;
-      color: $color-neutral-600;
+      font-size: 11px;
+      color: $color-neutral-500;
       line-height: 1.2;
       display: block;
     }
 
     .current-indicator {
       position: absolute;
-      top: -9px;
+      top: -10px;
       background-color: $color-primary;
       color: #ffffff;
       font-size: 9px;
       font-weight: $font-weight-bold;
-      padding: 1px 6px;
+      padding: 2px 8px;
       border-radius: $radius-full;
-      letter-spacing: 0.05em;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      letter-spacing: 0.06em;
+      box-shadow: 0 1px 3px rgba(30, 64, 175, 0.3);
     }
   }
 
   &.is-current .node-box {
     border: 2px solid $color-primary;
-    box-shadow: 0 0 0 3px rgba(15, 110, 86, 0.15);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
     transform: translateY(-2px);
   }
 
@@ -263,13 +275,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 2px;
+    padding: 0 4px;
     color: $color-neutral-400;
 
     .arrow-icon {
-      font-size: 16px;
-      width: 16px;
-      height: 16px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
     }
 
     &.connector-active {
@@ -278,7 +290,7 @@
 
     @include respond-to('mobile') {
       transform: rotate(90deg);
-      padding: 4px 0;
+      padding: 6px 0;
     }
   }
 }

@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Auth, UserRole } from '../../../core/services/auth';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   imports: [
@@ -24,12 +26,19 @@ import { Auth, UserRole } from '../../../core/services/auth';
 })
 export class Login {
   private fb = inject(FormBuilder);
+  private router = inject(Router);
   readonly auth = inject(Auth);
 
   loginForm = this.fb.group({
-    email: ['employee@company.com', [Validators.required, Validators.email]],
-    password: ['Corporate@2026', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
+
+  constructor() {
+    if (this.auth.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   isSubmitting = false;
   errorMessage = '';
