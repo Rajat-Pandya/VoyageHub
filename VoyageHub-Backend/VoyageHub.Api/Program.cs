@@ -82,16 +82,38 @@ builder.Services.AddControllers()
     });
 
 // 4. Configure CORS policy for Angular frontend
+var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+
+if (!builder.Environment.IsDevelopment())
+{
+    var envOrigins = Environment.GetEnvironmentVariables().Keys
+        .Cast<string>()
+        .Where(k => k.StartsWith("Cors__AllowedOrigins", StringComparison.OrdinalIgnoreCase) ||
+                    k.StartsWith("Cors:AllowedOrigins", StringComparison.OrdinalIgnoreCase))
+        .Select(k => Environment.GetEnvironmentVariable(k))
+        .Where(v => !string.IsNullOrWhiteSpace(v))
+        .Select(v => v!)
+        .ToArray();
+
+    if (envOrigins.Length > 0)
+    {
+        corsOrigins = envOrigins;
+    }
+    else
+    {
+        corsOrigins = corsOrigins.Where(o => !o.Contains("localhost", StringComparison.OrdinalIgnoreCase) && !o.Contains("127.0.0.1")).ToArray();
+    }
+}
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
-        policy.WithOrigins(
-                "http://localhost:4200",
-                "http://127.0.0.1:4200",
-                "https://localhost:4200"
-            )
-            .AllowAnyHeader()
+        if (corsOrigins.Length > 0)
+        {
+            policy.WithOrigins(corsOrigins);
+        }
+        policy.AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
     });
