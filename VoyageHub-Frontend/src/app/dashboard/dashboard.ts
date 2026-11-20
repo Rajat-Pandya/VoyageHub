@@ -122,10 +122,8 @@ export class Dashboard implements OnInit {
 
   loadDashboardData(): void {
     this.isLoading.set(true);
-    const user = this.authService.currentUser();
-    const empId = user?.role === 'Employee' ? user.id : undefined;
 
-    this.voyageService.getDashboardStats(empId).subscribe({
+    this.voyageService.getDashboardStats().subscribe({
       next: (s) => this.stats.set(s),
       error: () => {}
     });
@@ -134,11 +132,9 @@ export class Dashboard implements OnInit {
   }
 
   fetchRequests(): void {
-    const user = this.authService.currentUser();
-    const empId = user?.role === 'Employee' ? user.id : undefined;
     const filter = this.selectedFilter();
 
-    this.voyageService.getRequests(filter, this.searchQuery, 8, empId).subscribe({
+    this.voyageService.getRequests(filter, this.searchQuery, 8).subscribe({
       next: (data) => {
         if (data && data.length > 0) {
           this.requests.set(data);

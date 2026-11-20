@@ -117,10 +117,8 @@ export class RequestList implements OnInit {
 
   loadRequests(): void {
     this.isLoading.set(true);
-    const user = this.authService.currentUser();
-    const empId = user?.role === 'Employee' ? user.id : undefined;
 
-    this.voyageService.getRequests(this.selectedStatus, this.searchQuery, 20, empId).subscribe({
+    this.voyageService.getRequests(this.selectedStatus, this.searchQuery, 20).subscribe({
       next: (data) => {
         if (data && data.length > 0) {
           this.requests.set(data);

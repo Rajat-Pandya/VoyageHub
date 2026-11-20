@@ -103,7 +103,7 @@ export class NewRequest {
       ]
     };
 
-    this.voyageService.createRequest(payload, user?.id).subscribe({
+    this.voyageService.createRequest(payload).subscribe({
       next: (res) => {
         this.isSubmitting.set(false);
         this.router.navigate(['/requests', res.id]);

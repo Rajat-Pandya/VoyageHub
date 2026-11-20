@@ -75,12 +75,12 @@ describe('Dashboard', () => {
   it('should update filter and refetch requests on setFilter', () => {
     component.setFilter('Approved');
     expect(component.selectedFilter()).toBe('Approved');
-    expect(mockVoyageService.getRequests).toHaveBeenLastCalledWith('Approved', '', 8, PRESET_PERSONAS[0].id);
+    expect(mockVoyageService.getRequests).toHaveBeenLastCalledWith('Approved', '', 8);
   });
 
   it('should filter requests by search query', () => {
     component.searchQuery = 'Bengaluru';
     component.onSearch();
-    expect(mockVoyageService.getRequests).toHaveBeenLastCalledWith('All', 'Bengaluru', 8, PRESET_PERSONAS[0].id);
+    expect(mockVoyageService.getRequests).toHaveBeenLastCalledWith('All', 'Bengaluru', 8);
   });
 });

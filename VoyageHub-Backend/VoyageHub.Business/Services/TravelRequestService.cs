@@ -32,7 +32,28 @@ public class TravelRequestService : ITravelRequestService
         int? limit,
         CancellationToken cancellationToken = default)
     {
-        var results = await _travelRequestRepository.GetRequestsAsync(status, search, employeeId, limit, cancellationToken);
+        var callerId = _currentUserService.UserId;
+        var callerRole = _currentUserService.UserRole;
+
+        Guid? targetEmployeeId = employeeId;
+        Guid? targetManagerId = null;
+
+        if (string.Equals(callerRole, "Employee", StringComparison.OrdinalIgnoreCase))
+        {
+            if (callerId.HasValue)
+            {
+                targetEmployeeId = callerId.Value;
+            }
+        }
+        else if (string.Equals(callerRole, "Manager", StringComparison.OrdinalIgnoreCase))
+        {
+            if (callerId.HasValue)
+            {
+                targetManagerId = callerId.Value;
+            }
+        }
+
+        var results = await _travelRequestRepository.GetRequestsAsync(status, search, targetEmployeeId, limit, targetManagerId, cancellationToken);
 
         var dtoList = results.Select(r =>
         {
@@ -66,7 +87,28 @@ public class TravelRequestService : ITravelRequestService
 
     public async Task<DashboardStatsDto> GetStatsAsync(Guid? employeeId, CancellationToken cancellationToken = default)
     {
-        var stats = await _travelRequestRepository.GetStatsAsync(employeeId, cancellationToken);
+        var callerId = _currentUserService.UserId;
+        var callerRole = _currentUserService.UserRole;
+
+        Guid? targetEmployeeId = employeeId;
+        Guid? targetManagerId = null;
+
+        if (string.Equals(callerRole, "Employee", StringComparison.OrdinalIgnoreCase))
+        {
+            if (callerId.HasValue)
+            {
+                targetEmployeeId = callerId.Value;
+            }
+        }
+        else if (string.Equals(callerRole, "Manager", StringComparison.OrdinalIgnoreCase))
+        {
+            if (callerId.HasValue)
+            {
+                targetManagerId = callerId.Value;
+            }
+        }
+
+        var stats = await _travelRequestRepository.GetStatsAsync(targetEmployeeId, targetManagerId, cancellationToken);
 
         return new DashboardStatsDto
         {
@@ -81,6 +123,24 @@ public class TravelRequestService : ITravelRequestService
     {
         var r = await _travelRequestRepository.GetDetailAsync(id, cancellationToken);
         if (r == null) return null;
+
+        var callerId = _currentUserService.UserId;
+        var callerRole = _currentUserService.UserRole;
+
+        if (string.Equals(callerRole, "Employee", StringComparison.OrdinalIgnoreCase))
+        {
+            if (callerId.HasValue && r.EmployeeId != callerId.Value)
+            {
+                return null;
+            }
+        }
+        else if (string.Equals(callerRole, "Manager", StringComparison.OrdinalIgnoreCase))
+        {
+            if (callerId.HasValue && r.EmployeeId != callerId.Value && r.Employee?.ManagerId != callerId.Value)
+            {
+                return null;
+            }
+        }
 
         var durationDays = Math.Max(1, (r.EndDate - r.StartDate).Days);
         var durationNights = Math.Max(0, durationDays - 1);
@@ -181,9 +241,14 @@ public class TravelRequestService : ITravelRequestService
             return (false, "Purpose is required.", null);
         }
 
-        var empId = employeeId.HasValue && employeeId != Guid.Empty
-            ? employeeId.Value
-            : (_currentUserService.UserId ?? await _travelRequestRepository.GetFirstEmployeeIdAsync(cancellationToken));
+        var callerId = _currentUserService.UserId;
+        var callerRole = _currentUserService.UserRole;
+
+        var empId = string.Equals(callerRole, "Employee", StringComparison.OrdinalIgnoreCase) && callerId.HasValue
+            ? callerId.Value
+            : (employeeId.HasValue && employeeId != Guid.Empty
+                ? employeeId.Value
+                : (callerId ?? await _travelRequestRepository.GetFirstEmployeeIdAsync(cancellationToken)));
 
         var employee = await _travelRequestRepository.GetEmployeeWithDepartmentAndManagerAsync(empId, cancellationToken);
         if (employee == null) return (false, "Employee account not found.", null);

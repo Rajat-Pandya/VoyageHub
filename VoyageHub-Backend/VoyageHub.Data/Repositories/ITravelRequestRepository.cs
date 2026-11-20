@@ -8,8 +8,8 @@ namespace VoyageHub.Data.Repositories;
 
 public interface ITravelRequestRepository : IRepository<TravelRequest>
 {
-    Task<List<TravelRequest>> GetRequestsAsync(string? status, string? search, Guid? employeeId, int? limit, CancellationToken cancellationToken = default);
-    Task<(int Drafts, int Pending, int Upcoming, decimal Reimbursement)> GetStatsAsync(Guid? employeeId, CancellationToken cancellationToken = default);
+    Task<List<TravelRequest>> GetRequestsAsync(string? status, string? search, Guid? employeeId, int? limit, Guid? managerId = null, CancellationToken cancellationToken = default);
+    Task<(int Drafts, int Pending, int Upcoming, decimal Reimbursement)> GetStatsAsync(Guid? employeeId, Guid? managerId = null, CancellationToken cancellationToken = default);
     Task<TravelRequest?> GetDetailAsync(Guid id, CancellationToken cancellationToken = default);
     Task<User?> GetEmployeeWithDepartmentAndManagerAsync(Guid employeeId, CancellationToken cancellationToken = default);
     Task<Guid> GetFirstEmployeeIdAsync(CancellationToken cancellationToken = default);

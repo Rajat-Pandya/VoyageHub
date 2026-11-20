@@ -14,7 +14,13 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
     {
     }
 
-    public async Task<List<TravelRequest>> GetRequestsAsync(string? status, string? search, Guid? employeeId, int? limit, CancellationToken cancellationToken = default)
+    public async Task<List<TravelRequest>> GetRequestsAsync(
+        string? status,
+        string? search,
+        Guid? employeeId,
+        int? limit,
+        Guid? managerId = null,
+        CancellationToken cancellationToken = default)
     {
         var query = DbSet
             .Include(r => r.Employee)
@@ -25,11 +31,11 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
 
         if (employeeId.HasValue && employeeId != Guid.Empty)
         {
-            var hasEmployeeRequests = await query.AnyAsync(r => r.EmployeeId == employeeId.Value, cancellationToken);
-            if (hasEmployeeRequests)
-            {
-                query = query.Where(r => r.EmployeeId == employeeId.Value);
-            }
+            query = query.Where(r => r.EmployeeId == employeeId.Value);
+        }
+        else if (managerId.HasValue && managerId != Guid.Empty)
+        {
+            query = query.Where(r => r.EmployeeId == managerId.Value || (r.Employee != null && r.Employee.ManagerId == managerId.Value));
         }
 
         if (!string.IsNullOrWhiteSpace(status) && status.ToLower() != "all" && status.ToLower() != "all statuses")
@@ -63,12 +69,19 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
         return await query.ToListAsync(cancellationToken);
     }
 
-    public async Task<(int Drafts, int Pending, int Upcoming, decimal Reimbursement)> GetStatsAsync(Guid? employeeId, CancellationToken cancellationToken = default)
+    public async Task<(int Drafts, int Pending, int Upcoming, decimal Reimbursement)> GetStatsAsync(
+        Guid? employeeId,
+        Guid? managerId = null,
+        CancellationToken cancellationToken = default)
     {
         var reqQuery = DbSet.AsQueryable();
         if (employeeId.HasValue && employeeId != Guid.Empty)
         {
             reqQuery = reqQuery.Where(r => r.EmployeeId == employeeId.Value);
+        }
+        else if (managerId.HasValue && managerId != Guid.Empty)
+        {
+            reqQuery = reqQuery.Where(r => r.EmployeeId == managerId.Value || (r.Employee != null && r.Employee.ManagerId == managerId.Value));
         }
 
         var drafts = await reqQuery.CountAsync(r => r.Status == "Draft", cancellationToken);
@@ -79,6 +92,10 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
         if (employeeId.HasValue && employeeId != Guid.Empty)
         {
             expenseQuery = expenseQuery.Where(e => e.Request != null && e.Request.EmployeeId == employeeId.Value);
+        }
+        else if (managerId.HasValue && managerId != Guid.Empty)
+        {
+            expenseQuery = expenseQuery.Where(e => e.Request != null && (e.Request.EmployeeId == managerId.Value || (e.Request.Employee != null && e.Request.Employee.ManagerId == managerId.Value)));
         }
         var reimbursement = await expenseQuery.Where(e => e.Status == "Pending").SumAsync(e => (decimal?)e.Amount, cancellationToken) ?? 0m;
 

@@ -164,30 +164,25 @@ export class VoyageService {
   private readonly baseUrl = environment.apiUrl;
 
   // Requests
-  getRequests(status?: string, search?: string, limit?: number, employeeId?: string): Observable<TravelRequestItem[]> {
+  getRequests(status?: string, search?: string, limit?: number): Observable<TravelRequestItem[]> {
     let params = new HttpParams();
     if (status) params = params.set('status', status);
     if (search) params = params.set('search', search);
     if (limit) params = params.set('limit', limit.toString());
-    if (employeeId) params = params.set('employeeId', employeeId);
 
     return this.http.get<TravelRequestItem[]>(`${this.baseUrl}/travelrequests`, { params });
   }
 
-  getDashboardStats(employeeId?: string): Observable<DashboardStats> {
-    let params = new HttpParams();
-    if (employeeId) params = params.set('employeeId', employeeId);
-    return this.http.get<DashboardStats>(`${this.baseUrl}/travelrequests/stats`, { params });
+  getDashboardStats(): Observable<DashboardStats> {
+    return this.http.get<DashboardStats>(`${this.baseUrl}/travelrequests/stats`);
   }
 
   getRequestDetail(id: string): Observable<TravelRequestDetail> {
     return this.http.get<TravelRequestDetail>(`${this.baseUrl}/travelrequests/${id}`);
   }
 
-  createRequest(payload: any, employeeId?: string): Observable<TravelRequestDetail> {
-    let params = new HttpParams();
-    if (employeeId) params = params.set('employeeId', employeeId);
-    return this.http.post<TravelRequestDetail>(`${this.baseUrl}/travelrequests`, payload, { params });
+  createRequest(payload: any): Observable<TravelRequestDetail> {
+    return this.http.post<TravelRequestDetail>(`${this.baseUrl}/travelrequests`, payload);
   }
 
   cancelRequest(id: string): Observable<any> {
@@ -211,11 +206,8 @@ export class VoyageService {
   }
 
   // Approvals (Manager / Finance)
-  getApprovalQueue(role?: string, approverId?: string): Observable<ApprovalQueueSummary> {
-    let params = new HttpParams();
-    if (role) params = params.set('role', role);
-    if (approverId) params = params.set('approverId', approverId);
-    return this.http.get<ApprovalQueueSummary>(`${this.baseUrl}/approvals/queue`, { params });
+  getApprovalQueue(): Observable<ApprovalQueueSummary> {
+    return this.http.get<ApprovalQueueSummary>(`${this.baseUrl}/approvals/queue`);
   }
 
   takeApprovalAction(stepId: string, action: 'Approve' | 'Reject', comment?: string): Observable<any> {

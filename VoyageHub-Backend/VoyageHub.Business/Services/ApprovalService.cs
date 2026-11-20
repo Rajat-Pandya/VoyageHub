@@ -27,7 +27,43 @@ public class ApprovalService : IApprovalService
 
     public async Task<ApprovalQueueSummaryDto> GetQueueAsync(Guid? approverId, string? role, CancellationToken cancellationToken = default)
     {
-        var steps = await _approvalStepRepository.GetPendingStepsAsync(approverId, role, cancellationToken);
+        var callerRole = _currentUserService.UserRole;
+        var callerId = _currentUserService.UserId;
+
+        string? effectiveRole = role;
+        Guid? effectiveApproverId = approverId;
+
+        if (!string.IsNullOrWhiteSpace(callerRole))
+        {
+            if (string.Equals(callerRole, "Employee", StringComparison.OrdinalIgnoreCase))
+            {
+                // Employee cannot fetch approval queue
+                return new ApprovalQueueSummaryDto
+                {
+                    PendingTotal = 0,
+                    AvgResponseTimeHours = 0.0,
+                    PolicyCompliancePercent = 100,
+                    Items = new List<ApprovalQueueItemDto>()
+                };
+            }
+            else if (string.Equals(callerRole, "Manager", StringComparison.OrdinalIgnoreCase))
+            {
+                effectiveRole = "Manager";
+                effectiveApproverId = callerId;
+            }
+            else if (string.Equals(callerRole, "Finance", StringComparison.OrdinalIgnoreCase))
+            {
+                effectiveRole = "Finance";
+                effectiveApproverId = null;
+            }
+            else if (string.Equals(callerRole, "Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                effectiveRole = role;
+                effectiveApproverId = approverId;
+            }
+        }
+
+        var steps = await _approvalStepRepository.GetPendingStepsAsync(effectiveApproverId, effectiveRole, cancellationToken);
 
         var pendingTotal = steps.Sum(s => s.Request!.EstimatedBudget);
 

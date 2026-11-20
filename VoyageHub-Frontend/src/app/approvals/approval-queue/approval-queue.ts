@@ -66,8 +66,7 @@ export class ApprovalQueue implements OnInit {
 
   loadQueue(): void {
     this.isLoading.set(true);
-    const role = this.authService.currentUser()?.role || 'Manager';
-    this.voyageService.getApprovalQueue(role).subscribe({
+    this.voyageService.getApprovalQueue().subscribe({
       next: (res) => {
         if (res && res.items && res.items.length > 0) {
           this.items.set(res.items);

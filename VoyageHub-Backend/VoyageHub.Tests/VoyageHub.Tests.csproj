@@ -20,6 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VoyageHub.Api\VoyageHub.Api.csproj" />
     <ProjectReference Include="..\VoyageHub.Business\VoyageHub.Business.csproj" />
     <ProjectReference Include="..\VoyageHub.Data\VoyageHub.Data.csproj" />
   </ItemGroup>
