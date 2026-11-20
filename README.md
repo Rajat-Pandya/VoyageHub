@@ -175,6 +175,9 @@ The database seed provides ready-to-use persona accounts:
 | **Finance**  | `rohit@voyagehub.internal`  | `password123` |
 | **Employee** | `ananya@voyagehub.internal` | `password123` |
 
+> [!IMPORTANT]
+> **Hosted Deployment Security Note**: The demo credentials and local seed password hashes above are strictly for local development environments using `database/VoyageHub_Schema.sql`. Cloud and hosted instances deployed using `database/VoyageHub_Schema.azure.sql` do **not** use these default passwords. In the Azure SQL schema, all seeded user `PasswordHash` values are initialized to the disabled placeholder `'DISABLED-SET-VIA-DEPLOYMENT-MD'`. For hosted environments, administrators must generate new secure password hashes using the `tools/HashPassword` utility and update the database directly via SQL (see [DEPLOYMENT.md](DEPLOYMENT.md)).
+
 ---
 
 ## Author
