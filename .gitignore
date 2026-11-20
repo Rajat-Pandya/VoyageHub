@@ -1,0 +1,57 @@
+# ===================================================================
+# .NET / C# / Visual Studio
+# ===================================================================
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.sln.docstates
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+*.nupkg
+project.lock.json
+project.assets.json
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+
+# ===================================================================
+# Node / Angular / Web
+# ===================================================================
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+coverage/
+.temp/
+.tmp/
+out-tsc/
+bazel-out/
+
+# ===================================================================
+# Operating Systems & Editors
+# ===================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+*.launch
+.settings/
