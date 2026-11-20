@@ -141,7 +141,7 @@ export class Support implements OnInit {
     const user = this.authService.currentUser();
     this.voyageService.getSupportTickets(undefined, user?.id).subscribe({
       next: (data) => {
-        if (data && data.length > 0) {
+        if (Array.isArray(data)) {
           this.tickets.set(data);
           if (isPlatformBrowser(this.platformId)) {
             sessionStorage.setItem('voyage_support_tickets', JSON.stringify(data));
@@ -154,7 +154,7 @@ export class Support implements OnInit {
             const saved = sessionStorage.getItem('voyage_support_tickets');
             if (saved) {
               const parsed = JSON.parse(saved);
-              if (Array.isArray(parsed) && parsed.length > 0) {
+              if (Array.isArray(parsed)) {
                 this.tickets.set(parsed);
               }
             }

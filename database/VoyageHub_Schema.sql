@@ -266,6 +266,11 @@ INSERT INTO dbo.EXPENSES (Id, RequestId, Category, Amount, ProofPath, Status, Su
 (NEWID(), @ReqNYC,    'Meals',   85.20,   'receipt_nyc_dinner.png',     'Pending', '2024-05-25T19:30:00'),
 (NEWID(), @ReqAustin, 'Transport', 145.00, 'receipt_uber_austin.pdf',   'Approved', '2024-05-13T10:00:00');
 
+-- Support Tickets
+INSERT INTO dbo.SUPPORT_TICKETS (Id, TicketCode, Category, Priority, RequestCode, RequestId, Subject, Description, CallbackNumber, Status, AssignedAgent, ResolutionNotes, UserId, CreatedAt, UpdatedAt) VALUES
+('E485C2A9-0311-4353-8DDC-BD5C701DA6DD', '#TICK-7412', 'Flight / Itinerary Rescheduling', 'High', '#TR-2048', @ReqBerlin, 'Flight re-routing due to BLR morning fog delay', 'Flight 6E-512 was delayed by 3 hours. Need connecting flight to Mumbai rebooked to attend 3 PM client kickoff meeting.', '+91 98201 44521', 'In Progress', 'Meera Sen (Corporate Travel Desk)', NULL, @UserAlex, '2026-10-28T08:30:00', '2026-10-28T10:15:00'),
+('2170D834-AB7A-4934-98FC-9F28188B6B6B', '#TICK-7280', 'Expense Claim & Reimbursement Query', 'Medium', '#TR-2041', @ReqLisbon, 'GST invoice breakdown query for hotel stay in New Delhi', 'Finance requested itemized food tax breakdown for Taj Palace hotel invoice.', '+91 98201 44521', 'Resolved', 'Vikram Malhotra (Finance)', 'Itemized CGST/SGST invoice accepted. Expense claim reimbursed in batch payout.', @UserAlex, '2026-10-26T14:10:00', '2026-10-27T11:00:00');
+
 -- Audit Logs (Matching PDF Page 10)
 INSERT INTO dbo.AUDIT_LOGS (Id, EntityType, EntityId, Action, ActorId, ActorName, ChangeDetail, Severity, Timestamp) VALUES
 (NEWID(), 'POLICY', NULL, 'Update Limit', @UserAdmin, 'Admin User', 'Sales Intl. Limit: $2,500 -> $3,000', 'LOW', '2024-06-05T14:22:10'),
