@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService, PRESET_PERSONAS, UserProfile } from '../services/auth.service';
+import { AuthService, DEMO_PASSWORD, PRESET_PERSONAS, UserProfile } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class Login implements OnInit {
   private readonly route = inject(ActivatedRoute);
 
   email = 'rohan.sharma@voyagehub.in';
-  password = 'Password123!';
+  password = DEMO_PASSWORD;
   stayLoggedIn = true;
 
   // Forgot password state
@@ -60,7 +60,7 @@ export class Login implements OnInit {
 
   quickSelect(persona: UserProfile): void {
     this.email = persona.email;
-    this.password = 'Password123!';
+    this.password = DEMO_PASSWORD;
     this.submitLogin();
   }
 

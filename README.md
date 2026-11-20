@@ -170,10 +170,10 @@ The database seed provides ready-to-use persona accounts:
 
 | Role | Email | Password |
 | :--- | :--- | :--- |
-| **Admin** | `vikram@voyagehub.internal` | `admin123` |
-| **Manager** | `priya@voyagehub.internal` | `password123` |
-| **Finance** | `rohit@voyagehub.internal` | `password123` |
-| **Employee** | `ananya@voyagehub.internal` | `password123` |
+| **Admin** | `vikram@voyagehub.internal` | `VoyageDemo2026!` |
+| **Manager** | `priya@voyagehub.internal` | `VoyageDemo2026!` |
+| **Finance** | `rohit@voyagehub.internal` | `VoyageDemo2026!` |
+| **Employee** | `ananya@voyagehub.internal` | `VoyageDemo2026!` |
 
 ---
 

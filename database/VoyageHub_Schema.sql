@@ -1,4 +1,4 @@
--- ====================================================================
+﻿-- ====================================================================
 -- VoyageHub: Enterprise Corporate Travel & Expense Management Database
 -- Database: AngularAuthDb
 -- ====================================================================
@@ -191,8 +191,8 @@ INSERT INTO dbo.TRAVEL_POLICIES (Id, DepartmentId, MaxBudget, IntlBudgetLimit, D
 (NEWID(), @DeptEng, 3500.00, 3500.00, 1000.00, 'ECONOMY+', 1),
 (NEWID(), @DeptHR, 2000.00, 2000.00, 600.00, 'ECONOMY', 1);
 
--- Standard Bcrypt Hash for password 'Password123!'
-DECLARE @DefaultHash NVARCHAR(500) = '$2a$11$w1qB87f.vj3R6lF8hLd54uWn40/3eQ2.d3rV5lF3x7wQ9l0.9B0W6';
+-- Demo user BCrypt hash (work factor 12)
+DECLARE @DefaultHash NVARCHAR(500) = '$2a$12$L/KBcAZtiVg6ENUw4IlchunmZM2eP2L6sMl6Dq2fUXCLwb4FEfBNq';
 
 DECLARE @UserAlex UNIQUEIDENTIFIER   = 'A1111111-AAAA-AAAA-AAAA-AAAAAAAAAAAA';
 DECLARE @UserMarcus UNIQUEIDENTIFIER = 'B2222222-BBBB-BBBB-BBBB-BBBBBBBBBBBB';

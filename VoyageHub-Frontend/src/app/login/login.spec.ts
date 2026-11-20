@@ -5,7 +5,7 @@ import { provideRouter, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
 import { Login } from './login';
-import { AuthService, PRESET_PERSONAS } from '../services/auth.service';
+import { AuthService, DEMO_PASSWORD, PRESET_PERSONAS } from '../services/auth.service';
 
 describe('Login', () => {
   let component: Login;
@@ -61,10 +61,10 @@ describe('Login', () => {
   it('should authenticate user and navigate on submitLogin', () => {
     const navSpy = vi.spyOn(router, 'navigate');
     component.email = 'rohan.sharma@voyagehub.in';
-    component.password = 'Password123!';
+    component.password = DEMO_PASSWORD;
     component.submitLogin();
 
-    expect(mockAuthService.loginUser).toHaveBeenCalledWith('rohan.sharma@voyagehub.in', 'Password123!');
+    expect(mockAuthService.loginUser).toHaveBeenCalledWith('rohan.sharma@voyagehub.in', DEMO_PASSWORD);
     expect(navSpy).toHaveBeenCalledWith(['/dashboard']);
   });
 

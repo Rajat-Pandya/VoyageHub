@@ -41,6 +41,8 @@ export interface ForgotPasswordResponse {
   resetLink?: string;
 }
 
+export const DEMO_PASSWORD = 'VoyageDemo2026!';
+
 export const PRESET_PERSONAS: UserProfile[] = [
   {
     id: 'A1111111-AAAA-AAAA-AAAA-AAAAAAAAAAAA',
@@ -167,10 +169,19 @@ export class AuthService {
   }
 
   switchPersona(persona: UserProfile): void {
-    this.currentUser.set(persona);
-    if (isPlatformBrowser(this.platformId)) {
-      sessionStorage.setItem('voyage_user', JSON.stringify(persona));
-    }
+    this.loginUser(persona.email, DEMO_PASSWORD).subscribe({
+      next: (res) => {
+        if (res.user) {
+          this.currentUser.set(res.user);
+        }
+      },
+      error: () => {
+        this.currentUser.set(persona);
+        if (isPlatformBrowser(this.platformId)) {
+          sessionStorage.setItem('voyage_user', JSON.stringify(persona));
+        }
+      }
+    });
   }
 
   loginUser(email: string, password: string): Observable<AuthResponse> {
