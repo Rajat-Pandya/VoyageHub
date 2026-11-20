@@ -89,7 +89,9 @@ Project.NET/
 │   ├── src/app/finance/       # Expense claims review & batch payout
 │   ├── src/app/requests/      # Travel request creation & itineraries
 │   └── src/app/support/       # Corporate desk support ticketing
-├── VoyageHub_Schema.sql       # Database creation and seed data script
+├── database/                  # Database creation and seed data scripts
+│   ├── VoyageHub_Schema.sql   # SQL Server schema and demo seed data
+│   └── run_migration.ps1      # Parameterized setup script for local SQL Server
 └── README.md                  # Project documentation
 ```
 
@@ -110,7 +112,7 @@ Project.NET/
 
 1. Open SQL Server Management Studio (SSMS) or Azure Data Studio.
 2. Connect to your SQL Server instance.
-3. Open and execute the `VoyageHub_Schema.sql` script. This will:
+3. Open and execute the `database/VoyageHub_Schema.sql` script (or run `.\database\run_migration.ps1`). This will:
    - Create the `AngularAuthDb` database (if not existing).
    - Create all 9 domain tables (`USERS`, `DEPARTMENTS`, `TRAVEL_POLICIES`, `TRAVEL_REQUESTS`, `APPROVAL_STEPS`, `ITINERARY_SEGMENTS`, `STAYS`, `EXPENSES`, `SUPPORT_TICKETS`, `AUDIT_LOGS`).
    - Populate initial seed data with departments, policies, and demo users.
