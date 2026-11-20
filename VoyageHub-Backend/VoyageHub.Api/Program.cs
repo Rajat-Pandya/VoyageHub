@@ -178,7 +178,9 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+var swaggerEnabled = builder.Configuration.GetValue<bool>("Swagger:Enabled", builder.Environment.IsDevelopment());
+
+if (swaggerEnabled)
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
@@ -188,8 +190,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// Redirect root to Swagger UI for quick API testing
-app.MapGet("/", () => Results.Redirect("/swagger"));
+// Redirect root to Swagger UI when enabled, otherwise return 200 text response
+app.MapGet("/", () => swaggerEnabled
+    ? Results.Redirect("/swagger")
+    : Results.Text("VoyageHub API is running.", "text/plain"));
 
 app.UseCors("AllowAngularApp");
 
