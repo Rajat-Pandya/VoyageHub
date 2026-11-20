@@ -1,0 +1,238 @@
+<div class="policy-page">
+  <!-- Top Bar matching Page 9 -->
+  <header class="page-top-bar">
+    <div class="header-titles">
+      <h1>Policy &amp; Hierarchy Configuration</h1>
+      <p class="subtitle">Define global travel rules and organizational approval paths</p>
+    </div>
+
+    <button type="button" class="btn-dark" (click)="saveAllChanges()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+        <polyline points="17 21 17 13 7 13 7 21"/>
+        <polyline points="7 3 7 8 15 8"/>
+      </svg>
+      Save All Changes
+    </button>
+  </header>
+
+  @if (toastMessage()) {
+    <div class="toast-banner fade-in">
+      <span>{{ toastMessage() }}</span>
+    </div>
+  }
+
+  <!-- Section 1: Department Travel Policies Table -->
+  <section class="section-card">
+    <div class="section-header-row">
+      <h2>Department Travel Policies</h2>
+      <button type="button" class="btn-secondary add-policy-btn" (click)="openAddPolicy()">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v8"/>
+          <path d="M8 12h8"/>
+        </svg>
+        Add Policy
+      </button>
+    </div>
+
+    <table class="voyage-table">
+      <thead>
+        <tr>
+          <th>DEPARTMENT</th>
+          <th>INTL. BUDGET LIMIT</th>
+          <th>DOMESTIC LIMIT</th>
+          <th>ALLOWED CLASS</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of policies(); track p.id) {
+          <tr>
+            <td><strong>{{ p.departmentName }}</strong></td>
+            <td>
+              @if (p.intlBudgetLimit >= 900000) {
+                <span>Unlimited</span>
+              } @else {
+                <span>{{ p.intlBudgetLimit | currency:'INR':'symbol':'1.0-0' }} / trip</span>
+              }
+            </td>
+            <td>{{ p.domesticLimit | currency:'INR':'symbol':'1.0-0' }} / trip</td>
+            <td>
+              <span class="class-pill" [class.business]="p.allowedClass === 'BUSINESS'" [class.economy]="p.allowedClass !== 'BUSINESS'">
+                {{ p.allowedClass }}
+              </span>
+            </td>
+            <td>
+              <div class="table-actions-cell">
+                <button type="button" class="edit-icon-btn" (click)="editPolicy(p)" title="Edit Limits" aria-label="Edit Limits">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                  </svg>
+                </button>
+                <button type="button" class="delete-icon-btn" (click)="deletePolicy(p)" title="Delete Policy" aria-label="Delete Policy">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 6h18"/>
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 2: Approval Hierarchy & Policy Hard Enforcement -->
+  <section class="split-section-grid">
+    <!-- Approval Hierarchy Workflow -->
+    <div class="hierarchy-card">
+      <h2>Approval Hierarchy</h2>
+
+      <div class="workflow-header-box">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="8" height="8" x="3" y="3" rx="2"/>
+            <path d="M7 11v4a2 2 0 0 0 2 2h4"/>
+            <rect width="8" height="8" x="13" y="13" rx="2"/>
+          </svg>
+        </div>
+        <div>
+          <strong>Default Workflow</strong>
+          <p>Standard path for all requests</p>
+        </div>
+      </div>
+
+      <div class="hierarchy-steps-list">
+        <div class="hierarchy-step-item">
+          <div class="step-badge-num">1</div>
+          <div class="step-info">
+            <strong>Immediate Manager</strong>
+            <span>First-level operational approval</span>
+          </div>
+        </div>
+
+        <div class="step-connector-line"></div>
+
+        <div class="hierarchy-step-item">
+          <div class="step-badge-num num-two">2</div>
+          <div class="step-info">
+            <strong>Finance Controller</strong>
+            <span>Second-level budgetary review</span>
+          </div>
+        </div>
+
+        <div class="step-connector-line"></div>
+
+        <div class="hierarchy-step-item">
+          <div class="step-badge-num num-activated">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div class="step-info">
+            <strong>Trip Activated</strong>
+            <span>Itinerary &amp; Expenses unlocked</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Policy Hard Enforcement Card (Dark Navy matching Page 9) -->
+    <div class="enforcement-card">
+      <div class="shield-watermark">
+        <svg viewBox="0 0 24 24" width="120" height="120" fill="currentColor">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+        </svg>
+      </div>
+
+      <div class="enforcement-content">
+        <h3>Policy Hard Enforcement</h3>
+        <p class="enforcement-desc">
+          When enabled, requests that exceed department limits will be automatically blocked from submission until adjusted or an override key is provided by an Admin.
+        </p>
+
+        <div class="enforcement-actions">
+          <button type="button" class="toggle-pill" [class.enabled]="hardEnforcementEnabled()" (click)="toggleEnforcement()">
+            {{ hardEnforcementEnabled() ? 'Enabled' : 'Disabled' }}
+          </button>
+          <a routerLink="/audit" class="override-logs-btn">Override Logs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Edit Policy Modal -->
+  @if (editingPolicy(); as ep) {
+    <div class="modal-backdrop fade-in" (click)="cancelEdit()">
+      <div class="modal-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Edit Policy &mdash; {{ ep.departmentName }}</h3>
+          <button type="button" class="close-x-btn" (click)="cancelEdit()" title="Close dialog" aria-label="Close dialog">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group edit-row">
+            <label for="intlBudgetLimit">Intl. Budget Limit (₹ INR)</label>
+            <input id="intlBudgetLimit" type="number" [(ngModel)]="ep.intlBudgetLimit" class="form-input" placeholder="e.g. 250000" title="Intl. Budget Limit (₹ INR)" />
+          </div>
+          <div class="form-group edit-row">
+            <label for="domesticLimit">Domestic Limit (₹ INR)</label>
+            <input id="domesticLimit" type="number" [(ngModel)]="ep.domesticLimit" class="form-input" placeholder="e.g. 45000" title="Domestic Limit (₹ INR)" />
+          </div>
+          <div class="form-group edit-row">
+            <label for="allowedClass">Allowed Travel Class</label>
+            <select id="allowedClass" [(ngModel)]="ep.allowedClass" class="form-select" title="Allowed Travel Class" aria-label="Allowed Travel Class">
+              <option value="ECONOMY">ECONOMY</option>
+              <option value="ECONOMY+">ECONOMY+</option>
+              <option value="BUSINESS">BUSINESS</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" (click)="cancelEdit()">Cancel</button>
+          <button type="button" class="btn-dark" (click)="savePolicyEdit()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Add Policy Modal -->
+  @if (showAddModal()) {
+    <div class="modal-backdrop fade-in" (click)="closeAddPolicy()">
+      <div class="modal-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Add Department Travel Policy</h3>
+          <button type="button" class="close-x-btn" (click)="closeAddPolicy()" title="Close dialog" aria-label="Close dialog">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group edit-row">
+            <label for="newDeptName">Department Name</label>
+            <input id="newDeptName" type="text" [(ngModel)]="newPolicy.departmentName" class="form-input" placeholder="e.g. Research & Innovation (Pune)" title="Department Name" />
+          </div>
+          <div class="form-group edit-row">
+            <label for="newIntlLimit">Intl. Budget Limit (₹ INR)</label>
+            <input id="newIntlLimit" type="number" [(ngModel)]="newPolicy.intlBudgetLimit" class="form-input" placeholder="250000" title="Intl. Budget Limit (₹ INR)" />
+          </div>
+          <div class="form-group edit-row">
+            <label for="newDomesticLimit">Domestic Limit (₹ INR)</label>
+            <input id="newDomesticLimit" type="number" [(ngModel)]="newPolicy.domesticLimit" class="form-input" placeholder="40000" title="Domestic Limit (₹ INR)" />
+          </div>
+          <div class="form-group edit-row">
+            <label for="newAllowedClass">Allowed Travel Class</label>
+            <select id="newAllowedClass" [(ngModel)]="newPolicy.allowedClass" class="form-select" title="Allowed Travel Class" aria-label="Allowed Travel Class">
+              <option value="ECONOMY">ECONOMY</option>
+              <option value="ECONOMY+">ECONOMY+</option>
+              <option value="BUSINESS">BUSINESS</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" (click)="closeAddPolicy()">Cancel</button>
+          <button type="button" class="btn-dark" (click)="submitAddPolicy()">Create Policy</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

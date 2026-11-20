@@ -1,0 +1,133 @@
+<div class="approval-queue-page">
+  <!-- Top Bar matching Page 6 -->
+  <header class="page-top-bar">
+    <div class="header-titles">
+      <h1>Approval Queue</h1>
+      <p class="subtitle">You have {{ items().length }} requests awaiting your review</p>
+    </div>
+
+    <button type="button" class="btn-secondary filter-btn">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+      </svg>
+      Filters
+    </button>
+  </header>
+
+  <!-- 3 KPI Cards matching Page 6 -->
+  <section class="kpi-grid-3">
+    <div class="kpi-card">
+      <span class="kpi-label">PENDING TOTAL</span>
+      <div class="kpi-value">{{ pendingTotal() | currency:'INR':'symbol':'1.0-0' }}</div>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">AVG. RESPONSE TIME</span>
+      <div class="kpi-value">{{ avgResponseTime() }} Hours</div>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">POLICY COMPLIANCE</span>
+      <div class="kpi-value accent-green">{{ policyCompliance() }}%</div>
+    </div>
+  </section>
+
+  <!-- Table Card matching Page 6 -->
+  <div class="table-card">
+    <table class="voyage-table">
+      <thead>
+        <tr>
+          <th>EMPLOYEE</th>
+          <th>DESTINATION &amp; PURPOSE</th>
+          <th>TRAVEL DATES</th>
+          <th>BUDGET</th>
+          <th>POLICY</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items(); track item.stepId) {
+          <tr>
+            <td class="employee-cell">
+              <img [src]="item.employeeAvatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80'" 
+                   alt="Avatar" class="emp-avatar" />
+              <div class="emp-info">
+                <strong>{{ item.employeeName }}</strong>
+                <span>{{ item.departmentName }}</span>
+              </div>
+            </td>
+            <td>
+              <div class="dest-info">
+                <strong>{{ item.destination }}</strong>
+                <span class="purpose-subtext">{{ item.purpose }}</span>
+              </div>
+            </td>
+            <td class="dates-text">{{ item.travelDates }}</td>
+            <td class="budget-value">{{ item.budget | currency:'INR':'symbol':'1.0-0' }}</td>
+            <td>
+              @if (item.policyStatus === 'Flagged') {
+                <span class="badge-policy-flagged">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" x2="12" y1="8" y2="12"/>
+                    <line x1="12" x2="12.01" y1="16" y2="16"/>
+                  </svg>
+                  Flagged
+                </span>
+              } @else {
+                <span class="badge-policy-standard">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  Standard
+                </span>
+              }
+            </td>
+            <td class="actions-cell">
+              <div class="action-buttons-wrap">
+                <button type="button" class="btn-review" (click)="viewDetail(item)" title="View Details">
+                  Review
+                </button>
+                <button type="button" class="btn-reject" (click)="openActionModal(item, 'Reject')" title="Reject Request">
+                  Reject
+                </button>
+                <button type="button" class="btn-approve" (click)="openActionModal(item, 'Approve')" title="Approve Request">
+                  Approve
+                </button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty-state-cell">
+              No pending travel requests in your approval queue. All clear!
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Action Modal for Review / Approval -->
+  @if (selectedItem(); as current) {
+    <div class="modal-backdrop fade-in" (click)="closeModal()">
+      <div class="modal-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>{{ actionType() }} Travel Request</h3>
+          <button type="button" class="close-x-btn" (click)="closeModal()" title="Close dialog" aria-label="Close dialog">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <p>You are about to <strong>{{ actionType().toLowerCase() }}</strong> the travel request <strong>{{ current.requestCode }}</strong> for <strong>{{ current.employeeName }}</strong> ({{ current.destination }}).</p>
+          <div class="form-group modal-field">
+            <label for="actionComment">Approval Comment / Remarks</label>
+            <textarea id="actionComment" [(ngModel)]="actionComment" rows="3" class="form-textarea" placeholder="Add optional comments for the applicant..." title="Approval Comment / Remarks" aria-label="Approval Comment / Remarks"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" (click)="closeModal()">Cancel</button>
+          <button type="button" class="btn-dark" (click)="confirmAction()">Confirm {{ actionType() }}</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

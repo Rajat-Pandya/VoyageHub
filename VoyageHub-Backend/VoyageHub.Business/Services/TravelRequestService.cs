@@ -1,0 +1,434 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using VoyageHub.Business.Dtos;
+using VoyageHub.Data.Entities;
+using VoyageHub.Data.Repositories;
+
+namespace VoyageHub.Business.Services;
+
+public class TravelRequestService : ITravelRequestService
+{
+    private readonly ITravelRequestRepository _travelRequestRepository;
+    private readonly IAuditService _auditService;
+
+    public TravelRequestService(ITravelRequestRepository travelRequestRepository, IAuditService auditService)
+    {
+        _travelRequestRepository = travelRequestRepository;
+        _auditService = auditService;
+    }
+
+    public async Task<List<TravelRequestListDto>> GetRequestsAsync(
+        string? status,
+        string? search,
+        Guid? employeeId,
+        int? limit,
+        CancellationToken cancellationToken = default)
+    {
+        var results = await _travelRequestRepository.GetRequestsAsync(status, search, employeeId, limit, cancellationToken);
+
+        var dtoList = results.Select(r =>
+        {
+            var activeApprover = r.ApprovalSteps
+                .Where(s => s.Approver != null)
+                .Select(s => s.Approver!.Name)
+                .FirstOrDefault() ?? "Priya Nair";
+
+            return new TravelRequestListDto
+            {
+                Id = r.Id,
+                RequestCode = r.RequestCode,
+                Destination = r.Destination,
+                Purpose = r.Purpose,
+                DatesFormatted = $"{r.StartDate:dd MMM} – {r.EndDate:dd MMM}",
+                StartDate = r.StartDate,
+                EndDate = r.EndDate,
+                SubmittedDate = r.CreatedAt,
+                EstimatedBudget = r.EstimatedBudget,
+                ApproverName = activeApprover,
+                Status = r.Status,
+                PolicyCompliance = r.PolicyCompliance,
+                TravelClass = r.TravelClass,
+                EmployeeName = r.Employee?.Name ?? "Rohan Sharma",
+                DepartmentName = r.Employee?.Department?.Name ?? "Sales & Business Dev (Mumbai HQ)"
+            };
+        }).ToList();
+
+        return dtoList;
+    }
+
+    public async Task<DashboardStatsDto> GetStatsAsync(Guid? employeeId, CancellationToken cancellationToken = default)
+    {
+        var stats = await _travelRequestRepository.GetStatsAsync(employeeId, cancellationToken);
+
+        return new DashboardStatsDto
+        {
+            DraftsCount = stats.Drafts > 0 ? stats.Drafts : 1,
+            PendingCount = stats.Pending > 0 ? stats.Pending : 2,
+            UpcomingTripsCount = stats.Upcoming > 0 ? stats.Upcoming : 1,
+            TotalReimbursement = stats.Reimbursement
+        };
+    }
+
+    public async Task<TravelRequestDetailDto?> GetDetailAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var r = await _travelRequestRepository.GetDetailAsync(id, cancellationToken);
+        if (r == null) return null;
+
+        var durationDays = Math.Max(1, (r.EndDate - r.StartDate).Days);
+        var durationNights = Math.Max(0, durationDays - 1);
+
+        return new TravelRequestDetailDto
+        {
+            Id = r.Id,
+            RequestCode = r.RequestCode,
+            EmployeeId = r.EmployeeId,
+            EmployeeName = r.Employee?.Name ?? "Employee",
+            EmployeeEmail = r.Employee?.Email ?? "",
+            DepartmentName = r.Employee?.Department?.Name ?? "General",
+            Destination = r.Destination,
+            Purpose = r.Purpose,
+            StartDate = r.StartDate,
+            EndDate = r.EndDate,
+            TripDurationDays = durationDays,
+            TripDurationNights = durationNights,
+            EstimatedBudget = r.EstimatedBudget,
+            TravelClass = r.TravelClass,
+            Justification = r.Justification,
+            Status = r.Status,
+            PolicyCompliance = r.PolicyCompliance,
+            SubmittedDate = r.CreatedAt,
+            PrimaryContact = "VoyageHub India Corporate Desk (+91-80-4000-8800)",
+            Segments = r.ItinerarySegments.Select(s => new ItinerarySegmentDto
+            {
+                Id = s.Id,
+                Mode = s.Mode,
+                Carrier = s.Carrier,
+                Origin = s.Origin,
+                Destination = s.Destination,
+                DepartureTime = s.DepartureTime,
+                ArrivalTime = s.ArrivalTime,
+                ConfirmationNumber = s.ConfirmationNumber,
+                Cost = s.Cost
+            }).ToList(),
+            Stays = r.Stays.Select(st => new StayDto
+            {
+                Id = st.Id,
+                HotelName = st.HotelName,
+                CheckIn = st.CheckIn,
+                CheckOut = st.CheckOut,
+                Nights = st.Nights,
+                ConfirmationNumber = st.ConfirmationNumber,
+                Cost = st.Cost
+            }).ToList(),
+            Expenses = r.Expenses.Select(e => new ExpenseItemDto
+            {
+                Id = e.Id,
+                RequestId = e.RequestId,
+                RequestCode = r.RequestCode,
+                EmployeeName = r.Employee?.Name ?? "Employee",
+                DepartmentName = r.Employee?.Department?.Name ?? "General",
+                TripPurpose = r.Purpose,
+                Category = e.Category,
+                Amount = e.Amount,
+                ProofPath = e.ProofPath,
+                Status = e.Status,
+                SubmittedAt = e.SubmittedAt
+            }).ToList(),
+            ApprovalHistory = r.ApprovalSteps.Select(a => new ApprovalStepItemDto
+            {
+                Id = a.Id,
+                Level = a.Level,
+                ApproverName = a.Approver?.Name ?? "Approver",
+                Status = a.Status,
+                Comment = a.Comment,
+                DecidedAt = a.DecidedAt
+            }).ToList()
+        };
+    }
+
+    public async Task<(bool Success, string Message, TravelRequestDetailDto? Request)> CreateRequestAsync(
+        CreateTravelRequestDto dto,
+        Guid? employeeId,
+        CancellationToken cancellationToken = default)
+    {
+        if (dto == null) return (false, "Invalid request data.", null);
+
+        var empId = employeeId.HasValue && employeeId != Guid.Empty
+            ? employeeId.Value
+            : await _travelRequestRepository.GetFirstEmployeeIdAsync(cancellationToken);
+
+        var employee = await _travelRequestRepository.GetEmployeeWithDepartmentAndManagerAsync(empId, cancellationToken);
+        if (employee == null) return (false, "Employee account not found.", null);
+
+        var count = await _travelRequestRepository.GetCountAsync(cancellationToken);
+        var code = $"#TR-{2050 + count + 1}";
+
+        var isFlagged = false;
+        if (employee.Department?.Policy != null)
+        {
+            var policy = employee.Department.Policy;
+            if (dto.EstimatedBudget > policy.IntlBudgetLimit)
+            {
+                isFlagged = true;
+            }
+        }
+
+        var status = dto.SaveAsDraft ? "Draft" : "In Review";
+
+        var request = new TravelRequest
+        {
+            RequestCode = code,
+            EmployeeId = empId,
+            Destination = dto.Destination.Trim(),
+            Purpose = dto.Purpose.Trim(),
+            StartDate = dto.StartDate,
+            EndDate = dto.EndDate,
+            EstimatedBudget = dto.EstimatedBudget,
+            TravelClass = string.IsNullOrWhiteSpace(dto.TravelClass) ? "Economy (Standard)" : dto.TravelClass,
+            Justification = dto.Justification,
+            Status = status,
+            PolicyCompliance = isFlagged ? "Flagged" : "Standard",
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        if (dto.Segments != null)
+        {
+            foreach (var s in dto.Segments)
+            {
+                request.ItinerarySegments.Add(new ItinerarySegment
+                {
+                    Mode = s.Mode ?? "Flight",
+                    Carrier = s.Carrier ?? "LUFTHANSA LH123",
+                    Origin = s.Origin,
+                    Destination = s.Destination,
+                    DepartureTime = s.DepartureTime,
+                    ArrivalTime = s.ArrivalTime,
+                    ConfirmationNumber = s.ConfirmationNumber ?? $"#AJK{new Random().Next(10, 99)}L",
+                    Cost = s.Cost
+                });
+            }
+        }
+
+        if (dto.Stays != null)
+        {
+            foreach (var st in dto.Stays)
+            {
+                request.Stays.Add(new Stay
+                {
+                    HotelName = st.HotelName,
+                    CheckIn = st.CheckIn,
+                    CheckOut = st.CheckOut,
+                    Nights = st.Nights > 0 ? st.Nights : 1,
+                    ConfirmationNumber = st.ConfirmationNumber ?? $"#HY-{new Random().Next(100000, 999999)}",
+                    Cost = st.Cost
+                });
+            }
+        }
+
+        if (!dto.SaveAsDraft)
+        {
+            var managerId = employee.ManagerId ?? await _travelRequestRepository.GetFirstManagerIdAsync(cancellationToken) ?? Guid.Empty;
+            var financeId = await _travelRequestRepository.GetFirstFinanceIdAsync(cancellationToken);
+
+            request.ApprovalSteps.Add(new ApprovalStep
+            {
+                ApproverId = managerId,
+                Level = "Manager",
+                Status = "Pending"
+            });
+
+            if (financeId != Guid.Empty)
+            {
+                request.ApprovalSteps.Add(new ApprovalStep
+                {
+                    ApproverId = financeId,
+                    Level = "Finance",
+                    Status = "Pending"
+                });
+            }
+        }
+
+        await _travelRequestRepository.AddAsync(request, cancellationToken);
+
+        await _auditService.LogAsync(
+            entityType: "REQUEST",
+            entityId: request.Id,
+            action: dto.SaveAsDraft ? "Create Draft" : "Submit Request",
+            actorId: empId,
+            actorName: employee.Name,
+            changeDetail: $"Created {request.RequestCode} for {request.Destination} (₹{request.EstimatedBudget:N0})",
+            severity: isFlagged ? "MEDIUM" : "LOW",
+            cancellationToken: cancellationToken);
+
+        await _travelRequestRepository.SaveChangesAsync(cancellationToken);
+
+        var resultDto = new TravelRequestDetailDto
+        {
+            Id = request.Id,
+            RequestCode = request.RequestCode,
+            Destination = request.Destination,
+            Purpose = request.Purpose,
+            Status = request.Status,
+            EstimatedBudget = request.EstimatedBudget
+        };
+
+        return (true, string.Empty, resultDto);
+    }
+
+    public async Task<(bool Success, string Message)> CancelRequestAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
+        if (r == null) return (false, "Not found");
+
+        r.Status = "Cancelled";
+        r.UpdatedAt = DateTime.UtcNow;
+
+        await _auditService.LogAsync(
+            entityType: "REQUEST",
+            entityId: r.Id,
+            action: "Cancelled",
+            actorId: null,
+            actorName: "User",
+            changeDetail: $"Cancelled trip {r.RequestCode}",
+            severity: "LOW",
+            cancellationToken: cancellationToken);
+
+        await _travelRequestRepository.SaveChangesAsync(cancellationToken);
+        return (true, "Request cancelled successfully.");
+    }
+
+    public async Task<(int StatusCode, object Response)> SubmitDraftAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var r = await _travelRequestRepository.GetDraftForSubmissionAsync(id, cancellationToken);
+
+        if (r == null) return (404, "Travel request not found.");
+        if (r.Status != "Draft") return (400, "Only Draft requests can be submitted.");
+
+        var isFlagged = false;
+        if (r.Employee?.Department?.Policy != null)
+        {
+            if (r.EstimatedBudget > r.Employee.Department.Policy.IntlBudgetLimit)
+            {
+                isFlagged = true;
+            }
+        }
+        r.PolicyCompliance = isFlagged ? "Flagged" : "Standard";
+        r.Status = "Manager Review";
+        r.UpdatedAt = DateTime.UtcNow;
+
+        var managerId = r.Employee?.ManagerId ?? await _travelRequestRepository.GetFirstManagerIdAsync(cancellationToken) ?? Guid.Empty;
+        var financeId = await _travelRequestRepository.GetFirstFinanceIdAsync(cancellationToken);
+
+        _travelRequestRepository.RemoveApprovalSteps(r.ApprovalSteps);
+
+        r.ApprovalSteps.Add(new ApprovalStep
+        {
+            ApproverId = managerId,
+            Level = "Manager",
+            Status = "Pending"
+        });
+
+        if (financeId != Guid.Empty)
+        {
+            r.ApprovalSteps.Add(new ApprovalStep
+            {
+                ApproverId = financeId,
+                Level = "Finance",
+                Status = "Waiting"
+            });
+        }
+
+        await _auditService.LogAsync(
+            entityType: "REQUEST",
+            entityId: r.Id,
+            action: "Submit Request",
+            actorId: r.EmployeeId,
+            actorName: r.Employee?.Name ?? "Employee",
+            changeDetail: $"Submitted {r.RequestCode} for Manager review (₹{r.EstimatedBudget:N0})",
+            severity: isFlagged ? "MEDIUM" : "LOW",
+            cancellationToken: cancellationToken);
+
+        await _travelRequestRepository.SaveChangesAsync(cancellationToken);
+        return (200, new { success = true, message = "Request submitted for Manager review." });
+    }
+
+    public async Task<(bool Success, string Message, ItinerarySegment? Segment)> AddSegmentAsync(
+        Guid id,
+        AddSegmentDto dto,
+        CancellationToken cancellationToken = default)
+    {
+        var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
+        if (r == null) return (false, "Travel request not found.", null);
+
+        var segment = new ItinerarySegment
+        {
+            RequestId = id,
+            Mode = string.IsNullOrWhiteSpace(dto.Mode) ? "Flight" : dto.Mode,
+            Carrier = dto.Carrier ?? "LUFTHANSA LH123",
+            Origin = dto.Origin,
+            Destination = dto.Destination,
+            DepartureTime = dto.DepartureTime == default ? DateTime.UtcNow : dto.DepartureTime,
+            ArrivalTime = dto.ArrivalTime,
+            ConfirmationNumber = dto.ConfirmationNumber ?? $"#AJK{new Random().Next(10, 99)}L",
+            Cost = dto.Cost
+        };
+
+        await _travelRequestRepository.AddSegmentAsync(segment, cancellationToken);
+        r.UpdatedAt = DateTime.UtcNow;
+        await _travelRequestRepository.SaveChangesAsync(cancellationToken);
+
+        return (true, string.Empty, segment);
+    }
+
+    public async Task<(bool Success, string Message, Stay? Stay)> AddStayAsync(
+        Guid id,
+        AddStayDto dto,
+        CancellationToken cancellationToken = default)
+    {
+        var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
+        if (r == null) return (false, "Travel request not found.", null);
+
+        var stay = new Stay
+        {
+            RequestId = id,
+            HotelName = dto.HotelName,
+            CheckIn = dto.CheckIn == default ? DateTime.UtcNow : dto.CheckIn,
+            CheckOut = dto.CheckOut == default ? DateTime.UtcNow.AddDays(1) : dto.CheckOut,
+            Nights = dto.Nights > 0 ? dto.Nights : 1,
+            ConfirmationNumber = dto.ConfirmationNumber ?? $"#HY-{new Random().Next(100000, 999999)}",
+            Cost = dto.Cost
+        };
+
+        await _travelRequestRepository.AddStayAsync(stay, cancellationToken);
+        r.UpdatedAt = DateTime.UtcNow;
+        await _travelRequestRepository.SaveChangesAsync(cancellationToken);
+
+        return (true, string.Empty, stay);
+    }
+
+    public async Task<(bool Success, string Message)> CloseRequestAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
+        if (r == null) return (false, "Travel request not found.");
+
+        r.Status = "Completed";
+        r.UpdatedAt = DateTime.UtcNow;
+
+        await _auditService.LogAsync(
+            entityType: "REQUEST",
+            entityId: r.Id,
+            action: "Closed Request",
+            actorId: null,
+            actorName: "User",
+            changeDetail: $"Marked {r.RequestCode} as Completed",
+            severity: "LOW",
+            cancellationToken: cancellationToken);
+
+        await _travelRequestRepository.SaveChangesAsync(cancellationToken);
+        return (true, "Trip marked as completed and closed.");
+    }
+}

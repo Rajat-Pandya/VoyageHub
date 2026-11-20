@@ -1,0 +1,309 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.data\\scripts\\addpasswordresetcolumns.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|solutionrelative:voyagehub.data\\scripts\\addpasswordresetcolumns.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.data\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|solutionrelative:voyagehub.data\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.data\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|solutionrelative:voyagehub.data\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.data\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|solutionrelative:voyagehub.data\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|solutionrelative:voyagehub.data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.business\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|solutionrelative:voyagehub.business\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.business\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|solutionrelative:voyagehub.business\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.business\\dtos\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|solutionrelative:voyagehub.business\\dtos\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C55F29BB-B76C-F87B-5B08-87F13E86A857}|VoyageHub.Api\\VoyageHub.Api.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C55F29BB-B76C-F87B-5B08-87F13E86A857}|VoyageHub.Api\\VoyageHub.Api.csproj|solutionrelative:voyagehub.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.business\\services\\travelrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|solutionrelative:voyagehub.business\\services\\travelrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.business\\services\\itravelrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|solutionrelative:voyagehub.business\\services\\itravelrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.business\\services\\analyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|solutionrelative:voyagehub.business\\services\\analyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.business\\services\\ianalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|solutionrelative:voyagehub.business\\services\\ianalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C55F29BB-B76C-F87B-5B08-87F13E86A857}|VoyageHub.Api\\VoyageHub.Api.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.api\\controllers\\approvalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C55F29BB-B76C-F87B-5B08-87F13E86A857}|VoyageHub.Api\\VoyageHub.Api.csproj|solutionrelative:voyagehub.api\\controllers\\approvalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C55F29BB-B76C-F87B-5B08-87F13E86A857}|VoyageHub.Api\\VoyageHub.Api.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.api\\controllers\\analyticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C55F29BB-B76C-F87B-5B08-87F13E86A857}|VoyageHub.Api\\VoyageHub.Api.csproj|solutionrelative:voyagehub.api\\controllers\\analyticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.business\\constants\\appconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF1D336-A521-54DF-3D6B-42113FCF7FD8}|VoyageHub.Business\\VoyageHub.Business.csproj|solutionrelative:voyagehub.business\\constants\\appconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|c:\\users\\rajat\\downloads\\project.net\\voyagehub\\voyagehub.data\\scripts\\addpasswordresetcolumns.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{488E9648-2062-3D88-43DA-6058FDE7ADF4}|VoyageHub.Data\\VoyageHub.Data.csproj|solutionrelative:voyagehub.data\\scripts\\addpasswordresetcolumns.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 291,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AddPasswordResetColumns.sql ",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\Scripts\\AddPasswordResetColumns.sql",
+              "RelativeDocumentMoniker": "VoyageHub.Data\\Scripts\\AddPasswordResetColumns.sql",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\Scripts\\AddPasswordResetColumns.sql",
+              "RelativeToolTip": "VoyageHub.Data\\Scripts\\AddPasswordResetColumns.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-11-10T06:14:52.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\IAuthService.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Business\\Services\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\IAuthService.cs",
+              "RelativeToolTip": "VoyageHub.Business\\Services\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T06:14:50.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Business\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\AuthService.cs",
+              "RelativeToolTip": "VoyageHub.Business\\Services\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T06:14:50.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthDtos.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Dtos\\AuthDtos.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Business\\Dtos\\AuthDtos.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Dtos\\AuthDtos.cs",
+              "RelativeToolTip": "VoyageHub.Business\\Dtos\\AuthDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T06:14:50.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Api\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "VoyageHub.Api\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T06:14:50.39Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TravelRequestService.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\TravelRequestService.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Business\\Services\\TravelRequestService.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\TravelRequestService.cs",
+              "RelativeToolTip": "VoyageHub.Business\\Services\\TravelRequestService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:32:07.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ITravelRequestService.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\ITravelRequestService.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Business\\Services\\ITravelRequestService.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\ITravelRequestService.cs",
+              "RelativeToolTip": "VoyageHub.Business\\Services\\ITravelRequestService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:32:04.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IAnalyticsService.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\IAnalyticsService.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Business\\Services\\IAnalyticsService.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\IAnalyticsService.cs",
+              "RelativeToolTip": "VoyageHub.Business\\Services\\IAnalyticsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:27:49.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AnalyticsService.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\AnalyticsService.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Business\\Services\\AnalyticsService.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Services\\AnalyticsService.cs",
+              "RelativeToolTip": "VoyageHub.Business\\Services\\AnalyticsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:27:35.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ApprovalsController.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Api\\Controllers\\ApprovalsController.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Api\\Controllers\\ApprovalsController.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Api\\Controllers\\ApprovalsController.cs",
+              "RelativeToolTip": "VoyageHub.Api\\Controllers\\ApprovalsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:15:13.019Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AnalyticsController.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Api\\Controllers\\AnalyticsController.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Api\\Controllers\\AnalyticsController.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Api\\Controllers\\AnalyticsController.cs",
+              "RelativeToolTip": "VoyageHub.Api\\Controllers\\AnalyticsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:15:09.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AppConstants.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Constants\\AppConstants.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Business\\Constants\\AppConstants.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Business\\Constants\\AppConstants.cs",
+              "RelativeToolTip": "VoyageHub.Business\\Constants\\AppConstants.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:14:32.656Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\AppDbContext.cs",
+              "RelativeToolTip": "VoyageHub.Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:13:57.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Data\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "VoyageHub.Data\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:09:07.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Data\\Repositories\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "VoyageHub.Data\\Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T18:09:04.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "VoyageHub.Data\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\rajat\\Downloads\\Project.NET\\VoyageHub\\VoyageHub.Data\\Entities\\User.cs",
+              "RelativeToolTip": "VoyageHub.Data\\Entities\\User.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-29T09:55:03.085Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 109,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

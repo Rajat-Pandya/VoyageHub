@@ -1,0 +1,380 @@
+<div class="settings-page">
+  <!-- Top Bar -->
+  <header class="page-top-bar">
+    <div class="header-titles">
+      <div class="title-row">
+        <h1>User Profile &amp; Preferences</h1>
+        <span class="role-badge" [class.admin]="role === 'Admin'" [class.finance]="role === 'Finance'"
+          [class.manager]="role === 'Manager'">
+          {{ role }}
+        </span>
+      </div>
+      <p class="subtitle">Manage your personal details, travel preferences, corporate loyalty IDs, and security</p>
+    </div>
+  </header>
+
+  @if (toastMessage()) {
+  <div class="toast-banner fade-in">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+    <span>{{ toastMessage() }}</span>
+  </div>
+  }
+
+  <!-- Navigation Tabs -->
+  <nav class="settings-nav-tabs" aria-label="Settings Tabs">
+    <button type="button" class="tab-btn" [class.active]="activeTab() === 'profile'" (click)="setTab('profile')">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      Profile &amp; Personal
+    </button>
+    <button type="button" class="tab-btn" [class.active]="activeTab() === 'travel'" (click)="setTab('travel')">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path
+          d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z" />
+      </svg>
+      Travel Preferences
+    </button>
+    <button type="button" class="tab-btn" [class.active]="activeTab() === 'notifications'"
+      (click)="setTab('notifications')">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+      </svg>
+      Notifications
+    </button>
+    <button type="button" class="tab-btn" [class.active]="activeTab() === 'security'" (click)="setTab('security')">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
+      Security
+    </button>
+  </nav>
+
+  <!-- TAB 1: Profile & Personal -->
+  @if (activeTab() === 'profile') {
+  <div class="settings-card fade-in">
+    <div class="card-header">
+      <div>
+        <h2>Personal Profile</h2>
+        <p class="card-desc">Your corporate profile information and employee directory identification</p>
+      </div>
+    </div>
+
+    <!-- Avatar Section -->
+    <div class="avatar-selection-section">
+      <img [src]="avatarUrl" alt="User Avatar" class="current-avatar-preview" />
+      <div class="avatar-controls">
+        <label class="field-label">Avatar Photo</label>
+        <div class="preset-avatars-row">
+          @for (av of presetAvatars; track av) {
+          <img [src]="av" alt="Avatar preset" class="preset-avatar-thumb" [class.selected]="avatarUrl === av"
+            (click)="selectAvatar(av)" />
+          }
+        </div>
+        <div class="custom-avatar-input">
+          <input type="text" [(ngModel)]="avatarUrl" placeholder="Or enter image URL..." class="form-input" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="field-label">Full Name <span class="required">*</span></label>
+        <input type="text" [(ngModel)]="fullname" class="form-input" placeholder="e.g. Rohan Sharma" />
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Work Email (Corporate)</label>
+        <input type="email" [value]="email" readonly class="form-input readonly-input"
+          title="Corporate email managed by IT" />
+        <span class="field-hint">Managed via Corporate Active Directory</span>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Department</label>
+        <input title="departmentName" type="text" [value]="departmentName" readonly class="form-input readonly-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Employee ID Code</label>
+        <input type="text" [(ngModel)]="employeeCode" class="form-input" placeholder="e.g. VH-EMP-1042" />
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Contact Phone / WhatsApp</label>
+        <input type="tel" [(ngModel)]="phoneNumber" class="form-input" placeholder="+91 98201 44521" />
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Base City / Home Airport</label>
+        <input type="text" [(ngModel)]="homeCity" class="form-input" placeholder="e.g. Mumbai (BOM)" />
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button type="button" class="btn-dark" [disabled]="isSaving()" (click)="saveProfile()">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+          <polyline points="17 21 17 13 7 13 7 21" />
+          <polyline points="7 3 7 8 15 8" />
+        </svg>
+        Save Profile Changes
+      </button>
+    </div>
+  </div>
+  }
+
+  <!-- TAB 2: Travel Preferences -->
+  @if (activeTab() === 'travel') {
+  <div class="settings-card fade-in">
+    <div class="card-header">
+      <div>
+        <h2>Travel &amp; Booking Preferences</h2>
+        <p class="card-desc">Defaults auto-filled into flight and hotel reservations across VoyageHub</p>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="field-label">Flight Seat Preference</label>
+        <select title="seatPreference" [(ngModel)]="seatPreference" class="form-select">
+          <option value="Aisle">Aisle Seat</option>
+          <option value="Window">Window Seat</option>
+          <option value="Any">No Preference / Any</option>
+        </select>
+        <span class="field-hint">Auto-requested on flight segment creation</span>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Dietary &amp; In-Flight Meal</label>
+        <select title="mealPreference" class="form-select">
+          <option value="Vegetarian (Hindu)">Vegetarian (Hindu / Asian)</option>
+          <option value="Vegetarian (Jain)">Vegetarian (Jain)</option>
+          <option value="Vegan">Vegan (Strictly Plant-Based)</option>
+          <option value="Non-Vegetarian">Non-Vegetarian Standard</option>
+          <option value="Halal">Halal Meal</option>
+          <option value="Kosher">Kosher Meal</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Hotel Accommodation Preference</label>
+        <select title="roomPreference" class="form-select">
+          <option value="High Floor, Non-Smoking">High Floor, Non-Smoking</option>
+          <option value="Quiet Floor, King Bed">Quiet Floor, King Bed</option>
+          <option value="Twin Beds, Work Desk">Twin Beds, Dedicated Work Desk</option>
+          <option value="Near Elevator, Accessible">Near Elevator / Accessible</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Airline Frequent Flyer Number</label>
+        <input type="text" [(ngModel)]="airlineLoyalty" class="form-input"
+          placeholder="e.g. Air India Flying Returns - AI-982144" />
+        <span class="field-hint">Miles accrued directly to your personal account</span>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label">Hotel Loyalty Membership</label>
+        <input type="text" [(ngModel)]="hotelLoyalty" class="form-input"
+          placeholder="e.g. Taj InnerCircle - TIC-40819" />
+        <span class="field-hint">Eligible for corporate room upgrades &amp; breakfast</span>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button type="button" class="btn-dark" [disabled]="isSaving()" (click)="saveTravelPreferences()">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+          <polyline points="17 21 17 13 7 13 7 21" />
+          <polyline points="7 3 7 8 15 8" />
+        </svg>
+        Save Travel Preferences
+      </button>
+    </div>
+  </div>
+  }
+
+  <!-- TAB 3: Notifications -->
+  @if (activeTab() === 'notifications') {
+  <div class="settings-card fade-in">
+    <div class="card-header">
+      <div>
+        <h2>Notification &amp; Alert Preferences</h2>
+        <p class="card-desc">Configure automated corporate communications for requests, approvals, and payouts</p>
+      </div>
+    </div>
+
+    <div class="toggle-list">
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <div class="toggle-title">Travel Request Status Updates</div>
+          <div class="toggle-desc">Receive email and browser notifications when a trip request advances through Manager
+            or Finance review</div>
+        </div>
+        <label class="switch">
+          <input title="checkbox" [(ngModel)]="notifyTripStatus" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <div class="toggle-title">Expense Reimbursement Alerts</div>
+          <div class="toggle-desc">Instant notification whenever Finance issues batch payouts or reimburses individual
+            expense claims</div>
+        </div>
+        <label class="switch">
+          <input title="checkbox" type="checkbox" [(ngModel)]="notifyExpensePayout" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <div class="toggle-title">Manager Approval Queue Digest</div>
+          <div class="toggle-desc">Daily morning summary email listing pending team requests requiring managerial action
+          </div>
+        </div>
+        <label class="switch">
+          <input title="checkbox" [(ngModel)]="notifyDailyDigest" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <div class="toggle-title">Urgent Travel Disruption SMS / WhatsApp</div>
+          <div class="toggle-desc">Critical alerts for flight delays, gate changes, or booking cancellations dispatched
+            directly to mobile</div>
+        </div>
+        <label class="switch">
+          <input title="checkbox" type="checkbox" [(ngModel)]="notifySmsAlerts" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button type="button" class="btn-dark" [disabled]="isSaving()" (click)="saveNotifications()">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+          <polyline points="17 21 17 13 7 13 7 21" />
+          <polyline points="7 3 7 8 15 8" />
+        </svg>
+        Save Notification Settings
+      </button>
+    </div>
+  </div>
+  }
+
+  <!-- TAB 4: Security -->
+  @if (activeTab() === 'security') {
+  <div class="security-sections-grid fade-in">
+    <!-- Change Password Card -->
+    <div class="settings-card">
+      <div class="card-header">
+        <div>
+          <h2>Change Password</h2>
+          <p class="card-desc">Update your corporate account password (BCrypt encrypted)</p>
+        </div>
+      </div>
+
+      @if (passwordError) {
+      <div class="error-banner">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        <span>{{ passwordError }}</span>
+      </div>
+      }
+
+      <div class="password-form">
+        <div class="form-group">
+          <label class="field-label">Current Password <span class="required">*</span></label>
+          <input type="password" [(ngModel)]="currentPassword" class="form-input" placeholder="••••••••" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label">New Password <span class="required">*</span></label>
+          <input type="password" [(ngModel)]="newPassword" class="form-input" placeholder="Min. 6 characters" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label">Confirm New Password <span class="required">*</span></label>
+          <input type="password" [(ngModel)]="confirmPassword" class="form-input" placeholder="Re-type new password" />
+        </div>
+
+        <button type="button" class="btn-dark" [disabled]="isSaving()" (click)="changePassword()">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          Update Password
+        </button>
+      </div>
+    </div>
+
+    <!-- Account Security Information Card -->
+    <div class="settings-card">
+      <div class="card-header">
+        <div>
+          <h2>Account Security &amp; Session</h2>
+          <p class="card-desc">Active session details, role permissions, and security protocols</p>
+        </div>
+      </div>
+
+      <div class="session-info-box">
+        <div class="info-row">
+          <span class="info-label">Signed in as:</span>
+          <span class="info-val"><strong>{{ fullname }}</strong></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Corporate Email:</span>
+          <span class="info-val">{{ email }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Assigned Role:</span>
+          <span class="info-val">
+            <span class="role-badge" [class.admin]="role === 'Admin'" [class.finance]="role === 'Finance'"
+              [class.manager]="role === 'Manager'">
+              {{ role }}
+            </span>
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Department:</span>
+          <span class="info-val">{{ departmentName }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Session Storage Key:</span>
+          <span class="info-val"><code>voyage_user</code></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Security Protocol:</span>
+          <span class="info-val">BCrypt Hash Encryption (v4.2.0)</span>
+        </div>
+      </div>
+
+      <div class="security-recommendation-box">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#4338ca" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        <div class="rec-text">
+          <strong>Password Security Guidelines:</strong>
+          <p>Ensure your password contains at least 6 characters with letters and numbers. Never disclose your
+            credentials.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

@@ -1,0 +1,74 @@
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { VoyageService, ExpenseItem } from '../../services/voyage.service';
+
+@Component({
+  selector: 'app-expense-review',
+  imports: [CommonModule, CurrencyPipe, FormsModule],
+  templateUrl: './expense-review.html',
+  styleUrl: './expense-review.css'
+})
+export class ExpenseReview implements OnInit {
+  private readonly voyageService = inject(VoyageService);
+
+  readonly claims = signal<ExpenseItem[]>([]);
+  readonly totalPending = signal<number>(8920.45);
+  readonly isLoading = signal(true);
+
+  selectedCategory = 'All Categories';
+  highPriorityOnly = false;
+
+  // Receipt preview modal
+  readonly previewClaim = signal<ExpenseItem | null>(null);
+
+  ngOnInit(): void {
+    this.loadExpenses();
+  }
+
+  loadExpenses(): void {
+    this.isLoading.set(true);
+    this.voyageService.getPendingExpenses(this.selectedCategory, this.highPriorityOnly).subscribe({
+      next: (res) => {
+        this.claims.set(res.pendingClaims);
+        this.totalPending.set(res.totalPendingAmount);
+        this.isLoading.set(false);
+      },
+      error: () => this.isLoading.set(false)
+    });
+  }
+
+  takeAction(claim: ExpenseItem, action: 'Approve' | 'Reject'): void {
+    this.voyageService.takeExpenseAction(claim.id, action).subscribe({
+      next: () => this.loadExpenses(),
+      error: () => this.loadExpenses()
+    });
+  }
+
+  readonly toastMessage = signal<string | null>(null);
+
+  showToast(msg: string): void {
+    this.toastMessage.set(msg);
+    setTimeout(() => {
+      this.toastMessage.set(null);
+    }, 3000);
+  }
+
+  batchPayout(): void {
+    this.voyageService.batchPayout().subscribe({
+      next: () => {
+        this.showToast('Batch payout processed successfully! Claims marked as reimbursed.');
+        this.loadExpenses();
+      },
+      error: () => this.loadExpenses()
+    });
+  }
+
+  openReceiptModal(claim: ExpenseItem): void {
+    this.previewClaim.set(claim);
+  }
+
+  closeReceiptModal(): void {
+    this.previewClaim.set(null);
+  }
+}

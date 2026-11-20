@@ -1,0 +1,164 @@
+<div class="analytics-page">
+  <!-- Top Bar matching Page 8 -->
+  <header class="page-top-bar">
+    <div class="header-titles">
+      <h1>Analytics Reports</h1>
+      <p class="subtitle">Strategic insights into travel expenditure and policy compliance</p>
+    </div>
+
+    <div class="header-actions">
+      <div class="date-filter-chip">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+          <line x1="16" x2="16" y1="2" y2="6"/>
+          <line x1="8" x2="8" y1="2" y2="6"/>
+          <line x1="3" x2="21" y1="10" y2="10"/>
+        </svg>
+        <span>Last 30 Days</span>
+      </div>
+      <button type="button" class="btn-dark" (click)="exportPdf()">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" x2="12" y1="15" y2="3"/>
+        </svg>
+        Export PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- Top Chart Card: Travel Spend Overview -->
+  <section class="chart-card">
+    <div class="chart-header">
+      <div>
+        <h2>Travel Spend Overview</h2>
+        <p class="chart-desc">Consolidated expenditure trends across all departments</p>
+      </div>
+
+      <div class="metric-block">
+        <div class="metric-item">
+          <span class="metric-label">TOTAL SPENT</span>
+          <strong class="metric-value">{{ analytics().totalSpent | currency:'INR':'symbol':'1.0-0' }}</strong>
+        </div>
+        <div class="metric-item">
+          <span class="metric-label">VS LAST PERIOD</span>
+          <strong class="trend-green">{{ analytics().vsLastPeriodPercent }}%</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive SVG Line Chart -->
+    <div class="line-chart-wrapper">
+      <svg viewBox="0 0 900 240" class="svg-chart">
+        <!-- Horizontal Grid Lines -->
+        <line x1="50" y1="20" x2="880" y2="20" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="50" y1="60" x2="880" y2="60" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="50" y1="100" x2="880" y2="100" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="50" y1="140" x2="880" y2="140" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="50" y1="180" x2="880" y2="180" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="50" y1="220" x2="880" y2="220" stroke="#e2e8f0" stroke-width="1"/>
+
+        <!-- Y Axis Labels -->
+        <text x="35" y="24" text-anchor="end" class="chart-axis-label">₹30L</text>
+        <text x="35" y="64" text-anchor="end" class="chart-axis-label">₹25L</text>
+        <text x="35" y="104" text-anchor="end" class="chart-axis-label">₹20L</text>
+        <text x="35" y="144" text-anchor="end" class="chart-axis-label">₹15L</text>
+        <text x="35" y="184" text-anchor="end" class="chart-axis-label">₹10L</text>
+        <text x="35" y="224" text-anchor="end" class="chart-axis-label">₹0</text>
+
+        <!-- Gradient Fill for Area Under Trend Curve -->
+        <defs>
+          <linearGradient id="spendGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6366f1" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#6366f1" stop-opacity="0.0"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Area Polygon -->
+        <polygon points="100,72 240,48 380,88 520,32 660,40 800,64 800,220 100,220" fill="url(#spendGradient)"/>
+
+        <!-- Trend Line -->
+        <polyline points="100,72 240,48 380,88 520,32 660,40 800,64" 
+                  fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- Data Points & Labels -->
+        <circle cx="100" cy="72" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+        <text x="100" y="235" text-anchor="middle" class="chart-month-label">Jan</text>
+
+        <circle cx="240" cy="48" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+        <text x="240" y="235" text-anchor="middle" class="chart-month-label">Feb</text>
+
+        <circle cx="380" cy="88" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+        <text x="380" y="235" text-anchor="middle" class="chart-month-label">Mar</text>
+
+        <circle cx="520" cy="32" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+        <text x="520" y="235" text-anchor="middle" class="chart-month-label">Apr</text>
+
+        <circle cx="660" cy="40" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+        <text x="660" y="235" text-anchor="middle" class="chart-month-label">May</text>
+
+        <circle cx="800" cy="64" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+        <text x="800" y="235" text-anchor="middle" class="chart-month-label">Jun</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Bottom Two-Column Split Grid matching Page 8 -->
+  <section class="split-grid">
+    <!-- Spend by Department -->
+    <div class="grid-card">
+      <h3>Spend by Department</h3>
+      <table class="voyage-table">
+        <thead>
+          <tr>
+            <th>DEPARTMENT</th>
+            <th>TRIPS</th>
+            <th>AVG. COST</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (d of analytics().departmentSpend; track d.department) {
+            <tr>
+              <td><strong>{{ d.department }}</strong></td>
+              <td>{{ d.trips }}</td>
+              <td>{{ d.avgCost | currency:'INR':'symbol':'1.0-0' }}</td>
+              <td class="bold-total">{{ d.total | currency:'INR':'symbol':'1.0-0' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Spend by Category (Donut Chart) -->
+    <div class="grid-card">
+      <h3>Spend by Category</h3>
+      <div class="donut-chart-container">
+        <svg viewBox="0 0 200 200" class="donut-svg">
+          <!-- 55% Airfare: stroke-dasharray="172.7 141.3" stroke-dashoffset="0" -->
+          <circle cx="100" cy="100" r="50" fill="transparent" stroke="#4f46e5" stroke-width="32"
+                  stroke-dasharray="172.7 141.3" stroke-dashoffset="78.5" />
+          <!-- 25% Hotel: stroke-dasharray="78.5 235.5" stroke-dashoffset="-94.2" -->
+          <circle cx="100" cy="100" r="50" fill="transparent" stroke="#f59e0b" stroke-width="32"
+                  stroke-dasharray="78.5 235.5" stroke-dashoffset="-94.2" />
+          <!-- 12% Meals: stroke-dasharray="37.7 276.3" stroke-dashoffset="-172.7" -->
+          <circle cx="100" cy="100" r="50" fill="transparent" stroke="#10b981" stroke-width="32"
+                  stroke-dasharray="37.7 276.3" stroke-dashoffset="-172.7" />
+          <!-- 8% Transport: stroke-dasharray="25.1 288.9" stroke-dashoffset="-210.4" -->
+          <circle cx="100" cy="100" r="50" fill="transparent" stroke="#ef4444" stroke-width="32"
+                  stroke-dasharray="25.1 288.9" stroke-dashoffset="-210.4" />
+        </svg>
+
+        <div class="donut-legend">
+          @for (c of analytics().categorySpend; track c.category) {
+            <div class="legend-item">
+              <span class="legend-color-box" [style.background-color]="c.color"></span>
+              <span class="legend-name">{{ c.category }}</span>
+              <strong class="legend-percent">{{ c.percentage }}%</strong>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

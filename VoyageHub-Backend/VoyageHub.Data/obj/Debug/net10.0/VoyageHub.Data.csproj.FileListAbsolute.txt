@@ -1,0 +1,36 @@
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.deps.json
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.dll
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.pdb
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.csproj.AssemblyReference.cache
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.AssemblyInfoInputs.cache
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.AssemblyInfo.cs
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.csproj.CoreCompileInputs.cache
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.dll
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\refint\VoyageHub.Data.dll
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.pdb
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub.Data\obj\Debug\net10.0\ref\VoyageHub.Data.dll
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.deps.json
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.dll
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.pdb
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.csproj.AssemblyReference.cache
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.AssemblyInfoInputs.cache
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.AssemblyInfo.cs
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.csproj.CoreCompileInputs.cache
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.dll
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\refint\VoyageHub.Data.dll
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.pdb
+C:\Users\rajat\Desktop\Rishabh Soft\.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\ref\VoyageHub.Data.dll
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.deps.json
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.dll
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\bin\Debug\net10.0\VoyageHub.Data.pdb
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.csproj.AssemblyReference.cache
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.AssemblyInfoInputs.cache
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.AssemblyInfo.cs
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.csproj.CoreCompileInputs.cache
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.dll
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\refint\VoyageHub.Data.dll
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\VoyageHub.Data.pdb
+C:\Users\rajat\Downloads\Project.NET\VoyageHub\VoyageHub.Data\obj\Debug\net10.0\ref\VoyageHub.Data.dll

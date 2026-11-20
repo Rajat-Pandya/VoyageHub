@@ -1,0 +1,504 @@
+<div class="trip-detail-page">
+  @if (detail(); as d) {
+    <!-- Top Bar matching Page 5 -->
+    <header class="detail-header">
+      <div class="header-left">
+        <a routerLink="/requests" class="back-link" title="Back to Requests" aria-label="Back to Requests">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+        </a>
+        <div class="header-titles">
+          <div class="title-status-row">
+            <h1>{{ d.destination }}</h1>
+            <span class="badge-status" [ngClass]="{
+              'status-draft': d.status === 'Draft',
+              'status-in-review': d.status === 'In Review' || d.status === 'Manager Review' || d.status === 'Finance Review',
+              'status-approved': d.status === 'Approved',
+              'status-completed': d.status === 'Completed',
+              'status-rejected': d.status === 'Rejected'
+            }">
+              {{ d.status }}
+            </span>
+            @if (d.policyCompliance === 'Flagged') {
+              <span class="badge-status status-flagged">Policy Flagged</span>
+            }
+          </div>
+          <p class="subtitle">{{ d.requestCode }} • Submitted on {{ d.submittedDate | date:'dd MMM, yyyy' }} • {{ d.purpose }}</p>
+        </div>
+      </div>
+
+      <!-- Context-Aware Role Workflow Action Buttons -->
+      <div class="header-actions">
+        <!-- 1. Draft Actions -->
+        @if (d.status === 'Draft') {
+          <button type="button" class="btn-primary" (click)="submitDraft()">
+            Submit for Approval
+          </button>
+          <button type="button" class="btn-secondary" (click)="cancelRequest()">
+            Discard Draft
+          </button>
+        }
+
+        <!-- 2. Manager Review Actions (If current user is Manager) -->
+        @if ((d.status === 'Manager Review' || d.status === 'In Review') && authService.isManager()) {
+          <button type="button" class="btn-primary btn-approve-action" (click)="quickApprove()">
+            Approve as Manager
+          </button>
+          <button type="button" class="btn-danger-outline" (click)="quickReject()">
+            Reject
+          </button>
+        }
+
+        <!-- 3. Finance Review Actions (If current user is Finance) -->
+        @if (d.status === 'Finance Review' && authService.isFinance()) {
+          <button type="button" class="btn-primary btn-approve-action" (click)="quickApprove()">
+            Approve as Finance
+          </button>
+          <button type="button" class="btn-danger-outline" (click)="quickReject()">
+            Reject
+          </button>
+        }
+
+        <!-- 4. Active Trip Actions (Employee or Admin) -->
+        @if (d.status === 'Approved') {
+          <button type="button" class="btn-primary" (click)="openExpenseModal()">
+            + Submit Expense
+          </button>
+          <button type="button" class="btn-secondary" (click)="openSegmentModal()">
+            + Add Segment
+          </button>
+          <button type="button" class="btn-dark" (click)="closeTrip()">
+            Mark Completed &amp; Close
+          </button>
+        }
+
+        @if (d.status !== 'Draft' && d.status !== 'Completed' && d.status !== 'Rejected' && !authService.isManager() && !authService.isFinance()) {
+          <button type="button" class="btn-secondary" (click)="cancelRequest()">Cancel Request</button>
+        }
+      </div>
+    </header>
+
+    <!-- Interactive Workflow Stepper Tracker matching Workflow Diagram -->
+    <div class="workflow-stepper-card">
+      <!-- Step 1: Created / Submitted -->
+      <div class="track-step" [ngClass]="d.status === 'Draft' ? 'current' : 'completed'">
+        <div class="step-circle" [ngClass]="d.status === 'Draft' ? 'current-circle' : 'success-circle'">
+          @if (d.status === 'Draft') {
+            1
+          } @else {
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          }
+        </div>
+        <span class="track-label">{{ d.status === 'Draft' ? 'DRAFT' : 'SUBMITTED' }}</span>
+      </div>
+      <div class="track-line" [class.active-line]="d.status !== 'Draft'"></div>
+
+      <!-- Step 2: Manager Review -->
+      <div class="track-step" [ngClass]="{
+        'completed': d.status === 'Finance Review' || d.status === 'Approved' || d.status === 'Completed',
+        'current': d.status === 'Manager Review' || d.status === 'In Review',
+        'pending': d.status === 'Draft'
+      }">
+        <div class="step-circle" [ngClass]="{
+          'success-circle': d.status === 'Finance Review' || d.status === 'Approved' || d.status === 'Completed',
+          'current-circle': d.status === 'Manager Review' || d.status === 'In Review',
+          'pending-circle': d.status === 'Draft'
+        }">
+          @if (d.status === 'Finance Review' || d.status === 'Approved' || d.status === 'Completed') {
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          } @else {
+            2
+          }
+        </div>
+        <span class="track-label">MANAGER</span>
+      </div>
+      <div class="track-line" [class.active-line]="d.status === 'Finance Review' || d.status === 'Approved' || d.status === 'Completed'"></div>
+
+      <!-- Step 3: Finance Review -->
+      <div class="track-step" [ngClass]="{
+        'completed': d.status === 'Approved' || d.status === 'Completed',
+        'current': d.status === 'Finance Review',
+        'pending': d.status === 'Draft' || d.status === 'Manager Review' || d.status === 'In Review'
+      }">
+        <div class="step-circle" [ngClass]="{
+          'success-circle': d.status === 'Approved' || d.status === 'Completed',
+          'current-circle': d.status === 'Finance Review',
+          'pending-circle': d.status === 'Draft' || d.status === 'Manager Review' || d.status === 'In Review'
+        }">
+          @if (d.status === 'Approved' || d.status === 'Completed') {
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          } @else {
+            3
+          }
+        </div>
+        <span class="track-label">FINANCE</span>
+      </div>
+      <div class="track-line" [class.active-line]="d.status === 'Approved' || d.status === 'Completed'"></div>
+
+      <!-- Step 4: Active / Closed -->
+      <div class="track-step" [ngClass]="{
+        'completed': d.status === 'Completed',
+        'current': d.status === 'Approved',
+        'pending': d.status !== 'Approved' && d.status !== 'Completed'
+      }">
+        <div class="step-circle" [ngClass]="{
+          'success-circle': d.status === 'Completed',
+          'current-circle': d.status === 'Approved',
+          'pending-circle': d.status !== 'Approved' && d.status !== 'Completed'
+        }">
+          @if (d.status === 'Completed') {
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          } @else {
+            4
+          }
+        </div>
+        <span class="track-label">{{ d.status === 'Completed' ? 'CLOSED' : 'APPROVED' }}</span>
+      </div>
+    </div>
+
+    <!-- Rejection Alert if Rejected -->
+    @if (d.status === 'Rejected') {
+      <div class="rejection-banner fade-in">
+        <div class="rejection-icon">✕</div>
+        <div class="rejection-text">
+          <strong>Request Rejected:</strong> This travel request was rejected during the approval workflow. Employee has been notified.
+        </div>
+      </div>
+    }
+
+    <!-- Active Trip Banner if Approved -->
+    @if (d.status === 'Approved') {
+      <div class="active-banner fade-in">
+        <div class="active-icon">✓</div>
+        <div class="active-text">
+          <strong>Trip Approved &amp; Active:</strong> You can now add booking confirmations, travel segments, and submit expense reimbursement claims.
+        </div>
+      </div>
+    }
+
+    <!-- Navigation Tabs (Itinerary, Expenses, Approval History) -->
+    <div class="tabs-nav">
+      <button type="button" class="tab-btn" [class.active]="activeTab() === 'Itinerary'" (click)="setTab('Itinerary')">
+        Itinerary &amp; Stays ({{ d.segments.length + d.stays.length }})
+      </button>
+      <button type="button" class="tab-btn" [class.active]="activeTab() === 'Expenses'" (click)="setTab('Expenses')">
+        Expenses &amp; Proof ({{ d.expenses.length }})
+      </button>
+      <button type="button" class="tab-btn" [class.active]="activeTab() === 'Approval History'" (click)="setTab('Approval History')">
+        Approval History ({{ d.approvalHistory.length }})
+      </button>
+    </div>
+
+    <!-- TAB 1: ITINERARY -->
+    @if (activeTab() === 'Itinerary') {
+      <div class="tab-panel fade-in">
+        <div class="panel-header-row">
+          <h3>Travel Segments &amp; Stays</h3>
+          <div class="panel-actions-group">
+            <button type="button" class="btn-secondary-sm" (click)="openSegmentModal()">
+              + Add Flight / Train
+            </button>
+            <button type="button" class="btn-secondary-sm" (click)="openStayModal()">
+              + Add Hotel Stay
+            </button>
+          </div>
+        </div>
+
+        <!-- Segments List -->
+        <div class="segments-stack">
+          @for (s of d.segments; track s.id) {
+            <div class="segment-item-card">
+              <div class="segment-left">
+                <div class="segment-icon-badge flight-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+                  </svg>
+                </div>
+                <div class="segment-content">
+                  <div class="segment-headline">
+                    <strong>{{ s.origin }} &rarr; {{ s.destination }}</strong>
+                    <span class="segment-tag">{{ s.mode | uppercase }} • {{ s.carrier }}</span>
+                  </div>
+                  <div class="segment-dates">
+                    {{ s.departureTime | date:'dd MMM, yyyy • hh:mm a' }}
+                  </div>
+                  <div class="confirmation-code">Confirmation: {{ s.confirmationNumber }}</div>
+                </div>
+              </div>
+              <div class="segment-right">
+                <span class="segment-price">{{ s.cost | currency:'INR':'symbol':'1.0-0' }}</span>
+              </div>
+            </div>
+          }
+
+          <!-- Stays List -->
+          @for (st of d.stays; track st.id) {
+            <div class="segment-item-card">
+              <div class="segment-left">
+                <div class="segment-icon-badge stay-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
+                    <path d="M6 12H4a2 2 0 0 0-2 2v8h4"/>
+                    <path d="M18 9h2a2 2 0 0 1 2 2v11h-4"/>
+                    <path d="M10 6h4"/>
+                    <path d="M10 10h4"/>
+                    <path d="M10 14h4"/>
+                    <path d="M10 18h4"/>
+                  </svg>
+                </div>
+                <div class="segment-content">
+                  <div class="segment-headline">
+                    <strong>{{ st.hotelName }}</strong>
+                    <span class="segment-tag">STAY • {{ st.nights }} NIGHTS</span>
+                  </div>
+                  <div class="segment-dates">
+                    Check-in: {{ st.checkIn | date:'dd MMM' }} • Check-out: {{ st.checkOut | date:'dd MMM' }}
+                  </div>
+                  <div class="confirmation-code">Confirmation: {{ st.confirmationNumber }}</div>
+                </div>
+              </div>
+              <div class="segment-right">
+                <span class="segment-price">{{ st.cost | currency:'INR':'symbol':'1.0-0' }}</span>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Dark Summary Banner matching Page 5 -->
+        <div class="dark-summary-banner">
+          <div class="summary-col">
+            <span class="banner-label">TOTAL EST. BUDGET</span>
+            <div class="banner-value">{{ d.estimatedBudget | currency:'INR':'symbol':'1.0-0' }}</div>
+          </div>
+          <div class="summary-col">
+            <span class="banner-label">TRIP DURATION</span>
+            <div class="banner-value">{{ d.tripDurationDays }} Days, {{ d.tripDurationNights }} Nights</div>
+          </div>
+          <div class="summary-col">
+            <span class="banner-label">PRIMARY CONTACT</span>
+            <div class="banner-value subtext-value">{{ d.primaryContact }}</div>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- TAB 2: EXPENSES -->
+    @if (activeTab() === 'Expenses') {
+      <div class="tab-panel fade-in">
+        <div class="panel-header-row">
+          <h3>Trip Expenses &amp; Reimbursements</h3>
+          <button type="button" class="btn-primary" (click)="openExpenseModal()">
+            + Submit Expense Claim
+          </button>
+        </div>
+        <div class="segments-stack">
+          @for (e of d.expenses; track e.id) {
+            <div class="segment-item-card">
+              <div class="segment-left">
+                <div class="segment-icon-badge stay-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" x2="12" y1="2" y2="22"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                </div>
+                <div class="segment-content">
+                  <strong>{{ e.category }}</strong>
+                  <div class="segment-dates">Submitted on {{ e.submittedAt | date:'dd MMM, yyyy' }}</div>
+                  <div class="confirmation-code">Receipt Document: {{ e.proofPath || 'receipt.pdf' }}</div>
+                </div>
+              </div>
+              <div class="segment-right">
+                <span class="segment-price">{{ e.amount | currency:'INR':'symbol':'1.0-0' }}</span>
+                <span class="badge-status" [ngClass]="{
+                  'status-approved': e.status === 'Reimbursed' || e.status === 'Approved',
+                  'status-in-review': e.status === 'Pending',
+                  'status-rejected': e.status === 'Rejected'
+                }">
+                  {{ e.status === 'Approved' ? 'Reimbursed' : e.status }}
+                </span>
+              </div>
+            </div>
+          } @empty {
+            <p class="empty-note">No expenses submitted yet for this trip. Click <strong>+ Submit Expense Claim</strong> to add one.</p>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- TAB 3: APPROVAL HISTORY -->
+    @if (activeTab() === 'Approval History') {
+      <div class="tab-panel fade-in">
+        <div class="panel-header-row">
+          <h3>Approval Workflow History</h3>
+        </div>
+        <div class="approval-timeline">
+          @for (step of d.approvalHistory; track step.id) {
+            <div class="timeline-item">
+              <div class="timeline-dot" [class.done]="step.status === 'Approved'" [class.rejected]="step.status === 'Rejected'"></div>
+              <div class="timeline-details">
+                <strong>{{ step.level }} Level Review: {{ step.approverName }}</strong>
+                <span class="badge-status" [ngClass]="{
+                  'status-approved': step.status === 'Approved',
+                  'status-in-review': step.status === 'Pending',
+                  'status-draft': step.status === 'Waiting',
+                  'status-rejected': step.status === 'Rejected'
+                }">
+                  {{ step.status }}
+                </span>
+                @if (step.comment) {
+                  <p class="timeline-comment">"{{ step.comment }}"</p>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- MODAL 1: ADD SEGMENT MODAL -->
+    @if (showSegmentModal()) {
+      <div class="modal-backdrop fade-in" (click)="closeSegmentModal()">
+        <div class="modal-card" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Add Travel Segment</h3>
+            <button type="button" class="close-x-btn" (click)="closeSegmentModal()" title="Close dialog" aria-label="Close dialog">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="segMode">Mode</label>
+                <select id="segMode" [(ngModel)]="segmentForm.mode" class="form-select" title="Mode" aria-label="Mode">
+                  <option value="Flight">Flight</option>
+                  <option value="Train">Train</option>
+                  <option value="Car">Car</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="segCarrier">Carrier / Provider</label>
+                <input id="segCarrier" type="text" [(ngModel)]="segmentForm.carrier" class="form-input" placeholder="e.g. Lufthansa LH123" title="Carrier" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="segOrigin">Origin (Code)</label>
+                <input id="segOrigin" type="text" [(ngModel)]="segmentForm.origin" class="form-input" placeholder="e.g. LHR" title="Origin" />
+              </div>
+              <div class="form-group">
+                <label for="segDest">Destination (Code)</label>
+                <input id="segDest" type="text" [(ngModel)]="segmentForm.destination" class="form-input" placeholder="e.g. BER" title="Destination" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="segCost">Cost (USD)</label>
+                <input id="segCost" type="number" [(ngModel)]="segmentForm.cost" class="form-input" title="Cost" />
+              </div>
+              <div class="form-group">
+                <label for="segConfirm">Confirmation #</label>
+                <input id="segConfirm" type="text" [(ngModel)]="segmentForm.confirmationNumber" class="form-input" title="Confirmation Number" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" (click)="closeSegmentModal()">Cancel</button>
+            <button type="button" class="btn-dark" (click)="addSegmentSubmit()">Add Segment</button>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- MODAL 2: ADD STAY MODAL -->
+    @if (showStayModal()) {
+      <div class="modal-backdrop fade-in" (click)="closeStayModal()">
+        <div class="modal-card" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Add Hotel Stay</h3>
+            <button type="button" class="close-x-btn" (click)="closeStayModal()" title="Close dialog" aria-label="Close dialog">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="stayHotel">Hotel Name</label>
+              <input id="stayHotel" type="text" [(ngModel)]="stayForm.hotelName" class="form-input" placeholder="e.g. Grand Hyatt Berlin" title="Hotel Name" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="stayCheckin">Check-in Date</label>
+                <input id="stayCheckin" type="date" [(ngModel)]="stayForm.checkIn" class="form-input" title="Check-in Date" />
+              </div>
+              <div class="form-group">
+                <label for="stayCheckout">Check-out Date</label>
+                <input id="stayCheckout" type="date" [(ngModel)]="stayForm.checkOut" class="form-input" title="Check-out Date" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="stayNights">Nights</label>
+                <input id="stayNights" type="number" [(ngModel)]="stayForm.nights" class="form-input" title="Nights" />
+              </div>
+              <div class="form-group">
+                <label for="stayCost">Cost (USD)</label>
+                <input id="stayCost" type="number" [(ngModel)]="stayForm.cost" class="form-input" title="Cost" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" (click)="closeStayModal()">Cancel</button>
+            <button type="button" class="btn-dark" (click)="addStaySubmit()">Add Stay</button>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- MODAL 3: SUBMIT EXPENSE MODAL -->
+    @if (showExpenseModal()) {
+      <div class="modal-backdrop fade-in" (click)="closeExpenseModal()">
+        <div class="modal-card" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Submit Expense Claim with Proof</h3>
+            <button type="button" class="close-x-btn" (click)="closeExpenseModal()" title="Close dialog" aria-label="Close dialog">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="expCategory">Expense Category</label>
+                <select id="expCategory" [(ngModel)]="expenseForm.category" class="form-select" title="Expense Category" aria-label="Expense Category">
+                  <option value="Airfare">Airfare</option>
+                  <option value="Hotel">Hotel / Accommodation</option>
+                  <option value="Meals">Meals &amp; Dining</option>
+                  <option value="Transport">Ground Transport</option>
+                  <option value="Conference Fee">Conference Fee</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="expAmount">Amount (₹ INR)</label>
+                <input id="expAmount" type="number" [(ngModel)]="expenseForm.amount" class="form-input" placeholder="0.00" title="Amount" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="expDesc">Description / Purpose</label>
+              <input id="expDesc" type="text" [(ngModel)]="expenseForm.description" class="form-input" placeholder="e.g. Business dinner with client team (GST Bill)" title="Description" />
+            </div>
+            <div class="form-group">
+              <label for="expProof">Proof Document / GST Bill Attachment</label>
+              <input id="expProof" type="text" [(ngModel)]="expenseForm.proofPath" class="form-input" placeholder="e.g. gst_tax_invoice.pdf" title="Receipt Attachment" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" (click)="closeExpenseModal()">Cancel</button>
+            <button type="button" class="btn-primary" (click)="submitExpenseSubmit()">Submit Claim to Finance</button>
+          </div>
+        </div>
+      </div>
+    }
+
+  }
+</div>

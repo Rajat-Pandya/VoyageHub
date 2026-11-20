@@ -1,0 +1,412 @@
+<div class="support-page">
+  <!-- Top Bar -->
+  <header class="page-top-bar">
+    <div class="header-titles">
+      <h1>Corporate Travel Desk &amp; Support</h1>
+      <p class="subtitle">24/7 Concierge assistance for flight delays, booking modifications, policy exceptions &amp; claims</p>
+    </div>
+  </header>
+
+  <!-- Emergency 24/7 Hotline Banner -->
+  <aside class="emergency-banner" aria-label="Urgent Travel Support">
+    <div class="emergency-icon-wrap">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+    </div>
+    <div class="emergency-details">
+      <div class="emergency-title">URGENT TRAVEL DISRUPTION / MISSED FLIGHT EMERGENCY?</div>
+      <div class="emergency-text">
+        Call Corporate Travel Desk 24/7 Hotline: <strong>+91 (022) 6123-8899</strong> &bull; Toll-Free: <strong>1800-209-8692</strong> &bull; Average Wait Time: &lt; 90 seconds
+      </div>
+    </div>
+    <a href="tel:+912261238899" class="btn-emergency-call">Call Desk Now</a>
+  </aside>
+
+  @if (toastMessage()) {
+    <div class="toast-banner fade-in">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+      <span>{{ toastMessage() }}</span>
+    </div>
+  }
+
+  <!-- Navigation Tabs -->
+  <nav class="support-nav-tabs" aria-label="Support Sections">
+    <button type="button" class="tab-btn" [class.active]="activeTab() === 'submit'" (click)="setTab('submit')">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+      Submit Ticket
+    </button>
+    <button type="button" class="tab-btn" [class.active]="activeTab() === 'tickets'" (click)="setTab('tickets')">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+      My Tickets
+      @if (openTicketCount() > 0) {
+        <span class="tab-badge">{{ openTicketCount() }}</span>
+      }
+    </button>
+    <button type="button" class="tab-btn" [class.active]="activeTab() === 'faq'" (click)="setTab('faq')">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      Knowledge Base &amp; FAQs
+    </button>
+    <button type="button" class="tab-btn" [class.active]="activeTab() === 'directory'" (click)="setTab('directory')">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Support Directory
+    </button>
+  </nav>
+
+  <!-- TAB 1: Submit Ticket -->
+  @if (activeTab() === 'submit') {
+    <div class="support-card fade-in">
+      <div class="card-header">
+        <div>
+          <h2>Open a Corporate Travel Support Ticket</h2>
+          <p class="card-desc">Our travel desk team will review your case and respond within designated SLA hours</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="field-label">Issue Category <span class="required">*</span></label>
+          <select [(ngModel)]="ticketCategory" class="form-select">
+            <option value="Flight / Itinerary Rescheduling">Flight / Itinerary Rescheduling</option>
+            <option value="Hotel Check-in &amp; Accommodation">Hotel Check-in &amp; Accommodation</option>
+            <option value="Expense Claim &amp; Reimbursement Query">Expense Claim &amp; Reimbursement Query</option>
+            <option value="Travel Policy Exception Request">Travel Policy Exception Request</option>
+            <option value="System Access &amp; Technical Support">System Access &amp; Technical Support</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label">Priority Level <span class="required">*</span></label>
+          <select [(ngModel)]="ticketPriority" class="form-select">
+            <option value="Low">Low (General Inquiry - 24 hr response)</option>
+            <option value="Medium">Medium (Standard Request - 8 hr response)</option>
+            <option value="High">High (Impending Travel - 2 hr response)</option>
+            <option value="Urgent">Urgent (Travel Disruption - 15 min response)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label">Related Travel Request Code</label>
+          <select [(ngModel)]="ticketRequestCode" class="form-select">
+            <option value="#TR-2048">#TR-2048 (Bengaluru - Client Review &amp; Tech Summit)</option>
+            <option value="#TR-2041">#TR-2041 (New Delhi - Govt Partner Alignment)</option>
+            <option value="#TR-2035">#TR-2035 (Hyderabad - HITEC City Workshop)</option>
+            <option value="#TR-2055">#TR-2055 (San Francisco - AWS Global Summit)</option>
+            <option value="None">None / General Corporate Inquiry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label">Callback Phone Number <span class="required">*</span></label>
+          <input type="tel" [(ngModel)]="ticketCallback" class="form-input" placeholder="+91 98201 44521" />
+        </div>
+
+        <div class="form-group full-width">
+          <label class="field-label">Ticket Subject <span class="required">*</span></label>
+          <input type="text" [(ngModel)]="ticketSubject" class="form-input" placeholder="e.g. Flight rescheduling due to client meeting postponement" />
+        </div>
+
+        <div class="form-group full-width">
+          <label class="field-label">Detailed Description <span class="required">*</span></label>
+          <textarea rows="4" [(ngModel)]="ticketDescription" class="form-textarea" placeholder="Please provide specific flight numbers, dates, hotel confirmation codes, or tax invoice reference details..."></textarea>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button type="button" class="btn-dark" [disabled]="isSubmitting()" (click)="submitTicket()">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          @if (isSubmitting()) {
+            Submitting Ticket...
+          } @else {
+            Submit Support Request
+          }
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- TAB 2: My Tickets -->
+  @if (activeTab() === 'tickets') {
+    <div class="support-card fade-in">
+      <div class="filter-header-row">
+        <div>
+          <h2>Your Support Inquiries</h2>
+          <p class="card-desc">Track real-time status and resolutions from the Corporate Travel Desk</p>
+        </div>
+
+        <div class="status-filters">
+          <button type="button" class="filter-pill" [class.active]="filterStatus() === 'All'" (click)="filterStatus.set('All')">All</button>
+          <button type="button" class="filter-pill" [class.active]="filterStatus() === 'Open'" (click)="filterStatus.set('Open')">Open</button>
+          <button type="button" class="filter-pill" [class.active]="filterStatus() === 'In Progress'" (click)="filterStatus.set('In Progress')">In Progress</button>
+          <button type="button" class="filter-pill" [class.active]="filterStatus() === 'Resolved'" (click)="filterStatus.set('Resolved')">Resolved</button>
+        </div>
+      </div>
+
+      @if (filteredTickets().length === 0) {
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#94a3b8" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4"/>
+            <path d="M12 16h.01"/>
+          </svg>
+          <p>No support tickets found matching this filter.</p>
+        </div>
+      } @else {
+        <div class="tickets-table-container">
+          <table class="voyage-table">
+            <thead>
+              <tr>
+                <th>TICKET CODE</th>
+                <th>CATEGORY &amp; SUBJECT</th>
+                <th>REQUEST</th>
+                <th>PRIORITY</th>
+                <th>STATUS</th>
+                <th>SUBMITTED</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (tk of filteredTickets(); track tk.id) {
+                <tr>
+                  <td><strong class="ticket-code">{{ tk.ticketCode }}</strong></td>
+                  <td>
+                    <div class="ticket-subject-title">{{ tk.subject }}</div>
+                    <div class="ticket-category-sub">{{ tk.category }}</div>
+                  </td>
+                  <td>
+                    @if (tk.requestCode) {
+                      <span class="request-code-pill">{{ tk.requestCode }}</span>
+                    } @else {
+                      <span class="text-muted">—</span>
+                    }
+                  </td>
+                  <td>
+                    <span class="priority-pill" [class.urgent]="tk.priority === 'Urgent'" [class.high]="tk.priority === 'High'" [class.medium]="tk.priority === 'Medium'">
+                      {{ tk.priority }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="status-pill" [class.open]="tk.status === 'Open'" [class.progress]="tk.status === 'In Progress'" [class.resolved]="tk.status === 'Resolved'">
+                      {{ tk.status }}
+                    </span>
+                  </td>
+                  <td class="timestamp-cell">{{ tk.createdAt | date:'shortDate' }}</td>
+                  <td>
+                    <button type="button" class="btn-sm-view" (click)="viewTicket(tk)">View Details</button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- TAB 3: FAQ -->
+  @if (activeTab() === 'faq') {
+    <div class="support-card fade-in">
+      <div class="card-header">
+        <div>
+          <h2>Corporate Travel Policy &amp; Help Knowledge Base</h2>
+          <p class="card-desc">Answers to common travel booking, reimbursement claims, and policy questions</p>
+        </div>
+
+        <div class="faq-search-box">
+          <input type="text" [ngModel]="faqSearch()" (ngModelChange)="faqSearch.set($event)" placeholder="Search travel policies, expense rules..." class="search-input" />
+        </div>
+      </div>
+
+      <div class="faq-accordion-list">
+        @for (faq of filteredFaqs(); track faq.question) {
+          <div class="faq-item" [class.expanded]="faq.isOpen">
+            <button type="button" class="faq-question-btn" (click)="toggleFaq(faq)">
+              <div class="question-meta">
+                <span class="faq-cat-tag">{{ faq.category }}</span>
+                <span class="question-text">{{ faq.question }}</span>
+              </div>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" class="chevron-icon">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            @if (faq.isOpen) {
+              <div class="faq-answer-panel fade-in">
+                <p>{{ faq.answer }}</p>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- TAB 4: Support Directory -->
+  @if (activeTab() === 'directory') {
+    <div class="directory-grid fade-in">
+      <div class="directory-card">
+        <div class="dir-icon-badge travel-desk">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+          </svg>
+        </div>
+        <h3>Corporate Travel Concierge</h3>
+        <p class="dir-role">Flight Bookings, Hotel Check-ins &amp; Emergencies</p>
+        <div class="contact-details">
+          <div class="detail-row">
+            <span class="detail-label">Lead Desk:</span>
+            <span>Meera Sen</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Direct Hotline:</span>
+            <span>+91 (022) 6123-8899</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email:</span>
+            <a href="mailto:traveldesk@voyagehub.in">traveldesk@voyagehub.in</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Availability:</span>
+            <span class="badge-online">24/7/365 Active</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="directory-card">
+        <div class="dir-icon-badge finance-desk">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="20" height="14" x="2" y="5" rx="2"/>
+            <line x1="2" x2="22" y1="10" y2="10"/>
+          </svg>
+        </div>
+        <h3>Finance &amp; Expense Reimbursements</h3>
+        <p class="dir-role">Batch Payouts, Tax Invoices &amp; Per-Diems</p>
+        <div class="contact-details">
+          <div class="detail-row">
+            <span class="detail-label">Lead Auditor:</span>
+            <span>Vikram Malhotra</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Extension:</span>
+            <span>Ext. 4402 (HQ Floor 5)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email:</span>
+            <a href="mailto:finance-reimburse@voyagehub.in">finance-reimburse@voyagehub.in</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Payout Schedule:</span>
+            <span>Tuesdays &amp; Fridays (16:00 IST)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="directory-card">
+        <div class="dir-icon-badge admin-desk">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3>Corporate Policy &amp; Administration</h3>
+        <p class="dir-role">Budget Limits, Dept Policy Caps &amp; Exceptions</p>
+        <div class="contact-details">
+          <div class="detail-row">
+            <span class="detail-label">Administrator:</span>
+            <span>Ananya Verma</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Extension:</span>
+            <span>Ext. 1001 (Corp Administration)</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email:</span>
+            <a href="mailto:admin@voyagehub.in">admin@voyagehub.in</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Working Hours:</span>
+            <span>Mon–Fri (09:00 – 18:30 IST)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- View Ticket Modal -->
+  @if (selectedTicket()) {
+    <div class="modal-backdrop" (click)="closeTicketModal()">
+      <div class="modal-card fade-in" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <div>
+            <div class="modal-tag">{{ selectedTicket()!.ticketCode }} &bull; {{ selectedTicket()!.category }}</div>
+            <h3>{{ selectedTicket()!.subject }}</h3>
+          </div>
+          <button type="button" class="btn-close" (click)="closeTicketModal()" aria-label="Close dialog">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-info-grid">
+            <div>
+              <span class="modal-label">Status:</span>
+              <span class="status-pill" [class.open]="selectedTicket()!.status === 'Open'" [class.progress]="selectedTicket()!.status === 'In Progress'" [class.resolved]="selectedTicket()!.status === 'Resolved'">
+                {{ selectedTicket()!.status }}
+              </span>
+            </div>
+            <div>
+              <span class="modal-label">Priority:</span>
+              <span class="priority-pill" [class.urgent]="selectedTicket()!.priority === 'Urgent'" [class.high]="selectedTicket()!.priority === 'High'" [class.medium]="selectedTicket()!.priority === 'Medium'">
+                {{ selectedTicket()!.priority }}
+              </span>
+            </div>
+            <div>
+              <span class="modal-label">Assigned Agent:</span>
+              <strong>{{ selectedTicket()!.assignedAgent || 'Travel Desk Queue' }}</strong>
+            </div>
+            <div>
+              <span class="modal-label">Travel Request:</span>
+              <strong>{{ selectedTicket()!.requestCode || 'N/A' }}</strong>
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <div class="modal-section-title">Description</div>
+            <p class="modal-description-text">{{ selectedTicket()!.description }}</p>
+          </div>
+
+          @if (selectedTicket()!.resolutionNotes) {
+            <div class="modal-section resolution-box">
+              <div class="modal-section-title">Resolution Notes</div>
+              <p>{{ selectedTicket()!.resolutionNotes }}</p>
+            </div>
+          }
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" (click)="closeTicketModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

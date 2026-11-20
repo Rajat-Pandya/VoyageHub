@@ -1,0 +1,147 @@
+<div class="dashboard-page">
+  <!-- Page Header -->
+  <header class="page-top-bar">
+    <div class="header-titles">
+      <h1>My Requests</h1>
+      <p class="subtitle">Track your travel approvals and itineraries</p>
+    </div>
+
+    <div class="header-actions">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" placeholder="Search trips..." title="Search trips" aria-label="Search trips" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" />
+      </div>
+
+      <a routerLink="/requests/new" class="btn-primary">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 5v14"/>
+          <path d="M5 12h14"/>
+        </svg>
+        New Request
+      </a>
+    </div>
+  </header>
+
+  <!-- 4 KPI Summary Cards matching Page 1 -->
+  <section class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon-wrap icon-drafts">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+        </svg>
+        <span>Drafts</span>
+      </div>
+      <div class="kpi-value">{{ stats().draftsCount }}</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon-wrap icon-pending">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span>Pending</span>
+      </div>
+      <div class="kpi-value">{{ stats().pendingCount }}</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon-wrap icon-upcoming">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+          <line x1="16" x2="16" y1="2" y2="6"/>
+          <line x1="8" x2="8" y1="2" y2="6"/>
+          <line x1="3" x2="21" y1="10" y2="10"/>
+        </svg>
+        <span>Upcoming Trips</span>
+      </div>
+      <div class="kpi-value">{{ stats().upcomingTripsCount }}</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon-wrap icon-reimbursement">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" x2="12" y1="2" y2="22"/>
+          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+        <span>Reimbursement</span>
+      </div>
+      <div class="kpi-value">{{ stats().totalReimbursement | currency:'INR':'symbol':'1.0-0' }}</div>
+    </div>
+  </section>
+
+  <!-- Recent Travel Requests Section -->
+  <section class="table-section-card">
+    <div class="section-card-header">
+      <h2>Recent Travel Requests</h2>
+
+      <div class="filter-pills">
+        <button type="button" class="pill-btn" [class.active]="selectedFilter() === 'All'" (click)="setFilter('All')">All</button>
+        <button type="button" class="pill-btn" [class.active]="selectedFilter() === 'Pending'" (click)="setFilter('Pending')">Pending</button>
+        <button type="button" class="pill-btn" [class.active]="selectedFilter() === 'Approved'" (click)="setFilter('Approved')">Approved</button>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="voyage-table">
+        <thead>
+          <tr>
+            <th>REQUEST ID</th>
+            <th>DESTINATION</th>
+            <th>DATES</th>
+            <th>EST. COST</th>
+            <th>APPROVER</th>
+            <th>STATUS</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (req of requests(); track req.id) {
+            <tr (click)="viewDetail(req)" class="clickable-row">
+              <td class="req-code-cell">{{ req.requestCode }}</td>
+              <td class="dest-cell">
+                <strong>{{ req.destination }}</strong>
+                @if (req.purpose) {
+                  <span class="subtext">{{ req.purpose }}</span>
+                }
+              </td>
+              <td class="dates-cell">{{ req.datesFormatted }}</td>
+              <td class="cost-cell">{{ req.estimatedBudget | currency:'INR':'symbol':'1.0-0' }}</td>
+              <td class="approver-cell">{{ req.approverName }}</td>
+              <td>
+                <span class="badge-status" [ngClass]="{
+                  'status-in-review': req.status === 'In Review' || req.status === 'Manager Review',
+                  'status-approved': req.status === 'Approved',
+                  'status-completed': req.status === 'Completed',
+                  'status-rejected': req.status === 'Rejected',
+                  'status-draft': req.status === 'Draft'
+                }">
+                  {{ req.status }}
+                </span>
+              </td>
+              <td class="actions-cell">
+                <button type="button" class="menu-dots-btn" (click)="$event.stopPropagation(); viewDetail(req)" title="View request details" aria-label="View request details">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="19" cy="12" r="2"/>
+                    <circle cx="5" cy="12" r="2"/>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" class="empty-state-cell">
+                No travel requests found. Click <strong>+ New Request</strong> to start a trip request!
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
