@@ -1,8 +1,10 @@
 # VoyageHub — Corporate Travel & Expense Management System
 
+[![CI](https://github.com/Rajat-Pandya/VoyageHub/actions/workflows/ci.yml/badge.svg)](https://github.com/Rajat-Pandya/VoyageHub/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Angular 21](https://img.shields.io/badge/Angular-21-DD0031?logo=angular)](https://angular.dev/)
-[![EF Core 8](https://img.shields.io/badge/EF%20Core-8.0-512BD4)](https://learn.microsoft.com/ef/core/)
+[![EF Core 10](https://img.shields.io/badge/EF%20Core-10.0-512BD4)](https://learn.microsoft.com/ef/core/)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-CC292B?logo=microsoftsqlserver)](https://www.microsoft.com/sql-server)
 
 **VoyageHub** is an enterprise-grade corporate travel and expense management application designed to streamline employee business travel requests, multi-tier approvals, expense claim reimbursements, departmental policy compliance, and internal corporate travel support workflows.
