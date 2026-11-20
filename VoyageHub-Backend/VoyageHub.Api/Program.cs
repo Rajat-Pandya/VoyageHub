@@ -10,9 +10,16 @@ using VoyageHub.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Add DbContext with SQL Server Connection
+// 1. Add DbContext with SQL Server Connection & Transient Error Resiliency
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null
+        )
+    ));
 
 // HttpContext accessor for extracting user identity in scoped services
 builder.Services.AddHttpContextAccessor();
