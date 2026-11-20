@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570.9688333333334 1302.1000000000001" width="570.9688333333334" height="1302.1000000000001" style="--bg:#18181B;--fg:#F4F4F5;--line:#71717A;--muted:#A1A1AA;--surface:#27272A;--border:#3F3F46;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="ManagerReview" data-label="ManagerReview">
+  <rect x="109.54687499999997" y="313.5" width="240.2945" height="335" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="109.54687499999997" y="313.5" width="240.2945" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="121.54687499999997" y="327.5" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">ManagerReview</text>
+</g>
+<g class="subgraph" data-id="FinanceReview" data-label="FinanceReview">
+  <rect x="105.47070833333336" y="776.8000000000001" width="265.4008333333333" height="326.1" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="105.47070833333336" y="776.8000000000001" width="265.4008333333333" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="117.47070833333336" y="790.8000000000001" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">FinanceReview</text>
+</g>
+<polyline class="edge" data-from="_start" data-to="Draft" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Save as Draft" points="381.7332916666667,68 381.7332916666667,176.75" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Draft" data-to="ManagerReview" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Submit" points="370.0486249999999,213.64999999999998 370.0486249999999,233.2 248.52166666666662,233.2 248.52166666666662,301.5 183.86320833333332,301.5 183.86320833333332,313.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start2" data-to="ManagerReview" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Create &amp; Submit Immediately" points="147.66166666666666,204.75 147.66166666666666,301.5 173.86320833333332,301.5 173.86320833333332,313.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Draft" data-to="Cancelled" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="User Cancels" points="393.41795833333333,213.64999999999998 393.41795833333333,634.2 471.27083333333337,634.2 471.27083333333337,734.8 466.3582083333333,734.8 466.3582083333333,746.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ManagerReview" data-to="Cancelled" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="User Cancels" points="261.352125,648.5 261.352125,666.5 424.3748333333333,666.5 424.3748333333333,734.8 432.614875,734.8 432.614875,746.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ManagerPending" data-to="Rejected" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Manager Rejects" points="173.86320833333332,479.3 173.86320833333332,491.3 153.69062499999998,491.3 153.69062499999998,690.5000000000001 85.5,690.5000000000001 85.5,758.8000000000001 141.13070833333336,758.8000000000001 141.13070833333333,1014.0000000000001 152.74404166666667,1014.0000000000001 152.74404166666667,1054.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ManagerApproved" data-to="FinanceReview" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Auto-routed to Finance Step" points="242.35212499999997,632.5 242.35212499999997,690.5000000000001 212.43400000000003,690.5000000000001 212.43400000000003,758.8000000000001 160.13070833333336,758.8000000000001 160.13070833333336,776.8000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Approved" data-to="Completed" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Trip Concluded" points="304.25654166666664,1086.9 304.25654166666664,1225.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start3" data-to="ManagerPending" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="198.02137499999998,389.95 198.02137499999998,442.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ManagerPending" data-to="ManagerApproved" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Manager Approves" points="222.17954166666664,479.3 222.17954166666664,491.3 242.35212499999997,491.3 242.35212499999997,595.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start4" data-to="FinancePending" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="252.1185416666667,848.8000000000001 252.1185416666667,896.8000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="FinancePending" data-to="Approved" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Finance Approves" points="275.41220833333335,933.7 275.41220833333335,945.7 304.25654166666664,945.7 304.25654166666664,1050" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="FinancePending" data-to="Rejected" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Finance Rejects" points="228.82487500000002,933.7 228.82487500000002,945.7 197.17437500000003,945.7 197.17437500000003,1014.0000000000001 184.01737500000002,1014.0000000000001 184.01737500000002,1054.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="_start" data-to="Draft" data-label="Save as Draft">
+  <rect x="341.2332916666667" y="111" width="80.61400000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="381.5402916666667" y="126.15" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Save as Draft</text>
+</g>
+<g class="edge-label" data-from="Draft" data-to="ManagerReview" data-label="Submit">
+  <rect x="224.02166666666662" y="240.2" width="48.53800000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="248.29066666666662" y="255.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Submit</text>
+</g>
+<g class="edge-label" data-from="_start2" data-to="ManagerReview" data-label="Create &amp; Submit Immediately">
+  <rect x="74.66166666666666" y="240.2" width="145.35999999999996" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="147.34166666666664" y="255.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Create &amp; Submit Immediately</text>
+</g>
+<g class="edge-label" data-from="Draft" data-to="Cancelled" data-label="User Cancels">
+  <rect x="429.77083333333337" y="641.2" width="82.39600000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="470.96883333333335" y="656.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">User Cancels</text>
+</g>
+<g class="edge-label" data-from="ManagerReview" data-to="Cancelled" data-label="User Cancels">
+  <rect x="382.8748333333333" y="673.5" width="82.39600000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="424.0728333333333" y="688.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">User Cancels</text>
+</g>
+<g class="edge-label" data-from="ManagerPending" data-to="Rejected" data-label="Manager Rejects">
+  <rect x="36.00000000000001" y="697.5000000000001" width="98.43400000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="85.21700000000001" y="712.6500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Manager Rejects</text>
+</g>
+<g class="edge-label" data-from="ManagerApproved" data-to="FinanceReview" data-label="Auto-routed to Finance Step">
+  <rect x="138.43400000000003" y="697.5000000000001" width="147.14200000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="212.00500000000005" y="712.6500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Auto-routed to Finance Step</text>
+</g>
+<g class="edge-label" data-from="Approved" data-to="Completed" data-label="Trip Concluded">
+  <rect x="258.75654166666664" y="1151.9" width="90.712" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="304.11254166666663" y="1167.0500000000002" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Trip Concluded</text>
+</g>
+<g class="edge-label" data-from="ManagerPending" data-to="ManagerApproved" data-label="Manager Approves">
+  <rect x="186.85212499999997" y="522.3000000000001" width="110.31400000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="242.00912499999998" y="537.45" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Manager Approves</text>
+</g>
+<g class="edge-label" data-from="FinancePending" data-to="Approved" data-label="Finance Approves">
+  <rect x="250.75654166666672" y="976.7000000000002" width="106.15600000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="303.8345416666667" y="991.8500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Finance Approves</text>
+</g>
+<g class="edge-label" data-from="FinancePending" data-to="Rejected" data-label="Finance Rejects">
+  <rect x="149.67437500000003" y="976.7000000000002" width="94.27600000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="196.81237500000003" y="991.8500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Finance Rejects</text>
+</g>
+<g class="node" data-id="_start" data-label="" data-shape="state-start">
+  <circle cx="381.7332916666667" cy="54" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="Draft" data-label="Draft" data-shape="rounded">
+  <rect x="346.6792916666666" y="176.75" width="70.108" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="381.73329166666656" y="195.2" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Draft</text>
+</g>
+<g class="node" data-id="_start2" data-label="" data-shape="state-start">
+  <circle cx="147.66166666666666" cy="190.75" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="Completed" data-label="Completed" data-shape="rounded">
+  <rect x="252.90054166666667" y="1225.2" width="102.712" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="304.2565416666667" y="1243.65" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Completed</text>
+</g>
+<g class="node" data-id="Cancelled" data-label="Cancelled" data-shape="rounded">
+  <rect x="398.87154166666664" y="746.8" width="101.22999999999999" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="449.48654166666665" y="765.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Cancelled</text>
+</g>
+<g class="node" data-id="_start3" data-label="" data-shape="state-start">
+  <circle cx="198.02137499999998" cy="375.95" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="ManagerPending" data-label="ManagerPending" data-shape="rounded">
+  <rect x="125.54687499999997" y="442.4" width="144.949" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="198.02137499999998" y="460.84999999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ManagerPending</text>
+</g>
+<g class="node" data-id="ManagerApproved" data-label="ManagerApproved" data-shape="rounded">
+  <rect x="164.69062499999998" y="595.6" width="155.32299999999998" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="242.35212499999997" y="614.0500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ManagerApproved</text>
+</g>
+<g class="node" data-id="Rejected" data-label="Rejected" data-shape="rounded">
+  <rect x="240.02137499999998" y="361.95" width="93.82" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="286.931375" y="380.4" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Rejected</text>
+</g>
+<g class="node" data-id="_start4" data-label="" data-shape="state-start">
+  <circle cx="252.1185416666667" cy="834.8000000000001" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="FinancePending" data-label="FinancePending" data-shape="rounded">
+  <rect x="182.2375416666667" y="896.8000000000001" width="139.762" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="252.1185416666667" y="915.2500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">FinancePending</text>
+</g>
+<g class="node" data-id="Approved" data-label="Approved" data-shape="rounded">
+  <rect x="253.64154166666668" y="1050" width="101.22999999999999" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="304.2565416666667" y="1068.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Approved</text>
+</g>
+<g class="node" data-id="Rejected" data-label="Rejected" data-shape="rounded">
+  <rect x="121.47070833333336" y="1050" width="93.82" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="168.38070833333336" y="1068.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Rejected</text>
+</g>
+</svg>

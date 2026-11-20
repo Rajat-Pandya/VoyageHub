@@ -180,6 +180,33 @@ The database seed provides ready-to-use persona accounts:
 
 ---
 
+## Deployment Readiness
+
+VoyageHub is engineered for zero-friction cloud deployment on free tiers (Azure Static Web Apps for Angular CSR, Azure App Service F1 for the ASP.NET Core API, and Azure SQL Database Free Offer) while maintaining 100% backward compatibility with local development workflows.
+
+### Summary of Deployment Architecture & Changes
+- **Configurable Angular API Target**: Replaced hardcoded localhost URLs with environment-based configuration (`environment.apiUrl`). Local builds use `src/environments/environment.ts` (`http://localhost:5062/api`), while production builds use `src/environments/environment.prod.ts` via file replacements.
+- **Configurable CORS Origin Whitelist**: In production, `Cors:AllowedOrigins` restricts incoming requests strictly to the configured domain (`Cors__AllowedOrigins__0`), isolating cloud instances from untrusted origins.
+- **Environment Variable Overrides & Fail-Fast Startup**: Database connections (`ConnectionStrings__DefaultConnection`) and JWT signing keys (`Jwt__Key`) are fully configurable via standard environment variables. In non-Development environments, the API enforces startup fail-fast validation (missing/invalid connection string or JWT key < 32 characters aborts immediately without logging secrets).
+- **Static Web App Hosting**: Added a dedicated browser-only client-side rendered build script (`npm run build:static`) and Azure Static Web Apps configuration (`staticwebapp.config.json`) with navigation fallback routing for deep URLs.
+- **Token-Based Identity & Authorization**: Replaced client-supplied ID parameters (`employeeId`, `approverId`, `role`) with token-derived caller context via `ICurrentUserService`. Employees are restricted strictly to their own requests and stats; Managers see their own and direct reports' data; and approval queues are scoped strictly to the caller's authenticated persona.
+- **Configuration-Driven Swagger UI**: Controlled via `Swagger:Enabled` (defaults to `true` in Development, `false` in Production). When disabled, Swagger UI is unmapped and the root route returns an HTTP 200 text status.
+- **Resilient Database Operations**: Configured `EnableRetryOnFailure` on the SQL Server provider for transient error resiliency against Azure SQL auto-pausing.
+- **Cloud Database Schema**: Provided `database/VoyageHub_Schema.azure.sql` (stripped of `CREATE DATABASE`/`USE`) with disabled seed hashes (`DISABLED-SET-VIA-DEPLOYMENT-MD`) paired with `tools/HashPassword` for secure credential provisioning.
+
+For detailed instructions, guides, and full configuration matrices, refer to:
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Complete step-by-step free Azure deployment guide.
+- [docs/CONFIGURATION.md](docs/CONFIGURATION.md) - Comprehensive configuration parameters and environment variables matrix.
+- [CHANGELOG.md](CHANGELOG.md) - History of tasks, commits, and changes.
+
+### Local Development (Unchanged)
+Local development continues to work without modification:
+- **Backend API**: `dotnet run --project VoyageHub.Api` on port `5062` (reads from `appsettings.Development.json` / LocalDB or local SQL Server Express, and user-secrets).
+- **Frontend Client**: `npm start` on port `4200` with local SSR and development live-reloading.
+- **Database**: `database/VoyageHub_Schema.sql` remains intact for local development.
+
+---
+
 ## Author
 
 - **Rajat Pandya** ([@Rajat-Pandya](https://github.com/Rajat-Pandya))

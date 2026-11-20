@@ -191,7 +191,7 @@ INSERT INTO dbo.TRAVEL_POLICIES (Id, DepartmentId, MaxBudget, IntlBudgetLimit, D
 (NEWID(), @DeptEng, 3500.00, 3500.00, 1000.00, 'ECONOMY+', 1),
 (NEWID(), @DeptHR, 2000.00, 2000.00, 600.00, 'ECONOMY', 1);
 
--- Demo user BCrypt hash (VoyageDemo2026!)
+-- User password hash placeholder (Disabled for cloud deployment: Set via DEPLOYMENT.md)
 DECLARE @DefaultHash NVARCHAR(500) = 'DISABLED-SET-VIA-DEPLOYMENT-MD';
 
 DECLARE @UserAlex UNIQUEIDENTIFIER   = 'A1111111-AAAA-AAAA-AAAA-AAAAAAAAAAAA';
