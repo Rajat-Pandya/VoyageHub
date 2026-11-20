@@ -1,38 +1,38 @@
+import '@angular/compiler';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgForm } from '@angular/forms';
-import { provideRouter } from '@angular/router';
-import { vi } from 'vitest';
+import { provideRouter, Router } from '@angular/router';
+import { of, throwError } from 'rxjs';
 
 import { Login } from './login';
-import { AuthService } from '../services/auth.service';
+import { AuthService, PRESET_PERSONAS } from '../services/auth.service';
 
 describe('Login', () => {
   let component: Login;
   let fixture: ComponentFixture<Login>;
-  let authService: AuthService;
+  let router: Router;
 
-  const validModel = () => {
-    component.email = 'alex@example.com';
-    component.password = 'password123';
-    component.rememberMe = true;
+  const mockAuthService = {
+    loginUser: vi.fn().mockReturnValue(of({
+      token: 'jwt-mock-token',
+      user: PRESET_PERSONAS[0] // Rohan Sharma (Employee)
+    })),
+    requestPasswordReset: vi.fn().mockReturnValue(of({
+      message: 'Reset token generated successfully',
+      resetToken: 'test-token-123'
+    }))
   };
-
-  const fakeValidForm = () =>
-    ({ invalid: false, control: { markAllAsTouched: () => undefined } }) as unknown as NgForm;
-
-  const fakeInvalidForm = () =>
-    ({
-      invalid: true,
-      control: { markAllAsTouched: vi.fn() },
-    }) as unknown as NgForm;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Login],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        { provide: AuthService, useValue: mockAuthService }
+      ],
     }).compileComponents();
 
-    authService = TestBed.inject(AuthService);
+    router = TestBed.inject(Router);
     fixture = TestBed.createComponent(Login);
     component = fixture.componentInstance;
     await fixture.whenStable();
@@ -50,48 +50,47 @@ describe('Login', () => {
     expect(component.showPassword()).toBe(false);
   });
 
-  it('should keep submit disabled when the form is invalid', () => {
-    fixture.detectChanges();
-    const submit = (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
-      'button[type="submit"]',
-    );
-    expect(submit?.disabled).toBe(true);
+  it('should switch to forgot password mode and back', () => {
+    expect(component.viewMode()).toBe('login');
+    component.openForgotPassword();
+    expect(component.viewMode()).toBe('forgot');
+    component.backToLogin();
+    expect(component.viewMode()).toBe('login');
   });
 
-  it('should set a success message on valid login with registered user', () => {
-    validModel();
-    component.login(fakeValidForm());
+  it('should authenticate user and navigate on submitLogin', () => {
+    const navSpy = vi.spyOn(router, 'navigate');
+    component.email = 'rohan.sharma@voyagehub.in';
+    component.password = 'Password123!';
+    component.submitLogin();
 
-    expect(component.successMessage()).toContain('Login successful');
-    expect(authService.currentUser()?.email).toBe('alex@example.com');
+    expect(mockAuthService.loginUser).toHaveBeenCalledWith('rohan.sharma@voyagehub.in', 'Password123!');
+    expect(navSpy).toHaveBeenCalledWith(['/dashboard']);
   });
 
-  it('should set error message when credentials are invalid', () => {
-    component.email = 'unknown@example.com';
-    component.password = 'password123';
-    component.login(fakeValidForm());
+  it('should navigate manager to approvals on login', () => {
+    mockAuthService.loginUser.mockReturnValueOnce(of({
+      token: 'jwt-manager-token',
+      user: PRESET_PERSONAS[1] // Priya Nair (Manager)
+    }));
+    const navSpy = vi.spyOn(router, 'navigate');
+    component.submitLogin();
 
-    expect(component.errorMessage()).toContain('No account found');
+    expect(navSpy).toHaveBeenCalledWith(['/approvals']);
   });
 
-  it('should reject invalid submit and mark fields touched', () => {
-    const form = fakeInvalidForm();
-    component.login(form);
+  it('should handle login error gracefully', () => {
+    mockAuthService.loginUser.mockReturnValueOnce(throwError(() => new Error('Invalid corporate credentials')));
+    component.submitLogin();
 
-    expect(form.control.markAllAsTouched).toHaveBeenCalled();
-    expect(component.successMessage()).toBeNull();
+    expect(component.errorMessage()).toBe('Invalid corporate credentials');
+    expect(component.isSubmitting()).toBe(false);
   });
 
-  it('should reset model state and clear status messages', () => {
-    validModel();
-    component.login(fakeValidForm());
-    expect(component.successMessage()).not.toBeNull();
+  it('should validate empty email in submitForgotPassword', () => {
+    component.forgotEmail = '   ';
+    component.submitForgotPassword();
 
-    const form = { resetForm: vi.fn() } as unknown as NgForm;
-    component.resetForm(form);
-
-    expect(form.resetForm).toHaveBeenCalled();
-    expect(component.successMessage()).toBeNull();
-    expect(component.showPassword()).toBe(false);
+    expect(component.errorMessage()).toBe('Please enter your corporate email address.');
   });
 });
