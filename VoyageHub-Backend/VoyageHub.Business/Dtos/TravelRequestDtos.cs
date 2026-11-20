@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace VoyageHub.Business.Dtos;
 
@@ -109,11 +110,21 @@ public class TravelRequestDetailDto
 
 public class CreateTravelRequestDto
 {
+    [Required(ErrorMessage = "Destination is required.")]
     public string Destination { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Purpose is required.")]
     public string Purpose { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Start date is required.")]
     public DateTime StartDate { get; set; }
+
+    [Required(ErrorMessage = "End date is required.")]
     public DateTime EndDate { get; set; }
+
+    [Range(0.01, 100000000, ErrorMessage = "Estimated budget must be greater than zero.")]
     public decimal EstimatedBudget { get; set; }
+
     public string TravelClass { get; set; } = "Economy (Standard)";
     public string? Justification { get; set; }
     public bool SaveAsDraft { get; set; } = false;
@@ -146,9 +157,15 @@ public class CreateStayDto
 
 public class SubmitExpenseDto
 {
+    [Required(ErrorMessage = "Travel request ID is required.")]
     public Guid RequestId { get; set; }
+
+    [Required(ErrorMessage = "Category is required.")]
     public string Category { get; set; } = "Airfare";
+
+    [Range(0.01, 100000000, ErrorMessage = "Expense amount must be greater than zero.")]
     public decimal Amount { get; set; }
+
     public string? ProofPath { get; set; }
     public string? Description { get; set; }
 }

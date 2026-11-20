@@ -13,11 +13,16 @@ public class ExpenseService : IExpenseService
 {
     private readonly IExpenseRepository _expenseRepository;
     private readonly IAuditService _auditService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public ExpenseService(IExpenseRepository expenseRepository, IAuditService auditService)
+    public ExpenseService(
+        IExpenseRepository expenseRepository,
+        IAuditService auditService,
+        ICurrentUserService currentUserService)
     {
         _expenseRepository = expenseRepository;
         _auditService = auditService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<ExpenseReviewSummaryDto> GetPendingSummaryAsync(string? category, bool? highPriorityOnly, CancellationToken cancellationToken = default)
@@ -49,6 +54,16 @@ public class ExpenseService : IExpenseService
 
     public async Task<(bool Success, string Message, Expense? Expense)> SubmitExpenseAsync(SubmitExpenseDto dto, CancellationToken cancellationToken = default)
     {
+        if (dto == null)
+        {
+            return (false, "Invalid expense data.", null);
+        }
+
+        if (dto.Amount <= 0)
+        {
+            return (false, "Expense amount must be greater than zero.", null);
+        }
+
         var request = await _expenseRepository.FindTravelRequestWithEmployeeAsync(dto.RequestId, cancellationToken);
         if (request == null)
         {
@@ -71,8 +86,8 @@ public class ExpenseService : IExpenseService
             entityType: "EXPENSE",
             entityId: expense.Id,
             action: "Submit Expense",
-            actorId: request.EmployeeId,
-            actorName: request.Employee?.Name ?? "Employee",
+            actorId: _currentUserService.UserId ?? request.EmployeeId,
+            actorName: _currentUserService.UserName ?? request.Employee?.Name ?? "Employee",
             changeDetail: $"Submitted ₹{expense.Amount:N0} {expense.Category} claim for {request.RequestCode}",
             severity: "LOW",
             cancellationToken: cancellationToken);
@@ -97,8 +112,8 @@ public class ExpenseService : IExpenseService
             entityType: "EXPENSE",
             entityId: expense.Id,
             action: isApprove ? "Reimbursed Claim" : "Rejected Claim",
-            actorId: null,
-            actorName: "Vikram Malhotra (Finance)",
+            actorId: _currentUserService.UserId,
+            actorName: _currentUserService.UserName ?? "Finance Officer",
             changeDetail: $"Processed ₹{expense.Amount:N0} {expense.Category} claim for {expense.Request?.RequestCode} ({expense.Status})",
             severity: "LOW",
             cancellationToken: cancellationToken);
@@ -121,8 +136,8 @@ public class ExpenseService : IExpenseService
             entityType: "EXPENSE",
             entityId: null,
             action: "Batch Payout",
-            actorId: null,
-            actorName: "Vikram Malhotra (Finance)",
+            actorId: _currentUserService.UserId,
+            actorName: _currentUserService.UserName ?? "Finance Officer",
             changeDetail: $"Processed batch payout for {toPayout.Count} claims totaling ₹{toPayout.Sum(e => e.Amount):N0}",
             severity: "MEDIUM",
             cancellationToken: cancellationToken);

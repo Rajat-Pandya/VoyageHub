@@ -84,6 +84,25 @@ public class CategorySpendDto
     public string Color { get; set; } = string.Empty;
 }
 
+public class EmployeeSpendReportDto
+{
+    public Guid EmployeeId { get; set; }
+    public string EmployeeName { get; set; } = string.Empty;
+    public string DepartmentName { get; set; } = string.Empty;
+    public int TripsCount { get; set; }
+    public decimal TotalApprovedBudget { get; set; }
+    public decimal TotalReimbursedExpenses { get; set; }
+}
+
+public class CostSummaryReportDto
+{
+    public int TotalTrips { get; set; }
+    public decimal TotalCommittedBudget { get; set; }
+    public decimal TotalReimbursed { get; set; }
+    public decimal TotalPendingReimbursement { get; set; }
+    public decimal AverageCostPerTrip { get; set; }
+}
+
 // Page 9: Policy & Hierarchy Config
 public class PolicyConfigDto
 {

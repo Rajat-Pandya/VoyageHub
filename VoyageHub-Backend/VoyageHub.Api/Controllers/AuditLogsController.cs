@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VoyageHub.Business.Dtos;
 using VoyageHub.Business.Services;
@@ -9,6 +10,7 @@ namespace VoyageHub.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "Admin")]
 public class AuditLogsController : ControllerBase
 {
     private readonly IAuditService _auditService;

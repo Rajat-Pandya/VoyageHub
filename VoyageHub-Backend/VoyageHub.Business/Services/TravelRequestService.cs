@@ -13,11 +13,16 @@ public class TravelRequestService : ITravelRequestService
 {
     private readonly ITravelRequestRepository _travelRequestRepository;
     private readonly IAuditService _auditService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public TravelRequestService(ITravelRequestRepository travelRequestRepository, IAuditService auditService)
+    public TravelRequestService(
+        ITravelRequestRepository travelRequestRepository,
+        IAuditService auditService,
+        ICurrentUserService currentUserService)
     {
         _travelRequestRepository = travelRequestRepository;
         _auditService = auditService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<List<TravelRequestListDto>> GetRequestsAsync(
@@ -156,9 +161,29 @@ public class TravelRequestService : ITravelRequestService
     {
         if (dto == null) return (false, "Invalid request data.", null);
 
+        if (dto.StartDate > dto.EndDate)
+        {
+            return (false, "Travel start date cannot be after end date.", null);
+        }
+
+        if (dto.EstimatedBudget <= 0)
+        {
+            return (false, "Estimated budget must be greater than zero.", null);
+        }
+
+        if (string.IsNullOrWhiteSpace(dto.Destination))
+        {
+            return (false, "Destination is required.", null);
+        }
+
+        if (string.IsNullOrWhiteSpace(dto.Purpose))
+        {
+            return (false, "Purpose is required.", null);
+        }
+
         var empId = employeeId.HasValue && employeeId != Guid.Empty
             ? employeeId.Value
-            : await _travelRequestRepository.GetFirstEmployeeIdAsync(cancellationToken);
+            : (_currentUserService.UserId ?? await _travelRequestRepository.GetFirstEmployeeIdAsync(cancellationToken));
 
         var employee = await _travelRequestRepository.GetEmployeeWithDepartmentAndManagerAsync(empId, cancellationToken);
         if (employee == null) return (false, "Employee account not found.", null);
@@ -258,8 +283,8 @@ public class TravelRequestService : ITravelRequestService
             entityType: "REQUEST",
             entityId: request.Id,
             action: dto.SaveAsDraft ? "Create Draft" : "Submit Request",
-            actorId: empId,
-            actorName: employee.Name,
+            actorId: _currentUserService.UserId ?? empId,
+            actorName: _currentUserService.UserName ?? employee.Name,
             changeDetail: $"Created {request.RequestCode} for {request.Destination} (₹{request.EstimatedBudget:N0})",
             severity: isFlagged ? "MEDIUM" : "LOW",
             cancellationToken: cancellationToken);
@@ -291,8 +316,8 @@ public class TravelRequestService : ITravelRequestService
             entityType: "REQUEST",
             entityId: r.Id,
             action: "Cancelled",
-            actorId: null,
-            actorName: "User",
+            actorId: _currentUserService.UserId ?? r.EmployeeId,
+            actorName: _currentUserService.UserName ?? "User",
             changeDetail: $"Cancelled trip {r.RequestCode}",
             severity: "LOW",
             cancellationToken: cancellationToken);

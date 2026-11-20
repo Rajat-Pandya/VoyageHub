@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VoyageHub.Business.Dtos;
 using VoyageHub.Business.Services;
@@ -10,6 +11,7 @@ namespace VoyageHub.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ExpensesController : ControllerBase
 {
     private readonly IExpenseService _expenseService;
@@ -20,6 +22,7 @@ public class ExpensesController : ControllerBase
     }
 
     [HttpGet("pending")]
+    [Authorize(Roles = "Finance,Admin")]
     public async Task<ActionResult<ExpenseReviewSummaryDto>> GetPending(
         [FromQuery] string? category,
         [FromQuery] bool? highPriorityOnly,
@@ -30,18 +33,20 @@ public class ExpensesController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<IActionResult> SubmitExpense([FromBody] SubmitExpenseDto dto, CancellationToken cancellationToken)
     {
         var (success, message, expense) = await _expenseService.SubmitExpenseAsync(dto, cancellationToken);
         if (!success)
         {
-            return NotFound(new { message });
+            return BadRequest(new { message });
         }
 
         return Ok(expense);
     }
 
     [HttpPost("{id}/action")]
+    [Authorize(Roles = "Finance,Admin")]
     public async Task<IActionResult> TakeAction(Guid id, [FromBody] ExpenseActionDto dto, CancellationToken cancellationToken)
     {
         var (success, message) = await _expenseService.TakeActionAsync(id, dto, cancellationToken);
@@ -54,9 +59,15 @@ public class ExpensesController : ControllerBase
     }
 
     [HttpPost("batch-payout")]
+    [Authorize(Roles = "Finance,Admin")]
     public async Task<IActionResult> BatchPayout([FromBody] BatchPayoutDto? dto, CancellationToken cancellationToken)
     {
         var (success, message) = await _expenseService.BatchPayoutAsync(dto, cancellationToken);
+        if (!success)
+        {
+            return BadRequest(new { message });
+        }
+
         return Ok(new { success = true, message });
     }
 }

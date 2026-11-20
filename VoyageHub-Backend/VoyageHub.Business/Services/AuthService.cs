@@ -23,12 +23,21 @@ public class AuthService : IAuthService
     private readonly IUserRepository _userRepository;
     private readonly IAuditService _auditService;
     private readonly ILogger<AuthService> _logger;
+    private readonly IJwtTokenService _jwtTokenService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public AuthService(IUserRepository userRepository, IAuditService auditService, ILogger<AuthService> logger)
+    public AuthService(
+        IUserRepository userRepository,
+        IAuditService auditService,
+        ILogger<AuthService> logger,
+        IJwtTokenService jwtTokenService,
+        ICurrentUserService currentUserService)
     {
         _userRepository = userRepository;
         _auditService = auditService;
         _logger = logger;
+        _jwtTokenService = jwtTokenService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<(int StatusCode, AuthResponseDto Response)> LoginAsync(LoginDto dto, CancellationToken cancellationToken = default)
@@ -57,14 +66,10 @@ public class AuthService : IAuthService
         {
             isPasswordValid = BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
         }
-        catch
+        catch (Exception ex)
         {
-            isPasswordValid = user.PasswordHash == dto.Password;
-        }
-
-        if (!isPasswordValid && (dto.Password == "password123" || dto.Password == "password" || dto.Password == "admin123"))
-        {
-            isPasswordValid = true;
+            _logger.LogWarning(ex, "BCrypt password verification failure for user {Email}", user.Email);
+            isPasswordValid = false;
         }
 
         if (!isPasswordValid)
@@ -89,10 +94,13 @@ public class AuthService : IAuthService
             RegisteredAt = user.CreatedAt.ToString("o")
         };
 
+        var token = _jwtTokenService.GenerateToken(user);
+
         return (200, new AuthResponseDto
         {
             Success = true,
             Message = $"Welcome back, {user.Name}!",
+            Token = token,
             User = userProfile
         });
     }
@@ -188,14 +196,10 @@ public class AuthService : IAuthService
         {
             isCurrentValid = BCrypt.Net.BCrypt.Verify(dto.CurrentPassword, user.PasswordHash);
         }
-        catch
+        catch (Exception ex)
         {
-            isCurrentValid = user.PasswordHash == dto.CurrentPassword;
-        }
-
-        if (!isCurrentValid && (dto.CurrentPassword == "password123" || dto.CurrentPassword == "password" || dto.CurrentPassword == "admin123"))
-        {
-            isCurrentValid = true;
+            _logger.LogWarning(ex, "BCrypt password verification failure in ChangePassword for user {UserId}", user.Id);
+            isCurrentValid = false;
         }
 
         if (!isCurrentValid)
@@ -209,8 +213,8 @@ public class AuthService : IAuthService
             entityType: "ACCESS",
             entityId: user.Id,
             action: "Change Password",
-            actorId: user.Id,
-            actorName: user.Name,
+            actorId: _currentUserService.UserId ?? user.Id,
+            actorName: _currentUserService.UserName ?? user.Name,
             changeDetail: $"Password changed for account {user.Email}",
             severity: "MEDIUM",
             cancellationToken: cancellationToken);

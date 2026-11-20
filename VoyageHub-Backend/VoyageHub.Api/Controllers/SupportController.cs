@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using VoyageHub.Business.Dtos;
 using VoyageHub.Business.Services;
 
@@ -10,6 +12,7 @@ namespace VoyageHub.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class SupportController : ControllerBase
 {
     private readonly ISupportService _supportService;
@@ -22,6 +25,7 @@ public class SupportController : ControllerBase
     }
 
     [HttpGet("tickets")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<ActionResult<List<SupportTicketDto>>> GetTickets(
         [FromQuery] string? status,
         [FromQuery] Guid? userId,
@@ -41,6 +45,7 @@ public class SupportController : ControllerBase
     }
 
     [HttpGet("tickets/{id}")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<ActionResult<SupportTicketDto>> GetTicketById(Guid id, CancellationToken cancellationToken)
     {
         try
@@ -48,19 +53,20 @@ public class SupportController : ControllerBase
             var ticket = await _supportService.GetTicketByIdAsync(id, cancellationToken);
             if (ticket == null)
             {
-                return NotFound(new { message = $"Ticket with ID {id} not found." });
+                return NotFound(new { message = "Support ticket not found." });
             }
 
             return Ok(ticket);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error fetching ticket {TicketId}", id);
+            _logger.LogError(ex, "Error fetching support ticket");
             return StatusCode(500, new { message = $"Database error: {ex.Message}" });
         }
     }
 
     [HttpPost("tickets")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<ActionResult<SupportTicketDto>> CreateTicket([FromBody] CreateSupportTicketDto dto, CancellationToken cancellationToken)
     {
         try
@@ -71,7 +77,7 @@ public class SupportController : ControllerBase
                 return BadRequest(new { message });
             }
 
-            return Ok(ticket);
+            return CreatedAtAction(nameof(GetTicketById), new { id = ticket!.Id }, ticket);
         }
         catch (Exception ex)
         {
@@ -81,7 +87,8 @@ public class SupportController : ControllerBase
     }
 
     [HttpPost("tickets/{id}/status")]
-    public async Task<ActionResult> UpdateTicketStatus(Guid id, [FromBody] UpdateTicketStatusDto dto, CancellationToken cancellationToken)
+    [Authorize(Roles = "Admin,Manager,Finance")]
+    public async Task<IActionResult> UpdateTicketStatus(Guid id, [FromBody] UpdateTicketStatusDto dto, CancellationToken cancellationToken)
     {
         try
         {
@@ -95,7 +102,7 @@ public class SupportController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error updating ticket {TicketId}", id);
+            _logger.LogError(ex, "Error updating support ticket status");
             return StatusCode(500, new { message = $"Database error: {ex.Message}" });
         }
     }

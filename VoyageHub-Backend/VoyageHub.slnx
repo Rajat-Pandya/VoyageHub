@@ -2,4 +2,5 @@
   <Project Path="VoyageHub.Api/VoyageHub.Api.csproj" />
   <Project Path="VoyageHub.Business/VoyageHub.Business.csproj" />
   <Project Path="VoyageHub.Data/VoyageHub.Data.csproj" />
+  <Project Path="VoyageHub.Tests/VoyageHub.Tests.csproj" />
 </Solution>

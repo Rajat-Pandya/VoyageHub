@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VoyageHub.Business.Dtos;
 using VoyageHub.Business.Services;
@@ -9,6 +10,7 @@ namespace VoyageHub.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "Manager,Finance,Admin")]
 public class ApprovalsController : ControllerBase
 {
     private readonly IApprovalService _approvalService;

@@ -38,7 +38,7 @@ public class ExpenseRepository : Repository<Expense>, IExpenseRepository
 
     public async Task<decimal> GetTotalPendingAmountAsync(CancellationToken cancellationToken = default)
     {
-        return await DbSet.Where(e => e.Status == "Pending").SumAsync(e => (decimal?)e.Amount, cancellationToken) ?? 45800.00m;
+        return await DbSet.Where(e => e.Status == "Pending").SumAsync(e => (decimal?)e.Amount, cancellationToken) ?? 0m;
     }
 
     public async Task<TravelRequest?> FindTravelRequestWithEmployeeAsync(Guid requestId, CancellationToken cancellationToken = default)

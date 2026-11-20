@@ -30,6 +30,7 @@ export interface UserProfile {
 export interface AuthResponse {
   success: boolean;
   message: string;
+  token?: string;
   user?: UserProfile;
 }
 
@@ -179,6 +180,9 @@ export class AuthService {
           this.currentUser.set(res.user);
           if (isPlatformBrowser(this.platformId)) {
             sessionStorage.setItem('voyage_user', JSON.stringify(res.user));
+            if (res.token) {
+              sessionStorage.setItem('voyage_token', res.token);
+            }
           }
         }
       }),
@@ -306,8 +310,16 @@ export class AuthService {
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.removeItem('voyage_user');
+      sessionStorage.removeItem('voyage_token');
     }
     // Return to default persona or null
     this.currentUser.set(PRESET_PERSONAS[0]);
+  }
+
+  getToken(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      return sessionStorage.getItem('voyage_token');
+    }
+    return null;
   }
 }

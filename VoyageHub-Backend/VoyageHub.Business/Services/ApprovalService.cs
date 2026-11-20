@@ -13,11 +13,16 @@ public class ApprovalService : IApprovalService
 {
     private readonly IApprovalStepRepository _approvalStepRepository;
     private readonly IAuditService _auditService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public ApprovalService(IApprovalStepRepository approvalStepRepository, IAuditService auditService)
+    public ApprovalService(
+        IApprovalStepRepository approvalStepRepository,
+        IAuditService auditService,
+        ICurrentUserService currentUserService)
     {
         _approvalStepRepository = approvalStepRepository;
         _auditService = auditService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<ApprovalQueueSummaryDto> GetQueueAsync(Guid? approverId, string? role, CancellationToken cancellationToken = default)
@@ -43,11 +48,15 @@ public class ApprovalService : IApprovalService
             Level = s.Level
         }).ToList();
 
+        var compliancePercent = items.Count > 0
+            ? (int)Math.Round((double)items.Count(i => i.PolicyStatus != "Flagged") / items.Count * 100)
+            : 100;
+
         return new ApprovalQueueSummaryDto
         {
-            PendingTotal = pendingTotal > 0 ? pendingTotal : 145000.00m,
-            AvgResponseTimeHours = 4.2,
-            PolicyCompliancePercent = 94,
+            PendingTotal = pendingTotal,
+            AvgResponseTimeHours = 0.0,
+            PolicyCompliancePercent = compliancePercent,
             Items = items
         };
     }
@@ -108,8 +117,8 @@ public class ApprovalService : IApprovalService
                 entityType: "APPROVAL",
                 entityId: step.RequestId,
                 action: isApprove ? "Approved" : "Rejected",
-                actorId: step.ApproverId,
-                actorName: step.Approver?.Name ?? "Manager",
+                actorId: _currentUserService.UserId ?? step.ApproverId,
+                actorName: _currentUserService.UserName ?? step.Approver?.Name ?? "Approver",
                 changeDetail: $"{step.Level} {dto.Action} for {step.Request.RequestCode}. {(string.IsNullOrWhiteSpace(dto.Comment) ? "" : "Note: " + dto.Comment)}",
                 severity: step.Request.PolicyCompliance == "Flagged" ? "MEDIUM" : "LOW",
                 cancellationToken: cancellationToken);

@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using VoyageHub.Business.Dtos;
 using VoyageHub.Business.Services;
 
@@ -33,6 +35,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
+    [AllowAnonymous]
     public async Task<ActionResult<AuthResponseDto>> Login([FromBody] LoginDto dto, CancellationToken cancellationToken)
     {
         try
@@ -52,6 +55,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet("personas")]
+    [AllowAnonymous]
     public async Task<ActionResult<List<UserProfileDto>>> GetQuickPersonas(CancellationToken cancellationToken)
     {
         var users = await _authService.GetPersonasAsync(cancellationToken);
@@ -59,6 +63,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPut("profile")]
+    [Authorize]
     public async Task<ActionResult<AuthResponseDto>> UpdateProfile([FromBody] UpdateProfileDto dto, CancellationToken cancellationToken)
     {
         try
@@ -78,6 +83,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("change-password")]
+    [Authorize]
     public async Task<ActionResult<AuthResponseDto>> ChangePassword([FromBody] ChangePasswordDto dto, CancellationToken cancellationToken)
     {
         try
@@ -97,6 +103,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("forgot-password")]
+    [AllowAnonymous]
     public async Task<ActionResult<ForgotPasswordResponseDto>> ForgotPassword([FromBody] ForgotPasswordDto dto, CancellationToken cancellationToken)
     {
         try
@@ -122,40 +129,18 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("verify-reset-token")]
+    [AllowAnonymous]
     public async Task<ActionResult<AuthResponseDto>> VerifyResetToken([FromBody] VerifyResetTokenDto dto, CancellationToken cancellationToken)
     {
-        try
-        {
-            var (statusCode, response) = await _authService.VerifyResetTokenAsync(dto, cancellationToken);
-            return StatusCode(statusCode, response);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error verifying password reset token");
-            return StatusCode(500, new AuthResponseDto
-            {
-                Success = false,
-                Message = $"Database error: {ex.Message}"
-            });
-        }
+        var (statusCode, response) = await _authService.VerifyResetTokenAsync(dto, cancellationToken);
+        return StatusCode(statusCode, response);
     }
 
     [HttpPost("reset-password")]
+    [AllowAnonymous]
     public async Task<ActionResult<AuthResponseDto>> ResetPassword([FromBody] ResetPasswordDto dto, CancellationToken cancellationToken)
     {
-        try
-        {
-            var (statusCode, response) = await _authService.ResetPasswordAsync(dto, cancellationToken);
-            return StatusCode(statusCode, response);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error resetting password");
-            return StatusCode(500, new AuthResponseDto
-            {
-                Success = false,
-                Message = $"Database error: {ex.Message}"
-            });
-        }
+        var (statusCode, response) = await _authService.ResetPasswordAsync(dto, cancellationToken);
+        return StatusCode(statusCode, response);
     }
 }

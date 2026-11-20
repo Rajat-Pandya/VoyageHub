@@ -13,11 +13,16 @@ public class SupportService : ISupportService
 {
     private readonly ISupportTicketRepository _supportTicketRepository;
     private readonly IAuditService _auditService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public SupportService(ISupportTicketRepository supportTicketRepository, IAuditService auditService)
+    public SupportService(
+        ISupportTicketRepository supportTicketRepository,
+        IAuditService auditService,
+        ICurrentUserService currentUserService)
     {
         _supportTicketRepository = supportTicketRepository;
         _auditService = auditService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<List<SupportTicketDto>> GetTicketsAsync(string? status, Guid? userId, string? search, CancellationToken cancellationToken = default)
@@ -112,7 +117,7 @@ public class SupportService : ISupportService
             Description = dto.Description.Trim(),
             CallbackNumber = dto.CallbackNumber?.Trim(),
             Status = "Open",
-            AssignedAgent = "Meera Sen (Corporate Travel Desk)",
+            AssignedAgent = "Corporate Travel Desk",
             UserId = user?.Id ?? dto.UserId,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
@@ -128,8 +133,8 @@ public class SupportService : ISupportService
             entityType: "SUPPORT",
             entityId: ticket.Id,
             action: "Create Support Ticket",
-            actorId: user?.Id,
-            actorName: user?.Name ?? "Employee",
+            actorId: _currentUserService.UserId ?? user?.Id,
+            actorName: _currentUserService.UserName ?? user?.Name ?? "Employee",
             changeDetail: $"Opened support ticket {ticketCode}: '{ticket.Subject}' ({ticket.Category}, Priority: {ticket.Priority})",
             severity: severity,
             cancellationToken: cancellationToken);
@@ -184,8 +189,8 @@ public class SupportService : ISupportService
             entityType: "SUPPORT",
             entityId: ticket.Id,
             action: "Update Support Ticket Status",
-            actorId: null,
-            actorName: ticket.AssignedAgent ?? "Travel Desk Agent",
+            actorId: _currentUserService.UserId,
+            actorName: _currentUserService.UserName ?? ticket.AssignedAgent ?? "Travel Desk Agent",
             changeDetail: $"Support ticket {ticket.TicketCode} status changed to '{ticket.Status}'",
             severity: "LOW",
             cancellationToken: cancellationToken);

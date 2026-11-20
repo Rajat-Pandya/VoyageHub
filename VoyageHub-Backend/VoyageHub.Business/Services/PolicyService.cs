@@ -13,11 +13,16 @@ public class PolicyService : IPolicyService
 {
     private readonly IPolicyRepository _policyRepository;
     private readonly IAuditService _auditService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public PolicyService(IPolicyRepository policyRepository, IAuditService auditService)
+    public PolicyService(
+        IPolicyRepository policyRepository,
+        IAuditService auditService,
+        ICurrentUserService currentUserService)
     {
         _policyRepository = policyRepository;
         _auditService = auditService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<List<PolicyConfigDto>> GetPoliciesAsync(CancellationToken cancellationToken = default)
@@ -54,8 +59,8 @@ public class PolicyService : IPolicyService
             entityType: "POLICY",
             entityId: policy.Id,
             action: "Update Limit",
-            actorId: null,
-            actorName: "System Admin",
+            actorId: _currentUserService.UserId,
+            actorName: _currentUserService.UserName ?? "System Admin",
             changeDetail: $"{policy.Department?.Name} Intl. Limit: ₹{oldLimit:N0} → ₹{dto.IntlBudgetLimit:N0}",
             severity: "LOW",
             cancellationToken: cancellationToken);
@@ -100,8 +105,8 @@ public class PolicyService : IPolicyService
             entityType: "POLICY",
             entityId: policy.Id,
             action: "Create Policy",
-            actorId: null,
-            actorName: "System Admin",
+            actorId: _currentUserService.UserId,
+            actorName: _currentUserService.UserName ?? "System Admin",
             changeDetail: $"Created policy for {deptName} (Domestic: ₹{dto.DomesticLimit:N0}, Intl: ₹{dto.IntlBudgetLimit:N0})",
             severity: "LOW",
             cancellationToken: cancellationToken);
@@ -136,8 +141,8 @@ public class PolicyService : IPolicyService
             entityType: "POLICY",
             entityId: policy.Id,
             action: "Delete Policy",
-            actorId: null,
-            actorName: "System Admin",
+            actorId: _currentUserService.UserId,
+            actorName: _currentUserService.UserName ?? "System Admin",
             changeDetail: $"Deleted policy for {policy.Department?.Name}",
             severity: "MEDIUM",
             cancellationToken: cancellationToken);

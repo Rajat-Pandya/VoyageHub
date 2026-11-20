@@ -80,7 +80,7 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
         {
             expenseQuery = expenseQuery.Where(e => e.Request != null && e.Request.EmployeeId == employeeId.Value);
         }
-        var reimbursement = await expenseQuery.Where(e => e.Status == "Pending").SumAsync(e => (decimal?)e.Amount, cancellationToken) ?? 34500.00m;
+        var reimbursement = await expenseQuery.Where(e => e.Status == "Pending").SumAsync(e => (decimal?)e.Amount, cancellationToken) ?? 0m;
 
         return (drafts, pending, upcoming, reimbursement);
     }
