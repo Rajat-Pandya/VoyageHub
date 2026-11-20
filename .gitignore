@@ -2,7 +2,9 @@
 # .NET / C# / Visual Studio
 # ===================================================================
 [Bb]in/
+bin/
 [Oo]bj/
+obj/
 [Ll]og/
 [Ll]ogs/
 .vs/
@@ -15,8 +17,12 @@ _ReSharper*/
 *.resharper
 *.DotSettings.user
 *.nupkg
+TestResults/
 project.lock.json
 project.assets.json
+
+# Local and environment appsettings
+appsettings.*.local.json
 
 # Build results
 [Dd]ebug/
@@ -55,3 +61,9 @@ desktop.ini
 .idea/
 *.launch
 .settings/
+
+# ===================================================================
+# Local Context / Specs
+# ===================================================================
+context.md
+**/context.md
