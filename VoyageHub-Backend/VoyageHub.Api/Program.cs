@@ -10,10 +10,40 @@ using VoyageHub.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuration validation & fail-fast startup checks (never log values)
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var jwtKey = builder.Configuration["Jwt:Key"];
+var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "VoyageHub.Api";
+var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "VoyageHub.Client";
+
+if (!builder.Environment.IsDevelopment())
+{
+    if (string.IsNullOrWhiteSpace(connectionString))
+    {
+        throw new InvalidOperationException("Startup failed: Database connection string 'ConnectionStrings:DefaultConnection' is missing or not configured.");
+    }
+
+    if (string.IsNullOrWhiteSpace(jwtKey))
+    {
+        throw new InvalidOperationException("Startup failed: JWT signing key ('Jwt:Key') is missing or not configured.");
+    }
+
+    if (jwtKey.Length < 32)
+    {
+        throw new InvalidOperationException($"Startup failed: JWT signing key ('Jwt:Key') must be at least 32 characters long (found {jwtKey.Length}).");
+    }
+}
+else
+{
+    // Fallback for local development when not yet in user-secrets or appsettings
+    jwtKey ??= "VoyageHubSuperSecretKeyForJwtAuthenticationTokenSigning2026!";
+    connectionString ??= "Server=(localdb)\\MSSQLLocalDB;Database=AngularAuthDb;Trusted_Connection=True;TrustServerCertificate=True;";
+}
+
 // 1. Add DbContext with SQL Server Connection & Transient Error Resiliency
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
+        connectionString,
         sqlServerOptions => sqlServerOptions.EnableRetryOnFailure(
             maxRetryCount: 5,
             maxRetryDelay: TimeSpan.FromSeconds(30),
@@ -45,9 +75,6 @@ builder.Services.AddScoped<IApprovalService, ApprovalService>();
 builder.Services.AddScoped<ITravelRequestService, TravelRequestService>();
 
 // 2. JWT Authentication Configuration
-var jwtKey = builder.Configuration["Jwt:Key"] ?? "VoyageHubSuperSecretKeyForJwtAuthenticationTokenSigning2026!";
-var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "VoyageHub.Api";
-var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "VoyageHub.Client";
 
 builder.Services.AddAuthentication(options =>
 {
