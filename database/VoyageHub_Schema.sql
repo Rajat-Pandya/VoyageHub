@@ -1,12 +1,19 @@
-﻿-- ====================================================================
+-- ====================================================================
 -- VoyageHub: Enterprise Corporate Travel & Expense Management Database
 -- Database: AngularAuthDb
 -- ====================================================================
+
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'AngularAuthDb')
+BEGIN
+    CREATE DATABASE AngularAuthDb;
+END
+GO
 
 USE AngularAuthDb;
 GO
 
 -- 1. Drop existing VoyageHub tables in reverse foreign key order if needed
+IF OBJECT_ID('dbo.SUPPORT_TICKETS', 'U') IS NOT NULL DROP TABLE dbo.SUPPORT_TICKETS;
 IF OBJECT_ID('dbo.AUDIT_LOGS', 'U') IS NOT NULL DROP TABLE dbo.AUDIT_LOGS;
 IF OBJECT_ID('dbo.EXPENSES', 'U') IS NOT NULL DROP TABLE dbo.EXPENSES;
 IF OBJECT_ID('dbo.STAYS', 'U') IS NOT NULL DROP TABLE dbo.STAYS;
@@ -35,6 +42,8 @@ CREATE TABLE dbo.USERS (
     DepartmentId UNIQUEIDENTIFIER NULL,
     ManagerId UNIQUEIDENTIFIER NULL,
     AvatarUrl NVARCHAR(500) NULL,
+    PasswordResetToken NVARCHAR(255) NULL,
+    PasswordResetTokenExpires DATETIME2 NULL,
     CreatedAt DATETIME2 DEFAULT SYSUTCDATETIME(),
     CONSTRAINT FK_USERS_DEPARTMENTS FOREIGN KEY (DepartmentId) REFERENCES dbo.DEPARTMENTS(Id) ON DELETE SET NULL,
     CONSTRAINT FK_USERS_MANAGERS FOREIGN KEY (ManagerId) REFERENCES dbo.USERS(Id)
@@ -191,8 +200,8 @@ INSERT INTO dbo.TRAVEL_POLICIES (Id, DepartmentId, MaxBudget, IntlBudgetLimit, D
 (NEWID(), @DeptEng, 3500.00, 3500.00, 1000.00, 'ECONOMY+', 1),
 (NEWID(), @DeptHR, 2000.00, 2000.00, 600.00, 'ECONOMY', 1);
 
--- Demo user BCrypt hash (work factor 12)
-DECLARE @DefaultHash NVARCHAR(500) = '$2a$12$L/KBcAZtiVg6ENUw4IlchunmZM2eP2L6sMl6Dq2fUXCLwb4FEfBNq';
+-- Demo user BCrypt hash (VoyageDemo2026!)
+DECLARE @DefaultHash NVARCHAR(500) = '$2a$11$MPV/7YdSwWOjQgfArQTqcecQGYvcVeEdn.o5fpUjos8hyeQhxfV/6';
 
 DECLARE @UserAlex UNIQUEIDENTIFIER   = 'A1111111-AAAA-AAAA-AAAA-AAAAAAAAAAAA';
 DECLARE @UserMarcus UNIQUEIDENTIFIER = 'B2222222-BBBB-BBBB-BBBB-BBBBBBBBBBBB';
@@ -201,14 +210,14 @@ DECLARE @UserSarah UNIQUEIDENTIFIER  = 'D4444444-DDDD-DDDD-DDDD-DDDDDDDDDDDD';
 DECLARE @UserLisa UNIQUEIDENTIFIER   = 'E5555555-EEEE-EEEE-EEEE-EEEEEEEEEEEE';
 DECLARE @UserAdmin UNIQUEIDENTIFIER  = 'F6666666-FFFF-FFFF-FFFF-FFFFFFFFFFFF';
 
--- Insert Users (Alex reports to Marcus)
+-- Insert Users (Rohan reports to Priya)
 INSERT INTO dbo.USERS (Id, Name, Email, PasswordHash, Role, DepartmentId, ManagerId, AvatarUrl) VALUES
-(@UserMarcus, 'Marcus Reynolds', 'marcus@voyagehub.io', @DefaultHash, 'Manager', @DeptSales, NULL, 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80'),
-(@UserDavid, 'David Chen', 'david@voyagehub.io', @DefaultHash, 'Finance', @DeptSales, NULL, 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80'),
-(@UserAdmin, 'System Admin', 'admin@voyagehub.io', @DefaultHash, 'Admin', @DeptExec, NULL, 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&h=120&q=80'),
-(@UserAlex, 'Alex Johnson', 'alex@voyagehub.io', @DefaultHash, 'Employee', @DeptSales, @UserMarcus, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120&q=80'),
+(@UserMarcus, 'Priya Nair', 'priya.nair@voyagehub.in', @DefaultHash, 'Manager', @DeptSales, NULL, 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&h=120&q=80'),
+(@UserDavid, 'Vikram Malhotra', 'vikram.malhotra@voyagehub.in', @DefaultHash, 'Finance', @DeptSales, NULL, 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80'),
+(@UserAdmin, 'Ananya Verma', 'admin@voyagehub.in', @DefaultHash, 'Admin', @DeptExec, NULL, 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&h=120&q=80'),
+(@UserAlex, 'Rohan Sharma', 'rohan.sharma@voyagehub.in', @DefaultHash, 'Employee', @DeptSales, @UserMarcus, 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&q=80'),
 (@UserSarah, 'Sarah Chen', 'sarah@voyagehub.io', @DefaultHash, 'Employee', @DeptEng, @UserMarcus, 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80'),
-(@UserLisa, 'Lisa Ray', 'lisa@voyagehub.io', @DefaultHash, 'Employee', @DeptSales, @UserMarcus, 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&h=120&q=80');
+(@UserLisa, 'Lisa Ray', 'lisa@voyagehub.io', @DefaultHash, 'Employee', @DeptSales, @UserMarcus, 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80');
 
 -- Insert Travel Requests
 DECLARE @ReqBerlin UNIQUEIDENTIFIER = 'AA010101-0000-0000-0000-000000000001';

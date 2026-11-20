@@ -1,5 +1,5 @@
 param(
-    [string]$Server = "(localdb)\MSSQLLocalDB",
+    [string]$Server = ".\SQLEXPRESS06",
     [string]$Database = "AngularAuthDb"
 )
 
