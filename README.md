@@ -7,13 +7,22 @@
 [![EF Core 10](https://img.shields.io/badge/EF%20Core-10.0-512BD4)](https://learn.microsoft.com/ef/core/)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-CC292B?logo=microsoftsqlserver)](https://www.microsoft.com/sql-server)
 
-**VoyageHub** is an enterprise-grade corporate travel and expense management application designed to streamline employee business travel requests, multi-tier approvals, expense claim reimbursements, departmental policy compliance, and internal corporate travel support workflows.
+**VoyageHub** is an enterprise-grade corporate travel and expense management application designed to coordinate employee business travel requests, multi-tier approvals, expense claim reimbursements, departmental policy compliance, and internal corporate travel desk workflows.
+
+> [!WARNING]
+> ### Security Notice
+> Authentication in this repository is designed for demo and evaluation purposes. While password hashing uses BCrypt (work factor 12) and JWT token generation is supported, complete token authentication and role authorization across all endpoints are part of the production roadmap (GAP-002). Persona switching and seed endpoints are accessible without multi-factor auth. **Do NOT expose this application directly to the public internet or load real corporate financial or personal data.**
 
 ---
 
+<!-- 
+### Application Preview
+![VoyageHub Dashboard](Assets/dashboard-preview.png)
+-->
+
 ## Architecture Overview
 
-VoyageHub is architected as a layered REST service paired with a modern Angular Single Page Application featuring Server-Side Rendering (SSR).
+VoyageHub follows a clean, layered architectural design separating the Angular Single Page Application (with SSR capabilities) from the ASP.NET Core backend REST services and SQL Server database.
 
 ```mermaid
 flowchart TD
@@ -25,19 +34,19 @@ flowchart TD
     end
 
     subgraph Core ["VoyageHub.Business"]
-        Services["Business Services & Workflow Logic"]
+        Services["Business Services and Workflow Logic"]
         Audit["Audit Trail Logging Engine"]
         DTOs["Data Transfer Objects (DTOs)"]
     end
 
-    subgraph Data ["VoyageHub.Data (EF Core 8)"]
+    subgraph Data ["VoyageHub.Data (EF Core 10)"]
         AppDb["AppDbContext"]
-        Repos["Generic & Custom Repositories"]
+        Repos["Generic and Custom Repositories"]
     end
 
     Database[("Microsoft SQL Server (AngularAuthDb)")]
 
-    Client -->|REST / JSON| Controllers
+    Client -->|REST / JSON (Port 5062)| Controllers
     Controllers --> Services
     Services --> Audit
     Services --> Repos
@@ -47,9 +56,9 @@ flowchart TD
 
 ---
 
-## Key Features & User Personas
+## User Personas and Workflows
 
-| Persona | Core Capabilities |
+| Persona | Primary Capabilities |
 | :--- | :--- |
 | **Employee** | Create and submit travel requests, link itinerary segments and hotel stays, claim out-of-pocket expenses, submit receipts, and open support tickets. |
 | **Line Manager** | Review pending team travel requests, inspect itinerary details and policy compliance flags, approve or reject with comments. |
@@ -62,85 +71,91 @@ flowchart TD
 
 - **Backend**:
   - ASP.NET Core 10 Web API (`net10.0`)
-  - Entity Framework Core 8.0 (`Microsoft.EntityFrameworkCore.SqlServer`)
-  - BCrypt.Net-Next for password hashing
-  - Swagger / OpenAPI (`Swashbuckle.AspNetCore`)
+  - Entity Framework Core 10.0 (`Microsoft.EntityFrameworkCore.SqlServer` 10.0.11)
+  - Password Hashing: `BCrypt.Net-Next` (work factor 12)
+  - API Documentation: OpenAPI / Swagger (`Swashbuckle.AspNetCore`)
+  - Testing: xUnit, Moq, and `Microsoft.EntityFrameworkCore.Sqlite` in-memory provider
 - **Frontend**:
   - Angular 21 (`@angular/core` ^21.2.0)
-  - Angular Server-Side Rendering (SSR) via Express 5
-  - Role-based Route Guards
+  - Server-Side Rendering (SSR) via Express 5
+  - Role-based Route Guards and JWT HTTP Interceptors
+  - Testing: Vitest with Angular TestBed
 - **Database**:
-  - Microsoft SQL Server / Azure SQL
+  - Microsoft SQL Server (LocalDB, Express, or Azure SQL Database)
 
 ---
 
 ## Repository Structure
 
 ```
-Project.NET/
+.
+├── .github/                   # GitHub Actions CI workflow
 ├── Assets/                    # Architecture diagrams, ER models, SRS documentation
-├── VoyageHub-Backend/         # .NET 10 Solution
+├── database/                  # Database creation and seed data scripts
+│   ├── VoyageHub_Schema.sql   # SQL Server schema, table constraints, and demo seed data
+│   └── run_migration.ps1      # Parameterized setup script for local SQL Server
+├── VoyageHub-Backend/         # .NET 10 Backend Solution
 │   ├── VoyageHub.Api/         # REST Controllers, Middleware, Configuration
 │   ├── VoyageHub.Business/    # Business services, validation, workflow logic, DTOs
 │   ├── VoyageHub.Data/        # EF Core DbContext, entity models, repositories
+│   ├── VoyageHub.Tests/       # Unit tests (xUnit + SQLite in-memory)
 │   └── VoyageHub.slnx         # Solution file
-├── VoyageHub-Frontend/        # Angular 21 SSR Client Application
-│   ├── src/app/admin/         # Admin policy management & audit logs
-│   ├── src/app/approvals/     # Manager & Finance approval queues
+├── VoyageHub-Frontend/        # Angular 21 Client Application
+│   ├── src/app/admin/         # Admin policy management and audit logs
+│   ├── src/app/approvals/     # Manager and Finance approval queues
 │   ├── src/app/dashboard/     # Unified role-based dashboard
-│   ├── src/app/finance/       # Expense claims review & batch payout
-│   ├── src/app/requests/      # Travel request creation & itineraries
-│   └── src/app/support/       # Corporate desk support ticketing
-├── database/                  # Database creation and seed data scripts
-│   ├── VoyageHub_Schema.sql   # SQL Server schema and demo seed data
-│   └── run_migration.ps1      # Parameterized setup script for local SQL Server
+│   ├── src/app/finance/       # Expense claims review and batch payout
+│   ├── src/app/requests/      # Travel request creation and itineraries
+│   ├── src/app/support/       # Corporate desk support ticketing
+│   └── src/app/services/      # Authentication, HTTP interceptors, Voyage API service
+├── LICENSE                    # MIT License
 └── README.md                  # Project documentation
 ```
 
 ---
 
-## Getting Started
+## Quick Start Guide
 
 ### Prerequisites
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) (v10.0.x or v11.0 preview)
 - [Node.js 20+ LTS](https://nodejs.org/) & npm 10+
-- [Angular CLI](https://angular.dev/tools/cli) (`npm install -g @angular/cli`)
-- [Microsoft SQL Server](https://www.microsoft.com/sql-server) or SQL Server Express
+- [Microsoft SQL Server](https://www.microsoft.com/sql-server) (LocalDB, Express, or Developer edition)
 
 ---
 
 ### Step 1: Database Setup
 
-1. Open SQL Server Management Studio (SSMS) or Azure Data Studio.
-2. Connect to your SQL Server instance.
-3. Open and execute the `database/VoyageHub_Schema.sql` script (or run `.\database\run_migration.ps1`). This will:
-   - Create the `AngularAuthDb` database (if not existing).
+1. Open SQL Server Management Studio (SSMS), Azure Data Studio, or PowerShell.
+2. Execute the schema script:
+   ```powershell
+   .\database\run_migration.ps1 -Server "(localdb)\MSSQLLocalDB" -Database "AngularAuthDb"
+   ```
+   Or execute `database/VoyageHub_Schema.sql` directly in your SQL editor. This will:
+   - Create the `AngularAuthDb` database.
    - Create all 9 domain tables (`USERS`, `DEPARTMENTS`, `TRAVEL_POLICIES`, `TRAVEL_REQUESTS`, `APPROVAL_STEPS`, `ITINERARY_SEGMENTS`, `STAYS`, `EXPENSES`, `SUPPORT_TICKETS`, `AUDIT_LOGS`).
-   - Populate initial seed data with departments, policies, and demo users.
+   - Seed baseline departments, travel policies, and demo persona accounts.
 
 ---
 
-### Step 2: Backend Configuration & Startup
+### Step 2: Backend Configuration and Startup
 
-1. Navigate to the API directory:
+1. Navigate to the API project directory:
    ```bash
    cd VoyageHub-Backend/VoyageHub.Api
    ```
-2. Verify or update the connection string in `appsettings.json` (see `appsettings.example.json`):
-   ```json
-   "ConnectionStrings": {
-     "DefaultConnection": "Server=localhost;Database=AngularAuthDb;Trusted_Connection=True;TrustServerCertificate=True;"
-   }
+2. Configure the database connection string using `dotnet user-secrets` (recommended) or set the `ConnectionStrings__DefaultConnection` environment variable:
+   ```bash
+   dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=(localdb)\MSSQLLocalDB;Database=AngularAuthDb;Trusted_Connection=True;TrustServerCertificate=True;"
    ```
-3. Restore packages and run the API:
+3. Restore dependencies and run the API:
    ```bash
    dotnet restore
    dotnet run
    ```
-4. Access the Swagger documentation at:
+4. The API runs on `http://localhost:5062`. Access Swagger UI documentation at:
    ```
-   https://localhost:5001/swagger or http://localhost:5000/swagger
+   http://localhost:5062/swagger
    ```
 
 ---
@@ -153,22 +168,19 @@ Project.NET/
    ```
 2. Install dependencies:
    ```bash
-   npm install
+   npm ci
    ```
 3. Start the Angular development server:
    ```bash
    npm start
    ```
-4. Open your browser and navigate to:
-   ```
-   http://localhost:4200
-   ```
+4. Open your browser and navigate to `http://localhost:4200`.
 
 ---
 
 ### Demo Accounts
 
-The database seed provides ready-to-use persona accounts:
+The database seed provides ready-to-use persona accounts. All seeded demo accounts use the single demo password below:
 
 | Role | Email | Password |
 | :--- | :--- | :--- |
@@ -176,6 +188,39 @@ The database seed provides ready-to-use persona accounts:
 | **Manager** | `priya@voyagehub.internal` | `VoyageDemo2026!` |
 | **Finance** | `rohit@voyagehub.internal` | `VoyageDemo2026!` |
 | **Employee** | `ananya@voyagehub.internal` | `VoyageDemo2026!` |
+
+---
+
+## Testing
+
+### Backend Unit Tests (.NET 10 / xUnit)
+The backend test suite runs with an in-memory SQLite provider (`Microsoft.EntityFrameworkCore.Sqlite`) requiring no external database:
+```bash
+dotnet test VoyageHub-Backend/VoyageHub.slnx
+```
+Covers authentication security (BCrypt enforcement, plaintext rejection), approval state transitions, policy duplication checks, travel request auto-flagging, expense reimbursements, and ticket code formatting.
+
+### Frontend Unit Tests (Angular 21 / Vitest)
+The frontend test suite runs via Vitest in headless, non-watch mode:
+```bash
+cd VoyageHub-Frontend
+npm test -- --no-watch
+```
+Covers role route guards, application routing, dashboard metrics rendering, and authentication component workflows.
+
+---
+
+## Known Limitations and Roadmap
+
+- **Token Authentication & RBAC (GAP-002)**: Complete JWT validation and role authorization attributes across all endpoints.
+- **Audit Actor Resolution (GAP-007)**: Dynamic extraction of actor identities from authentication context.
+- **Reporting Analytics (GAP-005, GAP-006)**: Complete live aggregation queries for empty-state reporting instead of fallback figures.
+- **User Preferences (GAP-008)**: Database persistence for user notification settings and travel preferences.
+- **Input Validation (GAP-009)**: Comprehensive FluentValidation rules for currency bounds, date limits, and character lengths.
+- **Global Error Handling**: Centralized ASP.NET Core `ProblemDetails` exception handling middleware.
+- **Pagination**: Server-side cursor/page-based querying for large request and audit histories.
+- **Receipt Blob Storage**: Integration with Azure Blob Storage or AWS S3 for binary expense receipt uploads.
+- **Accessibility (a11y)**: ARIA live regions and automated axe-core compliance checks.
 
 ---
 
