@@ -110,7 +110,7 @@ Project.NET/
 
 1. Open SQL Server Management Studio (SSMS) or Azure Data Studio.
 2. Connect to your SQL Server instance.
-3. Open and execute the [VoyageHub_Schema.sql](file:///c:/Users/rajat/Downloads/Project.NET/VoyageHub_Schema.sql) script. This will:
+3. Open and execute the `VoyageHub_Schema.sql` script. This will:
    - Create the `AngularAuthDb` database (if not existing).
    - Create all 9 domain tables (`USERS`, `DEPARTMENTS`, `TRAVEL_POLICIES`, `TRAVEL_REQUESTS`, `APPROVAL_STEPS`, `ITINERARY_SEGMENTS`, `STAYS`, `EXPENSES`, `SUPPORT_TICKETS`, `AUDIT_LOGS`).
    - Populate initial seed data with departments, policies, and demo users.
@@ -175,6 +175,10 @@ The database seed provides ready-to-use persona accounts:
 
 ---
 
+## Author
+
+- **Rajat Pandya** ([@Rajat-Pandya](https://github.com/Rajat-Pandya))
+
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
