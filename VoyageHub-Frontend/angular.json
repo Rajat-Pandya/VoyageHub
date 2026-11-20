@@ -58,6 +58,30 @@
               ],
               "outputHashing": "all"
             },
+            "static": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "12kB",
+                  "maximumError": "20kB"
+                }
+              ],
+              "outputHashing": "all",
+              "outputMode": "static",
+              "ssr": false,
+              "server": false
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
