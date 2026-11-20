@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface TravelRequestItem {
   id: string;
@@ -160,7 +161,7 @@ export interface AuditLogItem {
 })
 export class VoyageService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:5062/api';
+  private readonly baseUrl = environment.apiUrl;
 
   // Requests
   getRequests(status?: string, search?: string, limit?: number, employeeId?: string): Observable<TravelRequestItem[]> {

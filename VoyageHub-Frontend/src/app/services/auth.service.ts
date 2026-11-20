@@ -2,6 +2,7 @@ import { Injectable, signal, computed, PLATFORM_ID, inject } from '@angular/core
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface UserProfile {
   id?: string;
@@ -132,7 +133,7 @@ export const PRESET_PERSONAS: UserProfile[] = [
 export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly apiUrl = 'http://localhost:5062/api/auth';
+  private readonly apiUrl = `${environment.apiUrl}/auth`;
 
   // Default to Rohan Sharma so the application is instantly ready and populated
   readonly currentUser = signal<UserProfile>(PRESET_PERSONAS[0]);
