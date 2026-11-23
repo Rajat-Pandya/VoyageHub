@@ -178,10 +178,10 @@ export class RequestDetail implements OnInit {
     if (confirm(`Are you sure you want to cancel ${d.requestCode}?`)) {
       this.voyageService.cancelRequest(d.id).subscribe({
         next: () => {
-          this.router.navigate(['/requests']);
+          void this.router.navigate(['/requests']);
         },
         error: () => {
-          this.router.navigate(['/requests']);
+          void this.router.navigate(['/requests']);
         }
       });
     }

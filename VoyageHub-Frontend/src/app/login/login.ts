@@ -54,7 +54,7 @@ export class Login implements OnInit {
     this.devResetToken.set(null);
     this.viewMode.set('login');
     if (this.router.url.startsWith('/forgot-password')) {
-      this.router.navigate(['/login']);
+      void this.router.navigate(['/login']);
     }
   }
 
@@ -73,13 +73,13 @@ export class Login implements OnInit {
       next: (res) => {
         this.isSubmitting.set(false);
         if (res.user?.role === 'Manager') {
-          this.router.navigate(['/approvals']);
+          void this.router.navigate(['/approvals']);
         } else if (res.user?.role === 'Finance') {
-          this.router.navigate(['/expenses']);
+          void this.router.navigate(['/expenses']);
         } else if (res.user?.role === 'Admin') {
-          this.router.navigate(['/policies']);
+          void this.router.navigate(['/policies']);
         } else {
-          this.router.navigate(['/dashboard']);
+          void this.router.navigate(['/dashboard']);
         }
       },
       error: (err) => {
@@ -124,6 +124,6 @@ export class Login implements OnInit {
     if (withToken && this.devResetToken()) {
       queryParams['token'] = this.devResetToken()!;
     }
-    this.router.navigate(['/reset-password'], { queryParams });
+    void this.router.navigate(['/reset-password'], { queryParams });
   }
 }

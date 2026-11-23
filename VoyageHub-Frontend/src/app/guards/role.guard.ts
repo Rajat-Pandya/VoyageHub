@@ -9,7 +9,7 @@ export const roleGuard: (allowedRoles: string[]) => CanActivateFn = (allowedRole
 
     const user = authService.currentUser();
     if (!user) {
-      router.navigate(['/login']);
+      void router.navigate(['/login']);
       return false;
     }
 
@@ -20,7 +20,7 @@ export const roleGuard: (allowedRoles: string[]) => CanActivateFn = (allowedRole
 
     // Unauthorized for this specific route -> redirect to role's home view
     const defaultRoute = authService.getRoleDefaultRoute(currentRole);
-    router.navigate([defaultRoute]);
+    void router.navigate([defaultRoute]);
     return false;
   };
 };

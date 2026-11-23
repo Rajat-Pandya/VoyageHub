@@ -106,11 +106,11 @@ export class NewRequest {
     this.voyageService.createRequest(payload).subscribe({
       next: (res) => {
         this.isSubmitting.set(false);
-        this.router.navigate(['/requests', res.id]);
+        void this.router.navigate(['/requests', res.id]);
       },
       error: (err) => {
         this.isSubmitting.set(false);
-        this.router.navigate(['/requests']);
+        void this.router.navigate(['/requests']);
       }
     });
   }

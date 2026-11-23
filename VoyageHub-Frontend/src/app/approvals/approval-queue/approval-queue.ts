@@ -86,7 +86,7 @@ export class ApprovalQueue implements OnInit {
   }
 
   viewDetail(item: ApprovalQueueItem): void {
-    this.router.navigate(['/requests', item.requestId]);
+    void this.router.navigate(['/requests', item.requestId]);
   }
 
   openActionModal(item: ApprovalQueueItem, action: 'Approve' | 'Reject'): void {

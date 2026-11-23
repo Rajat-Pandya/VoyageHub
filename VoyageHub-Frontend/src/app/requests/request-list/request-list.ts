@@ -175,7 +175,7 @@ export class RequestList implements OnInit {
   }
 
   viewDetail(req: TravelRequestItem): void {
-    this.router.navigate(['/requests', req.id]);
+    void this.router.navigate(['/requests', req.id]);
   }
 
   exportCsv(): void {
