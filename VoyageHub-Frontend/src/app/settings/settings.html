@@ -68,39 +68,23 @@
 
     <!-- Avatar Section -->
     <div class="avatar-selection-section">
-      <img [src]="avatarUrl" alt="User Avatar" class="current-avatar-preview" />
+      <img [src]="avatarUrl || presetAvatars[0]" alt="User Avatar" class="current-avatar-preview" />
       <div class="avatar-controls">
         <label class="field-label" for="customAvatarInput">Avatar Photo</label>
-        @if (isAdmin()) {
-        <div class="preset-avatars-row">
-          @for (av of presetAvatars; track av) {
-          <img [src]="av" alt="Avatar preset" class="preset-avatar-thumb" [class.selected]="avatarUrl === av"
-            (click)="selectAvatar(av)" />
-          }
-        </div>
-        <div class="custom-avatar-input">
-          <input id="customAvatarInput" type="text" [(ngModel)]="avatarUrl" placeholder="Or enter image URL..."
-            class="form-input" />
-        </div>
-        } @else {
         <div class="custom-avatar-input">
           <input id="customAvatarInput" type="text" [value]="avatarUrl" readonly class="form-input readonly-input"
-            title="Managed by Administrator" />
+            title="Managed via Employee Directory" />
         </div>
-        <span class="field-hint">Avatar photo is managed by Administrator</span>
-        }
+        <span class="field-hint">Avatar photo is managed via Corporate Directory / Employee Management</span>
       </div>
     </div>
 
     <div class="form-grid">
       <div class="form-group">
-        <label class="field-label" for="profileFullName">Full Name @if (isAdmin()) { <span class="required">*</span>
-          }</label>
-        <input id="profileFullName" type="text" [(ngModel)]="fullname" [readonly]="!isAdmin()"
-          [class.readonly-input]="!isAdmin()" class="form-input" placeholder="e.g. Rohan Sharma" />
-        @if (!isAdmin()) {
-        <span class="field-hint">Managed via Corporate Active Directory (Admin update only)</span>
-        }
+        <label class="field-label" for="profileFullName">Full Name</label>
+        <input id="profileFullName" type="text" [value]="fullname" readonly class="form-input readonly-input"
+          placeholder="e.g. Rohan Sharma" />
+        <span class="field-hint">Managed via Corporate Active Directory</span>
       </div>
 
       <div class="form-group">
@@ -114,49 +98,40 @@
         <label class="field-label" for="profileDepartment">Department</label>
         <input id="profileDepartment" title="departmentName" type="text" [value]="departmentName" readonly
           class="form-input readonly-input" />
-        @if (!isAdmin()) {
-        <span class="field-hint">Department assignment managed by Administrator</span>
-        }
+        <span class="field-hint">Department assignment managed via Corporate Directory</span>
       </div>
 
       <div class="form-group">
         <label class="field-label" for="profileEmployeeCode">Employee ID Code</label>
-        <input id="profileEmployeeCode" type="text" [(ngModel)]="employeeCode" [readonly]="!isAdmin()"
-          [class.readonly-input]="!isAdmin()" class="form-input" placeholder="e.g. VH-EMP-1042" />
-        @if (!isAdmin()) {
-        <span class="field-hint">Corporate employee code (Admin update only)</span>
-        }
+        <input id="profileEmployeeCode" type="text" [value]="employeeCode" readonly class="form-input readonly-input"
+          placeholder="e.g. VH-EMP-1042" />
+        <span class="field-hint">Corporate employee identification</span>
       </div>
 
       <div class="form-group">
         <label class="field-label" for="profilePhoneNumber">Contact Phone / WhatsApp</label>
-        <input id="profilePhoneNumber" type="tel" [(ngModel)]="phoneNumber" [readonly]="!isAdmin()"
-          [class.readonly-input]="!isAdmin()" class="form-input" placeholder="+91 98201 44521" />
-        @if (!isAdmin()) {
-        <span class="field-hint">Official contact number (Admin update only)</span>
-        }
+        <input id="profilePhoneNumber" type="tel" [value]="phoneNumber" readonly class="form-input readonly-input"
+          placeholder="+91 98201 44521" />
+        <span class="field-hint">Official contact number</span>
       </div>
 
       <div class="form-group">
         <label class="field-label" for="profileHomeCity">Base City / Home Airport</label>
-        <input id="profileHomeCity" type="text" [(ngModel)]="homeCity" [readonly]="!isAdmin()"
-          [class.readonly-input]="!isAdmin()" class="form-input" placeholder="e.g. Mumbai (BOM)" />
-        @if (!isAdmin()) {
-        <span class="field-hint">Designated work location (Admin update only)</span>
-        }
+        <input id="profileHomeCity" type="text" [value]="homeCity" readonly class="form-input readonly-input"
+          placeholder="e.g. Mumbai (BOM)" />
+        <span class="field-hint">Designated work location</span>
       </div>
     </div>
 
     @if (isAdmin()) {
-    <div class="card-footer">
-      <button type="button" class="btn-dark" [disabled]="isSaving()" (click)="saveProfile()">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-          <polyline points="17 21 17 13 7 13 7 21" />
-          <polyline points="7 3 7 8 15 8" />
+    <div class="card-footer card-footer-notice">
+      <span class="field-hint locked-notice">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         </svg>
-        Save Profile Changes
-      </button>
+        Profile details are read-only here. To manage corporate records, visit <a routerLink="/admin/employees" class="text-link">Employee Directory</a>.
+      </span>
     </div>
     } @else {
     <div class="card-footer card-footer-notice">
@@ -165,7 +140,7 @@
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
           <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         </svg>
-        Personal profile details are locked and can only be updated by a System Administrator.
+        Personal profile details are locked and can only be updated in Employee Management.
       </span>
     </div>
     }

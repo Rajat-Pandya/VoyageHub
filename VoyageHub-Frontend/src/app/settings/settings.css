@@ -275,6 +275,17 @@
   gap: 6px;
 }
 
+.text-link {
+  color: var(--color-brand-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  margin-left: 4px;
+}
+
+.text-link:hover {
+  color: #4338ca;
+}
+
 /* Card Footer */
 .card-footer {
   margin-top: 28px;
