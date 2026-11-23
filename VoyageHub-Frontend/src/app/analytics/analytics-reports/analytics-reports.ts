@@ -1,6 +1,13 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { VoyageService, AnalyticsOverview } from '../../services/voyage.service';
+
+interface DonutSegment {
+  category: string;
+  color: string;
+  dashArray: string;
+  dashOffset: number;
+}
 
 @Component({
   selector: 'app-analytics-reports',
@@ -12,27 +19,50 @@ export class AnalyticsReports implements OnInit {
   private readonly voyageService = inject(VoyageService);
 
   readonly analytics = signal<AnalyticsOverview>({
-    totalSpent: 142500,
-    vsLastPeriodPercent: -12.5,
-    monthlySpend: [
-      { month: 'Jan', amount: 24000 },
-      { month: 'Feb', amount: 28000 },
-      { month: 'Mar', amount: 22000 },
-      { month: 'Apr', amount: 31000 },
-      { month: 'May', amount: 29000 },
-      { month: 'Jun', amount: 25000 }
-    ],
-    departmentSpend: [
-      { department: 'Sales & Marketing', trips: 42, avgCost: 1850, total: 77700 },
-      { department: 'Engineering', trips: 18, avgCost: 2100, total: 37800 },
-      { department: 'Human Resources', trips: 8, avgCost: 950, total: 7600 }
-    ],
-    categorySpend: [
-      { category: 'Airfare', percentage: 55, amount: 78375, color: '#4f46e5' },
-      { category: 'Hotel', percentage: 25, amount: 35625, color: '#f59e0b' },
-      { category: 'Meals', percentage: 12, amount: 17100, color: '#10b981' },
-      { category: 'Transport', percentage: 8, amount: 11400, color: '#ef4444' }
-    ]
+    totalSpent: 0,
+    vsLastPeriodPercent: 0,
+    monthlySpend: [],
+    departmentSpend: [],
+    categorySpend: []
+  });
+
+  readonly chartPoints = computed(() => {
+    const list = this.analytics().monthlySpend;
+    if (!list || list.length === 0) {
+      return { polyline: '', polygon: '', points: [] as Array<{ x: number; y: number; month: string; amount: number }> };
+    }
+    const max = Math.max(...list.map(m => m.amount), 1);
+    const startX = 100;
+    const availableWidth = 700;
+    const stepX = list.length > 1 ? availableWidth / (list.length - 1) : 0;
+    const points = list.map((m, i) => {
+      const x = Math.round(startX + i * stepX);
+      const y = Math.round(220 - (m.amount / max) * 160);
+      return { x, y, month: m.month, amount: m.amount };
+    });
+    const polyline = points.map(p => `${p.x},${p.y}`).join(' ');
+    const polygon = `${polyline} ${points[points.length - 1].x},220 ${points[0].x},220`;
+    return { polyline, polygon, points };
+  });
+
+  readonly donutSegments = computed<DonutSegment[]>(() => {
+    const cats = this.analytics().categorySpend;
+    if (!cats || cats.length === 0) return [];
+    const circumference = 314.159;
+    let accumulatedOffset = 78.5; // Start at top
+    return cats.map(c => {
+      const segLength = (c.percentage / 100) * circumference;
+      const gapLength = Math.max(0, circumference - segLength);
+      const dashArray = `${segLength.toFixed(1)} ${gapLength.toFixed(1)}`;
+      const dashOffset = accumulatedOffset;
+      accumulatedOffset -= segLength;
+      return {
+        category: c.category,
+        color: c.color,
+        dashArray,
+        dashOffset
+      };
+    });
   });
 
   ngOnInit(): void {

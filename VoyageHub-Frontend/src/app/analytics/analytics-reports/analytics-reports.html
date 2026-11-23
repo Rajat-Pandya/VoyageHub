@@ -74,31 +74,20 @@
           </linearGradient>
         </defs>
 
-        <!-- Area Polygon -->
-        <polygon points="100,72 240,48 380,88 520,32 660,40 800,64 800,220 100,220" fill="url(#spendGradient)"/>
+        <!-- Area Polygon & Trend Line -->
+        @if (chartPoints().points.length > 0) {
+          <polygon [attr.points]="chartPoints().polygon" fill="url(#spendGradient)"/>
+          <polyline [attr.points]="chartPoints().polyline" 
+                    fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
-        <!-- Trend Line -->
-        <polyline points="100,72 240,48 380,88 520,32 660,40 800,64" 
-                  fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-
-        <!-- Data Points & Labels -->
-        <circle cx="100" cy="72" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
-        <text x="100" y="235" text-anchor="middle" class="chart-month-label">Jan</text>
-
-        <circle cx="240" cy="48" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
-        <text x="240" y="235" text-anchor="middle" class="chart-month-label">Feb</text>
-
-        <circle cx="380" cy="88" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
-        <text x="380" y="235" text-anchor="middle" class="chart-month-label">Mar</text>
-
-        <circle cx="520" cy="32" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
-        <text x="520" y="235" text-anchor="middle" class="chart-month-label">Apr</text>
-
-        <circle cx="660" cy="40" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
-        <text x="660" y="235" text-anchor="middle" class="chart-month-label">May</text>
-
-        <circle cx="800" cy="64" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
-        <text x="800" y="235" text-anchor="middle" class="chart-month-label">Jun</text>
+          <!-- Dynamic Data Points & Month Labels -->
+          @for (p of chartPoints().points; track p.month) {
+            <circle [attr.cx]="p.x" [attr.cy]="p.y" r="5" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+            <text [attr.x]="p.x" y="235" text-anchor="middle" class="chart-month-label">{{ p.month }}</text>
+          }
+        } @else {
+          <text x="450" y="130" text-anchor="middle" fill="#94a3b8" font-size="14">No spend transactions in this reporting period</text>
+        }
       </svg>
     </div>
   </section>
@@ -125,6 +114,10 @@
               <td>{{ d.avgCost | currency:'INR':'symbol':'1.0-0' }}</td>
               <td class="bold-total">{{ d.total | currency:'INR':'symbol':'1.0-0' }}</td>
             </tr>
+          } @empty {
+            <tr>
+              <td colspan="4" style="text-align: center; color: #94a3b8; padding: 24px;">No departmental spend recorded</td>
+            </tr>
           }
         </tbody>
       </table>
@@ -135,18 +128,12 @@
       <h3>Spend by Category</h3>
       <div class="donut-chart-container">
         <svg viewBox="0 0 200 200" class="donut-svg">
-          <!-- 55% Airfare: stroke-dasharray="172.7 141.3" stroke-dashoffset="0" -->
-          <circle cx="100" cy="100" r="50" fill="transparent" stroke="#4f46e5" stroke-width="32"
-                  stroke-dasharray="172.7 141.3" stroke-dashoffset="78.5" />
-          <!-- 25% Hotel: stroke-dasharray="78.5 235.5" stroke-dashoffset="-94.2" -->
-          <circle cx="100" cy="100" r="50" fill="transparent" stroke="#f59e0b" stroke-width="32"
-                  stroke-dasharray="78.5 235.5" stroke-dashoffset="-94.2" />
-          <!-- 12% Meals: stroke-dasharray="37.7 276.3" stroke-dashoffset="-172.7" -->
-          <circle cx="100" cy="100" r="50" fill="transparent" stroke="#10b981" stroke-width="32"
-                  stroke-dasharray="37.7 276.3" stroke-dashoffset="-172.7" />
-          <!-- 8% Transport: stroke-dasharray="25.1 288.9" stroke-dashoffset="-210.4" -->
-          <circle cx="100" cy="100" r="50" fill="transparent" stroke="#ef4444" stroke-width="32"
-                  stroke-dasharray="25.1 288.9" stroke-dashoffset="-210.4" />
+          @for (s of donutSegments(); track s.category) {
+            <circle cx="100" cy="100" r="50" fill="transparent" [attr.stroke]="s.color" stroke-width="32"
+                    [attr.stroke-dasharray]="s.dashArray" [attr.stroke-dashoffset]="s.dashOffset" />
+          } @empty {
+            <circle cx="100" cy="100" r="50" fill="transparent" stroke="#e2e8f0" stroke-width="32" />
+          }
         </svg>
 
         <div class="donut-legend">
@@ -156,6 +143,8 @@
               <span class="legend-name">{{ c.category }}</span>
               <strong class="legend-percent">{{ c.percentage }}%</strong>
             </div>
+          } @empty {
+            <p style="color: #94a3b8; font-size: 13px;">No category breakdown available</p>
           }
         </div>
       </div>

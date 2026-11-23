@@ -68,16 +68,16 @@ export class Settings implements OnInit {
     this.email = user.email || '';
     this.role = user.role || 'Employee';
     this.departmentName = user.departmentName || 'General';
-    this.phoneNumber = user.phoneNumber || '+91 98201 44521';
-    this.homeCity = user.homeCity || 'Mumbai (BOM)';
-    this.employeeCode = user.employeeCode || 'VH-EMP-1042';
+    this.phoneNumber = user.phoneNumber || '';
+    this.homeCity = user.homeCity || '';
+    this.employeeCode = user.employeeCode || '';
     this.avatarUrl = user.avatarUrl || this.presetAvatars[0];
 
     this.seatPreference = user.seatPreference || 'Aisle';
-    this.mealPreference = user.mealPreference || 'Vegetarian (Hindu)';
-    this.roomPreference = user.roomPreference || 'High Floor, Non-Smoking';
-    this.airlineLoyalty = user.airlineLoyalty || 'Air India Flying Returns - AI-982144';
-    this.hotelLoyalty = user.hotelLoyalty || 'Taj InnerCircle - TIC-40819';
+    this.mealPreference = user.mealPreference || 'Standard';
+    this.roomPreference = user.roomPreference || 'Non-Smoking';
+    this.airlineLoyalty = user.airlineLoyalty || '';
+    this.hotelLoyalty = user.hotelLoyalty || '';
 
     this.notifyTripStatus = user.notifyTripStatus !== undefined ? user.notifyTripStatus : true;
     this.notifyExpensePayout = user.notifyExpensePayout !== undefined ? user.notifyExpensePayout : true;

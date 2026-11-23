@@ -100,7 +100,7 @@ export class Support implements OnInit {
   ngOnInit(): void {
     const user = this.authService.currentUser();
     if (user) {
-      this.ticketCallback = user.phoneNumber || '+91 98201 44521';
+      this.ticketCallback = user.phoneNumber || '';
     }
     this.loadTickets();
   }
