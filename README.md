@@ -72,6 +72,12 @@ flowchart TD
 
 ---
 
+## UI Design System & Guidelines
+
+VoyageHub employs a consistent 4px-base design token scale, responsive layout primitives, unified status indicators, and keyboard-accessible form controls. See [UI Guidelines](docs/UI-GUIDELINES.md) for full token tables, layout classes, component patterns, and guidelines for adding new pages.
+
+---
+
 ## Repository Structure
 
 ```

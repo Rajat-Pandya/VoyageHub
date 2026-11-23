@@ -1,6 +1,23 @@
 # Changelog
 
-All notable changes to the VoyageHub project implemented on branch `feature/deploy-config` are documented in this file.
+All notable changes to the VoyageHub project implemented across branches are documented in this file.
+
+## [feature/ui-consistency] - 2026-11-23
+
+### Added & Refactored
+- **Design Tokens & Primitives** (`3af9a72`): Established universal 4px spacing scale (`--space-0` through `--space-12`), radius tokens, typography scales, layout primitives (`.page`, `.page-header`, `.card`, `.form-grid`, `.table-wrap`, `.empty-state`), and unified status chip mapping in `src/styles/`.
+- **Shared Standalone Components**: Created `app-page-header`, `app-empty-state`, and `app-status-chip` in `src/app/shared/`.
+- **App Shell** (`342538d`): Refactored navigation bar, responsive sidebar, and main view container using spacing tokens and normalized >= 40px touch targets.
+- **Login & Auth** (`f83f0fa`): Cleaned up authentication cards, normalized form field heights to 40px, and replaced hardcoded margins with spacing tokens.
+- **Dashboard** (`eea2ee0`): Structured KPI cards with responsive grid, normalized activity table container, and consistent section spacing.
+- **Requests Views** (`4c7e1e1`): Standardized request list, new request multi-step form, and request detail views with unified layout classes, responsive table containers, and consistent spacing.
+- **Approvals Queue** (`55f1f96`): Applied `.page`, `.page-header`, 3-column KPI cards, unified action buttons, and responsive table wrapper.
+- **Finance Review** (`cdf54f6`): Replaced custom containers with `.page`, `.page-header`, structured reimbursement action bar, and responsive expense item table.
+- **Analytics & Reports** (`d071697`): Converted analytics views to `.page` and `.page-header`, refactored split charts grid and department budget table.
+- **Admin Views** (`4fa0cfd`): Standardized policy config, audit logs, and employee management directory with `.page`, `.page-header`, `.table-wrap`, and min 40px controls.
+- **Support Desk** (`4dfcdef`): Unified support emergency banner, ticket submission form grid, and ticket tracking table.
+- **User Settings** (`a92188f`): Aligned user profile tabs, travel preferences, notification toggles, and security views with design tokens; preserved read-only corporate directory records.
+- **Documentation**: Authored `docs/UI-GUIDELINES.md` detailing token reference, layout classes, component patterns, and do/don't checklist.
 
 ## [feature/deploy-config] - 2026-11-20
 
