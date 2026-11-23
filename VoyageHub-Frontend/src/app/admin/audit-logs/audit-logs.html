@@ -1,6 +1,6 @@
-<div class="audit-page">
+<div class="page audit-page">
   <!-- Top Bar matching Page 10 -->
-  <header class="page-top-bar">
+  <header class="page-header">
     <div class="header-titles">
       <h1>System Audit Log</h1>
       <p class="subtitle">Comprehensive history of all security and data changes within VoyageHub</p>
@@ -29,49 +29,51 @@
 
   <!-- Table Card matching Page 10 -->
   <div class="table-card">
-    <table class="voyage-table">
-      <thead>
-        <tr>
-          <th>TIMESTAMP</th>
-          <th>ENTITY TYPE</th>
-          <th>ACTION</th>
-          <th>ACTOR</th>
-          <th>CHANGE DETAIL</th>
-          <th>SEVERITY</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (log of logs(); track log.id) {
+    <div class="table-wrap">
+      <table class="voyage-table">
+        <thead>
           <tr>
-            <td class="timestamp-cell">
-              {{ log.timestamp | date:'MMM dd, yyyy • HH:mm:ss' }}
-            </td>
-            <td>
-              <span class="entity-pill" [ngClass]="log.entityType.toLowerCase()">
-                {{ log.entityType }}
-              </span>
-            </td>
-            <td><strong>{{ log.action }}</strong></td>
-            <td class="actor-cell">
-              <div class="actor-avatar-circle">
-                {{ log.actor.charAt(0) }}
-              </div>
-              <span>{{ log.actor }}</span>
-            </td>
-            <td class="change-detail-cell">{{ log.changeDetail }}</td>
-            <td>
-              <span class="severity-pill" [ngClass]="log.severity.toLowerCase()">
-                {{ log.severity }}
-              </span>
-            </td>
+            <th>TIMESTAMP</th>
+            <th>ENTITY TYPE</th>
+            <th>ACTION</th>
+            <th>ACTOR</th>
+            <th>CHANGE DETAIL</th>
+            <th>SEVERITY</th>
           </tr>
-        } @empty {
-          <tr>
-            <td colspan="6" class="empty-state-cell">No audit log records found.</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (log of logs(); track log.id) {
+            <tr>
+              <td class="timestamp-cell">
+                {{ log.timestamp | date:'MMM dd, yyyy • HH:mm:ss' }}
+              </td>
+              <td>
+                <span class="entity-pill" [ngClass]="log.entityType.toLowerCase()">
+                  {{ log.entityType }}
+                </span>
+              </td>
+              <td><strong>{{ log.action }}</strong></td>
+              <td class="actor-cell">
+                <div class="actor-avatar-circle">
+                  {{ log.actor.charAt(0) }}
+                </div>
+                <span>{{ log.actor }}</span>
+              </td>
+              <td class="change-detail-cell">{{ log.changeDetail }}</td>
+              <td>
+                <span class="severity-pill" [ngClass]="log.severity.toLowerCase()">
+                  {{ log.severity }}
+                </span>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-state-cell">No audit log records found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
 
     <!-- Pagination Footer matching Page 10 -->
     <div class="pagination-footer">

@@ -1,6 +1,6 @@
-<div class="policy-page">
+<div class="page policy-page">
   <!-- Top Bar matching Page 9 -->
-  <header class="page-top-bar">
+  <header class="page-header">
     <div class="header-titles">
       <h1>Policy &amp; Hierarchy Configuration</h1>
       <p class="subtitle">Define global travel rules and organizational approval paths</p>
@@ -36,53 +36,55 @@
       </button>
     </div>
 
-    <table class="voyage-table">
-      <thead>
-        <tr>
-          <th>DEPARTMENT</th>
-          <th>INTL. BUDGET LIMIT</th>
-          <th>DOMESTIC LIMIT</th>
-          <th>ALLOWED CLASS</th>
-          <th>ACTIONS</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (p of policies(); track p.id) {
+    <div class="table-wrap">
+      <table class="voyage-table">
+        <thead>
           <tr>
-            <td><strong>{{ p.departmentName }}</strong></td>
-            <td>
-              @if (p.intlBudgetLimit >= 900000) {
-                <span>Unlimited</span>
-              } @else {
-                <span>{{ p.intlBudgetLimit | currency:'INR':'symbol':'1.0-0' }} / trip</span>
-              }
-            </td>
-            <td>{{ p.domesticLimit | currency:'INR':'symbol':'1.0-0' }} / trip</td>
-            <td>
-              <span class="class-pill" [class.business]="p.allowedClass === 'BUSINESS'" [class.economy]="p.allowedClass !== 'BUSINESS'">
-                {{ p.allowedClass }}
-              </span>
-            </td>
-            <td>
-              <div class="table-actions-cell">
-                <button type="button" class="edit-icon-btn" (click)="editPolicy(p)" title="Edit Limits" aria-label="Edit Limits">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
-                  </svg>
-                </button>
-                <button type="button" class="delete-icon-btn" (click)="deletePolicy(p)" title="Delete Policy" aria-label="Delete Policy">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 6h18"/>
-                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-                  </svg>
-                </button>
-              </div>
-            </td>
+            <th>DEPARTMENT</th>
+            <th>INTL. BUDGET LIMIT</th>
+            <th>DOMESTIC LIMIT</th>
+            <th>ALLOWED CLASS</th>
+            <th>ACTIONS</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (p of policies(); track p.id) {
+            <tr>
+              <td><strong>{{ p.departmentName }}</strong></td>
+              <td>
+                @if (p.intlBudgetLimit >= 900000) {
+                  <span>Unlimited</span>
+                } @else {
+                  <span>{{ p.intlBudgetLimit | currency:'INR':'symbol':'1.0-0' }} / trip</span>
+                }
+              </td>
+              <td>{{ p.domesticLimit | currency:'INR':'symbol':'1.0-0' }} / trip</td>
+              <td>
+                <span class="class-pill" [class.business]="p.allowedClass === 'BUSINESS'" [class.economy]="p.allowedClass !== 'BUSINESS'">
+                  {{ p.allowedClass }}
+                </span>
+              </td>
+              <td>
+                <div class="table-actions-cell">
+                  <button type="button" class="edit-icon-btn" (click)="editPolicy(p)" title="Edit Limits" aria-label="Edit Limits">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="delete-icon-btn" (click)="deletePolicy(p)" title="Delete Policy" aria-label="Delete Policy">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 6h18"/>
+                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <!-- Section 2: Approval Hierarchy & Policy Hard Enforcement -->
