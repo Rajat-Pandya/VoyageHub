@@ -1,0 +1,209 @@
+/* ==========================================================================
+   VoyageHub Layout Primitives & Responsive Grid Rules
+   ========================================================================== */
+
+/* 1. Page Container */
+.page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  min-height: 100%;
+}
+
+.page-narrow {
+  max-width: 1080px;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: var(--space-4);
+  }
+}
+
+/* 2. Page Header (Title Left, Actions Right, Wraps on Mobile) */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.page-header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* 3. Section Spacing */
+.section {
+  margin-bottom: var(--space-6);
+}
+
+/* 4. Unified Card Primitive */
+.card,
+.section-card,
+.table-card,
+.chart-card,
+.kpi-card,
+.wizard-card {
+  background: var(--surface-card, #ffffff);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: var(--space-6);
+  position: relative;
+}
+
+/* Table cards contain their own scroll wrapper so their padding is handled via cells */
+.table-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .card,
+  .section-card,
+  .chart-card,
+  .kpi-card,
+  .wizard-card {
+    padding: var(--space-4);
+  }
+}
+
+/* 5. Responsive Grids */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 6. Table Wrapper (Horizontal Scroll Inside Wrapper, Never Page-Level) */
+.table-wrap,
+.table-container,
+.voyage-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-card);
+  border: var(--card-border);
+  background: #ffffff;
+}
+
+/* When table-wrap is inside a table-card that already has a border, remove double border */
+.table-card .table-wrap,
+.table-card .table-container {
+  border: none;
+  border-radius: 0;
+}
+
+/* 7. Action Bar */
+.action-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.action-bar-end {
+  justify-content: flex-end;
+}
+
+/* 8. Empty & Loading States */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  gap: var(--space-3);
+  color: var(--text-muted);
+}
+
+.empty-state-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--surface-subtle);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-2);
+}
+
+.empty-state-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.empty-state-desc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  max-width: 420px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  gap: var(--space-3);
+  color: var(--text-muted);
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border-light);
+  border-top-color: var(--color-brand-primary);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 9. Interactive Controls (Minimum 40px Target & Visible Focus) */
+.form-input,
+.form-select,
+.form-textarea,
+.btn-primary,
+.btn-secondary,
+.btn-dark {
+  min-height: var(--control-min-height, 40px);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-dark:focus-visible,
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible,
+a.nav-item:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+}

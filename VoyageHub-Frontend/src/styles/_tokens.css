@@ -1,0 +1,44 @@
+/* ==========================================================================
+   VoyageHub Design Tokens — Spacing, Elevation, Radius & Type Scale
+   ========================================================================== */
+
+:root {
+  /* 4px-Base Spacing Scale */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Radius Tokens */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-full: 9999px;
+
+  /* Semantic Component Radii */
+  --radius-chip: var(--radius-full);
+  --radius-control: var(--radius-md);
+  --radius-card: var(--radius-lg);
+  --radius-modal: var(--radius-lg);
+
+  /* Unified Elevation & Card Border */
+  --card-border: 1px solid var(--border-card);
+  --card-shadow: var(--shadow-sm);
+  --card-padding-desktop: var(--space-6);
+  --card-padding-mobile: var(--space-4);
+
+  /* Interactive Controls Sizing */
+  --control-min-height: 40px;
+  --control-padding-x: var(--space-4);
+  --control-padding-y: 9px;
+  --focus-ring: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
