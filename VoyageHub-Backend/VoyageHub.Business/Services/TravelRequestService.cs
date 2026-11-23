@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using VoyageHub.Business.Dtos;
@@ -297,7 +298,7 @@ public class TravelRequestService : ITravelRequestService
                     Destination = s.Destination,
                     DepartureTime = s.DepartureTime,
                     ArrivalTime = s.ArrivalTime,
-                    ConfirmationNumber = s.ConfirmationNumber ?? $"#AJK{new Random().Next(10, 99)}L",
+                    ConfirmationNumber = s.ConfirmationNumber ?? $"#AJK{RandomNumberGenerator.GetInt32(10, 99)}L",
                     Cost = s.Cost
                 });
             }
@@ -313,7 +314,7 @@ public class TravelRequestService : ITravelRequestService
                     CheckIn = st.CheckIn,
                     CheckOut = st.CheckOut,
                     Nights = st.Nights > 0 ? st.Nights : 1,
-                    ConfirmationNumber = st.ConfirmationNumber ?? $"#HY-{new Random().Next(100000, 999999)}",
+                    ConfirmationNumber = st.ConfirmationNumber ?? $"#HY-{RandomNumberGenerator.GetInt32(100000, 999999)}",
                     Cost = st.Cost
                 });
             }
@@ -463,7 +464,7 @@ public class TravelRequestService : ITravelRequestService
             Destination = dto.Destination,
             DepartureTime = dto.DepartureTime == default ? DateTime.UtcNow : dto.DepartureTime,
             ArrivalTime = dto.ArrivalTime,
-            ConfirmationNumber = dto.ConfirmationNumber ?? $"#AJK{new Random().Next(10, 99)}L",
+            ConfirmationNumber = dto.ConfirmationNumber ?? $"#AJK{RandomNumberGenerator.GetInt32(10, 99)}L",
             Cost = dto.Cost
         };
 
@@ -489,7 +490,7 @@ public class TravelRequestService : ITravelRequestService
             CheckIn = dto.CheckIn == default ? DateTime.UtcNow : dto.CheckIn,
             CheckOut = dto.CheckOut == default ? DateTime.UtcNow.AddDays(1) : dto.CheckOut,
             Nights = dto.Nights > 0 ? dto.Nights : 1,
-            ConfirmationNumber = dto.ConfirmationNumber ?? $"#HY-{new Random().Next(100000, 999999)}",
+            ConfirmationNumber = dto.ConfirmationNumber ?? $"#HY-{RandomNumberGenerator.GetInt32(100000, 999999)}",
             Cost = dto.Cost
         };
 
