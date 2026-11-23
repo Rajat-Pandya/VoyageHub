@@ -46,4 +46,20 @@ public class UserRepository : Repository<User>, IUserRepository
             .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<List<User>> GetAllWithDetailsAsync(CancellationToken cancellationToken = default)
+    {
+        return await DbSet
+            .Include(u => u.Department)
+            .Include(u => u.Manager)
+            .OrderBy(u => u.Name)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<List<User>> GetSubordinatesAsync(Guid managerId, CancellationToken cancellationToken = default)
+    {
+        return await DbSet
+            .Where(u => u.ManagerId == managerId)
+            .ToListAsync(cancellationToken);
+    }
 }

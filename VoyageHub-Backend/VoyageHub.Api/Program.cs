@@ -73,6 +73,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<IApprovalService, ApprovalService>();
 builder.Services.AddScoped<ITravelRequestService, TravelRequestService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 // 2. JWT Authentication Configuration
 

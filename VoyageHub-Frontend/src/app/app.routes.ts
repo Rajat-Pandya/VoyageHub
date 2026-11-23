@@ -11,6 +11,7 @@ import { ExpenseReview } from './finance/expense-review/expense-review';
 import { AnalyticsReports } from './analytics/analytics-reports/analytics-reports';
 import { PolicyConfigComponent } from './admin/policy-config/policy-config';
 import { AuditLogs } from './admin/audit-logs/audit-logs';
+import { EmployeeManagement } from './admin/employee-management/employee-management';
 import { Settings } from './settings/settings';
 import { Support } from './support/support';
 import { roleGuard } from './guards/role.guard';
@@ -33,6 +34,8 @@ export const routes: Routes = [
       { path: 'analytics', component: AnalyticsReports, canActivate: [roleGuard(['Manager', 'Finance', 'Admin'])] },
       { path: 'policies', component: PolicyConfigComponent, canActivate: [roleGuard(['Admin'])] },
       { path: 'audit', component: AuditLogs, canActivate: [roleGuard(['Admin'])] },
+      { path: 'admin/employees', component: EmployeeManagement, canActivate: [roleGuard(['Admin'])] },
+      { path: 'employees', component: EmployeeManagement, canActivate: [roleGuard(['Admin'])] },
       { path: 'settings', component: Settings, canActivate: [roleGuard(['Employee', 'Manager', 'Finance', 'Admin'])] },
       { path: 'support', component: Support, canActivate: [roleGuard(['Employee', 'Manager', 'Finance', 'Admin'])] }
     ]

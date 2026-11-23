@@ -12,4 +12,6 @@ public interface IUserRepository : IRepository<User>
     Task<User?> GetByEmailWithDetailsAsync(string email, CancellationToken cancellationToken = default);
     Task<User?> GetByIdWithDetailsAsync(Guid id, CancellationToken cancellationToken = default);
     Task<List<User>> GetAllPersonasAsync(CancellationToken cancellationToken = default);
+    Task<List<User>> GetAllWithDetailsAsync(CancellationToken cancellationToken = default);
+    Task<List<User>> GetSubordinatesAsync(Guid managerId, CancellationToken cancellationToken = default);
 }

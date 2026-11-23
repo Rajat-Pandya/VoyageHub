@@ -251,6 +251,41 @@ export class VoyageService {
     return this.http.delete(`${this.baseUrl}/policies/${id}`);
   }
 
+  // Employees (Admin Directory & Batch Upload)
+  getEmployees(search?: string, department?: string, role?: string): Observable<EmployeeItem[]> {
+    let params = new HttpParams();
+    if (search) params = params.set('search', search);
+    if (department && department !== 'All') params = params.set('department', department);
+    if (role && role !== 'All') params = params.set('role', role);
+    return this.http.get<EmployeeItem[]>(`${this.baseUrl}/employees`, { params });
+  }
+
+  getEmployee(id: string): Observable<EmployeeItem> {
+    return this.http.get<EmployeeItem>(`${this.baseUrl}/employees/${id}`);
+  }
+
+  createEmployee(payload: CreateEmployeePayload): Observable<EmployeeItem> {
+    return this.http.post<EmployeeItem>(`${this.baseUrl}/employees`, payload);
+  }
+
+  updateEmployee(id: string, payload: UpdateEmployeePayload): Observable<EmployeeItem> {
+    return this.http.put<EmployeeItem>(`${this.baseUrl}/employees/${id}`, payload);
+  }
+
+  deleteEmployee(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/employees/${id}`);
+  }
+
+  batchUploadEmployees(file: File): Observable<BatchUploadResult> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post<BatchUploadResult>(`${this.baseUrl}/employees/batch-upload`, formData);
+  }
+
+  downloadEmployeeCsvTemplate(): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/employees/csv-template`, { responseType: 'blob' });
+  }
+
   // Analytics
   getAnalytics(): Observable<AnalyticsOverview> {
     return this.http.get<AnalyticsOverview>(`${this.baseUrl}/analytics/overview`);
@@ -305,4 +340,47 @@ export interface CreateSupportTicketPayload {
   description: string;
   callbackNumber?: string;
   userId?: string;
+}
+
+export interface EmployeeItem {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  departmentId?: string;
+  departmentName?: string;
+  managerId?: string;
+  managerName?: string;
+  avatarUrl?: string;
+  createdAt: string;
+}
+
+export interface CreateEmployeePayload {
+  name: string;
+  email: string;
+  password?: string;
+  role: string;
+  departmentId?: string;
+  departmentName?: string;
+  managerId?: string;
+  avatarUrl?: string;
+}
+
+export interface UpdateEmployeePayload {
+  name: string;
+  email: string;
+  password?: string;
+  role: string;
+  departmentId?: string;
+  departmentName?: string;
+  managerId?: string;
+  avatarUrl?: string;
+}
+
+export interface BatchUploadResult {
+  totalProcessed: number;
+  successCount: number;
+  failureCount: number;
+  errors: string[];
+  createdEmployees: EmployeeItem[];
 }

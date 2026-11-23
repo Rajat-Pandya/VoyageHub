@@ -1,0 +1,457 @@
+<div class="employee-page">
+  <!-- Top Bar -->
+  <header class="page-top-bar">
+    <div class="header-titles">
+      <h1>Employee Directory &amp; Administration</h1>
+      <p class="subtitle">Manage user profiles, organizational roles, reporting lines, and bulk employee onboarding</p>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="btn-outline" (click)="openBatchModal()">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        Batch CSV Upload
+      </button>
+
+      <button type="button" class="btn-dark" (click)="openAddModal()">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v8M8 12h8"/>
+        </svg>
+        Add Employee
+      </button>
+    </div>
+  </header>
+
+  @if (toastMessage()) {
+    <div class="toast-banner fade-in">
+      <span>{{ toastMessage() }}</span>
+    </div>
+  }
+
+  <!-- Stats / KPI Cards -->
+  <section class="stats-row">
+    <div class="stat-card">
+      <div class="stat-meta">
+        <span class="stat-label">TOTAL EMPLOYEES</span>
+        <span class="stat-value">{{ employees().length }}</span>
+      </div>
+      <div class="stat-icon-box blue">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-meta">
+        <span class="stat-label">DEPARTMENTS</span>
+        <span class="stat-value">{{ departments().length }}</span>
+      </div>
+      <div class="stat-icon-box purple">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/>
+          <path d="M9 22v-4h6v4"/>
+          <path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-meta">
+        <span class="stat-label">MANAGERS &amp; LEADS</span>
+        <span class="stat-value">{{ managerOptions().length }}</span>
+      </div>
+      <div class="stat-icon-box green">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Search Controls -->
+  <section class="section-card">
+    <div class="table-controls-bar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <label for="employeeSearchInput" class="sr-only">Search employees</label>
+        <input
+          id="employeeSearchInput"
+          type="text"
+          placeholder="Search by name, email, or department..."
+          [ngModel]="searchTerm()"
+          (ngModelChange)="searchTerm.set($event)"
+        />
+      </div>
+
+      <div class="filter-group">
+        <label for="deptFilterSelect" class="filter-label">Department:</label>
+        <select
+          id="deptFilterSelect"
+          class="form-select"
+          [ngModel]="selectedDepartment()"
+          (ngModelChange)="selectedDepartment.set($event)"
+        >
+          <option value="All">All Departments</option>
+          @for (dept of departments(); track dept) {
+            <option [value]="dept">{{ dept }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="roleFilterSelect" class="filter-label">Role:</label>
+        <select
+          id="roleFilterSelect"
+          class="form-select"
+          [ngModel]="selectedRole()"
+          (ngModelChange)="selectedRole.set($event)"
+        >
+          <option value="All">All Roles</option>
+          <option value="Employee">Employee</option>
+          <option value="Manager">Manager</option>
+          <option value="Finance">Finance</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Employee Table -->
+    <div class="table-container">
+      <table class="voyage-table">
+        <thead>
+          <tr>
+            <th>EMPLOYEE</th>
+            <th>ROLE</th>
+            <th>DEPARTMENT</th>
+            <th>REPORTING MANAGER</th>
+            <th>ONBOARDED</th>
+            <th class="actions-col">ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (filteredEmployees().length === 0) {
+            <tr>
+              <td colspan="6" class="empty-row">
+                <div class="empty-state">
+                  <p>No employee records matched your search or filter criteria.</p>
+                </div>
+              </td>
+            </tr>
+          }
+
+          @for (emp of filteredEmployees(); track emp.id) {
+            <tr>
+              <td>
+                <div class="employee-cell">
+                  <img
+                    [src]="emp.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=256&q=80'"
+                    alt="{{ emp.name }} avatar"
+                    class="employee-avatar"
+                  />
+                  <div class="employee-meta">
+                    <span class="emp-name">{{ emp.name }}</span>
+                    <span class="emp-email">{{ emp.email }}</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="role-badge" [ngClass]="emp.role.toLowerCase()">
+                  {{ emp.role }}
+                </span>
+              </td>
+              <td>
+                <span class="dept-name">{{ emp.departmentName || 'General' }}</span>
+              </td>
+              <td>
+                @if (emp.managerName) {
+                  <span class="manager-name">{{ emp.managerName }}</span>
+                } @else {
+                  <span class="no-manager">—</span>
+                }
+              </td>
+              <td>
+                <span class="date-cell">{{ emp.createdAt | date:'mediumDate' }}</span>
+              </td>
+              <td class="actions-col">
+                <div class="table-actions-cell">
+                  <button
+                    type="button"
+                    class="edit-icon-btn"
+                    (click)="openEditModal(emp)"
+                    title="Edit Employee"
+                    aria-label="Edit Employee"
+                  >
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    class="delete-icon-btn"
+                    (click)="openDeleteModal(emp)"
+                    title="Delete Employee"
+                    aria-label="Delete Employee"
+                  >
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 6h18"/>
+                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<!-- Modal 1: Add / Edit Employee Modal -->
+@if (showAddEditModal()) {
+  <div class="modal-backdrop fade-in" (click)="closeAddEditModal()" (keydown.escape)="closeAddEditModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ isEditMode() ? 'Edit Employee Details' : 'Add New Corporate Employee' }}</h2>
+        <button type="button" class="close-btn" (click)="closeAddEditModal()" aria-label="Close dialog">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="field-label" for="empFullName">Full Name <span class="required">*</span></label>
+          <input
+            id="empFullName"
+            type="text"
+            class="form-input"
+            placeholder="e.g. Rahul Verma"
+            [(ngModel)]="employeeForm.name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="empEmail">Corporate Email <span class="required">*</span></label>
+          <input
+            id="empEmail"
+            type="email"
+            class="form-input"
+            placeholder="e.g. rahul.verma@voyagehub.in"
+            [(ngModel)]="employeeForm.email"
+          />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="field-label" for="empRole">System Role <span class="required">*</span></label>
+            <select id="empRole" class="form-select" [(ngModel)]="employeeForm.role">
+              <option value="Employee">Employee</option>
+              <option value="Manager">Manager</option>
+              <option value="Finance">Finance</option>
+              <option value="Admin">Admin</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label" for="empDept">Department</label>
+            <input
+              id="empDept"
+              type="text"
+              class="form-input"
+              placeholder="e.g. Engineering, Sales"
+              [(ngModel)]="employeeForm.departmentName"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="empManager">Reporting Manager</label>
+          <select id="empManager" class="form-select" [(ngModel)]="employeeForm.managerId">
+            <option value="">No Direct Manager (Top Level)</option>
+            @for (mgr of managerOptions(); track mgr.id) {
+              <option [value]="mgr.id">{{ mgr.name }} ({{ mgr.role }}) - {{ mgr.departmentName }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="empPassword">
+            {{ isEditMode() ? 'Change Password (leave blank to keep current)' : 'Initial Password' }}
+          </label>
+          <input
+            id="empPassword"
+            type="password"
+            class="form-input"
+            placeholder="{{ isEditMode() ? 'Enter new password...' : 'Default: VoyageHub@2026' }}"
+            [(ngModel)]="employeeForm.password"
+          />
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" (click)="closeAddEditModal()">Cancel</button>
+        <button type="button" class="btn-dark" [disabled]="isSaving()" (click)="saveEmployee()">
+          {{ isSaving() ? 'Saving...' : (isEditMode() ? 'Update Employee' : 'Create Employee') }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Modal 2: Delete Employee Confirmation Modal -->
+@if (showDeleteModal()) {
+  <div class="modal-backdrop fade-in" (click)="closeDeleteModal()" (keydown.escape)="closeDeleteModal()">
+    <div class="modal-card modal-delete" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Confirm Employee Deletion</h2>
+        <button type="button" class="close-btn" (click)="closeDeleteModal()" aria-label="Close dialog">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="delete-warning-box">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="warning-text">
+            <strong>Are you sure you want to delete this employee?</strong>
+            <p>
+              This will permanently remove the account for
+              <strong>{{ employeeToDelete()?.name }}</strong> ({{ employeeToDelete()?.email }}).
+              Any active reporting lines will be automatically decoupled.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" (click)="closeDeleteModal()">Cancel</button>
+        <button type="button" class="btn-danger" [disabled]="isDeleting()" (click)="confirmDelete()">
+          {{ isDeleting() ? 'Deleting...' : 'Delete Employee' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Modal 3: Batch CSV Upload Modal -->
+@if (showBatchModal()) {
+  <div class="modal-backdrop fade-in" (click)="closeBatchModal()" (keydown.escape)="closeBatchModal()">
+    <div class="modal-card modal-batch" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>CSV Batch Employee Onboarding</h2>
+        <button type="button" class="close-btn" (click)="closeBatchModal()" aria-label="Close dialog">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="batch-intro">
+          Upload a standard comma-separated (.csv) file to create multiple employee accounts in a single batch.
+        </p>
+
+        <!-- CSV format guidance banner -->
+        <div class="csv-format-card">
+          <div class="csv-format-header">
+            <span class="format-title">REQUIRED CSV COLUMNS</span>
+            <button type="button" class="template-link-btn" (click)="downloadTemplate()">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download Sample Template
+            </button>
+          </div>
+          <code>Name,Email,Role,Department,Password</code>
+          <p class="format-note">
+            Accepted roles: <em>Employee, Manager, Finance, Admin</em>. Password is optional (defaults to VoyageHub@2026).
+          </p>
+        </div>
+
+        <!-- File Upload Drop Zone -->
+        <div class="file-upload-zone">
+          <label for="csvFileInput" class="file-upload-label">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+              <path d="M12 12v9"/>
+              <path d="m16 16-4-4-4 4"/>
+            </svg>
+            <span class="upload-title">Choose CSV file or drag and drop here</span>
+            <span class="upload-subtitle">Only .csv format supported (up to 5MB)</span>
+          </label>
+          <input
+            id="csvFileInput"
+            type="file"
+            accept=".csv,text/csv"
+            class="file-input-hidden"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+
+        @if (selectedCsvFile()) {
+          <div class="selected-file-badge">
+            <div class="file-info">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              <span class="file-name">{{ selectedCsvFile()?.name }}</span>
+              <span class="file-size">({{ (selectedCsvFile()?.size || 0) / 1024 | number:'1.0-1' }} KB)</span>
+            </div>
+            <button type="button" class="remove-file-btn" (click)="selectedCsvFile.set(null)" aria-label="Remove selected file">✕</button>
+          </div>
+        }
+
+        <!-- Upload Batch Result Summary -->
+        @if (batchResult()) {
+          <div class="batch-results-summary" [class.has-errors]="batchResult()!.failureCount > 0">
+            <div class="result-stats">
+              <span class="badge-success">✓ {{ batchResult()!.successCount }} Added Successfully</span>
+              @if (batchResult()!.failureCount > 0) {
+                <span class="badge-danger">✕ {{ batchResult()!.failureCount }} Failed / Skipped</span>
+              }
+            </div>
+
+            @if (batchResult()!.errors.length > 0) {
+              <div class="batch-errors-list">
+                <span class="errors-heading">Detailed Issues:</span>
+                <ul>
+                  @for (err of batchResult()!.errors; track err) {
+                    <li>{{ err }}</li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" (click)="closeBatchModal()">Close</button>
+        <button
+          type="button"
+          class="btn-dark"
+          [disabled]="!selectedCsvFile() || isUploadingBatch()"
+          (click)="uploadBatchCsv()"
+        >
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          {{ isUploadingBatch() ? 'Importing Employees...' : 'Start Batch Import' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
