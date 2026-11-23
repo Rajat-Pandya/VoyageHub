@@ -80,7 +80,7 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpPost("batch-upload")]
-    public async Task<ActionResult<BatchUploadResultDto>> BatchUpload([FromForm] IFormFile? file, CancellationToken cancellationToken)
+    public async Task<ActionResult<BatchUploadResultDto>> BatchUpload(IFormFile? file, CancellationToken cancellationToken)
     {
         // Support both IFormFile binding and fallback to Request.Form.Files
         var uploadFile = file ?? (Request.HasFormContentType && Request.Form.Files.Count > 0 ? Request.Form.Files[0] : null);

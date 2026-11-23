@@ -84,7 +84,7 @@ public class ExpensesController : ControllerBase
 
     [HttpPost("upload-proof")]
     [Authorize(Roles = "Employee,Manager,Finance,Admin")]
-    public async Task<IActionResult> UploadProof([FromForm] IFormFile? file, CancellationToken cancellationToken)
+    public async Task<IActionResult> UploadProof(IFormFile? file, CancellationToken cancellationToken)
     {
         var uploadFile = file ?? (Request.HasFormContentType && Request.Form.Files.Count > 0 ? Request.Form.Files[0] : null);
 
@@ -130,7 +130,7 @@ public class ExpensesController : ControllerBase
 
     [HttpPost("{id}/proof")]
     [Authorize(Roles = "Employee,Manager,Finance,Admin")]
-    public async Task<IActionResult> AttachProof(Guid id, [FromForm] IFormFile? file, CancellationToken cancellationToken)
+    public async Task<IActionResult> AttachProof(Guid id, IFormFile? file, CancellationToken cancellationToken)
     {
         var uploadFile = file ?? (Request.HasFormContentType && Request.Form.Files.Count > 0 ? Request.Form.Files[0] : null);
 
