@@ -98,7 +98,6 @@
 .voyage-table-wrap {
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   border-radius: var(--radius-card);
   border: var(--card-border);
   background: #ffffff;

@@ -229,7 +229,6 @@
   overflow-x: auto;
   border-radius: var(--radius-md);
   border: 1px solid #f1f5f9;
-  -webkit-overflow-scrolling: touch;
 }
 
 .req-code-cell {
