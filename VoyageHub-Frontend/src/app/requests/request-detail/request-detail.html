@@ -671,5 +671,15 @@
       </div>
     }
 
+  } @else {
+    <div class="detail-empty-card">
+      @if (isLoading()) {
+        <p class="detail-empty-text">Loading trip details...</p>
+      } @else {
+        <h2 class="detail-empty-title">Request Not Found</h2>
+        <p class="detail-empty-subtitle">The requested travel itinerary was not found or has been removed.</p>
+        <a routerLink="/requests" class="btn-primary detail-return-btn">Return to Travel Requests</a>
+      }
+    </div>
   }
 </div>

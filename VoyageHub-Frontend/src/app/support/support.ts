@@ -13,38 +13,6 @@ export interface FAQItem {
   isOpen?: boolean;
 }
 
-const INITIAL_FALLBACK_TICKETS: SupportTicket[] = [
-  {
-    id: 'tk-001',
-    ticketCode: '#TICK-7412',
-    category: 'Flight / Itinerary Rescheduling',
-    priority: 'High',
-    requestCode: '#TR-2048',
-    subject: 'Flight re-routing due to BLR morning fog delay',
-    description: 'Flight 6E-512 was delayed by 3 hours. Need connecting flight to Mumbai rebooked to attend 3 PM client kickoff meeting.',
-    callbackNumber: '+91 98201 44521',
-    status: 'In Progress',
-    assignedAgent: 'Meera Sen (Corporate Travel Desk)',
-    createdAt: '2026-10-28T08:30:00.000Z',
-    updatedAt: '2026-10-28T10:15:00.000Z'
-  },
-  {
-    id: 'tk-002',
-    ticketCode: '#TICK-7280',
-    category: 'Expense Claim & Reimbursement Query',
-    priority: 'Medium',
-    requestCode: '#TR-2041',
-    subject: 'GST invoice breakdown query for hotel stay in New Delhi',
-    description: 'Finance requested itemized food tax breakdown for Taj Palace hotel invoice.',
-    callbackNumber: '+91 98201 44521',
-    status: 'Resolved',
-    assignedAgent: 'Vikram Malhotra (Finance)',
-    resolutionNotes: 'Itemized CGST/SGST invoice accepted. Expense claim reimbursed in batch payout.',
-    createdAt: '2026-10-26T14:10:00.000Z',
-    updatedAt: '2026-10-27T11:00:00.000Z'
-  }
-];
-
 @Component({
   selector: 'app-support',
   imports: [CommonModule, FormsModule, DatePipe],
@@ -61,14 +29,14 @@ export class Support implements OnInit {
   readonly isSubmitting = signal(false);
 
   // Tickets
-  readonly tickets = signal<SupportTicket[]>(INITIAL_FALLBACK_TICKETS);
+  readonly tickets = signal<SupportTicket[]>([]);
   readonly filterStatus = signal<string>('All');
   readonly selectedTicket = signal<SupportTicket | null>(null);
 
   // Form inputs
   ticketCategory = 'Flight / Itinerary Rescheduling';
   ticketPriority: 'Low' | 'Medium' | 'High' | 'Urgent' = 'High';
-  ticketRequestCode = '#TR-2048';
+  ticketRequestCode = '';
   ticketSubject = '';
   ticketDescription = '';
   ticketCallback = '';
@@ -143,25 +111,10 @@ export class Support implements OnInit {
       next: (data) => {
         if (Array.isArray(data)) {
           this.tickets.set(data);
-          if (isPlatformBrowser(this.platformId)) {
-            sessionStorage.setItem('voyage_support_tickets', JSON.stringify(data));
-          }
         }
       },
       error: () => {
-        if (isPlatformBrowser(this.platformId)) {
-          try {
-            const saved = sessionStorage.getItem('voyage_support_tickets');
-            if (saved) {
-              const parsed = JSON.parse(saved);
-              if (Array.isArray(parsed)) {
-                this.tickets.set(parsed);
-              }
-            }
-          } catch {
-            // Keep initial fallback
-          }
-        }
+        this.tickets.set([]);
       }
     });
   }
@@ -207,39 +160,8 @@ export class Support implements OnInit {
         this.activeTab.set('tickets');
       },
       error: () => {
-        // Fallback local persistence if offline
-        const randomNum = Math.floor(1000 + Math.random() * 9000);
-        const newTicket: SupportTicket = {
-          id: `tk-${Date.now()}`,
-          ticketCode: `#TICK-${randomNum}`,
-          category: this.ticketCategory,
-          priority: this.ticketPriority,
-          requestCode: this.ticketRequestCode !== 'None' ? this.ticketRequestCode : undefined,
-          subject: this.ticketSubject.trim(),
-          description: this.ticketDescription.trim(),
-          callbackNumber: this.ticketCallback.trim(),
-          status: 'Open',
-          assignedAgent: 'Meera Sen (Corporate Travel Desk)',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
-
-        const updated = [newTicket, ...this.tickets()];
-        this.tickets.set(updated);
-
-        if (isPlatformBrowser(this.platformId)) {
-          try {
-            sessionStorage.setItem('voyage_support_tickets', JSON.stringify(updated));
-          } catch {
-            // Safe fallback
-          }
-        }
-
         this.isSubmitting.set(false);
-        this.ticketSubject = '';
-        this.ticketDescription = '';
-        this.showToast(`Support Ticket ${newTicket.ticketCode} opened! Travel desk alerted.`);
-        this.activeTab.set('tickets');
+        this.showToast('Failed to submit ticket. Please check your connection and try again.');
       }
     });
   }

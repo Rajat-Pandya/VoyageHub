@@ -19,26 +19,26 @@ export class NewRequest {
   currentStep = signal<1 | 2 | 3>(1);
   isSubmitting = signal(false);
 
-  // Form Fields (Indian Corporate Standards)
-  tripPurpose = 'Client Quarterly Review & Tech Summit Bengaluru';
-  destinationCity = 'Bengaluru, Karnataka';
-  startDate = '2026-10-20';
-  endDate = '2026-10-24';
-  estimatedBudget = 42500;
+  // Form Fields
+  tripPurpose = '';
+  destinationCity = '';
+  startDate = '';
+  endDate = '';
+  estimatedBudget = 0;
   travelClass = 'Economy (Standard)';
-  detailedJustification = 'Annual client review sessions with Infosys & Wipro engineering leadership.';
+  detailedJustification = '';
 
   // Segments (Flight / Train)
-  flightCarrier = 'IndiGo 6E-5324';
-  flightOrigin = 'BOM (Mumbai)';
-  flightDestination = 'BLR (Bengaluru)';
-  flightDeparture = '2026-10-20T08:15';
-  flightCost = 9800;
+  flightCarrier = '';
+  flightOrigin = '';
+  flightDestination = '';
+  flightDeparture = '';
+  flightCost = 0;
 
   // Stay (Hotel)
-  hotelName = 'The Leela Palace Bengaluru';
-  hotelNights = 4;
-  hotelCost = 28000;
+  hotelName = '';
+  hotelNights = 1;
+  hotelCost = 0;
 
   // Policy threshold check (e.g. standard domestic departmental limit is ₹35,000)
   get isPolicyExceeded(): boolean {

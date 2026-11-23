@@ -39,30 +39,30 @@ export class RequestDetail implements OnInit {
   // New Segment Model
   segmentForm = {
     mode: 'Flight',
-    carrier: 'IndiGo 6E-5324',
-    origin: 'BOM',
-    destination: 'BLR',
-    departureTime: '2026-10-20T08:15',
-    cost: 9800.00,
-    confirmationNumber: '#6E-90234'
+    carrier: '',
+    origin: '',
+    destination: '',
+    departureTime: '',
+    cost: 0,
+    confirmationNumber: ''
   };
 
   // New Stay Model
   stayForm = {
-    hotelName: 'The Leela Palace Bengaluru',
-    checkIn: '2026-10-20',
-    checkOut: '2026-10-24',
-    nights: 4,
-    cost: 28500.00,
-    confirmationNumber: '#LP-88902'
+    hotelName: '',
+    checkIn: '',
+    checkOut: '',
+    nights: 1,
+    cost: 0,
+    confirmationNumber: ''
   };
 
   // New Expense Model
   expenseForm = {
     category: 'Meals',
-    amount: 3850.00,
-    description: 'Client welcome dinner at Karavalli with GST bill',
-    proofPath: 'gst_tax_invoice_karavalli.pdf'
+    amount: 0,
+    description: '',
+    proofPath: ''
   };
 
   ngOnInit(): void {
@@ -70,7 +70,8 @@ export class RequestDetail implements OnInit {
     if (id) {
       this.loadDetail(id);
     } else {
-      this.loadMockOrFallback();
+      this.isLoading.set(false);
+      this.detail.set(null);
     }
   }
 
@@ -82,100 +83,10 @@ export class RequestDetail implements OnInit {
         this.isLoading.set(false);
       },
       error: () => {
-        this.loadMockOrFallback();
+        this.detail.set(null);
+        this.isLoading.set(false);
       }
     });
-  }
-
-  private loadMockOrFallback(): void {
-    // Indian corporate trip fallback (BOM -> BLR)
-    this.detail.set({
-      id: 'AA010101-0000-0000-0000-000000000001',
-      requestCode: '#TR-2048',
-      employeeId: 'A1111111-AAAA-AAAA-AAAA-AAAAAAAAAAAA',
-      employeeName: 'Rohan Sharma',
-      employeeEmail: 'rohan.sharma@voyagehub.in',
-      departmentName: 'Sales & Business Dev (Mumbai HQ)',
-      destination: 'Bengaluru, Karnataka',
-      purpose: 'Annual Strategic Planning & Client Leadership Summit',
-      startDate: '2026-10-20',
-      endDate: '2026-10-24',
-      tripDurationDays: 5,
-      tripDurationNights: 4,
-      estimatedBudget: 46500.00,
-      travelClass: 'Economy (Standard)',
-      status: 'Manager Review',
-      policyCompliance: 'Flagged',
-      submittedDate: '2026-10-12T10:00:00',
-      primaryContact: 'VoyageHub India Corporate Desk (+91-80-4000-8800)',
-      segments: [
-        {
-          id: '1',
-          mode: 'Flight',
-          carrier: 'IndiGo 6E-5324',
-          origin: 'BOM (Mumbai)',
-          destination: 'BLR (Bengaluru)',
-          departureTime: '2026-10-20T08:15:00',
-          arrivalTime: '2026-10-20T10:05:00',
-          confirmationNumber: '#6E-90234',
-          cost: 9800.00
-        }
-      ],
-      stays: [
-        {
-          id: '1',
-          hotelName: 'The Leela Palace Bengaluru',
-          checkIn: '2026-10-20',
-          checkOut: '2026-10-24',
-          nights: 4,
-          confirmationNumber: '#LP-88902',
-          cost: 28500.00
-        }
-      ],
-      expenses: [
-        {
-          id: '1',
-          requestId: 'AA010101-0000-0000-0000-000000000001',
-          requestCode: '#TR-2048',
-          employeeName: 'Rohan Sharma',
-          departmentName: 'Sales & Business Dev (Mumbai HQ)',
-          tripPurpose: 'Client Leadership Summit',
-          category: 'Airfare',
-          amount: 9800.00,
-          proofPath: 'indigo_gst_tax_invoice.pdf',
-          status: 'Pending',
-          submittedAt: '2026-10-21T09:00:00'
-        },
-        {
-          id: '2',
-          requestId: 'AA010101-0000-0000-0000-000000000001',
-          requestCode: '#TR-2048',
-          employeeName: 'Rohan Sharma',
-          departmentName: 'Sales & Business Dev (Mumbai HQ)',
-          tripPurpose: 'Client Leadership Summit',
-          category: 'Meals',
-          amount: 3850.00,
-          proofPath: 'karavalli_dinner_gst_bill.pdf',
-          status: 'Pending',
-          submittedAt: '2026-10-22T21:30:00'
-        }
-      ],
-      approvalHistory: [
-        {
-          id: '1',
-          level: 'Manager',
-          approverName: 'Priya Nair',
-          status: 'Pending'
-        },
-        {
-          id: '2',
-          level: 'Finance',
-          approverName: 'Vikram Malhotra',
-          status: 'Pending'
-        }
-      ]
-    });
-    this.isLoading.set(false);
   }
 
   setTab(tab: 'Itinerary' | 'Expenses' | 'Approval History'): void {
@@ -205,9 +116,7 @@ export class RequestDetail implements OnInit {
         this.loadDetail(d.id);
       },
       error: () => {
-        // Optimistic UI fallback
-        d.status = 'Manager Review';
-        this.detail.set({ ...d });
+        this.loadDetail(d.id);
       }
     });
   }
@@ -228,18 +137,6 @@ export class RequestDetail implements OnInit {
         this.loadDetail(d.id);
       },
       error: () => {
-        // Optimistic update
-        d.segments.push({
-          id: Date.now().toString(),
-          mode: this.segmentForm.mode,
-          carrier: this.segmentForm.carrier,
-          origin: this.segmentForm.origin,
-          destination: this.segmentForm.destination,
-          departureTime: this.segmentForm.departureTime,
-          cost: this.segmentForm.cost,
-          confirmationNumber: this.segmentForm.confirmationNumber
-        });
-        this.detail.set({ ...d });
         this.closeSegmentModal();
       }
     });
@@ -261,17 +158,6 @@ export class RequestDetail implements OnInit {
         this.loadDetail(d.id);
       },
       error: () => {
-        // Optimistic update
-        d.stays.push({
-          id: Date.now().toString(),
-          hotelName: this.stayForm.hotelName,
-          checkIn: this.stayForm.checkIn,
-          checkOut: this.stayForm.checkOut,
-          nights: this.stayForm.nights,
-          cost: this.stayForm.cost,
-          confirmationNumber: this.stayForm.confirmationNumber
-        });
-        this.detail.set({ ...d });
         this.closeStayModal();
       }
     });
@@ -320,12 +206,11 @@ export class RequestDetail implements OnInit {
         },
         error: () => {
           this.isUploadingProof.set(false);
-          // Fallback to local name
-          this.executeExpensePost(d, file.name);
+          alert('Failed to upload proof file. Please try again.');
         }
       });
     } else {
-      this.executeExpensePost(d, this.expenseForm.proofPath || 'receipt.pdf');
+      this.executeExpensePost(d, this.expenseForm.proofPath || '');
     }
   }
 
@@ -343,22 +228,7 @@ export class RequestDetail implements OnInit {
         this.activeTab.set('Expenses');
       },
       error: () => {
-        d.expenses.push({
-          id: Date.now().toString(),
-          requestId: d.id,
-          requestCode: d.requestCode,
-          employeeName: d.employeeName,
-          departmentName: d.departmentName,
-          tripPurpose: d.purpose,
-          category: this.expenseForm.category,
-          amount: this.expenseForm.amount,
-          proofPath: proofPath,
-          status: 'Pending',
-          submittedAt: new Date().toISOString()
-        });
-        this.detail.set({ ...d });
         this.closeExpenseModal();
-        this.activeTab.set('Expenses');
       }
     });
   }
@@ -401,14 +271,13 @@ export class RequestDetail implements OnInit {
 
     this.isUploadingProof.set(true);
     this.voyageService.attachExpenseProof(expense.id, file).subscribe({
-      next: (res) => {
+      next: () => {
         this.isUploadingProof.set(false);
         this.closeAttachProofModal();
         this.loadDetail(d.id);
       },
       error: () => {
         this.isUploadingProof.set(false);
-        expense.proofPath = file.name;
         this.closeAttachProofModal();
       }
     });
@@ -436,8 +305,7 @@ export class RequestDetail implements OnInit {
           this.loadDetail(d.id);
         },
         error: () => {
-          d.status = 'Completed';
-          this.detail.set({ ...d });
+          this.loadDetail(d.id);
         }
       });
     }

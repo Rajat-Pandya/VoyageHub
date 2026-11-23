@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 
-/* Header */
+
 .detail-header {
   display: flex;
   justify-content: space-between;
@@ -65,7 +65,7 @@
   align-items: center;
 }
 
-/* 4-Step Progress Tracker matching Page 5 */
+
 .workflow-stepper-card {
   display: flex;
   align-items: center;
@@ -146,7 +146,7 @@
   background: linear-gradient(90deg, #10b981, #34d399);
 }
 
-/* Tabs */
+
 .tabs-nav {
   display: flex;
   gap: 28px;
@@ -174,7 +174,7 @@
   border-bottom-color: #4f46e5;
 }
 
-/* Panel Header */
+
 .panel-header-row {
   display: flex;
   justify-content: space-between;
@@ -204,7 +204,7 @@
   text-decoration: underline;
 }
 
-/* Segments Stack */
+
 .segments-stack {
   display: flex;
   flex-direction: column;
@@ -321,7 +321,7 @@
   background: #fee2e2;
 }
 
-/* Dark Summary Banner matching Page 5 */
+
 .dark-summary-banner {
   background: linear-gradient(135deg, #090d16 0%, #151e33 100%);
   color: #ffffff;
@@ -358,7 +358,7 @@
   color: #cbd5e1;
 }
 
-/* Timeline */
+
 .approval-timeline {
   display: flex;
   flex-direction: column;
@@ -409,7 +409,7 @@
   margin-top: 2px;
 }
 
-/* Banners */
+
 .rejection-banner {
   background: #fef2f2;
   border: 1px solid #fecaca;
@@ -464,7 +464,7 @@
   flex-shrink: 0;
 }
 
-/* Action buttons */
+
 .btn-approve-action {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
   color: #ffffff !important;
@@ -516,7 +516,7 @@
   gap: 8px;
 }
 
-/* Modals */
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -591,7 +591,7 @@
   gap: 12px;
 }
 
-/* Proof & Receipt Styles */
+
 .expense-proof-actions {
   display: flex;
   align-items: center;
@@ -686,7 +686,7 @@
   color: #dc2626;
 }
 
-/* Proof Viewer Modal */
+
 .proof-viewer-modal {
   max-width: 720px;
 }
@@ -799,7 +799,7 @@
   line-height: 1.5;
 }
 
-/* Receipt invoice mock inside request-detail */
+
 .receipt-invoice-mock {
   width: 100%;
   background: #fcfcfc;
@@ -847,4 +847,38 @@
   font-weight: 700;
   text-align: center;
   letter-spacing: 0.05em;
+}
+
+.detail-empty-card {
+  padding: 64px 32px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-sm);
+  margin-top: 24px;
+}
+
+.detail-empty-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.detail-empty-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.detail-empty-text {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.detail-return-btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
 }

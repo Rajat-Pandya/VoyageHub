@@ -13,7 +13,7 @@ export class ExpenseReview implements OnInit {
   private readonly voyageService = inject(VoyageService);
 
   readonly claims = signal<ExpenseItem[]>([]);
-  readonly totalPending = signal<number>(8920.45);
+  readonly totalPending = signal<number>(0);
   readonly isLoading = signal(true);
 
   selectedCategory = 'All Categories';
@@ -30,11 +30,15 @@ export class ExpenseReview implements OnInit {
     this.isLoading.set(true);
     this.voyageService.getPendingExpenses(this.selectedCategory, this.highPriorityOnly).subscribe({
       next: (res) => {
-        this.claims.set(res.pendingClaims);
-        this.totalPending.set(res.totalPendingAmount);
+        this.claims.set(res?.pendingClaims || []);
+        this.totalPending.set(res?.totalPendingAmount || 0);
         this.isLoading.set(false);
       },
-      error: () => this.isLoading.set(false)
+      error: () => {
+        this.claims.set([]);
+        this.totalPending.set(0);
+        this.isLoading.set(false);
+      }
     });
   }
 

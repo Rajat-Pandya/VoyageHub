@@ -88,20 +88,8 @@ export class PolicyConfigComponent implements OnInit {
         this.loadPolicies();
         this.showToast(`Policy for ${this.newPolicy.departmentName} created successfully!`);
       },
-      error: (err) => {
-        // Fallback optimistic
-        const optimistic: PolicyConfig = {
-          id: Date.now().toString(),
-          departmentId: Date.now().toString(),
-          departmentName: this.newPolicy.departmentName,
-          intlBudgetLimit: this.newPolicy.intlBudgetLimit,
-          domesticLimit: this.newPolicy.domesticLimit,
-          allowedClass: this.newPolicy.allowedClass,
-          hardEnforcement: this.newPolicy.hardEnforcement
-        };
-        this.policies.update(list => [...list, optimistic]);
-        this.closeAddPolicy();
-        this.showToast(`Policy for ${this.newPolicy.departmentName} added.`);
+      error: () => {
+        this.showToast('Failed to create policy. Please try again.');
       }
     });
   }
@@ -139,8 +127,7 @@ export class PolicyConfigComponent implements OnInit {
           this.showToast(`Policy for ${p.departmentName} deleted.`);
         },
         error: () => {
-          this.policies.update(list => list.filter(item => item.id !== p.id));
-          this.showToast(`Policy for ${p.departmentName} removed.`);
+          this.showToast('Failed to delete policy.');
         }
       });
     }
