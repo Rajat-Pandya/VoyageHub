@@ -86,8 +86,8 @@
 
       <div class="form-grid">
         <div class="form-group">
-          <label class="field-label">Issue Category <span class="required">*</span></label>
-          <select [(ngModel)]="ticketCategory" class="form-select">
+          <label class="field-label" for="supportTicketCategory">Issue Category <span class="required">*</span></label>
+          <select id="supportTicketCategory" [(ngModel)]="ticketCategory" class="form-select">
             <option value="Flight / Itinerary Rescheduling">Flight / Itinerary Rescheduling</option>
             <option value="Hotel Check-in &amp; Accommodation">Hotel Check-in &amp; Accommodation</option>
             <option value="Expense Claim &amp; Reimbursement Query">Expense Claim &amp; Reimbursement Query</option>
@@ -97,8 +97,8 @@
         </div>
 
         <div class="form-group">
-          <label class="field-label">Priority Level <span class="required">*</span></label>
-          <select [(ngModel)]="ticketPriority" class="form-select">
+          <label class="field-label" for="supportTicketPriority">Priority Level <span class="required">*</span></label>
+          <select id="supportTicketPriority" [(ngModel)]="ticketPriority" class="form-select">
             <option value="Low">Low (General Inquiry - 24 hr response)</option>
             <option value="Medium">Medium (Standard Request - 8 hr response)</option>
             <option value="High">High (Impending Travel - 2 hr response)</option>
@@ -107,8 +107,8 @@
         </div>
 
         <div class="form-group">
-          <label class="field-label">Related Travel Request Code</label>
-          <select [(ngModel)]="ticketRequestCode" class="form-select">
+          <label class="field-label" for="supportTicketRequestCode">Related Travel Request Code</label>
+          <select id="supportTicketRequestCode" [(ngModel)]="ticketRequestCode" class="form-select">
             <option value="#TR-2048">#TR-2048 (Bengaluru - Client Review &amp; Tech Summit)</option>
             <option value="#TR-2041">#TR-2041 (New Delhi - Govt Partner Alignment)</option>
             <option value="#TR-2035">#TR-2035 (Hyderabad - HITEC City Workshop)</option>
@@ -118,18 +118,18 @@
         </div>
 
         <div class="form-group">
-          <label class="field-label">Callback Phone Number <span class="required">*</span></label>
-          <input type="tel" [(ngModel)]="ticketCallback" class="form-input" placeholder="+91 98201 44521" />
+          <label class="field-label" for="supportTicketCallback">Callback Phone Number <span class="required">*</span></label>
+          <input id="supportTicketCallback" type="tel" [(ngModel)]="ticketCallback" class="form-input" placeholder="+91 98201 44521" />
         </div>
 
         <div class="form-group full-width">
-          <label class="field-label">Ticket Subject <span class="required">*</span></label>
-          <input type="text" [(ngModel)]="ticketSubject" class="form-input" placeholder="e.g. Flight rescheduling due to client meeting postponement" />
+          <label class="field-label" for="supportTicketSubject">Ticket Subject <span class="required">*</span></label>
+          <input id="supportTicketSubject" type="text" [(ngModel)]="ticketSubject" class="form-input" placeholder="e.g. Flight rescheduling due to client meeting postponement" />
         </div>
 
         <div class="form-group full-width">
-          <label class="field-label">Detailed Description <span class="required">*</span></label>
-          <textarea rows="4" [(ngModel)]="ticketDescription" class="form-textarea" placeholder="Please provide specific flight numbers, dates, hotel confirmation codes, or tax invoice reference details..."></textarea>
+          <label class="field-label" for="supportTicketDescription">Detailed Description <span class="required">*</span></label>
+          <textarea id="supportTicketDescription" rows="4" [(ngModel)]="ticketDescription" class="form-textarea" placeholder="Please provide specific flight numbers, dates, hotel confirmation codes, or tax invoice reference details..."></textarea>
         </div>
       </div>
 

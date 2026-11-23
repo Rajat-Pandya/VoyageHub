@@ -70,7 +70,7 @@
     <div class="avatar-selection-section">
       <img [src]="avatarUrl" alt="User Avatar" class="current-avatar-preview" />
       <div class="avatar-controls">
-        <label class="field-label">Avatar Photo</label>
+        <label class="field-label" for="customAvatarInput">Avatar Photo</label>
         <div class="preset-avatars-row">
           @for (av of presetAvatars; track av) {
           <img [src]="av" alt="Avatar preset" class="preset-avatar-thumb" [class.selected]="avatarUrl === av"
@@ -78,42 +78,42 @@
           }
         </div>
         <div class="custom-avatar-input">
-          <input type="text" [(ngModel)]="avatarUrl" placeholder="Or enter image URL..." class="form-input" />
+          <input id="customAvatarInput" type="text" [(ngModel)]="avatarUrl" placeholder="Or enter image URL..." class="form-input" />
         </div>
       </div>
     </div>
 
     <div class="form-grid">
       <div class="form-group">
-        <label class="field-label">Full Name <span class="required">*</span></label>
-        <input type="text" [(ngModel)]="fullname" class="form-input" placeholder="e.g. Rohan Sharma" />
+        <label class="field-label" for="profileFullName">Full Name <span class="required">*</span></label>
+        <input id="profileFullName" type="text" [(ngModel)]="fullname" class="form-input" placeholder="e.g. Rohan Sharma" />
       </div>
 
       <div class="form-group">
-        <label class="field-label">Work Email (Corporate)</label>
-        <input type="email" [value]="email" readonly class="form-input readonly-input"
+        <label class="field-label" for="profileWorkEmail">Work Email (Corporate)</label>
+        <input id="profileWorkEmail" type="email" [value]="email" readonly class="form-input readonly-input"
           title="Corporate email managed by IT" />
         <span class="field-hint">Managed via Corporate Active Directory</span>
       </div>
 
       <div class="form-group">
-        <label class="field-label">Department</label>
-        <input title="departmentName" type="text" [value]="departmentName" readonly class="form-input readonly-input" />
+        <label class="field-label" for="profileDepartment">Department</label>
+        <input id="profileDepartment" title="departmentName" type="text" [value]="departmentName" readonly class="form-input readonly-input" />
       </div>
 
       <div class="form-group">
-        <label class="field-label">Employee ID Code</label>
-        <input type="text" [(ngModel)]="employeeCode" class="form-input" placeholder="e.g. VH-EMP-1042" />
+        <label class="field-label" for="profileEmployeeCode">Employee ID Code</label>
+        <input id="profileEmployeeCode" type="text" [(ngModel)]="employeeCode" class="form-input" placeholder="e.g. VH-EMP-1042" />
       </div>
 
       <div class="form-group">
-        <label class="field-label">Contact Phone / WhatsApp</label>
-        <input type="tel" [(ngModel)]="phoneNumber" class="form-input" placeholder="+91 98201 44521" />
+        <label class="field-label" for="profilePhoneNumber">Contact Phone / WhatsApp</label>
+        <input id="profilePhoneNumber" type="tel" [(ngModel)]="phoneNumber" class="form-input" placeholder="+91 98201 44521" />
       </div>
 
       <div class="form-group">
-        <label class="field-label">Base City / Home Airport</label>
-        <input type="text" [(ngModel)]="homeCity" class="form-input" placeholder="e.g. Mumbai (BOM)" />
+        <label class="field-label" for="profileHomeCity">Base City / Home Airport</label>
+        <input id="profileHomeCity" type="text" [(ngModel)]="homeCity" class="form-input" placeholder="e.g. Mumbai (BOM)" />
       </div>
     </div>
 
@@ -142,8 +142,8 @@
 
     <div class="form-grid">
       <div class="form-group">
-        <label class="field-label">Flight Seat Preference</label>
-        <select title="seatPreference" [(ngModel)]="seatPreference" class="form-select">
+        <label class="field-label" for="travelSeatPref">Flight Seat Preference</label>
+        <select id="travelSeatPref" title="seatPreference" [(ngModel)]="seatPreference" class="form-select">
           <option value="Aisle">Aisle Seat</option>
           <option value="Window">Window Seat</option>
           <option value="Any">No Preference / Any</option>
@@ -152,8 +152,8 @@
       </div>
 
       <div class="form-group">
-        <label class="field-label">Dietary &amp; In-Flight Meal</label>
-        <select title="mealPreference" class="form-select">
+        <label class="field-label" for="travelMealPref">Dietary &amp; In-Flight Meal</label>
+        <select id="travelMealPref" title="mealPreference" class="form-select">
           <option value="Vegetarian (Hindu)">Vegetarian (Hindu / Asian)</option>
           <option value="Vegetarian (Jain)">Vegetarian (Jain)</option>
           <option value="Vegan">Vegan (Strictly Plant-Based)</option>
@@ -164,8 +164,8 @@
       </div>
 
       <div class="form-group">
-        <label class="field-label">Hotel Accommodation Preference</label>
-        <select title="roomPreference" class="form-select">
+        <label class="field-label" for="travelRoomPref">Hotel Accommodation Preference</label>
+        <select id="travelRoomPref" title="roomPreference" class="form-select">
           <option value="High Floor, Non-Smoking">High Floor, Non-Smoking</option>
           <option value="Quiet Floor, King Bed">Quiet Floor, King Bed</option>
           <option value="Twin Beds, Work Desk">Twin Beds, Dedicated Work Desk</option>
@@ -174,15 +174,15 @@
       </div>
 
       <div class="form-group">
-        <label class="field-label">Airline Frequent Flyer Number</label>
-        <input type="text" [(ngModel)]="airlineLoyalty" class="form-input"
+        <label class="field-label" for="travelAirlineLoyalty">Airline Frequent Flyer Number</label>
+        <input id="travelAirlineLoyalty" type="text" [(ngModel)]="airlineLoyalty" class="form-input"
           placeholder="e.g. Air India Flying Returns - AI-982144" />
         <span class="field-hint">Miles accrued directly to your personal account</span>
       </div>
 
       <div class="form-group">
-        <label class="field-label">Hotel Loyalty Membership</label>
-        <input type="text" [(ngModel)]="hotelLoyalty" class="form-input"
+        <label class="field-label" for="travelHotelLoyalty">Hotel Loyalty Membership</label>
+        <input id="travelHotelLoyalty" type="text" [(ngModel)]="hotelLoyalty" class="form-input"
           placeholder="e.g. Taj InnerCircle - TIC-40819" />
         <span class="field-hint">Eligible for corporate room upgrades &amp; breakfast</span>
       </div>
@@ -218,8 +218,8 @@
           <div class="toggle-desc">Receive email and browser notifications when a trip request advances through Manager
             or Finance review</div>
         </div>
-        <label class="switch">
-          <input title="checkbox" [(ngModel)]="notifyTripStatus" />
+        <label class="switch" for="notifyTripStatus" aria-label="Travel Request Status Updates">
+          <input id="notifyTripStatus" type="checkbox" title="checkbox" [(ngModel)]="notifyTripStatus" />
           <span class="slider"></span>
         </label>
       </div>
@@ -230,8 +230,8 @@
           <div class="toggle-desc">Instant notification whenever Finance issues batch payouts or reimburses individual
             expense claims</div>
         </div>
-        <label class="switch">
-          <input title="checkbox" type="checkbox" [(ngModel)]="notifyExpensePayout" />
+        <label class="switch" for="notifyExpensePayout" aria-label="Expense Reimbursement Alerts">
+          <input id="notifyExpensePayout" title="checkbox" type="checkbox" [(ngModel)]="notifyExpensePayout" />
           <span class="slider"></span>
         </label>
       </div>
@@ -242,8 +242,8 @@
           <div class="toggle-desc">Daily morning summary email listing pending team requests requiring managerial action
           </div>
         </div>
-        <label class="switch">
-          <input title="checkbox" [(ngModel)]="notifyDailyDigest" />
+        <label class="switch" for="notifyDailyDigest" aria-label="Manager Approval Queue Digest">
+          <input id="notifyDailyDigest" type="checkbox" title="checkbox" [(ngModel)]="notifyDailyDigest" />
           <span class="slider"></span>
         </label>
       </div>
@@ -254,8 +254,8 @@
           <div class="toggle-desc">Critical alerts for flight delays, gate changes, or booking cancellations dispatched
             directly to mobile</div>
         </div>
-        <label class="switch">
-          <input title="checkbox" type="checkbox" [(ngModel)]="notifySmsAlerts" />
+        <label class="switch" for="notifySmsAlerts" aria-label="Urgent Travel Disruption SMS / WhatsApp">
+          <input id="notifySmsAlerts" title="checkbox" type="checkbox" [(ngModel)]="notifySmsAlerts" />
           <span class="slider"></span>
         </label>
       </div>
@@ -299,18 +299,18 @@
 
       <div class="password-form">
         <div class="form-group">
-          <label class="field-label">Current Password <span class="required">*</span></label>
-          <input type="password" [(ngModel)]="currentPassword" class="form-input" placeholder="••••••••" />
+          <label class="field-label" for="securityCurrentPassword">Current Password <span class="required">*</span></label>
+          <input id="securityCurrentPassword" type="password" [(ngModel)]="currentPassword" class="form-input" placeholder="••••••••" />
         </div>
 
         <div class="form-group">
-          <label class="field-label">New Password <span class="required">*</span></label>
-          <input type="password" [(ngModel)]="newPassword" class="form-input" placeholder="Min. 6 characters" />
+          <label class="field-label" for="securityNewPassword">New Password <span class="required">*</span></label>
+          <input id="securityNewPassword" type="password" [(ngModel)]="newPassword" class="form-input" placeholder="Min. 6 characters" />
         </div>
 
         <div class="form-group">
-          <label class="field-label">Confirm New Password <span class="required">*</span></label>
-          <input type="password" [(ngModel)]="confirmPassword" class="form-input" placeholder="Re-type new password" />
+          <label class="field-label" for="securityConfirmPassword">Confirm New Password <span class="required">*</span></label>
+          <input id="securityConfirmPassword" type="password" [(ngModel)]="confirmPassword" class="form-input" placeholder="Re-type new password" />
         </div>
 
         <button type="button" class="btn-dark" [disabled]="isSaving()" (click)="changePassword()">
