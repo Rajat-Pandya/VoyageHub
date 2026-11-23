@@ -206,6 +206,17 @@
   font-family: var(--font-mono);
 }
 
+.table-empty-cell {
+  text-align: center;
+  color: #94a3b8;
+  padding: 24px;
+}
+
+.legend-empty-text {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
 @media (max-width: 900px) {
   .split-grid {
     grid-template-columns: 1fr;
