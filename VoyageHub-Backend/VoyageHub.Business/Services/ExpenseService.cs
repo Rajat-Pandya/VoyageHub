@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using VoyageHub.Business.Dtos;
@@ -75,7 +76,7 @@ public class ExpenseService : IExpenseService
             RequestId = dto.RequestId,
             Category = string.IsNullOrWhiteSpace(dto.Category) ? "Airfare" : dto.Category,
             Amount = dto.Amount,
-            ProofPath = dto.ProofPath ?? $"receipt_{dto.Category.ToLower()}_{new Random().Next(100, 999)}.pdf",
+            ProofPath = dto.ProofPath ?? $"receipt_{dto.Category.ToLower()}_{RandomNumberGenerator.GetInt32(100, 999)}.pdf",
             Status = "Pending",
             SubmittedAt = DateTime.UtcNow
         };
