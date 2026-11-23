@@ -129,19 +129,6 @@
             Log in with Okta
           </button>
         </div>
-
-        <!-- Quick Demo Accounts -->
-        <div class="demo-personas-section">
-          <div class="demo-title">DEMO ACCOUNTS (QUICK LOGIN)</div>
-          <div class="demo-chips">
-            @for (p of personas; track p.email) {
-            <button type="button" class="persona-chip" (click)="quickSelect(p)">
-              <img [src]="p.avatarUrl" alt="Avatar" />
-              <span>{{ p.fullname }} ({{ p.role }})</span>
-            </button>
-            }
-          </div>
-        </div>
         }
 
         @if (viewMode() === 'forgot') {

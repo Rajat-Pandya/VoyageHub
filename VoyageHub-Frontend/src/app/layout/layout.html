@@ -11,7 +11,7 @@
         <span class="brand-name">VoyageHub</span>
       </a>
       <span class="role-pill" [class.pill-employee]="authService.isEmployee()" [class.pill-manager]="authService.isManager()" [class.pill-finance]="authService.isFinance()" [class.pill-admin]="authService.isAdmin()">
-        {{ authService.currentUser().role }}
+        {{ authService.currentUser()?.role || 'Employee' }}
       </span>
     </div>
 
@@ -245,11 +245,11 @@
     <!-- User Profile & Sign Out in Sidebar Footer -->
     <div class="sidebar-footer">
       <div class="user-profile-badge">
-        <img [src]="authService.currentUser().avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120&q=80'" 
+        <img [src]="authService.currentUser()?.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120&q=80'" 
              alt="Avatar" class="user-avatar" />
         <div class="user-details">
-          <div class="user-name">{{ authService.currentUser().fullname || 'User' }}</div>
-          <div class="user-role-label">{{ authService.currentUser().role || 'Employee' }} @if (authService.currentUser().departmentName) { &bull; {{ authService.currentUser().departmentName }} }</div>
+          <div class="user-name">{{ authService.currentUser()?.fullname || 'User' }}</div>
+          <div class="user-role-label">{{ authService.currentUser()?.role || 'Employee' }} @if (authService.currentUser()?.departmentName) { &bull; {{ authService.currentUser()?.departmentName }} }</div>
         </div>
         <button type="button" class="btn-logout" (click)="logout()" title="Sign Out" aria-label="Sign Out">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">

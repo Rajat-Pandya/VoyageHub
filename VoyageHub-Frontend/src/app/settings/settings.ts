@@ -62,7 +62,7 @@ export class Settings implements OnInit {
     this.syncFromUser(this.authService.currentUser());
   }
 
-  syncFromUser(user: UserProfile): void {
+  syncFromUser(user: UserProfile | null): void {
     if (!user) return;
     this.fullname = user.fullname || '';
     this.email = user.email || '';

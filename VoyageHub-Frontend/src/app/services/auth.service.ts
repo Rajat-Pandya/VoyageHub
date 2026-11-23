@@ -135,11 +135,11 @@ export class AuthService {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly apiUrl = `${environment.apiUrl}/auth`;
 
-  // Default to Rohan Sharma so the application is instantly ready and populated
-  readonly currentUser = signal<UserProfile>(PRESET_PERSONAS[0]);
+  // Active user session signal (null initially until authenticated via backend)
+  readonly currentUser = signal<UserProfile | null>(null);
   readonly isAuthenticated = computed(() => this.currentUser() !== null);
-  readonly userRole = computed(() => this.currentUser()?.role || 'Employee');
-  readonly isEmployee = computed(() => (this.currentUser()?.role || 'Employee') === 'Employee');
+  readonly userRole = computed(() => this.currentUser()?.role || '');
+  readonly isEmployee = computed(() => this.currentUser()?.role === 'Employee');
   readonly isManager = computed(() => this.currentUser()?.role === 'Manager');
   readonly isFinance = computed(() => this.currentUser()?.role === 'Finance');
   readonly isAdmin = computed(() => this.currentUser()?.role === 'Admin');
@@ -169,22 +169,6 @@ export class AuthService {
     }
   }
 
-  switchPersona(persona: UserProfile): void {
-    this.loginUser(persona.email, DEMO_PASSWORD).subscribe({
-      next: (res) => {
-        if (res.user) {
-          this.currentUser.set(res.user);
-        }
-      },
-      error: () => {
-        this.currentUser.set(persona);
-        if (isPlatformBrowser(this.platformId)) {
-          sessionStorage.setItem('voyage_user', JSON.stringify(persona));
-        }
-      }
-    });
-  }
-
   loginUser(email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { email, password }).pipe(
       tap((res) => {
@@ -199,21 +183,11 @@ export class AuthService {
         }
       }),
       catchError((error) => {
-        // Only fall back to preset demo personas if the backend API is unreachable (offline)
-        if (error?.status === 0) {
-          const found = PRESET_PERSONAS.find(p => p.email.toLowerCase() === email.toLowerCase());
-          if (found) {
-            this.currentUser.set(found);
-            if (isPlatformBrowser(this.platformId)) {
-              sessionStorage.setItem('voyage_user', JSON.stringify(found));
-            }
-            return new Observable<AuthResponse>(sub => {
-              sub.next({ success: true, message: `Welcome back, ${found.fullname}!`, user: found });
-              sub.complete();
-            });
-          }
-        }
-        const message = error?.error?.message || 'Login failed. Please check credentials.';
+        const message =
+          error?.error?.message ||
+          (error?.status === 0
+            ? 'Unable to connect to VoyageHub API server. Please ensure the backend is running.'
+            : 'Login failed. Please check credentials.');
         return throwError(() => new Error(message));
       })
     );
@@ -221,6 +195,9 @@ export class AuthService {
 
   updateProfile(updates: Partial<UserProfile>): Observable<{ success: boolean; message: string; user?: UserProfile }> {
     const current = this.currentUser();
+    if (!current) {
+      return throwError(() => new Error('No user is currently logged in.'));
+    }
     const updated: UserProfile = { ...current, ...updates };
     this.currentUser.set(updated);
     if (isPlatformBrowser(this.platformId)) {
@@ -324,8 +301,7 @@ export class AuthService {
       sessionStorage.removeItem('voyage_user');
       sessionStorage.removeItem('voyage_token');
     }
-    // Return to default persona or null
-    this.currentUser.set(PRESET_PERSONAS[0]);
+    this.currentUser.set(null);
   }
 
   getToken(): string | null {

@@ -74,6 +74,8 @@ describe('Login', () => {
       user: PRESET_PERSONAS[1] // Priya Nair (Manager)
     }));
     const navSpy = vi.spyOn(router, 'navigate');
+    component.email = 'priya.nair@voyagehub.in';
+    component.password = DEMO_PASSWORD;
     component.submitLogin();
 
     expect(navSpy).toHaveBeenCalledWith(['/approvals']);
