@@ -268,6 +268,13 @@
   color: var(--text-muted);
 }
 
+.locked-notice {
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 /* Card Footer */
 .card-footer {
   margin-top: 28px;
@@ -275,6 +282,11 @@
   border-top: 1px solid var(--border-subtle);
   display: flex;
   justify-content: flex-end;
+}
+
+.card-footer.card-footer-notice {
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* Buttons */
