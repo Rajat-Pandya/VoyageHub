@@ -129,6 +129,11 @@ public class AuthService : IAuthService
             return (400, new AuthResponseDto { Success = false, Message = "Profile data is required." });
         }
 
+        if (_currentUserService.UserRole != "Admin")
+        {
+            return (403, new AuthResponseDto { Success = false, Message = "Profile details can only be updated by a System Administrator." });
+        }
+
         var user = await _userRepository.GetByIdWithDetailsAsync(dto.UserId, cancellationToken);
         if (user == null)
         {

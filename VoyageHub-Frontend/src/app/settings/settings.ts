@@ -17,6 +17,7 @@ export class Settings implements OnInit {
   readonly activeTab = signal<'profile' | 'travel' | 'notifications' | 'security'>('profile');
   readonly toastMessage = signal<string | null>(null);
   readonly isSaving = signal(false);
+  readonly isAdmin = this.authService.isAdmin;
 
   // Preset Avatars for quick selection
   readonly presetAvatars: string[] = [
@@ -89,10 +90,16 @@ export class Settings implements OnInit {
   }
 
   selectAvatar(url: string): void {
+    if (!this.isAdmin()) return;
     this.avatarUrl = url;
   }
 
   saveProfile(): void {
+    if (!this.isAdmin()) {
+      this.showToast('Profile details can only be updated by a System Administrator.');
+      return;
+    }
+
     if (!this.fullname.trim()) {
       this.showToast('Please enter your full name.');
       return;
