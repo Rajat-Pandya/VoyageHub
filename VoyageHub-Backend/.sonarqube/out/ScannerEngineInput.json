@@ -1,0 +1,220 @@
+{
+  "scannerProperties": [
+    {
+      "key": "sonar.scanner.app",
+      "value": "ScannerMSBuild"
+    },
+    {
+      "key": "sonar.scanner.appVersion",
+      "value": "12.1"
+    },
+    {
+      "key": "sonar.scanner.bootstrapStartTime",
+      "value": "1795435549000"
+    },
+    {
+      "key": "sonar.projectKey",
+      "value": "VoyageHub-Backend"
+    },
+    {
+      "key": "sonar.working.directory",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\.sonar"
+    },
+    {
+      "key": "sonar.projectBaseDir",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend"
+    },
+    {
+      "key": "sonar.pullrequest.cache.basepath",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend"
+    },
+    {
+      "key": "sonar.sources",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.vs\\VoyageHub.slnx\\config\\applicationhost.config,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.vs\\VoyageHub.slnx\\v18\\DocumentLayout.backup.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.vs\\VoyageHub.slnx\\v18\\DocumentLayout.json"
+    },
+    {
+      "key": "sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "sonar.modules",
+      "value": "488E9648-2062-3D88-43DA-6058FDE7ADF4,CEF1D336-A521-54DF-3D6B-42113FCF7FD8,C55F29BB-B76C-F87B-5B08-87F13E86A857,EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.projectKey",
+      "value": "VoyageHub-Backend:488E9648-2062-3D88-43DA-6058FDE7ADF4"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.projectName",
+      "value": "VoyageHub.Data"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.projectBaseDir",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.working.directory",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\.sonar\\mod0"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.sources",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\AppDbContext.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\ApprovalStep.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\AuditLog.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\Department.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\Expense.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\ItinerarySegment.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\Stay.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\SupportTicket.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\TravelPolicy.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\TravelRequest.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Entities\\User.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\GlobalUsings.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\ApprovalStepRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\AuditLogRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\ExpenseRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\IApprovalStepRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\IAuditLogRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\IExpenseRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\IPolicyRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\IRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\ISupportTicketRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\ITravelRequestRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\IUserRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\PolicyRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\Repository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\SupportTicketRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\TravelRequestRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\Repositories\\UserRepository.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\obj\\project.assets.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\obj\\VoyageHub.Data.csproj.nuget.dgspec.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\bin\\Debug\\net10.0\\VoyageHub.Data.deps.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\bin\\Release\\net10.0\\VoyageHub.Data.deps.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\obj\\Debug\\net10.0\\VoyageHub.Data.sourcelink.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Data\\obj\\Release\\net10.0\\VoyageHub.Data.sourcelink.json"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\0"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\0\\Issues.json"
+    },
+    {
+      "key": "488E9648-2062-3D88-43DA-6058FDE7ADF4.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\0\\Telemetry.json"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.projectKey",
+      "value": "VoyageHub-Backend:CEF1D336-A521-54DF-3D6B-42113FCF7FD8"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.projectName",
+      "value": "VoyageHub.Business"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.projectBaseDir",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.working.directory",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\.sonar\\mod1"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.sources",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\obj\\project.assets.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\obj\\VoyageHub.Business.csproj.nuget.dgspec.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\bin\\Debug\\net10.0\\VoyageHub.Business.deps.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\bin\\Release\\net10.0\\VoyageHub.Business.deps.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\obj\\Debug\\net10.0\\VoyageHub.Business.sourcelink.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\obj\\Release\\net10.0\\VoyageHub.Business.sourcelink.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Constants\\AppConstants.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Dtos\\AuthDtos.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Dtos\\EmployeeDtos.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Dtos\\ManagementDtos.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Dtos\\SupportDtos.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Dtos\\TravelRequestDtos.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\GlobalUsings.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\AnalyticsService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\ApprovalService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\AuditService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\AuthService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\EmployeeService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\ExpenseService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\IAnalyticsService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\IApprovalService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\IAuditService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\IAuthService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\ICurrentUserService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\IEmployeeService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\IExpenseService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\IJwtTokenService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\IPolicyService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\ISupportService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\ITravelRequestService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\JwtTokenService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\PolicyService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\SupportService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Business\\Services\\TravelRequestService.cs"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\1"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\1\\Issues.json"
+    },
+    {
+      "key": "CEF1D336-A521-54DF-3D6B-42113FCF7FD8.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\1\\Telemetry.json"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.projectKey",
+      "value": "VoyageHub-Backend:C55F29BB-B76C-F87B-5B08-87F13E86A857"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.projectName",
+      "value": "VoyageHub.Api"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.projectBaseDir",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.working.directory",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\.sonar\\mod2"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.sources",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\appsettings.Development.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\appsettings.example.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\appsettings.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\project.assets.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\VoyageHub.Api.csproj.nuget.dgspec.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Properties\\launchSettings.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Debug\\net10.0\\appsettings.Development.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Debug\\net10.0\\appsettings.example.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Debug\\net10.0\\appsettings.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Debug\\net10.0\\VoyageHub.Api.deps.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Debug\\net10.0\\VoyageHub.Api.runtimeconfig.dev.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Debug\\net10.0\\VoyageHub.Api.runtimeconfig.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Debug\\net10.0\\VoyageHub.Api.staticwebassets.endpoints.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Debug\\net10.0\\VoyageHub.Api.staticwebassets.runtime.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Release\\net10.0\\appsettings.Development.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Release\\net10.0\\appsettings.example.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Release\\net10.0\\appsettings.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Release\\net10.0\\VoyageHub.Api.deps.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Release\\net10.0\\VoyageHub.Api.runtimeconfig.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\bin\\Release\\net10.0\\VoyageHub.Api.staticwebassets.endpoints.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\ApiEndpoints.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\rbcswa.dswa.cache.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\rjsmcshtml.dswa.cache.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\rjsmrazor.dswa.cache.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\rpswa.dswa.cache.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\staticwebassets.build.endpoints.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\staticwebassets.build.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\staticwebassets.development.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\VoyageHub.Api.sourcelink.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Release\\net10.0\\rjsmcshtml.dswa.cache.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Release\\net10.0\\rjsmrazor.dswa.cache.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Release\\net10.0\\rpswa.dswa.cache.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Release\\net10.0\\staticwebassets.build.endpoints.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Release\\net10.0\\staticwebassets.build.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Release\\net10.0\\staticwebassets.publish.endpoints.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Release\\net10.0\\staticwebassets.publish.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Release\\net10.0\\VoyageHub.Api.sourcelink.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\EndpointInfo\\VoyageHub.Api.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\HotReload\\browser-tools-key.private.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\HotReload\\browser-tools-key.public.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\HotReload\\Microsoft.NET.Sdk.BlazorWeb.HotReload.BrowserTools.Config.js,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\HotReload\\Microsoft.NET.Sdk.BlazorWeb.HotReload.BrowserTools.js,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\HotReload\\Microsoft.NET.Sdk.BlazorWeb.HotReload.lib.module.js,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\jsmodules\\jsmodules.build.manifest.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\AnalyticsController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\ApprovalsController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\AuditLogsController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\AuthController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\EmployeesController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\ExpensesController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\PoliciesController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\SupportController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Controllers\\TravelRequestsController.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\GlobalUsings.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Program.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\Services\\CurrentUserService.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\VoyageHub.Api.GlobalUsings.g.cs,\"C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\.NETCoreApp,Version=v10.0.AssemblyAttributes.cs\",C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\VoyageHub.Api.AssemblyInfo.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Api\\obj\\Debug\\net10.0\\VoyageHub.Api.MvcApplicationPartsAssemblyInfo.cs"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\2"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\2\\Issues.json"
+    },
+    {
+      "key": "C55F29BB-B76C-F87B-5B08-87F13E86A857.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\2\\Telemetry.json"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.projectKey",
+      "value": "VoyageHub-Backend:EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.projectName",
+      "value": "VoyageHub.Tests"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.projectBaseDir",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.working.directory",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\.sonar\\mod3"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.sources",
+      "value": ""
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.tests",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\obj\\project.assets.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\obj\\VoyageHub.Tests.csproj.nuget.dgspec.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\appsettings.Development.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\appsettings.example.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\appsettings.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\VoyageHub.Api.deps.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\VoyageHub.Api.runtimeconfig.dev.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\VoyageHub.Api.runtimeconfig.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\VoyageHub.Api.staticwebassets.endpoints.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\VoyageHub.Api.staticwebassets.runtime.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\VoyageHub.Tests.deps.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\VoyageHub.Tests.runtimeconfig.dev.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\bin\\Debug\\net10.0\\VoyageHub.Tests.runtimeconfig.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\obj\\Debug\\net10.0\\VoyageHub.Tests.sourcelink.json,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\AcceptanceCriteriaTests.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\ApprovalServiceTests.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\AuthorizationTests.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\AuthServiceTests.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\PolicyServiceTests.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\RetryPolicyTests.cs,C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\VoyageHub.Tests\\TravelRequestValidationTests.cs"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\3"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\3\\Issues.json"
+    },
+    {
+      "key": "EB5B70AA-C02D-E8E5-D816-E1FE4EBE04AD.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\rajat\\Downloads\\Rishabh Soft\\Project.NET\\VoyageHub-Backend\\.sonarqube\\out\\3\\Telemetry.json"
+    },
+    {
+      "key": "sonar.token",
+      "value": "***"
+    },
+    {
+      "key": "sonar.host.url",
+      "value": "http://localhost:9000"
+    },
+    {
+      "key": "sonar.cs.vscoveragexml.reportsPaths",
+      "value": "coverage.xml"
+    },
+    {
+      "key": "sonar.exclusions",
+      "value": "coverage.xml"
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "5.12.0.0",
+        "fileVersion": "5.12.0-1.26529.118 (297acf930fb0f5c07fd4e51d78e521b4ad2e5d1f)",
+        "semanticVersion": "5.12.0",
+        "language": "en-US"
+      },
+      "results": [
+        {
+          "ruleId": "S6932",
+          "level": "warning",
+          "message": "Use IFormFile or IFormFileCollection binding instead",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/rajat/Downloads/Rishabh%20Soft/Project.NET/VoyageHub-Backend/VoyageHub.Api/Controllers/EmployeesController.cs",
+                "region": {
+                  "startLine": 86,
+                  "startColumn": 65,
+                  "endLine": 86,
+                  "endColumn": 83
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6932",
+          "level": "warning",
+          "message": "Use IFormFile or IFormFileCollection binding instead",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/rajat/Downloads/Rishabh%20Soft/Project.NET/VoyageHub-Backend/VoyageHub.Api/Controllers/EmployeesController.cs",
+                "region": {
+                  "startLine": 86,
+                  "startColumn": 96,
+                  "endLine": 86,
+                  "endColumn": 114
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6932",
+          "level": "warning",
+          "message": "Use IFormFile or IFormFileCollection binding instead",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/rajat/Downloads/Rishabh%20Soft/Project.NET/VoyageHub-Backend/VoyageHub.Api/Controllers/ExpensesController.cs",
+                "region": {
+                  "startLine": 89,
+                  "startColumn": 65,
+                  "endLine": 89,
+                  "endColumn": 83
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6932",
+          "level": "warning",
+          "message": "Use IFormFile or IFormFileCollection binding instead",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/rajat/Downloads/Rishabh%20Soft/Project.NET/VoyageHub-Backend/VoyageHub.Api/Controllers/ExpensesController.cs",
+                "region": {
+                  "startLine": 89,
+                  "startColumn": 96,
+                  "endLine": 89,
+                  "endColumn": 114
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6932",
+          "level": "warning",
+          "message": "Use IFormFile or IFormFileCollection binding instead",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/rajat/Downloads/Rishabh%20Soft/Project.NET/VoyageHub-Backend/VoyageHub.Api/Controllers/ExpensesController.cs",
+                "region": {
+                  "startLine": 135,
+                  "startColumn": 65,
+                  "endLine": 135,
+                  "endColumn": 83
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6932",
+          "level": "warning",
+          "message": "Use IFormFile or IFormFileCollection binding instead",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/rajat/Downloads/Rishabh%20Soft/Project.NET/VoyageHub-Backend/VoyageHub.Api/Controllers/ExpensesController.cs",
+                "region": {
+                  "startLine": 135,
+                  "startColumn": 96,
+                  "endLine": 135,
+                  "endColumn": 114
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "S6932": {
+          "id": "S6932",
+          "shortDescription": "Use model binding instead of reading raw request data",
+          "fullDescription": "The HttpRequest class provides access to the raw request data through the QueryString, Headers, and Forms properties. However, whenever possible it is recommended to use model binding instead of directly accessing the input data.",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
