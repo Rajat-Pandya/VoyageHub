@@ -123,27 +123,19 @@
       </div>
     </div>
 
-    @if (isAdmin()) {
     <div class="card-footer card-footer-notice">
       <div class="field-hint locked-notice">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
         </svg>
-        <span>Profile details are read-only here. To manage corporate records, visit <a routerLink="/admin/employees" class="text-link">Employee Directory</a>.</span>
+        @if (isAdmin()) {
+          <span>Profile details are read-only here. To manage corporate records, visit <a routerLink="/admin/employees" class="text-link">Employee Directory</a>.</span>
+        } @else {
+          <span>Personal profile details are locked and can only be updated in Employee Management.</span>
+        }
       </div>
     </div>
-    } @else {
-    <div class="card-footer card-footer-notice">
-      <div class="field-hint locked-notice">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-        </svg>
-        <span>Personal profile details are locked and can only be updated in Employee Management.</span>
-      </div>
-    </div>
-    }
   </div>
   }
 
