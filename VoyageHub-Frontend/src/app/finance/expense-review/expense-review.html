@@ -132,34 +132,65 @@
     <div class="modal-backdrop fade-in" (click)="closeReceiptModal()">
       <div class="modal-card receipt-modal" (click)="$event.stopPropagation()">
         <div class="modal-header">
-          <h3>Tax Invoice &mdash; {{ claim.category }}</h3>
+          <div class="receipt-header-titles">
+            <h3>Tax Invoice &amp; Receipt &mdash; {{ claim.category }}</h3>
+            <span class="receipt-subtitle">{{ claim.requestCode }} &bull; Submitted by {{ claim.employeeName }} ({{ claim.departmentName }})</span>
+          </div>
           <button type="button" class="close-x-btn" (click)="closeReceiptModal()" title="Close receipt preview" aria-label="Close receipt preview">&times;</button>
         </div>
         <div class="modal-body receipt-body">
+          <!-- Uploaded Document Visual Preview -->
+          @if (isImageProof(claim.proofPath)) {
+            <div class="receipt-document-viewport">
+              <img [src]="getProofUrl(claim.proofPath)" alt="Tax Invoice & Receipt Document" class="receipt-preview-img" />
+            </div>
+          } @else if (isPdfProof(claim.proofPath)) {
+            <div class="receipt-pdf-banner">
+              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              <div class="pdf-details">
+                <strong>PDF Bill Document Attached</strong>
+                <code>{{ claim.proofPath }}</code>
+              </div>
+              <a [href]="getProofUrl(claim.proofPath)" target="_blank" rel="noopener noreferrer" class="btn-outline-sm">
+                Open PDF
+              </a>
+            </div>
+          }
+
           <div class="receipt-invoice-mock">
-            <div class="receipt-brand">VOYAGE TAX INVOICE &bull; GST COMPLIANT AUDIT</div>
+            <div class="receipt-brand">VOYAGE CORPORATE TAX INVOICE &bull; GST COMPLIANT AUDIT</div>
             <div class="receipt-row">
               <span>Employee:</span>
               <strong>{{ claim.employeeName }}</strong>
             </div>
             <div class="receipt-row">
-              <span>Trip ID:</span>
-              <strong>{{ claim.requestCode }}</strong>
+              <span>Trip Request:</span>
+              <strong>{{ claim.requestCode }} &mdash; {{ claim.tripPurpose }}</strong>
             </div>
             <div class="receipt-row">
-              <span>Amount:</span>
+              <span>Expense Category:</span>
+              <strong>{{ claim.category }}</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Claim Amount:</span>
               <strong class="receipt-amount">{{ claim.amount | currency:'INR':'symbol':'1.0-0' }}</strong>
             </div>
             <div class="receipt-row">
-              <span>File:</span>
+              <span>Proof Document:</span>
               <code>{{ claim.proofPath || 'gst_invoice.pdf' }}</code>
             </div>
-            <div class="receipt-stamp">STATUS: GST VERIFIED &amp; ELIGIBLE</div>
+            <div class="receipt-stamp">STATUS: GST VERIFIED &amp; ELIGIBLE FOR REIMBURSEMENT</div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-secondary" (click)="closeReceiptModal()">Close</button>
-          <button type="button" class="btn-dark" (click)="takeAction(claim, 'Approve'); closeReceiptModal()">Approve Claim</button>
+          <button type="button" class="btn-danger-outline" (click)="takeAction(claim, 'Reject'); closeReceiptModal()">Reject Claim</button>
+          <button type="button" class="btn-dark" (click)="takeAction(claim, 'Approve'); closeReceiptModal()">Verify &amp; Approve Claim</button>
         </div>
       </div>
     </div>

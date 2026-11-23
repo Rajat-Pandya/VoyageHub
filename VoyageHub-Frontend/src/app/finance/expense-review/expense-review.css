@@ -256,6 +256,110 @@
   max-width: 480px;
 }
 
+.receipt-modal {
+  max-width: 650px;
+}
+
+.receipt-header-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.receipt-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.receipt-document-viewport {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 12px;
+  max-height: 380px;
+  overflow: auto;
+}
+
+.receipt-preview-img {
+  max-width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.receipt-pdf-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  color: #1e40af;
+}
+
+.receipt-pdf-banner svg {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.pdf-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.pdf-details strong {
+  font-size: 13.5px;
+  color: #1e3a8a;
+}
+
+.pdf-details code {
+  font-size: 11.5px;
+  color: #3b82f6;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.btn-outline-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #ffffff;
+  border: 1px solid #93c5fd;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.btn-outline-sm:hover {
+  background: #dbeafe;
+}
+
+.btn-danger-outline {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #dc2626;
+  background: #ffffff;
+  border: 1px solid #fca5a5;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-danger-outline:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+
 .receipt-invoice-mock {
   background: #f8fafc;
   border: 1.5px dashed #cbd5e1;

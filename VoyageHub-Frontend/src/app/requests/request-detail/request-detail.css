@@ -590,3 +590,261 @@
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
+
+/* Proof & Receipt Styles */
+.expense-proof-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.proof-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-sm);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.proof-view-btn:hover {
+  background: #dbeafe;
+}
+
+.proof-attach-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: #f8fafc;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.proof-attach-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.proof-upload-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.file-input-control {
+  font-size: 13px;
+  color: #475569;
+  padding: 8px;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius-md);
+  background: #f8fafc;
+  cursor: pointer;
+}
+
+.proof-upload-hint {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.file-chosen-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-sm);
+  color: #166534;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.tag-remove-btn {
+  background: transparent;
+  border: none;
+  color: #15803d;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.tag-remove-btn:hover {
+  color: #dc2626;
+}
+
+/* Proof Viewer Modal */
+.proof-viewer-modal {
+  max-width: 720px;
+}
+
+.proof-modal-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.proof-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.verification-meta-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.meta-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.meta-val.highlight {
+  font-size: 16px;
+  color: #059669;
+}
+
+.meta-val.verified {
+  color: #16a34a;
+}
+
+.proof-viewport {
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  padding: 16px;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.proof-img-display {
+  max-width: 100%;
+  max-height: 480px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  object-fit: contain;
+}
+
+.pdf-preview-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px;
+}
+
+.pdf-preview-box svg {
+  color: #ef4444;
+}
+
+.pdf-preview-box h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.pdf-preview-box p code {
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.modal-help-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Receipt invoice mock inside request-detail */
+.receipt-invoice-mock {
+  width: 100%;
+  background: #fcfcfc;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  font-family: inherit;
+}
+
+.receipt-brand {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 13px;
+  color: #475569;
+  border-bottom: 1px dotted #f1f5f9;
+}
+
+.receipt-amount {
+  font-size: 15px;
+  color: #059669;
+  font-weight: 800;
+}
+
+.receipt-stamp {
+  margin-top: 14px;
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-sm);
+  color: #166534;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.05em;
+}

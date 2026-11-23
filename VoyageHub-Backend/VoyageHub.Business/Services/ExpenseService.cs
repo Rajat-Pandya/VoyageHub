@@ -147,4 +147,28 @@ public class ExpenseService : IExpenseService
 
         return (true, $"Successfully processed payout for {toPayout.Count} claims.");
     }
+
+    public async Task<(bool Success, string Message, string? ProofPath)> AttachProofAsync(Guid id, string proofPath, CancellationToken cancellationToken = default)
+    {
+        var expense = await _expenseRepository.GetByIdAsync(id, cancellationToken);
+        if (expense == null)
+        {
+            return (false, "Expense claim not found.", null);
+        }
+
+        expense.ProofPath = proofPath;
+        await _expenseRepository.SaveChangesAsync(cancellationToken);
+
+        await _auditService.LogAsync(
+            entityType: "EXPENSE",
+            entityId: expense.Id,
+            action: "Attach Proof",
+            actorId: _currentUserService.UserId,
+            actorName: _currentUserService.UserName ?? "Employee",
+            changeDetail: $"Attached receipt proof '{proofPath}' to expense claim",
+            severity: "LOW",
+            cancellationToken: cancellationToken);
+
+        return (true, "Proof document attached successfully.", proofPath);
+    }
 }

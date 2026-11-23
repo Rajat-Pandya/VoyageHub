@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { VoyageService, TravelRequestDetail } from '../../services/voyage.service';
+import { VoyageService, TravelRequestDetail, ExpenseItem } from '../../services/voyage.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -25,6 +25,16 @@ export class RequestDetail implements OnInit {
   readonly showSegmentModal = signal(false);
   readonly showStayModal = signal(false);
   readonly showExpenseModal = signal(false);
+  readonly showProofModal = signal(false);
+  readonly proofToView = signal<ExpenseItem | null>(null);
+  readonly showAttachModal = signal(false);
+  readonly targetExpenseForProof = signal<ExpenseItem | null>(null);
+
+  // File Upload State
+  readonly selectedProofFile = signal<File | null>(null);
+  readonly selectedProofFileName = signal<string | null>(null);
+  readonly isUploadingProof = signal<boolean>(false);
+  readonly attachFile = signal<File | null>(null);
 
   // New Segment Model
   segmentForm = {
@@ -269,20 +279,63 @@ export class RequestDetail implements OnInit {
 
   // Expense
   openExpenseModal(): void {
+    this.selectedProofFile.set(null);
+    this.selectedProofFileName.set(null);
     this.showExpenseModal.set(true);
   }
+
   closeExpenseModal(): void {
     this.showExpenseModal.set(false);
+    this.selectedProofFile.set(null);
+    this.selectedProofFileName.set(null);
   }
+
+  onProofFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.selectedProofFile.set(file);
+      this.selectedProofFileName.set(file.name);
+      this.expenseForm.proofPath = file.name;
+    }
+  }
+
+  removeProofFile(): void {
+    this.selectedProofFile.set(null);
+    this.selectedProofFileName.set(null);
+    this.expenseForm.proofPath = '';
+  }
+
   submitExpenseSubmit(): void {
     const d = this.detail();
     if (!d) return;
+
+    const file = this.selectedProofFile();
+    if (file) {
+      this.isUploadingProof.set(true);
+      this.voyageService.uploadExpenseProof(file).subscribe({
+        next: (uploadRes) => {
+          this.isUploadingProof.set(false);
+          this.executeExpensePost(d, uploadRes.proofPath);
+        },
+        error: () => {
+          this.isUploadingProof.set(false);
+          // Fallback to local name
+          this.executeExpensePost(d, file.name);
+        }
+      });
+    } else {
+      this.executeExpensePost(d, this.expenseForm.proofPath || 'receipt.pdf');
+    }
+  }
+
+  private executeExpensePost(d: TravelRequestDetail, proofPath: string): void {
     this.voyageService.submitExpense({
       requestId: d.id,
       category: this.expenseForm.category,
       amount: this.expenseForm.amount,
       description: this.expenseForm.description,
-      proofPath: this.expenseForm.proofPath
+      proofPath: proofPath
     }).subscribe({
       next: () => {
         this.closeExpenseModal();
@@ -299,7 +352,7 @@ export class RequestDetail implements OnInit {
           tripPurpose: d.purpose,
           category: this.expenseForm.category,
           amount: this.expenseForm.amount,
-          proofPath: this.expenseForm.proofPath,
+          proofPath: proofPath,
           status: 'Pending',
           submittedAt: new Date().toISOString()
         });
@@ -308,6 +361,69 @@ export class RequestDetail implements OnInit {
         this.activeTab.set('Expenses');
       }
     });
+  }
+
+  // Proof Viewing & Verification
+  openProofModal(expense: ExpenseItem): void {
+    this.proofToView.set(expense);
+    this.showProofModal.set(true);
+  }
+
+  closeProofModal(): void {
+    this.showProofModal.set(false);
+    this.proofToView.set(null);
+  }
+
+  openAttachProofModal(expense: ExpenseItem): void {
+    this.targetExpenseForProof.set(expense);
+    this.attachFile.set(null);
+    this.showAttachModal.set(true);
+  }
+
+  closeAttachProofModal(): void {
+    this.showAttachModal.set(false);
+    this.targetExpenseForProof.set(null);
+    this.attachFile.set(null);
+  }
+
+  onAttachFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.attachFile.set(input.files[0]);
+    }
+  }
+
+  submitAttachProof(): void {
+    const expense = this.targetExpenseForProof();
+    const file = this.attachFile();
+    const d = this.detail();
+    if (!expense || !file || !d) return;
+
+    this.isUploadingProof.set(true);
+    this.voyageService.attachExpenseProof(expense.id, file).subscribe({
+      next: (res) => {
+        this.isUploadingProof.set(false);
+        this.closeAttachProofModal();
+        this.loadDetail(d.id);
+      },
+      error: () => {
+        this.isUploadingProof.set(false);
+        expense.proofPath = file.name;
+        this.closeAttachProofModal();
+      }
+    });
+  }
+
+  getProofUrl(proofPath?: string): string {
+    return this.voyageService.getProofUrl(proofPath);
+  }
+
+  isImageProof(proofPath?: string): boolean {
+    return this.voyageService.isImageProof(proofPath);
+  }
+
+  isPdfProof(proofPath?: string): boolean {
+    return this.voyageService.isPdfProof(proofPath);
   }
 
   // Close trip

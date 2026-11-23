@@ -71,4 +71,16 @@ export class ExpenseReview implements OnInit {
   closeReceiptModal(): void {
     this.previewClaim.set(null);
   }
+
+  getProofUrl(proofPath?: string): string {
+    return this.voyageService.getProofUrl(proofPath);
+  }
+
+  isImageProof(proofPath?: string): boolean {
+    return this.voyageService.isImageProof(proofPath);
+  }
+
+  isPdfProof(proofPath?: string): boolean {
+    return this.voyageService.isPdfProof(proofPath);
+  }
 }

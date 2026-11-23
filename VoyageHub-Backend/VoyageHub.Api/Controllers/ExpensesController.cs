@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VoyageHub.Business.Dtos;
 using VoyageHub.Business.Services;
@@ -14,11 +18,18 @@ namespace VoyageHub.Api.Controllers;
 [Authorize]
 public class ExpensesController : ControllerBase
 {
-    private readonly IExpenseService _expenseService;
+    private static readonly HashSet<string> AllowedExtensions = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ".pdf", ".png", ".jpg", ".jpeg", ".webp"
+    };
 
-    public ExpensesController(IExpenseService expenseService)
+    private readonly IExpenseService _expenseService;
+    private readonly IWebHostEnvironment _environment;
+
+    public ExpensesController(IExpenseService expenseService, IWebHostEnvironment environment)
     {
         _expenseService = expenseService;
+        _environment = environment;
     }
 
     [HttpGet("pending")]
@@ -69,5 +80,131 @@ public class ExpensesController : ControllerBase
         }
 
         return Ok(new { success = true, message });
+    }
+
+    [HttpPost("upload-proof")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
+    public async Task<IActionResult> UploadProof([FromForm] IFormFile? file, CancellationToken cancellationToken)
+    {
+        var uploadFile = file ?? (Request.HasFormContentType && Request.Form.Files.Count > 0 ? Request.Form.Files[0] : null);
+
+        if (uploadFile == null || uploadFile.Length == 0)
+        {
+            return BadRequest(new { message = "No receipt or bill file uploaded." });
+        }
+
+        if (uploadFile.Length > 15 * 1024 * 1024)
+        {
+            return BadRequest(new { message = "File size exceeds the 15MB limit." });
+        }
+
+        var ext = Path.GetExtension(uploadFile.FileName).ToLowerInvariant();
+        if (!AllowedExtensions.Contains(ext))
+        {
+            return BadRequest(new { message = "Only PDF and image files (.pdf, .jpg, .jpeg, .png, .webp) are allowed as proof." });
+        }
+
+        var receiptsDir = Path.Combine(_environment.ContentRootPath, "App_Data", "Receipts");
+        if (!Directory.Exists(receiptsDir))
+        {
+            Directory.CreateDirectory(receiptsDir);
+        }
+
+        var safeFileName = $"{Guid.NewGuid():N}_{Path.GetFileNameWithoutExtension(uploadFile.FileName).Replace(" ", "_")}{ext}";
+        var filePath = Path.Combine(receiptsDir, safeFileName);
+
+        await using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await uploadFile.CopyToAsync(stream, cancellationToken);
+        }
+
+        var relativeUrl = $"/api/expenses/proof/{safeFileName}";
+        return Ok(new
+        {
+            success = true,
+            proofPath = relativeUrl,
+            fileName = uploadFile.FileName,
+            fileUrl = $"{Request.Scheme}://{Request.Host}{relativeUrl}"
+        });
+    }
+
+    [HttpPost("{id}/proof")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
+    public async Task<IActionResult> AttachProof(Guid id, [FromForm] IFormFile? file, CancellationToken cancellationToken)
+    {
+        var uploadFile = file ?? (Request.HasFormContentType && Request.Form.Files.Count > 0 ? Request.Form.Files[0] : null);
+
+        if (uploadFile == null || uploadFile.Length == 0)
+        {
+            return BadRequest(new { message = "No receipt or bill file uploaded." });
+        }
+
+        var ext = Path.GetExtension(uploadFile.FileName).ToLowerInvariant();
+        if (!AllowedExtensions.Contains(ext))
+        {
+            return BadRequest(new { message = "Only PDF and image files (.pdf, .jpg, .jpeg, .png, .webp) are allowed as proof." });
+        }
+
+        var receiptsDir = Path.Combine(_environment.ContentRootPath, "App_Data", "Receipts");
+        if (!Directory.Exists(receiptsDir))
+        {
+            Directory.CreateDirectory(receiptsDir);
+        }
+
+        var safeFileName = $"{Guid.NewGuid():N}_{Path.GetFileNameWithoutExtension(uploadFile.FileName).Replace(" ", "_")}{ext}";
+        var filePath = Path.Combine(receiptsDir, safeFileName);
+
+        await using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await uploadFile.CopyToAsync(stream, cancellationToken);
+        }
+
+        var relativeUrl = $"/api/expenses/proof/{safeFileName}";
+        var (success, message, proofPath) = await _expenseService.AttachProofAsync(id, relativeUrl, cancellationToken);
+        if (!success)
+        {
+            return NotFound(new { message });
+        }
+
+        return Ok(new
+        {
+            success = true,
+            proofPath = relativeUrl,
+            fileName = uploadFile.FileName,
+            fileUrl = $"{Request.Scheme}://{Request.Host}{relativeUrl}",
+            message
+        });
+    }
+
+    [HttpGet("proof/{fileName}")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
+    public IActionResult GetProofFile(string fileName)
+    {
+        if (string.IsNullOrWhiteSpace(fileName))
+        {
+            return BadRequest(new { message = "File name is required." });
+        }
+
+        var cleanName = Path.GetFileName(fileName);
+        var receiptsDir = Path.Combine(_environment.ContentRootPath, "App_Data", "Receipts");
+        var filePath = Path.Combine(receiptsDir, cleanName);
+
+        if (!System.IO.File.Exists(filePath))
+        {
+            return NotFound(new { message = "Receipt document not found." });
+        }
+
+        var ext = Path.GetExtension(cleanName).ToLowerInvariant();
+        var contentType = ext switch
+        {
+            ".pdf" => "application/pdf",
+            ".png" => "image/png",
+            ".jpg" or ".jpeg" => "image/jpeg",
+            ".webp" => "image/webp",
+            _ => "application/octet-stream"
+        };
+
+        var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+        return File(stream, contentType, cleanName, enableRangeProcessing: true);
     }
 }

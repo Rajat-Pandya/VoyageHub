@@ -234,6 +234,50 @@ export class VoyageService {
     return this.http.post(`${this.baseUrl}/expenses/batch-payout`, { expenseIds });
   }
 
+  uploadExpenseProof(file: File): Observable<{ success: boolean; proofPath: string; fileName: string; fileUrl: string }> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post<{ success: boolean; proofPath: string; fileName: string; fileUrl: string }>(
+      `${this.baseUrl}/expenses/upload-proof`,
+      formData
+    );
+  }
+
+  attachExpenseProof(expenseId: string, file: File): Observable<{ success: boolean; proofPath: string; fileName: string; fileUrl: string; message: string }> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post<{ success: boolean; proofPath: string; fileName: string; fileUrl: string; message: string }>(
+      `${this.baseUrl}/expenses/${expenseId}/proof`,
+      formData
+    );
+  }
+
+  getProofUrl(proofPath?: string): string {
+    if (!proofPath) return '';
+    if (proofPath.startsWith('http://') || proofPath.startsWith('https://')) {
+      return proofPath;
+    }
+    if (proofPath.startsWith('/api')) {
+      return `${environment.apiUrl.replace(/\/api$/, '')}${proofPath}`;
+    }
+    if (proofPath.startsWith('api/')) {
+      return `${environment.apiUrl.replace(/\/api$/, '')}/${proofPath}`;
+    }
+    return `${this.baseUrl}/expenses/proof/${encodeURIComponent(proofPath)}`;
+  }
+
+  isImageProof(proofPath?: string): boolean {
+    if (!proofPath) return false;
+    const clean = proofPath.split('?')[0].toLowerCase();
+    return clean.endsWith('.png') || clean.endsWith('.jpg') || clean.endsWith('.jpeg') || clean.endsWith('.webp');
+  }
+
+  isPdfProof(proofPath?: string): boolean {
+    if (!proofPath) return false;
+    const clean = proofPath.split('?')[0].toLowerCase();
+    return clean.endsWith('.pdf');
+  }
+
   // Policies (Admin)
   getPolicies(): Observable<PolicyConfig[]> {
     return this.http.get<PolicyConfig[]>(`${this.baseUrl}/policies`);
