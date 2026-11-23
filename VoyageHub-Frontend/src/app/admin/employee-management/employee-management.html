@@ -426,11 +426,11 @@
             @if (batchResult()!.errors.length > 0) {
               <div class="batch-errors-list">
                 <span class="errors-heading">Detailed Issues:</span>
-                <ul>
+                <div class="error-items-stack">
                   @for (err of batchResult()!.errors; track err) {
-                    <li>{{ err }}</li>
+                    <div class="error-item">&bull; {{ err }}</div>
                   }
-                </ul>
+                </div>
               </div>
             }
           </div>
