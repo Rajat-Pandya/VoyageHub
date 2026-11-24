@@ -60,19 +60,19 @@ public class EmployeeService : IEmployeeService
         if (!string.IsNullOrWhiteSpace(search))
         {
             var term = search.Trim().ToLower();
-            query = query.Where(u => u.Name.ToLower().Contains(term) || u.Email.ToLower().Contains(term));
+            query = query.Where(u => u.Name.Contains(term, StringComparison.OrdinalIgnoreCase) || u.Email.Contains(term, StringComparison.OrdinalIgnoreCase));
         }
 
         if (!string.IsNullOrWhiteSpace(department) && !department.Equals("All", StringComparison.OrdinalIgnoreCase))
         {
             var deptTerm = department.Trim().ToLower();
-            query = query.Where(u => u.Department != null && u.Department.Name.ToLower() == deptTerm);
+            query = query.Where(u => u.Department != null && string.Equals(u.Department.Name, deptTerm, StringComparison.OrdinalIgnoreCase));
         }
 
         if (!string.IsNullOrWhiteSpace(role) && !role.Equals("All", StringComparison.OrdinalIgnoreCase))
         {
             var roleTerm = role.Trim().ToLower();
-            query = query.Where(u => u.Role.ToLower() == roleTerm);
+            query = query.Where(u => string.Equals(u.Role, roleTerm, StringComparison.OrdinalIgnoreCase));
         }
 
         var users = await query
@@ -110,7 +110,7 @@ public class EmployeeService : IEmployeeService
             return (false, "A valid email address is required.", null);
 
         var existingUser = await _context.Users
-            .AnyAsync(u => u.Email.ToLower() == email, cancellationToken);
+            .AnyAsync(u => string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase), cancellationToken);
         if (existingUser)
             return (false, $"An account with email '{email}' already exists.", null);
 
@@ -185,7 +185,7 @@ public class EmployeeService : IEmployeeService
             return (false, "A valid email address is required.", null);
 
         var duplicateEmail = await _context.Users
-            .AnyAsync(u => u.Id != id && u.Email.ToLower() == email, cancellationToken);
+            .AnyAsync(u => u.Id != id && string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase), cancellationToken);
         if (duplicateEmail)
             return (false, $"Email '{email}' is already in use by another account.", null);
 
@@ -391,7 +391,7 @@ public class EmployeeService : IEmployeeService
             {
                 var mgrVal = values[mgrCol].Trim().ToLowerInvariant();
                 var mgrUser = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email.ToLower() == mgrVal || u.Name.ToLower() == mgrVal, cancellationToken);
+                    .FirstOrDefaultAsync(u => string.Equals(u.Email, mgrVal, StringComparison.OrdinalIgnoreCase) || string.Equals(u.Name, mgrVal, StringComparison.OrdinalIgnoreCase), cancellationToken);
                 if (mgrUser != null)
                 {
                     mgrId = mgrUser.Id;
@@ -456,7 +456,7 @@ public class EmployeeService : IEmployeeService
     {
         var lower = departmentName.ToLower();
         var dept = await _context.Departments
-            .FirstOrDefaultAsync(d => d.Name.ToLower() == lower, cancellationToken);
+            .FirstOrDefaultAsync(d => string.Equals(d.Name, lower, StringComparison.OrdinalIgnoreCase), cancellationToken);
 
         if (dept == null)
         {
