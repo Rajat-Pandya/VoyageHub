@@ -86,44 +86,17 @@ public class ExpensesController : ControllerBase
     [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<IActionResult> UploadProof(IFormFile? file, CancellationToken cancellationToken)
     {
-        var uploadFile = file;
-
-        if (uploadFile == null || uploadFile.Length == 0)
+        var (errorResult, relativeUrl, fileName) = await SaveProofFileAsync(file, cancellationToken);
+        if (errorResult != null)
         {
-            return BadRequest(new { message = "No receipt or bill file uploaded." });
+            return errorResult;
         }
 
-        if (uploadFile.Length > 15 * 1024 * 1024)
-        {
-            return BadRequest(new { message = "File size exceeds the 15MB limit." });
-        }
-
-        var ext = Path.GetExtension(uploadFile.FileName).ToLowerInvariant();
-        if (!AllowedExtensions.Contains(ext))
-        {
-            return BadRequest(new { message = "Only PDF and image files (.pdf, .jpg, .jpeg, .png, .webp) are allowed as proof." });
-        }
-
-        var receiptsDir = Path.Combine(_environment.ContentRootPath, "App_Data", "Receipts");
-        if (!Directory.Exists(receiptsDir))
-        {
-            Directory.CreateDirectory(receiptsDir);
-        }
-
-        var safeFileName = $"{Guid.NewGuid():N}_{Path.GetFileNameWithoutExtension(uploadFile.FileName).Replace(" ", "_")}{ext}";
-        var filePath = Path.Combine(receiptsDir, safeFileName);
-
-        await using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            await uploadFile.CopyToAsync(stream, cancellationToken);
-        }
-
-        var relativeUrl = $"/api/expenses/proof/{safeFileName}";
         return Ok(new
         {
             success = true,
             proofPath = relativeUrl,
-            fileName = uploadFile.FileName,
+            fileName,
             fileUrl = $"{Request.Scheme}://{Request.Host}{relativeUrl}"
         });
     }
@@ -132,35 +105,13 @@ public class ExpensesController : ControllerBase
     [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<IActionResult> AttachProof(Guid id, IFormFile? file, CancellationToken cancellationToken)
     {
-        var uploadFile = file;
-
-        if (uploadFile == null || uploadFile.Length == 0)
+        var (errorResult, relativeUrl, fileName) = await SaveProofFileAsync(file, cancellationToken);
+        if (errorResult != null)
         {
-            return BadRequest(new { message = "No receipt or bill file uploaded." });
+            return errorResult;
         }
 
-        var ext = Path.GetExtension(uploadFile.FileName).ToLowerInvariant();
-        if (!AllowedExtensions.Contains(ext))
-        {
-            return BadRequest(new { message = "Only PDF and image files (.pdf, .jpg, .jpeg, .png, .webp) are allowed as proof." });
-        }
-
-        var receiptsDir = Path.Combine(_environment.ContentRootPath, "App_Data", "Receipts");
-        if (!Directory.Exists(receiptsDir))
-        {
-            Directory.CreateDirectory(receiptsDir);
-        }
-
-        var safeFileName = $"{Guid.NewGuid():N}_{Path.GetFileNameWithoutExtension(uploadFile.FileName).Replace(" ", "_")}{ext}";
-        var filePath = Path.Combine(receiptsDir, safeFileName);
-
-        await using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            await uploadFile.CopyToAsync(stream, cancellationToken);
-        }
-
-        var relativeUrl = $"/api/expenses/proof/{safeFileName}";
-        var (success, message, proofPath) = await _expenseService.AttachProofAsync(id, relativeUrl, cancellationToken);
+        var (success, message, proofPath) = await _expenseService.AttachProofAsync(id, relativeUrl!, cancellationToken);
         if (!success)
         {
             return NotFound(new { message });
@@ -170,10 +121,46 @@ public class ExpensesController : ControllerBase
         {
             success = true,
             proofPath = relativeUrl,
-            fileName = uploadFile.FileName,
+            fileName,
             fileUrl = $"{Request.Scheme}://{Request.Host}{relativeUrl}",
             message
         });
+    }
+
+    private async Task<(IActionResult? ErrorResult, string? RelativeUrl, string? FileName)> SaveProofFileAsync(IFormFile? file, CancellationToken cancellationToken)
+    {
+        if (file == null || file.Length == 0)
+        {
+            return (BadRequest(new { message = "No receipt or bill file uploaded." }), null, null);
+        }
+
+        if (file.Length > 15 * 1024 * 1024)
+        {
+            return (BadRequest(new { message = "File size exceeds the 15MB limit." }), null, null);
+        }
+
+        var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+        if (!AllowedExtensions.Contains(ext))
+        {
+            return (BadRequest(new { message = "Only PDF and image files (.pdf, .jpg, .jpeg, .png, .webp) are allowed as proof." }), null, null);
+        }
+
+        var receiptsDir = Path.Combine(_environment.ContentRootPath, "App_Data", "Receipts");
+        if (!Directory.Exists(receiptsDir))
+        {
+            Directory.CreateDirectory(receiptsDir);
+        }
+
+        var safeFileName = $"{Guid.NewGuid():N}_{Path.GetFileNameWithoutExtension(file.FileName).Replace(" ", "_")}{ext}";
+        var filePath = Path.Combine(receiptsDir, safeFileName);
+
+        await using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream, cancellationToken);
+        }
+
+        var relativeUrl = $"/api/expenses/proof/{safeFileName}";
+        return (null, relativeUrl, file.FileName);
     }
 
     [HttpGet("proof/{fileName}")]
