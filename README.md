@@ -1,222 +1,241 @@
 # VoyageHub — Corporate Travel & Expense Management System
 
 [![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
+[![EF Core 10](https://img.shields.io/badge/EF%20Core-10.0-512BD4)](https://learn.microsoft.com/ef/core/)
 [![Angular 21](https://img.shields.io/badge/Angular-21-DD0031?logo=angular)](https://angular.dev/)
-[![EF Core 8](https://img.shields.io/badge/EF%20Core-8.0-512BD4)](https://learn.microsoft.com/ef/core/)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-CC292B?logo=microsoftsqlserver)](https://www.microsoft.com/sql-server)
+[![SonarQube Quality Gate](https://img.shields.io/badge/SonarQube-Passed-brightgreen)](docs/CODE-QUALITY.md)
 
-**VoyageHub** is an enterprise-grade corporate travel and expense management application designed to streamline employee business travel requests, multi-tier approvals, expense claim reimbursements, departmental policy compliance, and internal corporate travel support workflows.
+**VoyageHub** is an enterprise corporate travel and expense management application engineered to coordinate corporate business travel requests, sequential multi-tier approvals, policy compliance verification, itemized expense reimbursement workflows, employee directory operations, and internal travel support ticketing. Built with ASP.NET Core 10, Entity Framework Core 10, and an Angular 21 Single Page Application with Server-Side Rendering (SSR), it provides strict token-based authorization and automated audit logging across all state transitions.
 
 ---
 
-## Architecture Overview
+## Key Features by User Persona
 
-VoyageHub is architected as a layered REST service paired with a modern Angular Single Page Application featuring Server-Side Rendering (SSR).
+| Persona | Core Capabilities |
+| :--- | :--- |
+| **Employee** | Create, edit, and submit travel requests; associate multi-segment flights, trains, and hotel stay reservations; track live approval status; submit expense reimbursement claims with receipt proof uploads; download uploaded receipts; and file corporate travel desk support inquiries. |
+| **Line Manager** | Access team approval queue scoped strictly to direct reports and departmental requests; inspect estimated budgets against departmental policies; approve requests with routing to Finance; reject requests with reason comments; and view department travel summaries. |
+| **Finance Officer** | Perform secondary financial review and approval on manager-approved travel requests; review submitted expense claims with attached proof receipts; execute single claim approvals/rejections; and process bulk reimbursement payouts. |
+| **System Admin** | Configure departmental travel policy parameters (domestic/international budget ceilings, allowed flight classes, hard-limit enforcement flags); view complete system audit logs; manage employee directory records (create, edit, delete, CSV batch upload, and CSV template download); and oversee support desk ticketing. |
+
+---
+
+## Tech Stack & Versions
+
+- **Backend (API & Business Core)**:
+  - **Runtime & SDK**: .NET 10 (`net10.0`), C# 13
+  - **Framework**: ASP.NET Core 10 Web API (`Microsoft.NET.Sdk.Web`)
+  - **ORM & Data Access**: Microsoft Entity Framework Core 10 (`Microsoft.EntityFrameworkCore.SqlServer` `10.0.11`, `Microsoft.EntityFrameworkCore.Design` `10.0.11`)
+  - **Security & Cryptography**: BCrypt.Net-Next (`4.2.0`), JWT Bearer Authentication (`Microsoft.AspNetCore.Authentication.JwtBearer` `10.0.11`, `System.IdentityModel.Tokens.Jwt` `7.7.1`)
+  - **API Documentation**: OpenAPI / Swagger (`Swashbuckle.AspNetCore` `10.3.1`, `Microsoft.AspNetCore.OpenApi` `10.0.11`)
+  - **Unit Testing**: xUnit (`2.9.3`), Moq (`4.20.72`), Microsoft.NET.Test.Sdk (`17.12.0`), EF Core InMemory/Sqlite (`10.0.11`)
+- **Frontend (Client Application)**:
+  - **Framework**: Angular 21 (`@angular/core` `^21.2.0`)
+  - **SSR Server**: Angular Server-Side Rendering (`@angular/ssr` `^21.2.21`) powered by Express 5 (`^5.1.0`)
+  - **State & Reactivity**: Angular Signals (`signal`, `computed`), RxJS (`~7.8.0`)
+  - **Build & Language**: Angular CLI (`^21.2.21`), TypeScript (`~5.9.2`)
+  - **Unit Testing**: Vitest (`^4.0.8`), `@vitest/coverage-v8` (`^4.1.12`), jsdom (`^28.0.0`)
+- **Database**:
+  - Microsoft SQL Server 2022 / Azure SQL Database (`AngularAuthDb`)
+
+---
+
+## Architecture Summary
+
+VoyageHub implements a strict 3-tier backend architecture paired with an Angular SPA supporting both client-side rendering (CSR) and server-side rendering (SSR):
 
 ```mermaid
 flowchart TD
     Client["Angular 21 Client (SPA / SSR)"]
 
     subgraph Backend ["VoyageHub.Api (ASP.NET Core 10)"]
-        Controllers["Controllers (Auth, TravelRequests, Approvals, Expenses, Policies, Support, Analytics)"]
+        Controllers["Controllers (Auth, TravelRequests, Approvals, Expenses, Policies, Employees, Support, Analytics)"]
+        CurrentUser["CurrentUserService (Claims Identity)"]
         Swagger["OpenAPI / Swagger UI"]
     end
 
     subgraph Core ["VoyageHub.Business"]
-        Services["Business Services & Workflow Logic"]
-        Audit["Audit Trail Logging Engine"]
+        Services["Business Services (Workflow & State Machines)"]
+        Audit["Audit Logging Service"]
         DTOs["Data Transfer Objects (DTOs)"]
     end
 
-    subgraph Data ["VoyageHub.Data (EF Core 8)"]
+    subgraph Data ["VoyageHub.Data (EF Core 10)"]
         AppDb["AppDbContext"]
-        Repos["Generic & Custom Repositories"]
+        Repos["Specialized & Generic Repositories"]
     end
 
     Database[("Microsoft SQL Server (AngularAuthDb)")]
 
-    Client -->|REST / JSON| Controllers
+    Client -->|REST / JSON (JWT Bearer)| Controllers
+    Controllers --> CurrentUser
     Controllers --> Services
     Services --> Audit
     Services --> Repos
     Repos --> AppDb
-    AppDb -->|T-SQL| Database
+    AppDb -->|T-SQL / TDS 1433| Database
 ```
 
----
-
-## Key Features & User Personas
-
-| Persona             | Core Capabilities                                                                                                                                     |
-| :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Employee**        | Create and submit travel requests, link itinerary segments and hotel stays, claim out-of-pocket expenses, submit receipts, and open support tickets.  |
-| **Line Manager**    | Review pending team travel requests, inspect itinerary details and policy compliance flags, approve or reject with comments.                          |
-| **Finance Officer** | Second-level approval on manager-approved requests, review itemized expense claims, and execute single or batch reimbursements.                       |
-| **System Admin**    | Set department domestic and international budget limits, flight class rules, enforcement flags, view complete system audit logs, and manage accounts. |
+For complete architectural details, request lifecycles, and state machines, see [ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ---
 
-## Tech Stack
-
-- **Backend**:
-  - ASP.NET Core 10 Web API (`net10.0`)
-  - Entity Framework Core 8.0 (`Microsoft.EntityFrameworkCore.SqlServer`)
-  - BCrypt.Net-Next for password hashing
-  - Swagger / OpenAPI (`Swashbuckle.AspNetCore`)
-- **Frontend**:
-  - Angular 21 (`@angular/core` ^21.2.0)
-  - Angular Server-Side Rendering (SSR) via Express 5
-  - Role-based Route Guards
-- **Database**:
-  - Microsoft SQL Server / Azure SQL
-
----
-
-## UI Design System & Guidelines
-
-VoyageHub employs a consistent 4px-base design token scale, responsive layout primitives, unified status indicators, and keyboard-accessible form controls. See [UI Guidelines](docs/UI-GUIDELINES.md) for full token tables, layout classes, component patterns, and guidelines for adding new pages.
-
----
-
-## Repository Structure
-
-```
-Project.NET/
-├── Assets/                    # Architecture diagrams, ER models, SRS documentation
-├── VoyageHub-Backend/         # .NET 10 Solution
-│   ├── VoyageHub.Api/         # REST Controllers, Middleware, Configuration
-│   ├── VoyageHub.Business/    # Business services, validation, workflow logic, DTOs
-│   ├── VoyageHub.Data/        # EF Core DbContext, entity models, repositories
-│   └── VoyageHub.slnx         # Solution file
-├── VoyageHub-Frontend/        # Angular 21 SSR Client Application
-│   ├── src/app/admin/         # Admin policy management & audit logs
-│   ├── src/app/approvals/     # Manager & Finance approval queues
-│   ├── src/app/dashboard/     # Unified role-based dashboard
-│   ├── src/app/finance/       # Expense claims review & batch payout
-│   ├── src/app/requests/      # Travel request creation & itineraries
-│   └── src/app/support/       # Corporate desk support ticketing
-├── database/                  # Database creation and seed data scripts
-│   ├── VoyageHub_Schema.sql   # SQL Server schema and demo seed data
-│   └── run_migration.ps1      # Parameterized setup script for local SQL Server
-└── README.md                  # Project documentation
-```
-
----
-
-## Getting Started
+## Quick Start
 
 ### Prerequisites
-
-- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
-- [Node.js 20+ LTS](https://nodejs.org/) & npm 10+
-- [Angular CLI](https://angular.dev/tools/cli) (`npm install -g @angular/cli`)
-- [Microsoft SQL Server](https://www.microsoft.com/sql-server) or SQL Server Express
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) (verify with `dotnet --version`)
+- [Node.js 20+ LTS](https://nodejs.org/) and npm 10+ (verify with `node -v` and `npm -v`)
+- [Angular CLI 21](https://angular.dev/tools/cli) (`npm install -g @angular/cli`)
+- [Microsoft SQL Server](https://www.microsoft.com/sql-server) (Local SQL Server, SQL Server Express, or Azure SQL)
 
 ---
 
 ### Step 1: Database Setup
 
-1. Open SQL Server Management Studio (SSMS) or Azure Data Studio.
-2. Connect to your SQL Server instance.
-3. Open and execute the `database/VoyageHub_Schema.sql` script (or run `.\database\run_migration.ps1`). This will:
-   - Create the `AngularAuthDb` database (if not existing).
-   - Create all 9 domain tables (`USERS`, `DEPARTMENTS`, `TRAVEL_POLICIES`, `TRAVEL_REQUESTS`, `APPROVAL_STEPS`, `ITINERARY_SEGMENTS`, `STAYS`, `EXPENSES`, `SUPPORT_TICKETS`, `AUDIT_LOGS`).
-   - Populate initial seed data with departments, policies, and demo users.
+Initialize the schema and seed data:
+
+```powershell
+# Option A: Run automated PowerShell setup script against local SQLEXPRESS
+.\database\run_migration.ps1 -Server ".\SQLEXPRESS06" -Database "AngularAuthDb"
+
+# Option B: Run via sqlcmd manually
+sqlcmd -S ".\SQLEXPRESS06" -d master -E -i "database\VoyageHub_Schema.sql"
+```
+
+The script creates the `AngularAuthDb` database, defines all 10 domain tables (`USERS`, `DEPARTMENTS`, `TRAVEL_POLICIES`, `TRAVEL_REQUESTS`, `APPROVAL_STEPS`, `ITINERARY_SEGMENTS`, `STAYS`, `EXPENSES`, `SUPPORT_TICKETS`, `AUDIT_LOGS`), sets foreign key cascades, and seeds initial departments, policies, and demo users.
 
 ---
 
-### Step 2: Backend Configuration & Startup
+### Step 2: Run the Backend API
 
-1. Navigate to the API directory:
-   ```bash
-   cd VoyageHub-Backend/VoyageHub.Api
-   ```
-2. Verify or update the connection string in `appsettings.json` (see `appsettings.example.json`):
-   ```json
-   "ConnectionStrings": {
-     "DefaultConnection": "Server=localhost;Database=AngularAuthDb;Trusted_Connection=True;TrustServerCertificate=True;"
-   }
-   ```
-3. Restore packages and run the API:
-   ```bash
-   dotnet restore
-   dotnet run
-   ```
-4. Access the Swagger documentation at:
-   ```
-   https://localhost:5001/swagger or http://localhost:5000/swagger
-   ```
+```powershell
+cd VoyageHub-Backend\VoyageHub.Api
+
+# Restore dependencies and build
+dotnet restore
+dotnet build
+
+# Run API (defaults to Development environment)
+dotnet run
+```
+
+- **API Base URL**: `http://localhost:5062` (HTTP) or `https://localhost:7213` (HTTPS)
+- **Swagger UI**: Accessible in Development at `http://localhost:5062/swagger`
 
 ---
 
-### Step 3: Frontend Startup
+### Step 3: Run the Frontend Client
 
-1. Open a new terminal and navigate to the frontend directory:
-   ```bash
-   cd VoyageHub-Frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Angular development server:
-   ```bash
-   npm start
-   ```
-4. Open your browser and navigate to:
-   ```
-   http://localhost:4200
-   ```
+Open a second terminal window:
+
+```powershell
+cd VoyageHub-Frontend
+
+# Install npm dependencies
+npm install
+
+# Start development dev-server
+npm start
+```
+
+- **Client Application**: Accessible at `http://localhost:4200`
 
 ---
 
-### Demo Accounts
+### Step 4: Run Tests Locally
 
-The database seed provides ready-to-use persona accounts:
+#### Backend Tests (xUnit)
+```powershell
+dotnet test VoyageHub-Backend\VoyageHub.Tests\VoyageHub.Tests.csproj
+```
+*(Runs 77 passing unit and integration tests covering services, controllers, and authorization logic.)*
 
-| Role         | Email                       | Password      |
-| :----------- | :-------------------------- | :------------ |
-| **Admin**    | `vikram@voyagehub.internal` | `admin123`    |
-| **Manager**  | `priya@voyagehub.internal`  | `password123` |
-| **Finance**  | `rohit@voyagehub.internal`  | `password123` |
-| **Employee** | `ananya@voyagehub.internal` | `password123` |
+#### Frontend Tests (Vitest)
+```powershell
+cd VoyageHub-Frontend
+npm test
+```
+*(Runs 49 passing Vitest tests and outputs coverage report to `coverage/AngularBasics/lcov.info`.)*
 
-> [!IMPORTANT]
-> **Hosted Deployment Security Note**: The demo credentials and local seed password hashes above are strictly for local development environments using `database/VoyageHub_Schema.sql`. Cloud and hosted instances deployed using `database/VoyageHub_Schema.azure.sql` do **not** use these default passwords. In the Azure SQL schema, all seeded user `PasswordHash` values are initialized to the disabled placeholder `'DISABLED-SET-VIA-DEPLOYMENT-MD'`. For hosted environments, administrators must generate new secure password hashes using the `tools/HashPassword` utility and update the database directly via SQL (see [DEPLOYMENT.md](DEPLOYMENT.md)).
+---
+
+## Local Development Demo Accounts
+
+> [!NOTE]
+> **LOCAL DEVELOPMENT ONLY**: The credentials below apply strictly to local development environments seeded via `database/VoyageHub_Schema.sql`. For hosted and production deployments, all seed passwords are set to the disabled placeholder `'DISABLED-SET-VIA-DEPLOYMENT-MD'` in `database/VoyageHub_Schema.azure.sql` and must be initialized using `tools/HashPassword` (see [DEPLOYMENT.md](DEPLOYMENT.md) and [SECURITY.md](docs/SECURITY.md)).
+
+| Persona | Email | Local Password | Default Department |
+| :--- | :--- | :--- | :--- |
+| **System Admin** | `admin@voyagehub.in` | `VoyageHub@2026` | Administration |
+| **Line Manager** | `priya.nair@voyagehub.in` | `VoyageHub@2026` | Product Management |
+| **Finance Officer** | `vikram.mehta@voyagehub.in` | `VoyageHub@2026` | Finance & Accounts |
+| **Employee** | `aarav.patel@voyagehub.in` | `VoyageHub@2026` | Engineering |
+
+---
+
+## Code Quality & Test Metrics
+
+Both projects in VoyageHub adhere to strict SonarQube Clean as You Code (CaYC) standards without suppressions or altered rules:
+
+| Metric | Backend (`VoyageHub-Backend`) | Frontend (`VoyageHub-Frontend`) | Quality Gate Threshold | Status |
+| :--- | :---: | :---: | :---: | :---: |
+| **Quality Gate Status** | **OK (PASSED)** | **OK (PASSED)** | All conditions passing | **PASSED** |
+| **Automated Tests** | **77 passed** (0 failed) | **49 passed** (0 failed) | 100% passing | **PASSED** |
+| **Coverage on New Code** | **83.1%** | **100.0%** | $\ge 80.0\%$ | **PASSED** |
+| **Duplications on New Code** | **0.0%** | **0.0%** | $\le 3.0\%$ | **PASSED** |
+| **New Open Violations** | **0** | **0** | $= 0$ | **PASSED** |
+| **Security Rating** | **A (`1.0`)** | **A (`1.0`)** | A | **PASSED** |
+| **Reliability Rating** | **A (`1.0`)** | **A (`1.0`)** | A | **PASSED** |
+| **Maintainability Rating** | **A (`1.0`)** | **A (`1.0`)** | A | **PASSED** |
+
+For details on local Sonar scanner execution and historical quality gate remediation, see [docs/CODE-QUALITY.md](docs/CODE-QUALITY.md).
 
 ---
 
 ## Deployment Readiness
 
-VoyageHub is engineered for zero-friction cloud deployment on free tiers (Azure Static Web Apps for Angular CSR, Azure App Service F1 for the ASP.NET Core API, and Azure SQL Database Free Offer) while maintaining 100% backward compatibility with local development workflows.
+VoyageHub supports zero-friction deployment to free-tier cloud architectures as well as self-hosted container environments:
+1. **Azure Free Tiers**: Azure Static Web Apps (CSR client), Azure App Service F1 (ASP.NET Core API), and Azure SQL Database Free Offer.
+2. **MonsterASP.NET**: Single-site Windows IIS hosting serving pre-compiled static Angular assets from `wwwroot` alongside the .NET API.
+3. **Local Docker + Tunnel**: Self-hosted container deployment with Cloudflare Tunnel or ngrok for remote review.
 
-### Summary of Deployment Architecture & Changes
-- **Configurable Angular API Target**: Replaced hardcoded localhost URLs with environment-based configuration (`environment.apiUrl`). Local builds use `src/environments/environment.ts` (`http://localhost:5062/api`), while production builds use `src/environments/environment.prod.ts` via file replacements.
-- **Configurable CORS Origin Whitelist**: In production, `Cors:AllowedOrigins` restricts incoming requests strictly to the configured domain (`Cors__AllowedOrigins__0`), isolating cloud instances from untrusted origins.
-- **Environment Variable Overrides & Fail-Fast Startup**: Database connections (`ConnectionStrings__DefaultConnection`) and JWT signing keys (`Jwt__Key`) are fully configurable via standard environment variables. In non-Development environments, the API enforces startup fail-fast validation (missing/invalid connection string or JWT key < 32 characters aborts immediately without logging secrets).
-- **Static Web App Hosting**: Added a dedicated browser-only client-side rendered build script (`npm run build:static`) and Azure Static Web Apps configuration (`staticwebapp.config.json`) with navigation fallback routing for deep URLs.
-- **Token-Based Identity & Authorization**: Replaced client-supplied ID parameters (`employeeId`, `approverId`, `role`) with token-derived caller context via `ICurrentUserService`. Employees are restricted strictly to their own requests and stats; Managers see their own and direct reports' data; and approval queues are scoped strictly to the caller's authenticated persona.
-- **Configuration-Driven Swagger UI**: Controlled via `Swagger:Enabled` (defaults to `true` in Development, `false` in Production). When disabled, Swagger UI is unmapped and the root route returns an HTTP 200 text status.
-- **Resilient Database Operations**: Configured `EnableRetryOnFailure` on the SQL Server provider for transient error resiliency against Azure SQL auto-pausing.
-- **Cloud Database Schema**: Provided `database/VoyageHub_Schema.azure.sql` (stripped of `CREATE DATABASE`/`USE`) with disabled seed hashes (`DISABLED-SET-VIA-DEPLOYMENT-MD`) paired with `tools/HashPassword` for secure credential provisioning.
+Key production safeguards:
+- **Startup Fail-Fast Validation**: Aborts startup in production if connection strings are missing or if `Jwt:Key` is shorter than 32 characters (256 bits).
+- **Environment-based CORS Isolation**: Excludes localhost origins by default in production and restricts access strictly to configured origins (`Cors__AllowedOrigins__0`).
+- **Resilient Database Retries**: `EnableRetryOnFailure` is configured on EF Core to survive cloud database cold starts.
 
-For detailed instructions, guides, and full configuration matrices, refer to:
-- [DEPLOYMENT.md](DEPLOYMENT.md) - Complete step-by-step free Azure deployment guide.
-- [docs/CONFIGURATION.md](docs/CONFIGURATION.md) - Comprehensive configuration parameters and environment variables matrix.
-- [CHANGELOG.md](CHANGELOG.md) - History of tasks, commits, and changes.
-
-### Local Development (Unchanged)
-Local development continues to work without modification:
-- **Backend API**: `dotnet run --project VoyageHub.Api` on port `5062` (reads from `appsettings.Development.json` / LocalDB or local SQL Server Express, and user-secrets).
-- **Frontend Client**: `npm start` on port `4200` with local SSR and development live-reloading.
-- **Database**: `database/VoyageHub_Schema.sql` remains intact for local development.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for step-by-step guides, configuration keys, and pre-demo checklists.
 
 ---
 
-## Author
+## Project Status & Known Limitations
 
-- **Rajat Pandya** ([@Rajat-Pandya](https://github.com/Rajat-Pandya))
+- **Production Status**: Production-ready core with end-to-end travel request, approval, expense, employee management, and audit logging workflows implemented and verified with automated tests.
+- **Simulated Third-Party Integrations**: External flight/hotel booking GDS engines and banking payout rails are intentionally simulated within domain services per design requirements; no real financial charges or live flight bookings occur.
+- **Client Token Storage**: JWT tokens are currently stored in browser `localStorage` by the Angular client. See [SECURITY.md](docs/SECURITY.md) for mitigation analysis.
+- **Swagger in Production**: Swagger UI is disabled by default in non-Development environments (`Swagger:Enabled: false`); the root endpoint `/` returns a lightweight HTTP 200 health check string.
 
-## License
+---
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Documentation Index
+
+- **Architecture & Design**:
+  - [ARCHITECTURE.md](docs/ARCHITECTURE.md) — System layers, request flows, authentication lifecycles, and approval state machine.
+  - [DATABASE.md](docs/DATABASE.md) — Entity-relationship diagram, table schemas, seed data, and migration workflows.
+  - [UI-GUIDELINES.md](docs/UI-GUIDELINES.md) — 4px spacing tokens, typography, layout primitives, and component patterns.
+  - [decisions/](docs/decisions/) — Architecture Decision Records (ADRs) for key technical choices.
+- **API & Security**:
+  - [API.md](docs/API.md) — Complete endpoint catalog, HTTP verbs, role requirements, and payload shapes.
+  - [SECURITY.md](docs/SECURITY.md) — JWT authentication, role-based access matrix, password hashing, and CORS isolation.
+  - [CONFIGURATION.md](docs/CONFIGURATION.md) — Environment variables, appsettings keys, and precedence hierarchy.
+- **Operations & Verification**:
+  - [DEPLOYMENT.md](DEPLOYMENT.md) — Azure free-tier guide, MonsterASP.NET guide, Docker setup, and pre-demo checklist.
+  - [TESTING.md](docs/TESTING.md) — xUnit and Vitest test suites, test catalog, and code coverage workflows.
+  - [CODE-QUALITY.md](docs/CODE-QUALITY.md) — SonarQube setup, scan commands, and Quality Gate metrics.
+  - [REQUIREMENTS-TRACEABILITY.md](docs/REQUIREMENTS-TRACEABILITY.md) — Mapping original specifications to implementation files and tests.
+  - [DEMO.md](docs/DEMO.md) — Guided role-based demonstration scripts and warm-up checklist.
+  - [GIT-WORKFLOW.md](docs/GIT-WORKFLOW.md) — Branching models, Conventional Commits, tags, and PR standards.
+  - [CONTRIBUTING.md](CONTRIBUTING.md) — Guidelines for contributing code and running pre-flight checks.
+  - [CHANGELOG.md](CHANGELOG.md) — Chronological history of releases and milestones.
+  - [context.md](context.md) — Formal system context and acceptance criteria specification.
