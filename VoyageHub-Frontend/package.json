@@ -7,7 +7,7 @@
     "build": "ng build",
     "build:static": "ng build --configuration static",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --no-watch --coverage --coverage-reporters=lcov",
     "serve:ssr:AngularBasics": "node dist/AngularBasics/server/server.mjs"
   },
   "private": true,
@@ -31,6 +31,7 @@
     "@angular/compiler-cli": "^21.2.0",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
+    "@vitest/coverage-v8": "^4.1.12",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
