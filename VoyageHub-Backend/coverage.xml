@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <results>
   <modules>
-    <module id="DCE63A568E871B48A59040204CF451E81D59B1B1" name="VoyageHub.Tests.dll" path="VoyageHub.Tests.dll" block_coverage="83.50" line_coverage="75.97" blocks_covered="2986" blocks_not_covered="590" lines_covered="1413" lines_partially_covered="63" lines_not_covered="384">
+    <module id="ECB126BB6059F84C925FD4570B5F625634E8CFC5" name="VoyageHub.Tests.dll" path="VoyageHub.Tests.dll" block_coverage="83.72" line_coverage="76.34" blocks_covered="3035" blocks_not_covered="590" lines_covered="1442" lines_partially_covered="63" lines_not_covered="384">
       <functions>
         <function id="8284" token="0x6000003" name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlComment(string, string, string, string, string, bool, System.Collections.Generic.List&lt;string&gt;, System.Collections.Generic.List&lt;Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlParameterComment&gt;, System.Collections.Generic.List&lt;Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlResponseComment&gt;)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlComment" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="10">
           <ranges>
@@ -632,7 +632,40 @@
             <range source_id="7" start_line="61" end_line="61" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="20740" token="0x6000098" name="ExpenseServiceTests()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="32" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
+        <function id="20808" token="0x6000099" name="GetProofFile_EmptyFileName_ReturnsBadRequest()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="7" start_line="291" end_line="291" start_column="5" end_column="6" covered="yes" />
+            <range source_id="7" start_line="292" end_line="292" start_column="9" end_column="51" covered="yes" />
+            <range source_id="7" start_line="294" end_line="294" start_column="9" end_column="72" covered="yes" />
+            <range source_id="7" start_line="295" end_line="295" start_column="9" end_column="42" covered="yes" />
+            <range source_id="7" start_line="296" end_line="296" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="20860" token="0x600009a" name="GetProofFile_FileNotFound_ReturnsNotFound()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="7" start_line="300" end_line="300" start_column="5" end_column="6" covered="yes" />
+            <range source_id="7" start_line="301" end_line="301" start_column="9" end_column="74" covered="yes" />
+            <range source_id="7" start_line="303" end_line="303" start_column="9" end_column="68" covered="yes" />
+            <range source_id="7" start_line="304" end_line="304" start_column="9" end_column="40" covered="yes" />
+            <range source_id="7" start_line="305" end_line="305" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="20912" token="0x600009b" name="GetProofFile_FileExists_ReturnsFileStreamResult()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="14" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="7" start_line="309" end_line="309" start_column="5" end_column="6" covered="yes" />
+            <range source_id="7" start_line="310" end_line="310" start_column="9" end_column="80" covered="yes" />
+            <range source_id="7" start_line="311" end_line="311" start_column="9" end_column="48" covered="yes" />
+            <range source_id="7" start_line="312" end_line="312" start_column="9" end_column="76" covered="yes" />
+            <range source_id="7" start_line="313" end_line="313" start_column="9" end_column="81" covered="yes" />
+            <range source_id="7" start_line="315" end_line="315" start_column="9" end_column="69" covered="yes" />
+            <range source_id="7" start_line="317" end_line="317" start_column="9" end_column="66" covered="yes" />
+            <range source_id="7" start_line="318" end_line="318" start_column="9" end_column="65" covered="yes" />
+            <range source_id="7" start_line="319" end_line="319" start_column="9" end_column="73" covered="yes" />
+            <range source_id="7" start_line="320" end_line="320" start_column="9" end_column="41" covered="yes" />
+            <range source_id="7" start_line="321" end_line="321" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="21064" token="0x600009c" name="ExpenseServiceTests()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="32" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="21" end_line="21" start_column="5" end_column="33" covered="yes" />
             <range source_id="8" start_line="22" end_line="22" start_column="5" end_column="6" covered="yes" />
@@ -646,7 +679,7 @@
             <range source_id="8" start_line="35" end_line="35" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="21828" token="0x60000a4" name="PolicyServiceTests()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="25" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="22152" token="0x60000a8" name="PolicyServiceTests()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="25" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="9" start_line="21" end_line="21" start_column="5" end_column="32" covered="yes" />
             <range source_id="9" start_line="22" end_line="22" start_column="5" end_column="6" covered="yes" />
@@ -659,7 +692,7 @@
             <range source_id="9" start_line="31" end_line="31" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="22364" token="0x60000a9" name="SqlServerConfiguration_EnablesExecutionStrategyAndTransientRetries()" namespace="VoyageHub.Tests" type_name="RetryPolicyTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="15" blocks_not_covered="0" lines_covered="16" lines_partially_covered="0" lines_not_covered="0">
+        <function id="22688" token="0x60000ad" name="SqlServerConfiguration_EnablesExecutionStrategyAndTransientRetries()" namespace="VoyageHub.Tests" type_name="RetryPolicyTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="15" blocks_not_covered="0" lines_covered="16" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="10" start_line="13" end_line="13" start_column="5" end_column="6" covered="yes" />
             <range source_id="10" start_line="14" end_line="14" start_column="9" end_column="48" covered="yes" />
@@ -672,7 +705,7 @@
             <range source_id="10" start_line="30" end_line="30" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="22512" token="0x60000ab" name="TravelRequestValidationTests()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="17" lines_partially_covered="0" lines_not_covered="0">
+        <function id="22836" token="0x60000af" name="TravelRequestValidationTests()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="17" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="11" start_line="22" end_line="22" start_column="5" end_column="42" covered="yes" />
             <range source_id="11" start_line="23" end_line="23" start_column="5" end_column="6" covered="yes" />
@@ -687,37 +720,37 @@
             <range source_id="11" start_line="41" end_line="41" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="23109" token="0x60000b1" name="&lt;TransformAsync&gt;b__0(System.Reflection.ParameterInfo)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlCommentOperationTransformer.&lt;&gt;c__DisplayClass0_0" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+        <function id="23433" token="0x60000b5" name="&lt;TransformAsync&gt;b__0(System.Reflection.ParameterInfo)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlCommentOperationTransformer.&lt;&gt;c__DisplayClass0_0" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
           <ranges>
             <range source_id="0" start_line="372" end_line="372" start_column="96" end_column="130" covered="no" />
           </ranges>
         </function>
-        <function id="23133" token="0x60000b2" name="&lt;TransformAsync&gt;b__1(Microsoft.OpenApi.IOpenApiParameter)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlCommentOperationTransformer.&lt;&gt;c__DisplayClass0_0" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+        <function id="23457" token="0x60000b6" name="&lt;TransformAsync&gt;b__1(Microsoft.OpenApi.IOpenApiParameter)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlCommentOperationTransformer.&lt;&gt;c__DisplayClass0_0" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
           <ranges>
             <range source_id="0" start_line="373" end_line="373" start_column="101" end_column="140" covered="no" />
           </ranges>
         </function>
-        <function id="23166" token="0x60000b4" name="&lt;TransformAsync&gt;b__2(Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlResponseComment)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlCommentOperationTransformer.&lt;&gt;c__DisplayClass0_1" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+        <function id="23490" token="0x60000b8" name="&lt;TransformAsync&gt;b__2(Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlResponseComment)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlCommentOperationTransformer.&lt;&gt;c__DisplayClass0_1" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
           <ranges>
             <range source_id="0" start_line="417" end_line="417" start_column="102" end_column="134" covered="no" />
           </ranges>
         </function>
-        <function id="23199" token="0x60000b6" name="&lt;TransformAsync&gt;b__3(Microsoft.OpenApi.IOpenApiParameter)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlCommentOperationTransformer.&lt;&gt;c__DisplayClass0_2" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+        <function id="23523" token="0x60000ba" name="&lt;TransformAsync&gt;b__3(Microsoft.OpenApi.IOpenApiParameter)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlCommentOperationTransformer.&lt;&gt;c__DisplayClass0_2" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="4" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
           <ranges>
             <range source_id="0" start_line="436" end_line="436" start_column="84" end_column="107" covered="no" />
           </ranges>
         </function>
-        <function id="23244" token="0x60000b9" name="&lt;TravelRequest_Creation_OverBudget_SetsInReview_Flagged_CodeTRFormat_AndCreatesApprovalSteps&gt;b__12_0(VoyageHub.Data.Entities.ApprovalStep)" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+        <function id="23568" token="0x60000bd" name="&lt;TravelRequest_Creation_OverBudget_SetsInReview_Flagged_CodeTRFormat_AndCreatesApprovalSteps&gt;b__12_0(VoyageHub.Data.Entities.ApprovalStep)" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="1" start_line="167" end_line="167" start_column="53" end_column="73" covered="yes" />
           </ranges>
         </function>
-        <function id="23262" token="0x60000ba" name="&lt;TravelRequest_Creation_OverBudget_SetsInReview_Flagged_CodeTRFormat_AndCreatesApprovalSteps&gt;b__12_1(VoyageHub.Data.Entities.ApprovalStep)" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+        <function id="23586" token="0x60000be" name="&lt;TravelRequest_Creation_OverBudget_SetsInReview_Flagged_CodeTRFormat_AndCreatesApprovalSteps&gt;b__12_1(VoyageHub.Data.Entities.ApprovalStep)" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="1" start_line="168" end_line="168" start_column="53" end_column="73" covered="yes" />
           </ranges>
         </function>
-        <function id="23300" token="0x60000bd" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;Expense_Approve_And_BatchPayout_SuccessfullyReimburses&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="81" blocks_not_covered="0" lines_covered="63" lines_partially_covered="0" lines_not_covered="0">
+        <function id="23624" token="0x60000c1" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;Expense_Approve_And_BatchPayout_SuccessfullyReimburses&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="81" blocks_not_covered="0" lines_covered="63" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="1" start_line="215" end_line="215" start_column="5" end_column="6" covered="yes" />
             <range source_id="1" start_line="217" end_line="217" start_column="9" end_column="36" covered="yes" />
@@ -743,7 +776,7 @@
             <range source_id="1" start_line="289" end_line="289" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="25096" token="0x60000c0" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;SupportTicket_CreateTicket_GeneratesCodeInFormatHashTickPlusFourDigits&gt;d__15" block_coverage="100.00" line_coverage="100.00" blocks_covered="16" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
+        <function id="25420" token="0x60000c4" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;SupportTicket_CreateTicket_GeneratesCodeInFormatHashTickPlusFourDigits&gt;d__15" block_coverage="100.00" line_coverage="100.00" blocks_covered="16" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="1" start_line="293" end_line="293" start_column="5" end_column="6" covered="yes" />
             <range source_id="1" start_line="295" end_line="301" start_column="9" end_column="11" covered="yes" />
@@ -755,7 +788,7 @@
             <range source_id="1" start_line="313" end_line="313" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="25592" token="0x60000c3" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;TravelRequest_Creation_OverBudget_SetsInReview_Flagged_CodeTRFormat_AndCreatesApprovalSteps&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="119" blocks_not_covered="0" lines_covered="78" lines_partially_covered="0" lines_not_covered="0">
+        <function id="25916" token="0x60000c7" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;TravelRequest_Creation_OverBudget_SetsInReview_Flagged_CodeTRFormat_AndCreatesApprovalSteps&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="119" blocks_not_covered="0" lines_covered="78" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="1" start_line="78" end_line="78" start_column="5" end_column="6" covered="yes" />
             <range source_id="1" start_line="80" end_line="80" start_column="9" end_column="37" covered="yes" />
@@ -784,7 +817,7 @@
             <range source_id="1" start_line="169" end_line="169" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="27500" token="0x60000c6" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;TravelRequest_SubmitDraftAsync_OnlyAllowedForDraftStatus&gt;d__13" block_coverage="100.00" line_coverage="100.00" blocks_covered="43" blocks_not_covered="0" lines_covered="32" lines_partially_covered="0" lines_not_covered="0">
+        <function id="27824" token="0x60000ca" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AcceptanceCriteriaTests.&lt;TravelRequest_SubmitDraftAsync_OnlyAllowedForDraftStatus&gt;d__13" block_coverage="100.00" line_coverage="100.00" blocks_covered="43" blocks_not_covered="0" lines_covered="32" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="1" start_line="173" end_line="173" start_column="5" end_column="6" covered="yes" />
             <range source_id="1" start_line="175" end_line="175" start_column="9" end_column="36" covered="yes" />
@@ -799,7 +832,7 @@
             <range source_id="1" start_line="211" end_line="211" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="28420" token="0x60000cf" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ApprovalServiceTests.&lt;TakeActionAsync_FinanceApprove_SetsRequestStatusToApproved&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="54" blocks_not_covered="0" lines_covered="28" lines_partially_covered="0" lines_not_covered="0">
+        <function id="28744" token="0x60000d3" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ApprovalServiceTests.&lt;TakeActionAsync_FinanceApprove_SetsRequestStatusToApproved&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="54" blocks_not_covered="0" lines_covered="28" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="2" start_line="116" end_line="116" start_column="5" end_column="6" covered="yes" />
             <range source_id="2" start_line="118" end_line="118" start_column="9" end_column="40" covered="yes" />
@@ -815,7 +848,7 @@
             <range source_id="2" start_line="151" end_line="151" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="29376" token="0x60000d2" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ApprovalServiceTests.&lt;TakeActionAsync_ManagerApprove_RoutesToFinanceReviewAndActivatesFinanceStep&gt;d__6" block_coverage="96.43" line_coverage="80.00" blocks_covered="108" blocks_not_covered="4" lines_covered="40" lines_partially_covered="10" lines_not_covered="0">
+        <function id="29700" token="0x60000d6" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ApprovalServiceTests.&lt;TakeActionAsync_ManagerApprove_RoutesToFinanceReviewAndActivatesFinanceStep&gt;d__6" block_coverage="96.43" line_coverage="80.00" blocks_covered="108" blocks_not_covered="4" lines_covered="40" lines_partially_covered="10" lines_not_covered="0">
           <ranges>
             <range source_id="2" start_line="52" end_line="52" start_column="5" end_column="6" covered="yes" />
             <range source_id="2" start_line="54" end_line="54" start_column="9" end_column="40" covered="yes" />
@@ -836,7 +869,7 @@
             <range source_id="2" start_line="112" end_line="112" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="30988" token="0x60000d5" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ApprovalServiceTests.&lt;TakeActionAsync_Reject_CancelsRemainingStepsAndMarksRequestRejected&gt;d__8" block_coverage="98.06" line_coverage="80.85" blocks_covered="101" blocks_not_covered="2" lines_covered="38" lines_partially_covered="9" lines_not_covered="0">
+        <function id="31312" token="0x60000d9" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ApprovalServiceTests.&lt;TakeActionAsync_Reject_CancelsRemainingStepsAndMarksRequestRejected&gt;d__8" block_coverage="98.06" line_coverage="80.85" blocks_covered="101" blocks_not_covered="2" lines_covered="38" lines_partially_covered="9" lines_not_covered="0">
           <ranges>
             <range source_id="2" start_line="155" end_line="155" start_column="5" end_column="6" covered="yes" />
             <range source_id="2" start_line="157" end_line="157" start_column="9" end_column="40" covered="yes" />
@@ -855,7 +888,7 @@
             <range source_id="2" start_line="212" end_line="212" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="32476" token="0x60000d8" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ApprovalServiceTests.&lt;TakeActionAsync_WhenStepNotFound_ReturnsFalse&gt;d__5" block_coverage="100.00" line_coverage="100.00" blocks_covered="24" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="32800" token="0x60000dc" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ApprovalServiceTests.&lt;TakeActionAsync_WhenStepNotFound_ReturnsFalse&gt;d__5" block_coverage="100.00" line_coverage="100.00" blocks_covered="24" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="2" start_line="35" end_line="35" start_column="5" end_column="6" covered="yes" />
             <range source_id="2" start_line="37" end_line="37" start_column="9" end_column="37" covered="yes" />
@@ -866,7 +899,7 @@
             <range source_id="2" start_line="48" end_line="48" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="33084" token="0x60000de" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthorizationTests.&lt;Employee_CannotFetchAnotherRolesQueue_ReturnsEmptyResult&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="48" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
+        <function id="33408" token="0x60000e2" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthorizationTests.&lt;Employee_CannotFetchAnotherRolesQueue_ReturnsEmptyResult&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="48" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="3" start_line="121" end_line="121" start_column="5" end_column="6" covered="yes" />
             <range source_id="3" start_line="125" end_line="125" start_column="9" end_column="41" covered="yes" />
@@ -881,7 +914,7 @@
             <range source_id="3" start_line="143" end_line="143" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="33872" token="0x60000e1" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthorizationTests.&lt;Employee_CannotReadAnotherEmployeesRequest_ReturnsForbidOrNull&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="51" blocks_not_covered="0" lines_covered="26" lines_partially_covered="0" lines_not_covered="0">
+        <function id="34196" token="0x60000e5" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthorizationTests.&lt;Employee_CannotReadAnotherEmployeesRequest_ReturnsForbidOrNull&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="51" blocks_not_covered="0" lines_covered="26" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="3" start_line="56" end_line="56" start_column="5" end_column="6" covered="yes" />
             <range source_id="3" start_line="59" end_line="59" start_column="9" end_column="42" covered="yes" />
@@ -897,7 +930,7 @@
             <range source_id="3" start_line="91" end_line="91" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="34744" token="0x60000e4" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthorizationTests.&lt;Employee_CannotReadAnotherEmployeesStats_ReturnsForbid&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="31" blocks_not_covered="0" lines_covered="15" lines_partially_covered="0" lines_not_covered="0">
+        <function id="35068" token="0x60000e8" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthorizationTests.&lt;Employee_CannotReadAnotherEmployeesStats_ReturnsForbid&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="31" blocks_not_covered="0" lines_covered="15" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="3" start_line="95" end_line="95" start_column="5" end_column="6" covered="yes" />
             <range source_id="3" start_line="98" end_line="98" start_column="9" end_column="42" covered="yes" />
@@ -910,7 +943,7 @@
             <range source_id="3" start_line="117" end_line="117" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="35344" token="0x60000e9" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthServiceTests.&lt;Login_WhenPasswordHashIsPlaintext_CannotLogInWithPlaintext&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="27" blocks_not_covered="0" lines_covered="21" lines_partially_covered="0" lines_not_covered="0">
+        <function id="35668" token="0x60000ed" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthServiceTests.&lt;Login_WhenPasswordHashIsPlaintext_CannotLogInWithPlaintext&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="27" blocks_not_covered="0" lines_covered="21" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="4" start_line="119" end_line="119" start_column="5" end_column="6" covered="yes" />
             <range source_id="4" start_line="121" end_line="129" start_column="9" end_column="11" covered="yes" />
@@ -923,7 +956,7 @@
             <range source_id="4" start_line="144" end_line="144" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="36008" token="0x60000ec" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthServiceTests.&lt;Login_WithCorrectPassword_WhenHashIsBCrypt_IsAcceptedWith200&gt;d__13" block_coverage="96.97" line_coverage="95.45" blocks_covered="32" blocks_not_covered="1" lines_covered="21" lines_partially_covered="1" lines_not_covered="0">
+        <function id="36332" token="0x60000f0" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthServiceTests.&lt;Login_WithCorrectPassword_WhenHashIsBCrypt_IsAcceptedWith200&gt;d__13" block_coverage="96.97" line_coverage="95.45" blocks_covered="32" blocks_not_covered="1" lines_covered="21" lines_partially_covered="1" lines_not_covered="0">
           <ranges>
             <range source_id="4" start_line="148" end_line="148" start_column="5" end_column="6" covered="yes" />
             <range source_id="4" start_line="150" end_line="158" start_column="9" end_column="11" covered="yes" />
@@ -937,7 +970,7 @@
             <range source_id="4" start_line="174" end_line="174" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="36708" token="0x60000ef" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthServiceTests.&lt;Login_WithEmptyEmailOrPassword_Returns400WithDocumentedMessage&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="24" blocks_not_covered="0" lines_covered="18" lines_partially_covered="0" lines_not_covered="0">
+        <function id="37032" token="0x60000f3" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthServiceTests.&lt;Login_WithEmptyEmailOrPassword_Returns400WithDocumentedMessage&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="24" blocks_not_covered="0" lines_covered="18" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="4" start_line="63" end_line="63" start_column="5" end_column="6" covered="yes" />
             <range source_id="4" start_line="65" end_line="69" start_column="9" end_column="12" covered="yes" />
@@ -951,7 +984,7 @@
             <range source_id="4" start_line="86" end_line="86" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="37416" token="0x60000f2" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthServiceTests.&lt;Login_WithWrongPassword_IsRejectedWith401&gt;d__11" block_coverage="100.00" line_coverage="100.00" blocks_covered="28" blocks_not_covered="0" lines_covered="21" lines_partially_covered="0" lines_not_covered="0">
+        <function id="37740" token="0x60000f6" name="MoveNext()" namespace="VoyageHub.Tests" type_name="AuthServiceTests.&lt;Login_WithWrongPassword_IsRejectedWith401&gt;d__11" block_coverage="100.00" line_coverage="100.00" blocks_covered="28" blocks_not_covered="0" lines_covered="21" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="4" start_line="90" end_line="90" start_column="5" end_column="6" covered="yes" />
             <range source_id="4" start_line="92" end_line="100" start_column="9" end_column="11" covered="yes" />
@@ -964,7 +997,7 @@
             <range source_id="4" start_line="115" end_line="115" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="38180" token="0x60000ff" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;BatchUpload_EmptyFile_ReturnsBadRequest&gt;d__13" block_coverage="100.00" line_coverage="100.00" blocks_covered="13" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+        <function id="38504" token="0x6000103" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;BatchUpload_EmptyFile_ReturnsBadRequest&gt;d__13" block_coverage="100.00" line_coverage="100.00" blocks_covered="13" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="175" end_line="175" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="176" end_line="176" start_column="9" end_column="102" covered="yes" />
@@ -974,7 +1007,7 @@
             <range source_id="5" start_line="182" end_line="182" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="38540" token="0x6000102" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;BatchUpload_NonCsvFile_ReturnsBadRequest&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="12" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+        <function id="38864" token="0x6000106" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;BatchUpload_NonCsvFile_ReturnsBadRequest&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="12" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="164" end_line="164" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="165" end_line="165" start_column="9" end_column="102" covered="yes" />
@@ -984,7 +1017,7 @@
             <range source_id="5" start_line="171" end_line="171" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="38908" token="0x6000105" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;BatchUpload_NullFile_ReturnsBadRequest&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+        <function id="39232" token="0x6000109" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;BatchUpload_NullFile_ReturnsBadRequest&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="186" end_line="186" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="187" end_line="187" start_column="9" end_column="82" covered="yes" />
@@ -992,7 +1025,7 @@
             <range source_id="5" start_line="190" end_line="190" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="39180" token="0x6000108" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;BatchUpload_ValidCsv_ReturnsOkResult&gt;d__15" block_coverage="100.00" line_coverage="100.00" blocks_covered="31" blocks_not_covered="0" lines_covered="16" lines_partially_covered="0" lines_not_covered="0">
+        <function id="39504" token="0x600010c" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;BatchUpload_ValidCsv_ReturnsOkResult&gt;d__15" block_coverage="100.00" line_coverage="100.00" blocks_covered="31" blocks_not_covered="0" lines_covered="16" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="194" end_line="194" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="195" end_line="195" start_column="9" end_column="112" covered="yes" />
@@ -1005,7 +1038,7 @@
             <range source_id="5" start_line="213" end_line="213" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="39804" token="0x600010b" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;CreateEmployee_ServiceFails_ReturnsBadRequest&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="28" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="40128" token="0x600010f" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;CreateEmployee_ServiceFails_ReturnsBadRequest&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="28" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="91" end_line="91" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="92" end_line="92" start_column="9" end_column="74" covered="yes" />
@@ -1016,7 +1049,7 @@
             <range source_id="5" start_line="101" end_line="101" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="40368" token="0x600010e" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;CreateEmployee_ValidDto_ReturnsCreatedAtAction&gt;d__6" block_coverage="100.00" line_coverage="100.00" blocks_covered="35" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
+        <function id="40692" token="0x6000112" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;CreateEmployee_ValidDto_ReturnsCreatedAtAction&gt;d__6" block_coverage="100.00" line_coverage="100.00" blocks_covered="35" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="75" end_line="75" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="76" end_line="76" start_column="9" end_column="104" covered="yes" />
@@ -1028,7 +1061,7 @@
             <range source_id="5" start_line="87" end_line="87" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="41028" token="0x6000111" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;DeleteEmployee_ServiceFails_ReturnsBadRequest&gt;d__11" block_coverage="100.00" line_coverage="100.00" blocks_covered="25" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="41352" token="0x6000115" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;DeleteEmployee_ServiceFails_ReturnsBadRequest&gt;d__11" block_coverage="100.00" line_coverage="100.00" blocks_covered="25" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="150" end_line="150" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="151" end_line="151" start_column="9" end_column="33" covered="yes" />
@@ -1039,7 +1072,7 @@
             <range source_id="5" start_line="160" end_line="160" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="41560" token="0x6000114" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;DeleteEmployee_ValidId_ReturnsOk&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="25" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="41884" token="0x6000118" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;DeleteEmployee_ValidId_ReturnsOk&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="25" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="136" end_line="136" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="137" end_line="137" start_column="9" end_column="33" covered="yes" />
@@ -1050,7 +1083,7 @@
             <range source_id="5" start_line="146" end_line="146" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="42092" token="0x6000117" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;GetEmployeeById_Found_ReturnsOk&gt;d__4" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
+        <function id="42416" token="0x600011b" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;GetEmployeeById_Found_ReturnsOk&gt;d__4" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="47" end_line="47" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="48" end_line="48" start_column="9" end_column="33" covered="yes" />
@@ -1062,7 +1095,7 @@
             <range source_id="5" start_line="58" end_line="58" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="42712" token="0x600011a" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;GetEmployeeById_NotFound_ReturnsNotFound&gt;d__5" block_coverage="100.00" line_coverage="100.00" blocks_covered="23" blocks_not_covered="0" lines_covered="8" lines_partially_covered="0" lines_not_covered="0">
+        <function id="43036" token="0x600011e" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;GetEmployeeById_NotFound_ReturnsNotFound&gt;d__5" block_coverage="100.00" line_coverage="100.00" blocks_covered="23" blocks_not_covered="0" lines_covered="8" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="62" end_line="62" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="63" end_line="63" start_column="9" end_column="33" covered="yes" />
@@ -1072,7 +1105,7 @@
             <range source_id="5" start_line="71" end_line="71" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="43204" token="0x600011d" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;GetEmployees_ReturnsOkWithList&gt;d__3" block_coverage="100.00" line_coverage="100.00" blocks_covered="34" blocks_not_covered="0" lines_covered="12" lines_partially_covered="0" lines_not_covered="0">
+        <function id="43528" token="0x6000121" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;GetEmployees_ReturnsOkWithList&gt;d__3" block_coverage="100.00" line_coverage="100.00" blocks_covered="34" blocks_not_covered="0" lines_covered="12" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="30" end_line="30" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="31" end_line="34" start_column="9" end_column="11" covered="yes" />
@@ -1083,7 +1116,7 @@
             <range source_id="5" start_line="43" end_line="43" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="43796" token="0x6000120" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;UpdateEmployee_ServiceFails_ReturnsBadRequest&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="32" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
+        <function id="44120" token="0x6000124" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;UpdateEmployee_ServiceFails_ReturnsBadRequest&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="32" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="121" end_line="121" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="122" end_line="122" start_column="9" end_column="33" covered="yes" />
@@ -1095,7 +1128,7 @@
             <range source_id="5" start_line="132" end_line="132" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="44412" token="0x6000123" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;UpdateEmployee_ValidDto_ReturnsOk&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="35" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
+        <function id="44736" token="0x6000127" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeesControllerTests.&lt;UpdateEmployee_ValidDto_ReturnsOk&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="35" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="5" start_line="105" end_line="105" start_column="5" end_column="6" covered="yes" />
             <range source_id="5" start_line="106" end_line="106" start_column="9" end_column="33" covered="yes" />
@@ -1108,7 +1141,7 @@
             <range source_id="5" start_line="117" end_line="117" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="45128" token="0x6000129" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;BatchUploadCsvAsync_ValidCsvStream_CreatesEmployees&gt;d__16" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
+        <function id="45452" token="0x600012d" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;BatchUploadCsvAsync_ValidCsvStream_CreatesEmployees&gt;d__16" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="263" end_line="263" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="264" end_line="266" start_column="9" end_column="76" covered="yes" />
@@ -1123,7 +1156,7 @@
             <range source_id="6" start_line="278" end_line="278" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="45872" token="0x600012c" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;CreateEmployeeAsync_DuplicateEmail_ReturnsFailure&gt;d__11" block_coverage="100.00" line_coverage="100.00" blocks_covered="26" blocks_not_covered="0" lines_covered="22" lines_partially_covered="0" lines_not_covered="0">
+        <function id="46196" token="0x6000130" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;CreateEmployeeAsync_DuplicateEmail_ReturnsFailure&gt;d__11" block_coverage="100.00" line_coverage="100.00" blocks_covered="26" blocks_not_covered="0" lines_covered="22" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="123" end_line="123" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="124" end_line="131" start_column="9" end_column="11" covered="yes" />
@@ -1137,7 +1170,7 @@
             <range source_id="6" start_line="147" end_line="147" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="46700" token="0x600012f" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;CreateEmployeeAsync_EmptyName_ReturnsFailure&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="11" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
+        <function id="47024" token="0x6000133" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;CreateEmployeeAsync_EmptyName_ReturnsFailure&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="11" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="91" end_line="91" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="92" end_line="96" start_column="9" end_column="11" covered="yes" />
@@ -1148,7 +1181,7 @@
             <range source_id="6" start_line="103" end_line="103" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="47148" token="0x6000132" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;CreateEmployeeAsync_InvalidEmail_ReturnsFailure&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="11" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
+        <function id="47472" token="0x6000136" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;CreateEmployeeAsync_InvalidEmail_ReturnsFailure&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="11" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="107" end_line="107" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="108" end_line="112" start_column="9" end_column="11" covered="yes" />
@@ -1159,7 +1192,7 @@
             <range source_id="6" start_line="119" end_line="119" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="47596" token="0x6000135" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;CreateEmployeeAsync_ValidInput_CreatesEmployeeAndDepartment&gt;d__8" block_coverage="97.67" line_coverage="94.74" blocks_covered="42" blocks_not_covered="1" lines_covered="18" lines_partially_covered="1" lines_not_covered="0">
+        <function id="47920" token="0x6000139" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;CreateEmployeeAsync_ValidInput_CreatesEmployeeAndDepartment&gt;d__8" block_coverage="97.67" line_coverage="94.74" blocks_covered="42" blocks_not_covered="1" lines_covered="18" lines_partially_covered="1" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="65" end_line="65" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="66" end_line="73" start_column="9" end_column="11" covered="yes" />
@@ -1175,7 +1208,7 @@
             <range source_id="6" start_line="87" end_line="87" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="48500" token="0x6000138" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;DeleteEmployeeAsync_SelfDeletion_ReturnsError&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="23" blocks_not_covered="0" lines_covered="16" lines_partially_covered="0" lines_not_covered="0">
+        <function id="48824" token="0x600013c" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;DeleteEmployeeAsync_SelfDeletion_ReturnsError&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="23" blocks_not_covered="0" lines_covered="16" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="211" end_line="211" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="212" end_line="212" start_column="9" end_column="74" covered="yes" />
@@ -1188,7 +1221,7 @@
             <range source_id="6" start_line="228" end_line="228" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="49260" token="0x600013b" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;DeleteEmployeeAsync_ValidEmployee_DeletesFromDatabaseAndAudits&gt;d__15" block_coverage="100.00" line_coverage="100.00" blocks_covered="62" blocks_not_covered="0" lines_covered="25" lines_partially_covered="0" lines_not_covered="0">
+        <function id="49584" token="0x600013f" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;DeleteEmployeeAsync_ValidEmployee_DeletesFromDatabaseAndAudits&gt;d__15" block_coverage="100.00" line_coverage="100.00" blocks_covered="62" blocks_not_covered="0" lines_covered="25" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="232" end_line="232" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="233" end_line="240" start_column="9" end_column="11" covered="yes" />
@@ -1202,7 +1235,7 @@
             <range source_id="6" start_line="259" end_line="259" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="50572" token="0x600013e" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;GetEmployeesAsync_FiltersBySearchDepartmentAndRole&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="70" blocks_not_covered="0" lines_covered="18" lines_partially_covered="0" lines_not_covered="0">
+        <function id="50896" token="0x6000142" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;GetEmployeesAsync_FiltersBySearchDepartmentAndRole&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="70" blocks_not_covered="0" lines_covered="18" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="151" end_line="151" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="152" end_line="152" start_column="9" end_column="78" covered="yes" />
@@ -1224,7 +1257,7 @@
             <range source_id="6" start_line="175" end_line="175" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="52156" token="0x6000141" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;UpdateEmployeeAsync_ValidUpdate_UpdatesEmployeeProperties&gt;d__13" block_coverage="100.00" line_coverage="100.00" blocks_covered="35" blocks_not_covered="0" lines_covered="26" lines_partially_covered="0" lines_not_covered="0">
+        <function id="52480" token="0x6000145" name="MoveNext()" namespace="VoyageHub.Tests" type_name="EmployeeServiceTests.&lt;UpdateEmployeeAsync_ValidUpdate_UpdatesEmployeeProperties&gt;d__13" block_coverage="100.00" line_coverage="100.00" blocks_covered="35" blocks_not_covered="0" lines_covered="26" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="6" start_line="179" end_line="179" start_column="5" end_column="6" covered="yes" />
             <range source_id="6" start_line="180" end_line="187" start_column="9" end_column="11" covered="yes" />
@@ -1241,7 +1274,7 @@
             <range source_id="6" start_line="207" end_line="207" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="53168" token="0x600014e" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;AttachProof_NonExistentExpense_ReturnsNotFound&gt;d__11" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
+        <function id="53492" token="0x6000152" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;AttachProof_NonExistentExpense_ReturnsNotFound&gt;d__11" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="113" end_line="113" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="114" end_line="114" start_column="9" end_column="40" covered="yes" />
@@ -1253,7 +1286,7 @@
             <range source_id="7" start_line="125" end_line="125" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="53784" token="0x6000151" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;AttachProof_NullFile_ReturnsBadRequest&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+        <function id="54108" token="0x6000155" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;AttachProof_NullFile_ReturnsBadRequest&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="104" end_line="104" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="105" end_line="105" start_column="9" end_column="40" covered="yes" />
@@ -1262,7 +1295,7 @@
             <range source_id="7" start_line="109" end_line="109" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="54068" token="0x6000154" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;AttachProof_ValidExpense_AttachesProofAndReturnsOk&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
+        <function id="54392" token="0x6000158" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;AttachProof_ValidExpense_AttachesProofAndReturnsOk&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="30" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="129" end_line="129" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="130" end_line="130" start_column="9" end_column="40" covered="yes" />
@@ -1274,7 +1307,7 @@
             <range source_id="7" start_line="141" end_line="141" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="54688" token="0x6000157" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;BatchPayout_Failure_ReturnsBadRequest&gt;d__20" block_coverage="100.00" line_coverage="100.00" blocks_covered="27" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="55012" token="0x600015b" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;BatchPayout_Failure_ReturnsBadRequest&gt;d__20" block_coverage="100.00" line_coverage="100.00" blocks_covered="27" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="250" end_line="250" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="251" end_line="251" start_column="9" end_column="72" covered="yes" />
@@ -1285,7 +1318,7 @@
             <range source_id="7" start_line="260" end_line="260" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="55232" token="0x600015a" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;BatchPayout_Success_ReturnsOk&gt;d__21" block_coverage="100.00" line_coverage="100.00" blocks_covered="29" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="55556" token="0x600015e" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;BatchPayout_Success_ReturnsOk&gt;d__21" block_coverage="100.00" line_coverage="100.00" blocks_covered="29" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="264" end_line="264" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="265" end_line="265" start_column="9" end_column="89" covered="yes" />
@@ -1296,7 +1329,7 @@
             <range source_id="7" start_line="274" end_line="274" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="55788" token="0x600015d" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;GetPending_ReturnsOkWithSummary&gt;d__13" block_coverage="100.00" line_coverage="100.00" blocks_covered="29" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
+        <function id="56112" token="0x6000161" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;GetPending_ReturnsOkWithSummary&gt;d__13" block_coverage="100.00" line_coverage="100.00" blocks_covered="29" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="145" end_line="145" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="146" end_line="150" start_column="9" end_column="11" covered="yes" />
@@ -1307,7 +1340,7 @@
             <range source_id="7" start_line="160" end_line="160" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="56352" token="0x6000160" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;SubmitExpense_ServiceReturnsFailure_ReturnsBadRequest&gt;d__17" block_coverage="100.00" line_coverage="100.00" blocks_covered="29" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="56676" token="0x6000164" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;SubmitExpense_ServiceReturnsFailure_ReturnsBadRequest&gt;d__17" block_coverage="100.00" line_coverage="100.00" blocks_covered="29" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="205" end_line="205" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="206" end_line="206" start_column="9" end_column="86" covered="yes" />
@@ -1318,7 +1351,7 @@
             <range source_id="7" start_line="215" end_line="215" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="56912" token="0x6000163" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;SubmitExpense_ValidDto_ReturnsOk&gt;d__18" block_coverage="100.00" line_coverage="100.00" blocks_covered="36" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
+        <function id="57236" token="0x6000167" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;SubmitExpense_ValidDto_ReturnsOk&gt;d__18" block_coverage="100.00" line_coverage="100.00" blocks_covered="36" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="219" end_line="219" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="220" end_line="220" start_column="9" end_column="106" covered="yes" />
@@ -1330,7 +1363,7 @@
             <range source_id="7" start_line="230" end_line="230" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="57564" token="0x6000166" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;TakeAction_CallsServiceAndReturnsOk&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="31" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
+        <function id="57888" token="0x600016a" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;TakeAction_CallsServiceAndReturnsOk&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="31" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="164" end_line="164" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="165" end_line="165" start_column="9" end_column="40" covered="yes" />
@@ -1342,7 +1375,7 @@
             <range source_id="7" start_line="179" end_line="179" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="58176" token="0x6000169" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;TakeAction_NotFound_ReturnsNotFound&gt;d__19" block_coverage="100.00" line_coverage="100.00" blocks_covered="31" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
+        <function id="58500" token="0x600016d" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;TakeAction_NotFound_ReturnsNotFound&gt;d__19" block_coverage="100.00" line_coverage="100.00" blocks_covered="31" blocks_not_covered="0" lines_covered="10" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="234" end_line="234" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="235" end_line="235" start_column="9" end_column="40" covered="yes" />
@@ -1354,7 +1387,7 @@
             <range source_id="7" start_line="246" end_line="246" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="58788" token="0x600016c" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_DisallowedExtension_ReturnsBadRequest&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="11" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+        <function id="59112" token="0x6000170" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_DisallowedExtension_ReturnsBadRequest&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="11" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="74" end_line="74" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="75" end_line="75" start_column="9" end_column="80" covered="yes" />
@@ -1364,7 +1397,7 @@
             <range source_id="7" start_line="81" end_line="81" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="59140" token="0x600016f" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_EmptyFile_ReturnsBadRequest&gt;d__16" block_coverage="100.00" line_coverage="100.00" blocks_covered="11" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+        <function id="59464" token="0x6000173" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_EmptyFile_ReturnsBadRequest&gt;d__16" block_coverage="100.00" line_coverage="100.00" blocks_covered="11" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="194" end_line="194" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="195" end_line="195" start_column="9" end_column="73" covered="yes" />
@@ -1374,7 +1407,19 @@
             <range source_id="7" start_line="201" end_line="201" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="59480" token="0x6000172" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_InvalidExtension_ReturnsBadRequest&gt;d__15" block_coverage="100.00" line_coverage="100.00" blocks_covered="10" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+        <function id="59804" token="0x6000176" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_FileTooLarge_ReturnsBadRequest&gt;d__22" block_coverage="100.00" line_coverage="100.00" blocks_covered="25" blocks_not_covered="0" lines_covered="8" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="7" start_line="278" end_line="278" start_column="5" end_column="6" covered="yes" />
+            <range source_id="7" start_line="279" end_line="279" start_column="9" end_column="46" covered="yes" />
+            <range source_id="7" start_line="280" end_line="280" start_column="9" end_column="65" covered="yes" />
+            <range source_id="7" start_line="281" end_line="281" start_column="9" end_column="62" covered="yes" />
+            <range source_id="7" start_line="283" end_line="283" start_column="9" end_column="93" covered="yes" />
+            <range source_id="7" start_line="285" end_line="285" start_column="9" end_column="72" covered="yes" />
+            <range source_id="7" start_line="286" end_line="286" start_column="9" end_column="42" covered="yes" />
+            <range source_id="7" start_line="287" end_line="287" start_column="5" end_column="6" covered="yes" />
+          </ranges>
+        </function>
+        <function id="60316" token="0x6000179" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_InvalidExtension_ReturnsBadRequest&gt;d__15" block_coverage="100.00" line_coverage="100.00" blocks_covered="10" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="183" end_line="183" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="184" end_line="184" start_column="9" end_column="83" covered="yes" />
@@ -1384,7 +1429,7 @@
             <range source_id="7" start_line="190" end_line="190" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="59832" token="0x6000175" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_NullFile_ReturnsBadRequest&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="9" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+        <function id="60668" token="0x600017c" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_NullFile_ReturnsBadRequest&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="9" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="65" end_line="65" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="66" end_line="66" start_column="9" end_column="82" covered="yes" />
@@ -1393,7 +1438,7 @@
             <range source_id="7" start_line="70" end_line="70" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="60132" token="0x6000178" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_ValidPdf_SavesFileAndReturnsOk&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="18" blocks_not_covered="0" lines_covered="12" lines_partially_covered="0" lines_not_covered="0">
+        <function id="60968" token="0x600017f" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpensesControllerTests.&lt;UploadProof_ValidPdf_SavesFileAndReturnsOk&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="18" blocks_not_covered="0" lines_covered="12" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="85" end_line="85" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="86" end_line="86" start_column="9" end_column="71" covered="yes" />
@@ -1409,12 +1454,12 @@
             <range source_id="7" start_line="100" end_line="100" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="60659" token="0x600017c" name="&lt;BatchPayoutAsync_UpdatesAllClaimsToReimbursed&gt;b__13_1(VoyageHub.Data.Entities.Expense)" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+        <function id="61495" token="0x6000183" name="&lt;BatchPayoutAsync_UpdatesAllClaimsToReimbursed&gt;b__13_1(VoyageHub.Data.Entities.Expense)" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="243" end_line="243" start_column="33" end_column="69" covered="yes" />
           </ranges>
         </function>
-        <function id="60752" token="0x6000185" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;AttachProofAsync_Found_UpdatesProofPathAndLogsAudit&gt;d__15" block_coverage="94.44" line_coverage="52.38" blocks_covered="68" blocks_not_covered="4" lines_covered="11" lines_partially_covered="10" lines_not_covered="0">
+        <function id="61588" token="0x600018c" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;AttachProofAsync_Found_UpdatesProofPathAndLogsAudit&gt;d__15" block_coverage="94.44" line_coverage="52.38" blocks_covered="68" blocks_not_covered="4" lines_covered="11" lines_partially_covered="10" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="264" end_line="264" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="265" end_line="265" start_column="9" end_column="33" covered="yes" />
@@ -1429,7 +1474,7 @@
             <range source_id="8" start_line="288" end_line="288" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="61924" token="0x6000188" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;AttachProofAsync_NotFound_ReturnsFalse&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="22" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="62760" token="0x600018f" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;AttachProofAsync_NotFound_ReturnsFalse&gt;d__14" block_coverage="100.00" line_coverage="100.00" blocks_covered="22" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="250" end_line="250" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="251" end_line="251" start_column="9" end_column="33" covered="yes" />
@@ -1440,7 +1485,7 @@
             <range source_id="8" start_line="260" end_line="260" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="62520" token="0x600018b" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;BatchPayoutAsync_UpdatesAllClaimsToReimbursed&gt;d__13" block_coverage="96.30" line_coverage="93.33" blocks_covered="52" blocks_not_covered="2" lines_covered="14" lines_partially_covered="1" lines_not_covered="0">
+        <function id="63356" token="0x6000192" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;BatchPayoutAsync_UpdatesAllClaimsToReimbursed&gt;d__13" block_coverage="96.30" line_coverage="93.33" blocks_covered="52" blocks_not_covered="2" lines_covered="14" lines_partially_covered="1" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="229" end_line="229" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="230" end_line="234" start_column="9" end_column="11" covered="yes" />
@@ -1453,7 +1498,7 @@
             <range source_id="8" start_line="246" end_line="246" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="63356" token="0x600018e" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;GetPendingSummaryAsync_ReturnsAggregatedData&gt;d__5" block_coverage="100.00" line_coverage="100.00" blocks_covered="66" blocks_not_covered="0" lines_covered="36" lines_partially_covered="0" lines_not_covered="0">
+        <function id="64192" token="0x6000195" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;GetPendingSummaryAsync_ReturnsAggregatedData&gt;d__5" block_coverage="100.00" line_coverage="100.00" blocks_covered="66" blocks_not_covered="0" lines_covered="36" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="39" end_line="39" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="40" end_line="40" start_column="9" end_column="40" covered="yes" />
@@ -1468,7 +1513,7 @@
             <range source_id="8" start_line="77" end_line="77" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="64252" token="0x6000191" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;SubmitExpenseAsync_NullDto_ReturnsFalse&gt;d__6" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+        <function id="65088" token="0x6000198" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;SubmitExpenseAsync_NullDto_ReturnsFalse&gt;d__6" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="81" end_line="81" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="82" end_line="82" start_column="9" end_column="91" covered="yes" />
@@ -1478,7 +1523,7 @@
             <range source_id="8" start_line="87" end_line="87" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="64648" token="0x6000194" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;SubmitExpenseAsync_RequestNotFound_ReturnsFalse&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="27" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
+        <function id="65484" token="0x600019b" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;SubmitExpenseAsync_RequestNotFound_ReturnsFalse&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="27" blocks_not_covered="0" lines_covered="11" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="103" end_line="103" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="104" end_line="104" start_column="9" end_column="40" covered="yes" />
@@ -1491,7 +1536,7 @@
             <range source_id="8" start_line="116" end_line="116" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="65308" token="0x6000197" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;SubmitExpenseAsync_Valid_CreatesExpenseAndLogsAudit&gt;d__9" block_coverage="96.19" line_coverage="73.68" blocks_covered="101" blocks_not_covered="4" lines_covered="28" lines_partially_covered="10" lines_not_covered="0">
+        <function id="66144" token="0x600019e" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;SubmitExpenseAsync_Valid_CreatesExpenseAndLogsAudit&gt;d__9" block_coverage="96.19" line_coverage="73.68" blocks_covered="101" blocks_not_covered="4" lines_covered="28" lines_partially_covered="10" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="120" end_line="120" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="121" end_line="121" start_column="9" end_column="40" covered="yes" />
@@ -1511,7 +1556,7 @@
             <range source_id="8" start_line="162" end_line="162" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="66840" token="0x600019a" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;SubmitExpenseAsync_ZeroOrNegativeAmount_ReturnsFalse&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="12" blocks_not_covered="0" lines_covered="7" lines_partially_covered="0" lines_not_covered="0">
+        <function id="67676" token="0x60001a1" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;SubmitExpenseAsync_ZeroOrNegativeAmount_ReturnsFalse&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="12" blocks_not_covered="0" lines_covered="7" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="91" end_line="91" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="92" end_line="92" start_column="9" end_column="83" covered="yes" />
@@ -1522,7 +1567,7 @@
             <range source_id="8" start_line="99" end_line="99" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="67288" token="0x600019d" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;TakeActionAsync_Approve_UpdatesStatusAndLogsAudit&gt;d__11" block_coverage="95.74" line_coverage="94.74" blocks_covered="45" blocks_not_covered="2" lines_covered="18" lines_partially_covered="1" lines_not_covered="0">
+        <function id="68124" token="0x60001a4" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;TakeActionAsync_Approve_UpdatesStatusAndLogsAudit&gt;d__11" block_coverage="95.74" line_coverage="94.74" blocks_covered="45" blocks_not_covered="2" lines_covered="18" lines_partially_covered="1" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="180" end_line="180" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="181" end_line="181" start_column="9" end_column="33" covered="yes" />
@@ -1536,7 +1581,7 @@
             <range source_id="8" start_line="202" end_line="202" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="68140" token="0x60001a0" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;TakeActionAsync_NotFound_ReturnsFalse&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="24" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="68976" token="0x60001a7" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;TakeActionAsync_NotFound_ReturnsFalse&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="24" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="166" end_line="166" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="167" end_line="167" start_column="9" end_column="33" covered="yes" />
@@ -1547,7 +1592,7 @@
             <range source_id="8" start_line="176" end_line="176" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="68716" token="0x60001a3" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;TakeActionAsync_Reject_UpdatesStatusToRejected&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="32" blocks_not_covered="0" lines_covered="17" lines_partially_covered="0" lines_not_covered="0">
+        <function id="69552" token="0x60001aa" name="MoveNext()" namespace="VoyageHub.Tests" type_name="ExpenseServiceTests.&lt;TakeActionAsync_Reject_UpdatesStatusToRejected&gt;d__12" block_coverage="100.00" line_coverage="100.00" blocks_covered="32" blocks_not_covered="0" lines_covered="17" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="8" start_line="206" end_line="206" start_column="5" end_column="6" covered="yes" />
             <range source_id="8" start_line="207" end_line="207" start_column="9" end_column="33" covered="yes" />
@@ -1560,7 +1605,7 @@
             <range source_id="8" start_line="225" end_line="225" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="69444" token="0x60001aa" name="MoveNext()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests.&lt;CreatePolicyAsync_ValidDepartmentWithoutPolicy_CreatesPolicyAndLogsAudit&gt;d__6" block_coverage="93.81" line_coverage="69.44" blocks_covered="91" blocks_not_covered="6" lines_covered="25" lines_partially_covered="11" lines_not_covered="0">
+        <function id="70280" token="0x60001b1" name="MoveNext()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests.&lt;CreatePolicyAsync_ValidDepartmentWithoutPolicy_CreatesPolicyAndLogsAudit&gt;d__6" block_coverage="93.81" line_coverage="69.44" blocks_covered="91" blocks_not_covered="6" lines_covered="25" lines_partially_covered="11" lines_not_covered="0">
           <ranges>
             <range source_id="9" start_line="67" end_line="67" start_column="5" end_column="6" covered="yes" />
             <range source_id="9" start_line="69" end_line="74" start_column="9" end_column="11" covered="yes" />
@@ -1578,7 +1623,7 @@
             <range source_id="9" start_line="110" end_line="110" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="70832" token="0x60001ad" name="MoveNext()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests.&lt;CreatePolicyAsync_WhenDepartmentAlreadyHasPolicy_ReturnsBadRequest&gt;d__5" block_coverage="100.00" line_coverage="100.00" blocks_covered="51" blocks_not_covered="0" lines_covered="22" lines_partially_covered="0" lines_not_covered="0">
+        <function id="71668" token="0x60001b4" name="MoveNext()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests.&lt;CreatePolicyAsync_WhenDepartmentAlreadyHasPolicy_ReturnsBadRequest&gt;d__5" block_coverage="100.00" line_coverage="100.00" blocks_covered="51" blocks_not_covered="0" lines_covered="22" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="9" start_line="35" end_line="35" start_column="5" end_column="6" covered="yes" />
             <range source_id="9" start_line="37" end_line="42" start_column="9" end_column="11" covered="yes" />
@@ -1592,7 +1637,7 @@
             <range source_id="9" start_line="63" end_line="63" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="71708" token="0x60001b0" name="MoveNext()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests.&lt;DeletePolicyAsync_WhenPolicyNotFound_ReturnsFalse&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="22" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+        <function id="72544" token="0x60001b7" name="MoveNext()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests.&lt;DeletePolicyAsync_WhenPolicyNotFound_ReturnsFalse&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="22" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="9" start_line="166" end_line="166" start_column="5" end_column="6" covered="yes" />
             <range source_id="9" start_line="168" end_line="168" start_column="9" end_column="39" covered="yes" />
@@ -1603,7 +1648,7 @@
             <range source_id="9" start_line="179" end_line="179" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="72268" token="0x60001b3" name="MoveNext()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests.&lt;UpdatePolicyAsync_ValidPolicy_UpdatesLimitsAndLogsAudit&gt;d__7" block_coverage="98.18" line_coverage="78.05" blocks_covered="108" blocks_not_covered="2" lines_covered="32" lines_partially_covered="9" lines_not_covered="0">
+        <function id="73104" token="0x60001ba" name="MoveNext()" namespace="VoyageHub.Tests" type_name="PolicyServiceTests.&lt;UpdatePolicyAsync_ValidPolicy_UpdatesLimitsAndLogsAudit&gt;d__7" block_coverage="98.18" line_coverage="78.05" blocks_covered="108" blocks_not_covered="2" lines_covered="32" lines_partially_covered="9" lines_not_covered="0">
           <ranges>
             <range source_id="9" start_line="114" end_line="114" start_column="5" end_column="6" covered="yes" />
             <range source_id="9" start_line="116" end_line="116" start_column="9" end_column="39" covered="yes" />
@@ -1623,17 +1668,17 @@
             <range source_id="9" start_line="162" end_line="162" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="73835" token="0x60001b7" name="&lt;SqlServerConfiguration_EnablesExecutionStrategyAndTransientRetries&gt;b__0_0(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)" namespace="VoyageHub.Tests" type_name="RetryPolicyTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="7" lines_partially_covered="0" lines_not_covered="0">
+        <function id="74671" token="0x60001be" name="&lt;SqlServerConfiguration_EnablesExecutionStrategyAndTransientRetries&gt;b__0_0(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)" namespace="VoyageHub.Tests" type_name="RetryPolicyTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="7" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="10" start_line="16" end_line="22" start_column="13" end_column="19" covered="yes" />
           </ranges>
         </function>
-        <function id="73880" token="0x60001b8" name="&lt;SqlServerConfiguration_EnablesExecutionStrategyAndTransientRetries&gt;b__0_1(Microsoft.EntityFrameworkCore.Infrastructure.SqlServerDbContextOptionsBuilder)" namespace="VoyageHub.Tests" type_name="RetryPolicyTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+        <function id="74716" token="0x60001bf" name="&lt;SqlServerConfiguration_EnablesExecutionStrategyAndTransientRetries&gt;b__0_1(Microsoft.EntityFrameworkCore.Infrastructure.SqlServerDbContextOptionsBuilder)" namespace="VoyageHub.Tests" type_name="RetryPolicyTests.&lt;&gt;c" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="10" start_line="18" end_line="22" start_column="31" end_column="18" covered="yes" />
           </ranges>
         </function>
-        <function id="73940" token="0x60001bd" name="MoveNext()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests.&lt;CreateRequestAsync_WhenBudgetExceedsPolicyLimit_AutoFlagsCompliance&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="88" blocks_not_covered="0" lines_covered="41" lines_partially_covered="0" lines_not_covered="0">
+        <function id="74776" token="0x60001c4" name="MoveNext()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests.&lt;CreateRequestAsync_WhenBudgetExceedsPolicyLimit_AutoFlagsCompliance&gt;d__9" block_coverage="100.00" line_coverage="100.00" blocks_covered="88" blocks_not_covered="0" lines_covered="41" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="11" start_line="89" end_line="89" start_column="5" end_column="6" covered="yes" />
             <range source_id="11" start_line="91" end_line="91" start_column="9" end_column="36" covered="yes" />
@@ -1650,7 +1695,7 @@
             <range source_id="11" start_line="138" end_line="138" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="75256" token="0x60001c0" name="MoveNext()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests.&lt;CreateRequestAsync_WhenEstimatedBudgetZeroOrNegative_ReturnsValidationError&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="19" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
+        <function id="76092" token="0x60001c7" name="MoveNext()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests.&lt;CreateRequestAsync_WhenEstimatedBudgetZeroOrNegative_ReturnsValidationError&gt;d__8" block_coverage="100.00" line_coverage="100.00" blocks_covered="19" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="11" start_line="67" end_line="67" start_column="5" end_column="6" covered="yes" />
             <range source_id="11" start_line="69" end_line="76" start_column="9" end_column="11" covered="yes" />
@@ -1661,7 +1706,7 @@
             <range source_id="11" start_line="85" end_line="85" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="75776" token="0x60001c3" name="MoveNext()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests.&lt;CreateRequestAsync_WhenStartDateAfterEndDate_ReturnsValidationError&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="19" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
+        <function id="76612" token="0x60001ca" name="MoveNext()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests.&lt;CreateRequestAsync_WhenStartDateAfterEndDate_ReturnsValidationError&gt;d__7" block_coverage="100.00" line_coverage="100.00" blocks_covered="19" blocks_not_covered="0" lines_covered="14" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="11" start_line="45" end_line="45" start_column="5" end_column="6" covered="yes" />
             <range source_id="11" start_line="47" end_line="54" start_column="9" end_column="11" covered="yes" />
@@ -1672,7 +1717,7 @@
             <range source_id="11" start_line="63" end_line="63" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="76296" token="0x60001c6" name="MoveNext()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests.&lt;SubmitExpenseAsync_WhenAmountZeroOrNegative_ReturnsValidationError&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="29" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
+        <function id="77132" token="0x60001cd" name="MoveNext()" namespace="VoyageHub.Tests" type_name="TravelRequestValidationTests.&lt;SubmitExpenseAsync_WhenAmountZeroOrNegative_ReturnsValidationError&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="29" blocks_not_covered="0" lines_covered="13" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="11" start_line="142" end_line="142" start_column="5" end_column="6" covered="yes" />
             <range source_id="11" start_line="144" end_line="149" start_column="9" end_column="11" covered="yes" />
@@ -1693,7 +1738,7 @@
         <source_file id="4" path="C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\AuthServiceTests.cs" checksum_type="SHA256" checksum="502FF2A915D275A2F5EDAB11F8D954D2EBA328F01229BE4C1B3DBE691AB77A57" />
         <source_file id="5" path="C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\EmployeesControllerTests.cs" checksum_type="SHA256" checksum="03642BD1D35632F0572E332E6631D146806F7043A588A1D65EA0320CA0CD9543" />
         <source_file id="6" path="C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\EmployeeServiceTests.cs" checksum_type="SHA256" checksum="271CDF1DEACADFC5B7941E10A5C0321BF7D53401D1863270ADFD6F95A89BCF6F" />
-        <source_file id="7" path="C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\ExpensesControllerTests.cs" checksum_type="SHA256" checksum="05A4AC642A528B99759B99138E0FE754CD3A44D4BBCE5D22FC0FC96CA64BBBD5" />
+        <source_file id="7" path="C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\ExpensesControllerTests.cs" checksum_type="SHA256" checksum="B8D65FAB7DB1FBC8E82E7B0D0E066AC42CFA618BB5B39BCD3BD4A9C4AABF83D1" />
         <source_file id="8" path="C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\ExpenseServiceTests.cs" checksum_type="SHA256" checksum="4418DE7C25331F7D17C32CDFEBE49D893827B0E1A50B4EC9EBC42481918821DF" />
         <source_file id="9" path="C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\PolicyServiceTests.cs" checksum_type="SHA256" checksum="34AC6C159F91FF73D10BAECBE902A7915D52D05D79435C17BB56F765B237D669" />
         <source_file id="10" path="C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\RetryPolicyTests.cs" checksum_type="SHA256" checksum="9335BEBAB10751B37DFF3AE85FED33EC7539EDDBE610D458451DFDAB10628643" />
@@ -1738,7 +1783,7 @@
         <skipped_function id="10947" original_id="10947" token="0x6000045" name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlResponseComment(Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlResponseComment)" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F22B0D8D9C01A53298D97A0D72D9854CED17EB4125533B744BF3B3359284046B8__XmlResponseComment" reason="attribute_excluded" />
       </skipped_functions>
     </module>
-    <module id="D6EF2E3C40649248BDE65ABCDDEFFD763A9E2AB6" name="VoyageHub.Data.dll" path="VoyageHub.Data.dll" block_coverage="34.17" line_coverage="52.52" blocks_covered="684" blocks_not_covered="1318" lines_covered="334" lines_partially_covered="1" lines_not_covered="301">
+    <module id="5C96EDC08BD4F54BBC4C5702000BB19572114389" name="VoyageHub.Data.dll" path="VoyageHub.Data.dll" block_coverage="34.17" line_coverage="52.52" blocks_covered="684" blocks_not_covered="1318" lines_covered="334" lines_partially_covered="1" lines_not_covered="301">
       <functions>
         <function id="8272" token="0x6000001" name="AppDbContext(Microsoft.EntityFrameworkCore.DbContextOptions&lt;VoyageHub.Data.AppDbContext&gt;)" namespace="VoyageHub.Data" type_name="AppDbContext" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
@@ -2725,7 +2770,7 @@
         <skipped_function id="14866" original_id="14866" token="0x600014f" name="set_ApprovalSteps(System.Collections.Generic.ICollection&lt;VoyageHub.Data.Entities.ApprovalStep&gt;)" type_name="User" reason="attribute_excluded" />
       </skipped_functions>
     </module>
-    <module id="C0F421960F74924E88B9397E4EAAE891C03FEDA7" name="VoyageHub.Business.dll" path="VoyageHub.Business.dll" block_coverage="41.46" line_coverage="29.78" blocks_covered="1827" blocks_not_covered="2580" lines_covered="642" lines_partially_covered="289" lines_not_covered="1225">
+    <module id="BEBF909EAC62B04484C6F1952C25B02587E549A3" name="VoyageHub.Business.dll" path="VoyageHub.Business.dll" block_coverage="41.46" line_coverage="29.78" blocks_covered="1827" blocks_not_covered="2580" lines_covered="642" lines_partially_covered="289" lines_not_covered="1225">
       <functions>
         <function id="8834" token="0x600000d" name="AnalyticsService(VoyageHub.Data.AppDbContext)" namespace="VoyageHub.Business.Services" type_name="AnalyticsService" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="4">
           <ranges>
@@ -5048,7 +5093,7 @@
         <skipped_function id="21053" original_id="21053" token="0x60002e7" name="set_Cost(decimal)" type_name="AddStayDto" reason="attribute_excluded" />
       </skipped_functions>
     </module>
-    <module id="BBB6DBEF19D82048BC6473C0E394071B465D1FD8" name="VoyageHub.Api.dll" path="VoyageHub.Api.dll" block_coverage="17.03" line_coverage="15.34" blocks_covered="274" blocks_not_covered="1335" lines_covered="169" lines_partially_covered="3" lines_not_covered="930">
+    <module id="FAF7B4BDD7B9F2408B8BDA631C53CA1BFA90A88A" name="VoyageHub.Api.dll" path="VoyageHub.Api.dll" block_coverage="18.65" line_coverage="17.15" blocks_covered="300" blocks_not_covered="1309" lines_covered="189" lines_partially_covered="7" lines_not_covered="906">
       <functions>
         <function id="10136" token="0x6000025" name="&lt;OpenApiXmlCommentSupport_generated&gt;F64F8076B7BB9F532B6F163C68B1948F7F3607E3A9F9DACD8326EF1A682AC337E__XmlComment(string, string, string, string, string, bool, System.Collections.Generic.List&lt;string&gt;, System.Collections.Generic.List&lt;Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F64F8076B7BB9F532B6F163C68B1948F7F3607E3A9F9DACD8326EF1A682AC337E__XmlParameterComment&gt;, System.Collections.Generic.List&lt;Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F64F8076B7BB9F532B6F163C68B1948F7F3607E3A9F9DACD8326EF1A682AC337E__XmlResponseComment&gt;)" namespace="Microsoft.AspNetCore.OpenApi.Generated" type_name="&lt;OpenApiXmlCommentSupport_generated&gt;F64F8076B7BB9F532B6F163C68B1948F7F3607E3A9F9DACD8326EF1A682AC337E__XmlComment" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="10">
           <ranges>
@@ -5597,28 +5642,28 @@
             <range source_id="7" start_line="33" end_line="33" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="19812" token="0x600009e" name="GetProofFile(string)" namespace="VoyageHub.Api.Controllers" type_name="ExpensesController" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="26" lines_covered="0" lines_partially_covered="0" lines_not_covered="22">
+        <function id="19812" token="0x600009e" name="GetProofFile(string)" namespace="VoyageHub.Api.Controllers" type_name="ExpensesController" block_coverage="84.62" line_coverage="81.82" blocks_covered="22" blocks_not_covered="4" lines_covered="18" lines_partially_covered="4" lines_not_covered="0">
           <ranges>
-            <range source_id="7" start_line="169" end_line="169" start_column="5" end_column="6" covered="no" />
-            <range source_id="7" start_line="170" end_line="170" start_column="9" end_column="49" covered="no" />
-            <range source_id="7" start_line="171" end_line="171" start_column="9" end_column="10" covered="no" />
-            <range source_id="7" start_line="172" end_line="172" start_column="13" end_column="75" covered="no" />
-            <range source_id="7" start_line="175" end_line="175" start_column="9" end_column="52" covered="no" />
-            <range source_id="7" start_line="176" end_line="176" start_column="9" end_column="94" covered="no" />
-            <range source_id="7" start_line="177" end_line="177" start_column="9" end_column="61" covered="no" />
-            <range source_id="7" start_line="179" end_line="179" start_column="9" end_column="46" covered="no" />
-            <range source_id="7" start_line="180" end_line="180" start_column="9" end_column="10" covered="no" />
-            <range source_id="7" start_line="181" end_line="181" start_column="13" end_column="78" covered="no" />
-            <range source_id="7" start_line="184" end_line="184" start_column="9" end_column="67" covered="no" />
-            <range source_id="7" start_line="185" end_line="192" start_column="9" end_column="11" covered="no" />
-            <range source_id="7" start_line="187" end_line="187" start_column="23" end_column="40" covered="no" />
+            <range source_id="7" start_line="169" end_line="169" start_column="5" end_column="6" covered="yes" />
+            <range source_id="7" start_line="170" end_line="170" start_column="9" end_column="49" covered="yes" />
+            <range source_id="7" start_line="171" end_line="171" start_column="9" end_column="10" covered="yes" />
+            <range source_id="7" start_line="172" end_line="172" start_column="13" end_column="75" covered="yes" />
+            <range source_id="7" start_line="175" end_line="175" start_column="9" end_column="52" covered="yes" />
+            <range source_id="7" start_line="176" end_line="176" start_column="9" end_column="94" covered="yes" />
+            <range source_id="7" start_line="177" end_line="177" start_column="9" end_column="61" covered="yes" />
+            <range source_id="7" start_line="179" end_line="179" start_column="9" end_column="46" covered="yes" />
+            <range source_id="7" start_line="180" end_line="180" start_column="9" end_column="10" covered="yes" />
+            <range source_id="7" start_line="181" end_line="181" start_column="13" end_column="78" covered="yes" />
+            <range source_id="7" start_line="184" end_line="184" start_column="9" end_column="67" covered="yes" />
+            <range source_id="7" start_line="185" end_line="192" start_column="9" end_column="11" covered="yes" />
+            <range source_id="7" start_line="187" end_line="187" start_column="23" end_column="40" covered="yes" />
             <range source_id="7" start_line="188" end_line="188" start_column="23" end_column="34" covered="no" />
             <range source_id="7" start_line="189" end_line="189" start_column="34" end_column="46" covered="no" />
             <range source_id="7" start_line="190" end_line="190" start_column="24" end_column="36" covered="no" />
             <range source_id="7" start_line="191" end_line="191" start_column="18" end_column="44" covered="no" />
-            <range source_id="7" start_line="194" end_line="194" start_column="9" end_column="95" covered="no" />
-            <range source_id="7" start_line="195" end_line="195" start_column="9" end_column="82" covered="no" />
-            <range source_id="7" start_line="196" end_line="196" start_column="5" end_column="6" covered="no" />
+            <range source_id="7" start_line="194" end_line="194" start_column="9" end_column="95" covered="yes" />
+            <range source_id="7" start_line="195" end_line="195" start_column="9" end_column="82" covered="yes" />
+            <range source_id="7" start_line="196" end_line="196" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
         <function id="20108" token="0x600009f" name="ExpensesController()" namespace="VoyageHub.Api.Controllers" type_name="ExpensesController" block_coverage="100.00" line_coverage="100.00" blocks_covered="8" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
@@ -6085,15 +6130,15 @@
             <range source_id="7" start_line="44" end_line="44" start_column="5" end_column="6" covered="yes" />
           </ranges>
         </function>
-        <function id="33300" token="0x6000114" name="MoveNext()" namespace="VoyageHub.Api.Controllers" type_name="ExpensesController.&lt;SaveProofFileAsync&gt;d__10" block_coverage="92.31" line_coverage="92.00" blocks_covered="48" blocks_not_covered="4" lines_covered="23" lines_partially_covered="0" lines_not_covered="2">
+        <function id="33300" token="0x6000114" name="MoveNext()" namespace="VoyageHub.Api.Controllers" type_name="ExpensesController.&lt;SaveProofFileAsync&gt;d__10" block_coverage="100.00" line_coverage="100.00" blocks_covered="52" blocks_not_covered="0" lines_covered="25" lines_partially_covered="0" lines_not_covered="0">
           <ranges>
             <range source_id="7" start_line="131" end_line="131" start_column="5" end_column="6" covered="yes" />
             <range source_id="7" start_line="132" end_line="132" start_column="9" end_column="46" covered="yes" />
             <range source_id="7" start_line="133" end_line="133" start_column="9" end_column="10" covered="yes" />
             <range source_id="7" start_line="134" end_line="134" start_column="13" end_column="100" covered="yes" />
             <range source_id="7" start_line="137" end_line="137" start_column="9" end_column="44" covered="yes" />
-            <range source_id="7" start_line="138" end_line="138" start_column="9" end_column="10" covered="no" />
-            <range source_id="7" start_line="139" end_line="139" start_column="13" end_column="100" covered="no" />
+            <range source_id="7" start_line="138" end_line="138" start_column="9" end_column="10" covered="yes" />
+            <range source_id="7" start_line="139" end_line="139" start_column="13" end_column="100" covered="yes" />
             <range source_id="7" start_line="142" end_line="142" start_column="9" end_column="71" covered="yes" />
             <range source_id="7" start_line="143" end_line="143" start_column="9" end_column="46" covered="yes" />
             <range source_id="7" start_line="144" end_line="144" start_column="9" end_column="10" covered="yes" />
@@ -6518,9 +6563,9 @@
     <skipped_module name="microsoft.net.sdk.workloadmanifestreader.dll" path="microsoft.net.sdk.workloadmanifestreader.dll" reason="no_symbols" />
     <skipped_module name="system.threading.overlapped.dll" path="system.threading.overlapped.dll" reason="no_symbols" />
     <skipped_module name="microsoft.net.build.tasks.dll" path="microsoft.net.build.tasks.dll" reason="no_symbols" />
+    <skipped_module name="nuget.packaging.dll" path="nuget.packaging.dll" reason="no_symbols" />
     <skipped_module name="system.xml.xdocument.dll" path="system.xml.xdocument.dll" reason="no_symbols" />
     <skipped_module name="system.private.xml.linq.dll" path="system.private.xml.linq.dll" reason="no_symbols" />
-    <skipped_module name="nuget.packaging.dll" path="nuget.packaging.dll" reason="no_symbols" />
     <skipped_module name="newtonsoft.json.dll" path="newtonsoft.json.dll" reason="no_symbols" />
     <skipped_module name="system.linq.expressions.dll" path="system.linq.expressions.dll" reason="no_symbols" />
     <skipped_module name="system.objectmodel.dll" path="system.objectmodel.dll" reason="no_symbols" />
@@ -6540,8 +6585,8 @@
     <skipped_module name="microsoft.net.sdk.staticwebassets.tasks.dll" path="microsoft.net.sdk.staticwebassets.tasks.dll" reason="no_symbols" />
     <skipped_module name="system.formats.asn1.dll" path="system.formats.asn1.dll" reason="no_symbols" />
     <skipped_module name="system.runtime.intrinsics.dll" path="system.runtime.intrinsics.dll" reason="no_symbols" />
-    <skipped_module name="system.diagnostics.tracesource.dll" path="system.diagnostics.tracesource.dll" reason="no_symbols" />
     <skipped_module name="microsoft.net.sdk.razor.tasks.dll" path="microsoft.net.sdk.razor.tasks.dll" reason="no_symbols" />
+    <skipped_module name="system.diagnostics.tracesource.dll" path="system.diagnostics.tracesource.dll" reason="no_symbols" />
     <skipped_module name="system.reflection.emit.lightweight.dll" path="system.reflection.emit.lightweight.dll" reason="no_symbols" />
     <skipped_module name="system.reflection.primitives.dll" path="system.reflection.primitives.dll" reason="no_symbols" />
     <skipped_module name="system.io.compression.dll" path="system.io.compression.dll" reason="no_symbols" />
@@ -6606,14 +6651,14 @@
     <skipped_module name="microsoft.entityframeworkcore.sqlite.dll" path="microsoft.entityframeworkcore.sqlite.dll" reason="no_symbols" />
     <skipped_module name="microsoft.aspnetcore.http.dll" path="microsoft.aspnetcore.http.dll" reason="no_symbols" />
     <skipped_module name="microsoft.aspnetcore.http.abstractions.dll" path="microsoft.aspnetcore.http.abstractions.dll" reason="no_symbols" />
-    <skipped_module name="sqlitepclraw.core.dll" path="sqlitepclraw.core.dll" reason="no_symbols" />
     <skipped_module name="xunit.assert.dll" path="xunit.assert.dll" reason="path_is_excluded" />
+    <skipped_module name="sqlitepclraw.core.dll" path="sqlitepclraw.core.dll" reason="no_symbols" />
     <skipped_module name="microsoft.extensions.features.dll" path="microsoft.extensions.features.dll" reason="no_symbols" />
     <skipped_module name="sqlitepclraw.batteries_v2.dll" path="sqlitepclraw.batteries_v2.dll" reason="no_symbols" />
     <skipped_module name="sqlitepclraw.provider.e_sqlite3.dll" path="sqlitepclraw.provider.e_sqlite3.dll" reason="no_symbols" />
     <skipped_module name="microsoft.aspnetcore.http.features.dll" path="microsoft.aspnetcore.http.features.dll" reason="no_symbols" />
-    <skipped_module name="system.reflection.emit.dll" path="system.reflection.emit.dll" reason="no_symbols" />
     <skipped_module name="microsoft.entityframeworkcore.relational.dll" path="microsoft.entityframeworkcore.relational.dll" reason="no_symbols" />
+    <skipped_module name="system.reflection.emit.dll" path="system.reflection.emit.dll" reason="no_symbols" />
     <skipped_module name="microsoft.extensions.caching.abstractions.dll" path="microsoft.extensions.caching.abstractions.dll" reason="no_symbols" />
     <skipped_module name="microsoft.entityframeworkcore.sqlserver.dll" path="microsoft.entityframeworkcore.sqlserver.dll" reason="no_symbols" />
     <skipped_module name="microsoft.extensions.fileproviders.abstractions.dll" path="microsoft.extensions.fileproviders.abstractions.dll" reason="no_symbols" />
@@ -6622,9 +6667,9 @@
     <skipped_module name="system.componentmodel.annotations.dll" path="system.componentmodel.annotations.dll" reason="no_symbols" />
     <skipped_module name="microsoft.extensions.logging.dll" path="microsoft.extensions.logging.dll" reason="no_symbols" />
     <skipped_module name="microsoft.net.http.headers.dll" path="microsoft.net.http.headers.dll" reason="no_symbols" />
-    <skipped_module name="microsoft.extensions.caching.memory.dll" path="microsoft.extensions.caching.memory.dll" reason="no_symbols" />
     <skipped_module name="microsoft.data.sqlclient.dll" path="microsoft.data.sqlclient.dll" reason="no_symbols" />
     <skipped_module name="system.configuration.configurationmanager.dll" path="system.configuration.configurationmanager.dll" reason="no_symbols" />
+    <skipped_module name="microsoft.extensions.caching.memory.dll" path="microsoft.extensions.caching.memory.dll" reason="no_symbols" />
     <skipped_module name="system.net.webclient.dll" path="system.net.webclient.dll" reason="no_symbols" />
     <skipped_module name="system.net.networkinformation.dll" path="system.net.networkinformation.dll" reason="no_symbols" />
     <skipped_module name="system.memory.data.dll" path="system.memory.data.dll" reason="no_symbols" />
