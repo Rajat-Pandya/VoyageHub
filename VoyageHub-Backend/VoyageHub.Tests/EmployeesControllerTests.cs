@@ -87,6 +87,101 @@ public class EmployeesControllerTests
     }
 
     [Fact]
+    public async Task CreateEmployee_ServiceFails_ReturnsBadRequest()
+    {
+        var dto = new CreateEmployeeDto { Name = "", Email = "invalid" };
+        _employeeServiceMock
+            .Setup(s => s.CreateEmployeeAsync(dto, It.IsAny<CancellationToken>()))
+            .ReturnsAsync((false, "Validation error", null));
+
+        var result = await _controller.CreateEmployee(dto, CancellationToken.None);
+
+        var badRequest = Assert.IsType<BadRequestObjectResult>(result.Result);
+        Assert.NotNull(badRequest.Value);
+    }
+
+    [Fact]
+    public async Task UpdateEmployee_ValidDto_ReturnsOk()
+    {
+        var id = Guid.NewGuid();
+        var dto = new UpdateEmployeeDto { Name = "Updated Name" };
+        var updated = new EmployeeDto { Id = id, Name = "Updated Name" };
+        _employeeServiceMock
+            .Setup(s => s.UpdateEmployeeAsync(id, dto, It.IsAny<CancellationToken>()))
+            .ReturnsAsync((true, "Updated", updated));
+
+        var result = await _controller.UpdateEmployee(id, dto, CancellationToken.None);
+
+        var okResult = Assert.IsType<OkObjectResult>(result.Result);
+        Assert.Equal(updated, okResult.Value);
+    }
+
+    [Fact]
+    public async Task UpdateEmployee_ServiceFails_ReturnsBadRequest()
+    {
+        var id = Guid.NewGuid();
+        var dto = new UpdateEmployeeDto { Name = "" };
+        _employeeServiceMock
+            .Setup(s => s.UpdateEmployeeAsync(id, dto, It.IsAny<CancellationToken>()))
+            .ReturnsAsync((false, "Update failed", null));
+
+        var result = await _controller.UpdateEmployee(id, dto, CancellationToken.None);
+
+        var badRequest = Assert.IsType<BadRequestObjectResult>(result.Result);
+        Assert.NotNull(badRequest.Value);
+    }
+
+    [Fact]
+    public async Task DeleteEmployee_ValidId_ReturnsOk()
+    {
+        var id = Guid.NewGuid();
+        _employeeServiceMock
+            .Setup(s => s.DeleteEmployeeAsync(id, It.IsAny<CancellationToken>()))
+            .ReturnsAsync((true, "Deleted"));
+
+        var result = await _controller.DeleteEmployee(id, CancellationToken.None);
+
+        var okResult = Assert.IsType<OkObjectResult>(result);
+        Assert.NotNull(okResult.Value);
+    }
+
+    [Fact]
+    public async Task DeleteEmployee_ServiceFails_ReturnsBadRequest()
+    {
+        var id = Guid.NewGuid();
+        _employeeServiceMock
+            .Setup(s => s.DeleteEmployeeAsync(id, It.IsAny<CancellationToken>()))
+            .ReturnsAsync((false, "Cannot delete employee"));
+
+        var result = await _controller.DeleteEmployee(id, CancellationToken.None);
+
+        var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+        Assert.NotNull(badRequest.Value);
+    }
+
+    [Fact]
+    public async Task BatchUpload_NonCsvFile_ReturnsBadRequest()
+    {
+        var formFile = new FormFile(new MemoryStream(new byte[] { 1, 2 }), 0, 2, "file", "test.txt");
+
+        var result = await _controller.BatchUpload(formFile, CancellationToken.None);
+
+        var badRequest = Assert.IsType<BadRequestObjectResult>(result.Result);
+        Assert.NotNull(badRequest.Value);
+    }
+
+    [Fact]
+    public async Task BatchUpload_EmptyFile_ReturnsBadRequest()
+    {
+        var formFile = new FormFile(new MemoryStream(Array.Empty<byte>()), 0, 0, "file", "test.csv");
+
+        var result = await _controller.BatchUpload(formFile, CancellationToken.None);
+
+        var badRequest = Assert.IsType<BadRequestObjectResult>(result.Result);
+        Assert.NotNull(badRequest.Value);
+    }
+
+    [Fact]
     public async Task BatchUpload_NullFile_ReturnsBadRequest()
     {
         var result = await _controller.BatchUpload(null, CancellationToken.None);
