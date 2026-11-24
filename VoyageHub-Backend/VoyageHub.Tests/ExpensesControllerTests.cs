@@ -272,4 +272,51 @@ public class ExpensesControllerTests : IDisposable
         var okResult = Assert.IsType<OkObjectResult>(result);
         Assert.NotNull(okResult.Value);
     }
+
+    [Fact]
+    public async Task UploadProof_FileTooLarge_ReturnsBadRequest()
+    {
+        var mockFile = new Mock<IFormFile>();
+        mockFile.Setup(f => f.Length).Returns(16 * 1024 * 1024);
+        mockFile.Setup(f => f.FileName).Returns("large.pdf");
+
+        var result = await _controller.UploadProof(mockFile.Object, CancellationToken.None);
+
+        var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+        Assert.NotNull(badRequest.Value);
+    }
+
+    [Fact]
+    public void GetProofFile_EmptyFileName_ReturnsBadRequest()
+    {
+        var result = _controller.GetProofFile("");
+
+        var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+        Assert.NotNull(badRequest.Value);
+    }
+
+    [Fact]
+    public void GetProofFile_FileNotFound_ReturnsNotFound()
+    {
+        var result = _controller.GetProofFile("nonexistent_receipt.pdf");
+
+        var notFound = Assert.IsType<NotFoundObjectResult>(result);
+        Assert.NotNull(notFound.Value);
+    }
+
+    [Fact]
+    public void GetProofFile_FileExists_ReturnsFileStreamResult()
+    {
+        var receiptsDir = Path.Combine(_tempDirectory, "App_Data", "Receipts");
+        Directory.CreateDirectory(receiptsDir);
+        var testFilePath = Path.Combine(receiptsDir, "sample_receipt.pdf");
+        File.WriteAllBytes(testFilePath, new byte[] { 0x25, 0x50, 0x44, 0x46 });
+
+        var result = _controller.GetProofFile("sample_receipt.pdf");
+
+        var fileResult = Assert.IsType<FileStreamResult>(result);
+        Assert.Equal("application/pdf", fileResult.ContentType);
+        Assert.Equal("sample_receipt.pdf", fileResult.FileDownloadName);
+        fileResult.FileStream.Dispose();
+    }
 }
