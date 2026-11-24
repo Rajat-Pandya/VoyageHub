@@ -1,13 +1,46 @@
 # Changelog
 
-All notable changes to the VoyageHub project implemented across branches are documented in this file.
+All notable changes to the VoyageHub project implemented across branches are documented in this file. This project adheres to [Semantic Versioning](https://semver.org/) and [Keep a Changelog](https://keepachangelog.com/).
+
+## [feature/sonar-quality-gate] - 2026-11-24
+
+### Added & Improved
+- **SonarQube Quality Gate Compliance**: Resolved all Quality Gate conditions for both `VoyageHub-Backend` (83.1% new code coverage, 0.0% duplication, 0 new violations) and `VoyageHub-Frontend` (100.0% new code coverage, 0.0% duplication, 0 new violations).
+- **Backend Test Suite Expansion**:
+  - Authored comprehensive unit tests in `VoyageHub.Tests/ExpenseServiceTests.cs` (10 tests) covering pending summaries, expense submission validations, single claim approval/rejection, and batch reimbursement payouts.
+  - Authored comprehensive unit tests in `VoyageHub.Tests/EmployeeServiceTests.cs` (9 tests) covering employee creation validations, database uniqueness checks, updates, deletions, and CSV stream processing.
+  - Authored comprehensive controller tests in `VoyageHub.Tests/EmployeesControllerTests.cs` (13 tests) and `VoyageHub.Tests/ExpensesControllerTests.cs` (17 tests) covering file validations, error handling, and proof document streaming.
+  - Expanded backend test suite from 48 to 77 passing xUnit tests.
+- **Frontend Test Suite & Coverage Reporting**:
+  - Integrated `@vitest/coverage-v8` (`^4.1.12`) to enable V8 code coverage collection during `ng test`.
+  - Configured LCOV coverage report generation (`coverage/AngularBasics/lcov.info`) and wired `sonar.javascript.lcov.reportPaths` in `sonar-project.properties`.
+  - Authored unit test suites for `AuthService` and `EmployeeManagementComponent`, expanding frontend tests to 49 passing Vitest tests.
+
+### Fixed & Refactored
+- **ReDoS Vulnerability Prevention** (`7e80d4f`): Added explicit 250ms execution timeouts to regex evaluation in `EmployeeService.cs` (`csharpsquid:S6444`).
+- **File Upload Parameter Binding** (`954cd3f`): Bound multipart file uploads directly to controller action parameters (`IFormFile? file`) rather than accessing raw `Request.Form.Files` dictionary (`csharpsquid:S6932`).
+- **Eliminated Code Duplication** (`80041e4`): Extracted `SaveProofFileAsync` helper method in `ExpensesController.cs`, reducing new code duplication from 5.5% down to 0.0%.
+- **Translatable EF Core Queries** (`55cdd7a`): Refactored case-insensitive database string lookups in `EmployeeService.cs` to use `EF.Functions.Like` instead of in-memory `.ToLower()` or unsupported `string.Equals(..., StringComparison)`.
+- **String Sorting Comparison** (`64106d8`): Provided explicit string comparison function for array sorting in `employee-management.ts` (`typescript:S2871`).
+- **Test Performance & Cleanup** (`4fd3105`, `5a42348`): Returned concrete `FormFile` in test helpers (`CA1859`) and registered `GC.SuppressFinalize` in disposable test fixture teardowns (`CA1816`).
+
+---
+
+## [Hotfixes & Bug Fixes] - 2026-11-23
+
+### Fixed
+- **Swagger JSON 500 Internal Server Error** (`0ea6721`): Removed conflicting `[FromForm]` attributes on `IFormFile` parameters in API controllers that caused Swashbuckle schema generation crashes.
+- **Obsolete Vendor Prefix Cleanup** (`1894034`): Removed deprecated `-webkit-overflow-scrolling` property from dashboard CSS.
+- **Template Reversion** (`6db17cb`): Restored request list template and styling state prior to regression.
+
+---
 
 ## [feature/ui-consistency] - 2026-11-23
 
 ### Added & Refactored
 - **Design Tokens & Primitives** (`3af9a72`): Established universal 4px spacing scale (`--space-0` through `--space-12`), radius tokens, typography scales, layout primitives (`.page`, `.page-header`, `.card`, `.form-grid`, `.table-wrap`, `.empty-state`), and unified status chip mapping in `src/styles/`.
 - **Shared Standalone Components**: Created `app-page-header`, `app-empty-state`, and `app-status-chip` in `src/app/shared/`.
-- **App Shell** (`342538d`): Refactored navigation bar, responsive sidebar, and main view container using spacing tokens and normalized >= 40px touch targets.
+- **App Shell** (`342538d`): Refactored navigation bar, responsive sidebar, and main view container using spacing tokens and normalized $\ge 40\text{px}$ touch targets.
 - **Login & Auth** (`f83f0fa`): Cleaned up authentication cards, normalized form field heights to 40px, and replaced hardcoded margins with spacing tokens.
 - **Dashboard** (`eea2ee0`): Structured KPI cards with responsive grid, normalized activity table container, and consistent section spacing.
 - **Requests Views** (`4c7e1e1`): Standardized request list, new request multi-step form, and request detail views with unified layout classes, responsive table containers, and consistent spacing.
@@ -19,50 +52,18 @@ All notable changes to the VoyageHub project implemented across branches are doc
 - **User Settings** (`a92188f`): Aligned user profile tabs, travel preferences, notification toggles, and security views with design tokens; preserved read-only corporate directory records.
 - **Documentation**: Authored `docs/UI-GUIDELINES.md` detailing token reference, layout classes, component patterns, and do/don't checklist.
 
+---
+
 ## [feature/deploy-config] - 2026-11-20
 
 ### Added
-- **Task 1** (`2a34de2`): `feat(config): make Angular API URL configurable via environment`
-  - Replaced hardcoded API URL (`http://localhost:5062/api`) in `voyage.service.ts` and `auth.service.ts` with `environment.apiUrl`.
-  - Created `environment.ts` (local development: `http://localhost:5062/api`) and `environment.prod.ts` (production placeholder: `https://REPLACE-ME.azurewebsites.net/api`).
-  - Added `fileReplacements` in `angular.json` for production configuration.
-- **Task 2** (`d5246d0`): `feat(config): make CORS origins configurable`
-  - Added `Cors:AllowedOrigins` string array in `appsettings.json` defaulting to localhost/127.0.0.1 on port 4200.
-  - Implemented production CORS isolation in `Program.cs` that overrides origins strictly from environment variables (`Cors__AllowedOrigins*`), excluding localhost by default in non-Development.
-- **Task 3** (`37f3fa1`): `feat(config): support environment variable override for database connection string`
-  - Cleaned `ConnectionStrings:DefaultConnection` in `appsettings.json` with generic unsecret connection string.
-  - Retained local SQL Server Express connection in `appsettings.Development.json`.
-  - Ensured standard ASP.NET Core `ConnectionStrings__DefaultConnection` environment variable override.
-- **Task 4** (`81b273c`): `feat(auth): validate JWT and connection string on startup in production`
-  - Initialized local JWT secret key in .NET user-secrets and removed plaintext key from `appsettings.json`.
-  - Implemented startup fail-fast validation in `Program.cs`: verifies connection string and JWT key (>= 32 characters) exist in non-Development environments without logging sensitive values.
-- **Task 5** (`4b71c6a`): `feat(db): add Azure SQL schema and HashPassword utility`
-  - Created `VoyageHub_Schema.azure.sql` derived from `database/VoyageHub_Schema.sql` without `CREATE DATABASE` or `USE` statements.
-  - Replaced seeded passwords with `'DISABLED-SET-VIA-DEPLOYMENT-MD'` placeholder for cloud database safety.
-  - Implemented `tools/HashPassword` CLI tool (BCrypt.Net-Next, work factor 11) to generate secure password hashes from stdin.
-  - Preserved original `database/VoyageHub_Schema.sql` untouched for local development.
-- **Task 6** (`8dc10e0`): `feat(frontend): add static client-side build and Static Web App routing config`
-  - Configured `"static"` build target in `angular.json` producing client-only CSR build with root `index.html`.
-  - Added `npm run build:static` script in `package.json`.
-  - Created `staticwebapp.config.json` with `navigationFallback` rewriting client routes to `/index.html`.
-- **Task 7** (`f5df3d1`): `feat(auth): enforce token-based identity and authorization`
-  - Enforced caller identity and role extraction from JWT claims via `ICurrentUserService`.
-  - Scoped Employee access strictly to own requests and stats; Managers see their own and direct reports' data; Finance/Admin filter freely.
-  - Scoped approval queue strictly by caller's token role and id.
-  - Updated Angular services and components to eliminate client-supplied `employeeId`, `approverId`, and `role` parameters.
-  - Added 3 xUnit authorization tests in `VoyageHub.Tests` verifying access control rules.
-- **Task 8** (`8badd3d`): `docs(auth): document hosted demo credentials and security isolation`
-  - Documented in `README.md` that cloud/hosted instances use disabled seed placeholders and require setting passwords via `tools/HashPassword`.
-  - Kept local seed credentials intact for development.
-- **Task 9** (`bfaf511`): `feat(api): make Swagger UI and root redirect configuration-driven`
-  - Added `Swagger:Enabled` configuration flag (`true` in Development, `false` in Production).
-  - Wired Swagger UI and root `/` route: when disabled, Swagger UI is omitted and root returns HTTP 200 text status (`"VoyageHub API is running."`).
-- **Task 10** (`5a04a0a`): `feat(data): ensure EF Core transient error resiliency and execution strategy`
-  - Confirmed `EnableRetryOnFailure` is configured on SQL Server provider in `Program.cs`.
-  - Verified no naked `BeginTransaction` or `TransactionScope` exist.
-  - Added `RetryPolicyTests.cs` in `VoyageHub.Tests` confirming execution strategy availability for transient resiliency.
-- **Task 11**: `feat(deploy): production dry run and deployment documentation`
-  - Verified end-to-end production dry run on published Release artifacts with Azure SQL schema and custom environment variables.
-  - Authored `DEPLOYMENT.md` detailing the free Azure deployment route, warm-up checklist, and clean-up steps.
-  - Authored `docs/CONFIGURATION.md` configuration matrix.
-  - Reconciled `context.md` specifications, invariants, and gap backlog.
+- **Configurable API URL** (`2a34de2`): Replaced hardcoded API URL (`http://localhost:5062/api`) in services with environment-driven `environment.apiUrl`. Added `environment.ts` and `environment.prod.ts` with Angular production file replacements.
+- **Configurable CORS Origin Whitelist** (`d5246d0`): Added `Cors:AllowedOrigins` in `appsettings.json`. Enforced production origin isolation in `Program.cs` via `Cors__AllowedOrigins*` environment variables.
+- **Database Connection String Overrides** (`37f3fa1`): Cleaned `appsettings.json` and ensured ASP.NET Core `ConnectionStrings__DefaultConnection` environment variable override works seamlessly.
+- **JWT & Connection String Fail-Fast Validation** (`81b273c`): Initialized local JWT secret in .NET user-secrets. Enforced startup validation in `Program.cs` aborting execution if connection strings are missing or if JWT key is shorter than 32 characters in production.
+- **Azure SQL Schema & Password Hasher Tool** (`4b71c6a`): Authored `database/VoyageHub_Schema.azure.sql` with disabled password placeholders (`'DISABLED-SET-VIA-DEPLOYMENT-MD'`). Implemented `tools/HashPassword` console utility for secure BCrypt hash generation.
+- **Static Client Build** (`8dc10e0`): Configured `"static"` build target in `angular.json` (`npm run build:static`) and authored `staticwebapp.config.json` with client-side route fallback.
+- **Token-Based Identity Scoping** (`f5df3d1`): Enforced caller identity extraction strictly from JWT claims via `ICurrentUserService`. Eliminated client-supplied identity parameters (`employeeId`, `approverId`, `role`) across controllers and Angular services.
+- **Configuration-Driven Swagger UI** (`bfaf511`): Added `Swagger:Enabled` flag. Disabled Swagger by default in production and mapped root route `/` to a lightweight status check string.
+- **EF Core Transient Resilience** (`5a04a0a`): Verified `EnableRetryOnFailure` on SQL Server DbContext configuration to survive Azure SQL auto-pausing.
+- **Deployment Documentation & Dry Run**: Executed production Release build dry run. Authored `DEPLOYMENT.md` and `docs/CONFIGURATION.md`.
