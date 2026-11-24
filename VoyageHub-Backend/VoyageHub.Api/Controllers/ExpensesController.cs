@@ -86,7 +86,7 @@ public class ExpensesController : ControllerBase
     [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<IActionResult> UploadProof(IFormFile? file, CancellationToken cancellationToken)
     {
-        var uploadFile = file ?? (Request.HasFormContentType && Request.Form.Files.Count > 0 ? Request.Form.Files[0] : null);
+        var uploadFile = file;
 
         if (uploadFile == null || uploadFile.Length == 0)
         {
@@ -132,7 +132,7 @@ public class ExpensesController : ControllerBase
     [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<IActionResult> AttachProof(Guid id, IFormFile? file, CancellationToken cancellationToken)
     {
-        var uploadFile = file ?? (Request.HasFormContentType && Request.Form.Files.Count > 0 ? Request.Form.Files[0] : null);
+        var uploadFile = file;
 
         if (uploadFile == null || uploadFile.Length == 0)
         {
