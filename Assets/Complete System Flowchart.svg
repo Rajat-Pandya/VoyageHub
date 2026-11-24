@@ -1,0 +1,419 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2314.331 2774.3999999999996" width="2314.331" height="2774.3999999999996" style="--bg:#18181B;--fg:#F4F4F5;--line:#71717A;--muted:#A1A1AA;--surface:#27272A;--border:#3F3F46;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="ApiLayer" data-label="1. Presentation Layer (VoyageHub.Api)">
+  <rect x="63.93833333333333" y="278.1" width="279.34399999999994" height="668.9999999999999" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="63.93833333333333" y="278.1" width="279.34399999999994" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="75.93833333333333" y="292.1" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">1. Presentation Layer (VoyageHub.Api)</text>
+<g class="subgraph" data-id="Controllers" data-label="Controllers">
+  <rect x="79.93833333333333" y="379" width="247.34399999999997" height="552.0999999999999" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="79.93833333333333" y="379" width="247.34399999999997" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="91.93833333333333" y="393" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Controllers</text>
+</g>
+</g>
+<g class="subgraph" data-id="BusinessLayer" data-label="2. Business Logic Layer (VoyageHub.Business)">
+  <rect x="40" y="967.0999999999999" width="1303.745" height="1767.2999999999997" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="40" y="967.0999999999999" width="1303.745" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="52" y="981.0999999999999" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">2. Business Logic Layer (VoyageHub.Business)</text>
+<g class="subgraph" data-id="Interfaces" data-label="Service Interfaces">
+  <rect x="508.50199999999995" y="1962.2999999999997" width="277.70399999999995" height="732.0999999999999" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="508.50199999999995" y="1962.2999999999997" width="277.70399999999995" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="520.502" y="1976.2999999999997" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Service Interfaces</text>
+</g>
+<g class="subgraph" data-id="Services" data-label="Service Implementations">
+  <rect x="329.06399999999996" y="1011.0999999999999" width="252.07799999999997" height="615.1999999999999" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="329.06399999999996" y="1011.0999999999999" width="252.07799999999997" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="341.06399999999996" y="1025.1" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Service Implementations</text>
+</g>
+<g class="subgraph" data-id="Dtos" data-label="Data Transfer Objects (DTOs)">
+  <rect x="1098.494" y="2164.5499999999997" width="229.251" height="327.6" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1098.494" y="2164.5499999999997" width="229.251" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1110.494" y="2178.5499999999997" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Data Transfer Objects (DTOs)</text>
+</g>
+</g>
+<g class="subgraph" data-id="DataLayer" data-label="3. Data Access Layer (VoyageHub.Data)">
+  <rect x="383.53" y="40" width="1526.801" height="570.3" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="383.53" y="40" width="1526.801" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="395.53" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">3. Data Access Layer (VoyageHub.Data)</text>
+<g class="subgraph" data-id="Repositories" data-label="Repository Pattern">
+  <rect x="399.53" y="84" width="789.2279999999998" height="486.29999999999995" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="399.53" y="84" width="789.2279999999998" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="411.53" y="98" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Repository Pattern</text>
+</g>
+<g class="subgraph" data-id="Entities" data-label="Entities (Relational Schema)">
+  <rect x="1533.461" y="245.79999999999995" width="360.87" height="324.5" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1533.461" y="245.79999999999995" width="360.87" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1545.461" y="259.79999999999995" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Entities (Relational Schema)</text>
+</g>
+</g>
+<polyline class="edge" data-from="Client" data-to="Program" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="HTTP / JSON + Bearer JWT" points="201.765,76.9 201.765,193.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+
+<polyline class="edge" data-from="Program" data-to="CurrentUserService" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="201.765,230.1 201.765,278.1 201.765,322.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Auth" data-to="I_Auth" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="241.62833333333333,423.75 327.2823333333333,423.75 1930.331,441.45 1930.331,2024.7499999999998 524.502,2024.7499999999998" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Emp" data-to="I_Emp" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="280.1603333333333,484.65000000000003 327.2823333333333,484.65000000000003 20,498.35 20,2081.6499999999996 524.502,2081.6499999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Travel" data-to="I_Travel" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="311.2823333333333,545.55 327.2823333333333,545.55 1942.331,555.25 1942.331,2138.5499999999997 524.502,2138.5499999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Appr" data-to="I_Appr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="277.1963333333333,612.1500000000001 327.2823333333333,612.1500000000001 8,612.1500000000001 8,2195.45 524.502,2195.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Exp" data-to="I_Exp" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="275.7143333333333,669.05 327.2823333333333,669.05 1954.331,669.05 1954.331,2239.6749999999997 524.502,2239.6749999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Pol" data-to="I_Pol" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="262.3763333333334,735.5 327.2823333333333,735.5 -4,725.95 -4,2296.575 524.502,2296.575" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Audit" data-to="I_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="275.7143333333333,782.8499999999999 327.2823333333333,782.8499999999999 1966.331,782.8499999999999 1966.331,2357.7 560.502,2357.7 560.502,2380.725 584.502,2380.725" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Supp" data-to="I_Supp" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="262.3763333333334,839.75 327.2823333333333,839.75 -16,839.75 -16,2456.9249999999997 524.502,2456.9249999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Ana" data-to="I_Ana" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="269.78633333333335,896.6499999999999 327.2823333333333,896.6499999999999 1978.331,896.6499999999999 1978.331,2513.0499999999997 524.502,2513.0499999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Auth" data-to="S_Auth" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="661.3,2024.7499999999998 786.2059999999999,2024.7499999999998 -28,2024.7499999999998 -28,1057.65 756.2059999999999,1057.65 756.2059999999999,983.1999999999999 170.06399999999996,983.1999999999999 170.06399999999996,108 289.06399999999996,108 -28,108 -28,1075.1 345.06399999999996,1075.1" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Emp" data-to="S_Emp" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="692.4219999999999,2081.6499999999996 786.2059999999999,2081.6499999999996 1990.331,2081.6499999999996 1990.331,1114.55 768.2059999999999,1114.55 768.2059999999999,959.1999999999999 182.06399999999996,959.1999999999999 182.06399999999996,168 289.06399999999996,168 1990.331,168 1990.331,1135.1 345.06399999999996,1135.1" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Travel" data-to="S_Travel" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="723.5439999999999,2138.5499999999997 786.2059999999999,2138.5499999999997 -40,2138.5499999999997 -40,1171.4499999999998 780.2059999999999,1171.4499999999998 780.2059999999999,935.1999999999999 194.06399999999996,935.1999999999999 194.06399999999996,226.45 289.06399999999996,226.45 -40,226.45 -40,1193.55 345.06399999999996,1193.55" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Appr" data-to="S_Appr" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="689.458,2195.45 786.2059999999999,2195.45 2002.331,2195.45 2002.331,1228.35 792.2059999999999,1228.35 792.2059999999999,911.1999999999999 206.06399999999996,911.1999999999999 206.06399999999996,283.35 289.06399999999996,283.35 2002.331,283.35 2002.331,1250.4499999999998 345.06399999999996,1250.4499999999998" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Exp" data-to="S_Exp" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="687.9759999999999,2239.6749999999997 786.2059999999999,2239.6749999999997 -52,2252.35 -52,1285.25 804.2059999999999,1285.25 804.2059999999999,887.1999999999999 218.06399999999996,887.1999999999999 218.06399999999996,340.25 289.06399999999996,340.25 -52,340.25 -52,1307.35 345.06399999999996,1307.35" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Pol" data-to="S_Pol" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="671.674,2296.575 786.2059999999999,2296.575 2014.331,2309.2499999999995 2014.331,1342.1499999999999 816.2059999999999,1342.1499999999999 816.2059999999999,863.1999999999999 230.06399999999996,863.1999999999999 230.06399999999996,397.15000000000003 289.06399999999996,397.15000000000003 2014.331,397.15000000000003 2014.331,1364.25 345.06399999999996,1364.25" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Audit" data-to="S_Audit" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="724.2639999999999,2390.975 786.2059999999999,2390.975 -64,2382.7 -64,1415.6 828.2059999999999,1415.6 828.2059999999999,839.1999999999999 242.06399999999996,839.1999999999999 242.06399999999996,454.05 289.06399999999996,454.05 -64,454.05 -64,1421.1499999999999 345.06399999999996,1421.1499999999999" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Supp" data-to="S_Supp" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="682.048,2456.9249999999997 786.2059999999999,2456.9249999999997 2026.331,2456.1499999999996 2026.331,1489.05 864.2059999999999,1489.05 864.2059999999999,683.1999999999999 278.06399999999996,683.1999999999999 278.06399999999996,510.95 289.06399999999996,510.95 2026.331,510.95 2026.331,1478.05 345.06399999999996,1478.05" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Ana" data-to="S_Ana" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="689.458,2513.0499999999997 786.2059999999999,2513.0499999999997 -76,2513.0499999999997 -76,1545.9499999999998 840.2059999999999,1545.9499999999998 840.2059999999999,815.1999999999999 254.06399999999996,815.1999999999999 254.06399999999996,567.8499999999999 289.06399999999996,567.8499999999999 -76,567.8499999999999 -76,1534.9499999999998 345.06399999999996,1534.9499999999998" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Jwt" data-to="S_Jwt" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="693.904,2569.95 786.2059999999999,2569.95 2038.331,2569.95 2038.331,1602.85 852.2059999999999,1602.85 852.2059999999999,791.1999999999999 266.06399999999996,791.1999999999999 266.06399999999996,624.75 289.06399999999996,624.75 2038.331,624.75 2038.331,1591.85 345.06399999999996,1591.85" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="I_Curr" data-to="CurrentUserService" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="770.2059999999999,2643.3999999999996 786.2059999999999,2643.3999999999996 -88,2643.3999999999996 -88,322.1 140.85166666666666,322.1" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Auth" data-to="I_Jwt" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="409.16799999999995,1093.55 409.16799999999995,1657.3874999999998 609.203,1657.3874999999998 609.203,2551.4999999999995" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Auth" data-to="I_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="409.16799999999995,1093.55 409.16799999999995,1657.3874999999998 601.9722499999999,1657.3874999999998 601.9722499999999,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Auth" data-to="I_Curr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="409.16799999999995,1093.55 409.16799999999995,1657.3874999999998 605.1357777777778,1657.3874999999998 605.1357777777778,2624.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Emp" data-to="I_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="427.542,1153.55 427.542,1715.8375 695.6708888888888,1715.8375 695.6708888888888,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Emp" data-to="I_Curr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="427.542,1153.55 427.542,1715.8375 728.9384444444444,1715.8375 728.9384444444444,2624.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Travel" data-to="I_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="443.10299999999995,1212 443.10299999999995,1767.175 716.3046666666667,1767.175 716.3046666666667,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Travel" data-to="I_Curr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="443.10299999999995,1212 443.10299999999995,1767.175 749.5722222222222,1767.175 749.5722222222222,2624.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Appr" data-to="I_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="426.05999999999995,1268.9 426.05999999999995,1820.7124999999999 675.037111111111,1820.7124999999999 675.037111111111,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Appr" data-to="I_Curr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="426.05999999999995,1268.9 426.05999999999995,1820.7124999999999 687.6708888888888,1820.7124999999999 687.6708888888888,2624.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Exp" data-to="I_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="425.31899999999996,1325.8 425.31899999999996,1849.1625 654.8829999999999,1849.1625 654.8829999999999,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Exp" data-to="I_Curr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="425.31899999999996,1325.8 425.31899999999996,1849.1625 667.037111111111,1849.1625 667.037111111111,2624.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Pol" data-to="I_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="417.16799999999995,1382.7 417.16799999999995,1877.6124999999997 619.4425,1877.6124999999997 619.4425,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Pol" data-to="I_Curr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="417.16799999999995,1382.7 417.16799999999995,1877.6124999999997 625.7695555555555,1877.6124999999997 625.7695555555555,2624.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Supp" data-to="I_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="401.16799999999995,1496.5 401.16799999999995,1934.5124999999998 636.91275,1934.5124999999998 636.91275,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Supp" data-to="I_Curr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="401.16799999999995,1496.5 401.16799999999995,1934.5124999999998 646.4033333333333,1934.5124999999998 646.4033333333333,2624.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Ana" data-to="I_Curr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="393.16799999999995,1553.4 393.16799999999995,1970.2999999999997 708.3046666666667,1970.2999999999997 708.3046666666667,2624.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Auth" data-to="D_Auth" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="409.16799999999995,1093.55 409.16799999999995,1657.3874999999998 1171.0369999999998,1657.3874999999998 1171.0369999999998,2221.2249999999995" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Emp" data-to="D_Emp" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="427.542,1153.55 427.542,1715.8375 1190.7441999999999,1715.8375 1190.7441999999999,2278.125" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Travel" data-to="D_Travel" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="443.10299999999995,1212 443.10299999999995,1767.175 1202.1589999999999,1767.175 1202.1589999999999,2322.35" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Appr" data-to="D_Mgmt" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="426.05999999999995,1268.9 426.05999999999995,1820.7124999999999 1247.2446,1820.7124999999999 1247.2446,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Exp" data-to="D_Mgmt" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="425.31899999999996,1325.8 425.31899999999996,1849.1625 1214.9943999999998,1849.1625 1214.9943999999998,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Pol" data-to="D_Mgmt" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="417.16799999999995,1382.7 417.16799999999995,1877.6124999999997 1182.7441999999999,1877.6124999999997 1182.7441999999999,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Audit" data-to="D_Mgmt" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="481.86199999999997,1415 581.1419999999999,1415 2182.331,1415 2182.331,447.90000000000003 1012.4939999999999,447.90000000000003 1012.4939999999999,1452.1499999999999 1058.494,1452.1499999999999 2182.331,1452.1499999999999 2182.331,2419.2499999999995 1138.494,2419.2499999999995 1138.494,2403.2749999999996 1150.494,2403.2749999999996" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Ana" data-to="D_Mgmt" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="393.16799999999995,1553.4 393.16799999999995,1970.2999999999997 1279.4948,1970.2999999999997 1279.4948,2372.5249999999996" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Supp" data-to="D_Supp" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="401.16799999999995,1496.5 401.16799999999995,1934.5124999999998 1181.4109999999998,1934.5124999999998 1181.4109999999998,2438.475" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="Services" data-to="Constants" data-style="solid" data-arrow-start="false" data-arrow-end="false" points="289.06399999999996,659.1999999999999 289.06399999999996,671.1999999999999 876.2059999999999,671.1999999999999 876.2059999999999,1739.2999999999997 345.22749999999996,1739.2999999999997 345.22749999999996,1767.2999999999997 -244,1767.2999999999997 -244,2706.3999999999996 385.22749999999996,2706.3999999999996 177.75099999999998,2706.3999999999996 177.75099999999998,2694.3999999999996" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="edge" data-from="S_Auth" data-to="R_User" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="478.89799999999997,1075.1 581.1419999999999,1075.1 2206.331,1075.1 2206.331,217.5 455.04999999999995,217.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Emp" data-to="R_User" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="510.02,1135.1 581.1419999999999,1135.1 -256,1135.1 -256,205.2 455.04999999999995,205.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Emp" data-to="AppDbContext" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="510.02,1128.9499999999998 534.02,1128.9499999999998 534.02,1125.1 581.1419999999999,1125.1 2218.331,1125.1 2218.331,338.16999999999996 1409.2266666666665,338.16999999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Travel" data-to="R_Travel" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="541.1419999999999,1189.86 553.1419999999999,1189.86 553.1419999999999,1188.55 581.1419999999999,1188.55 -268,1188.55 -268,276.25 415.53,276.25" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Appr" data-to="R_Appr" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="507.056,1254.1399999999999 519.056,1254.1399999999999 519.056,1255.4499999999998 581.1419999999999,1255.4499999999998 2230.331,1255.4499999999998 2230.331,356.61999999999995 422.93999999999994,356.61999999999995" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Exp" data-to="R_Exp" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="505.57399999999996,1318.4199999999998 517.574,1318.4199999999998 517.574,1322.35 581.1419999999999,1322.35 -280,1322.35 -280,423.75 451.09799999999996,423.75" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Pol" data-to="R_Pol" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="489.27199999999993,1367.94 501.27199999999993,1367.94 501.27199999999993,1369.25 581.1419999999999,1369.25 2242.331,1369.25 2242.331,484.65 467.4,484.65" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Audit" data-to="R_Audit" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="481.86199999999997,1427.3 581.1419999999999,1427.3 -292,1427.3 -292,545.5499999999998 451.09799999999996,545.5499999999998" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Supp" data-to="R_Supp" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="499.64599999999996,1466.98 511.64599999999996,1466.98 511.64599999999996,1463.05 581.1419999999999,1463.05 2254.331,1463.05 2254.331,146.45 419.976,146.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="S_Ana" data-to="AppDbContext" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="507.056,1534.9499999999998 581.1419999999999,1534.9499999999998 -304,1534.9499999999998 -304,338.16999999999996 1312.9923333333331,338.16999999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Repositories" data-to="AppDbContext" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="16,530.3 16,570.3 2266.331,570.3 2266.331,582.3 399.53,582.3 1288.9337499999997,582.3 1288.9337499999997,375.06999999999994" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="AppDbContext" data-to="Entities" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1433.2852499999997,375.06999999999994 1433.2852499999997,582.3 1713.896,582.3 1713.896,610.3 -316,610.3 -316,530.3 1330.366,530.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="AppDbContext" data-to="Database" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="EF Core SQL Provider" points="1361.1094999999998,375.06999999999994 1361.1094999999998,610.3 1361.1094999999998,717.05" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="R_User" data-to="BaseRepo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="inherits" points="733.3789999999999,211.35 929.7089999999998,211.35 929.7089999999998,331.92499999999995 953.7089999999998,331.92499999999995" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="R_Travel" data-to="BaseRepo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="inherits" points="812.4189999999999,276.25 917.7089999999998,276.25 917.7089999999998,336.5375 953.7089999999998,336.5375" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="R_Appr" data-to="BaseRepo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="inherits" points="805.0089999999999,356.61999999999995 953.7089999999998,356.61999999999995" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="R_Exp" data-to="BaseRepo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="inherits" points="776.8509999999999,423.75 917.7089999999998,406.04999999999995 917.7089999999998,345.7625 953.7089999999998,345.7625" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="R_Pol" data-to="BaseRepo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="inherits" points="760.5489999999999,484.65 929.7089999999998,484.65 929.7089999999998,350.375 953.7089999999998,350.375" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="R_Audit" data-to="BaseRepo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="inherits" points="776.8509999999999,545.5499999999998 941.7089999999998,545.5499999999998 941.7089999999998,354.9875 953.7089999999998,354.9875" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="R_Supp" data-to="BaseRepo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="inherits" points="807.9729999999998,146.45 941.7089999999998,146.45 941.7089999999998,327.3125 953.7089999999998,327.3125" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="Client" data-to="Program" data-label="HTTP / JSON + Bearer JWT">
+  <rect x="126.26499999999997" y="119.9" width="150.112" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="201.32099999999997" y="135.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">HTTP / JSON + Bearer JWT</text>
+</g>
+<g class="edge-label" data-from="AppDbContext" data-to="Database" data-label="EF Core SQL Provider">
+  <rect x="1298.1095" y="653.3" width="125.16399999999999" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1360.6915" y="668.4499999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">EF Core SQL Provider</text>
+</g>
+<g class="edge-label" data-from="R_User" data-to="BaseRepo" data-label="inherits">
+  <rect x="856.4189999999999" y="195.35" width="53.290000000000006" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="883.0639999999999" y="210.5" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">inherits</text>
+</g>
+<g class="edge-label" data-from="R_Travel" data-to="BaseRepo" data-label="inherits">
+  <rect x="856.4189999999999" y="260.25" width="53.290000000000006" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="883.0639999999999" y="275.4" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">inherits</text>
+</g>
+<g class="edge-label" data-from="R_Appr" data-to="BaseRepo" data-label="inherits">
+  <rect x="856.4189999999999" y="325.15000000000003" width="53.290000000000006" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="883.0639999999999" y="340.3" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">inherits</text>
+</g>
+<g class="edge-label" data-from="R_Exp" data-to="BaseRepo" data-label="inherits">
+  <rect x="856.4189999999999" y="390.04999999999995" width="53.290000000000006" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="883.0639999999999" y="405.19999999999993" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">inherits</text>
+</g>
+<g class="edge-label" data-from="R_Pol" data-to="BaseRepo" data-label="inherits">
+  <rect x="856.4189999999999" y="454.95" width="53.290000000000006" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="883.0639999999999" y="470.09999999999997" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">inherits</text>
+</g>
+<g class="edge-label" data-from="R_Audit" data-to="BaseRepo" data-label="inherits">
+  <rect x="856.4189999999999" y="519.85" width="53.290000000000006" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="883.0639999999999" y="535" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">inherits</text>
+</g>
+<g class="edge-label" data-from="R_Supp" data-to="BaseRepo" data-label="inherits">
+  <rect x="856.4189999999999" y="130.45" width="53.290000000000006" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="883.0639999999999" y="145.6" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">inherits</text>
+</g>
+<g class="node" data-id="Client" data-label="Angular Frontend Client (localhost:4200)" data-shape="rectangle">
+  <rect x="63.341500000000025" y="40" width="276.8469999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="201.765" y="58.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Angular Frontend Client (localhost:4200)</text>
+</g>
+<g class="node" data-id="Program" data-label="Program.cs (DI Container &amp; Middleware Pipeline)" data-shape="rectangle">
+  <rect x="40" y="193.2" width="323.53" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="201.765" y="211.64999999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Program.cs (DI Container &amp; Middleware Pipeline)</text>
+</g>
+<g class="node" data-id="Database" data-label="SQL Server (AngularAuthDb)" data-shape="cylinder">
+  <rect x="1254.1784999999998" y="724.05" width="213.86199999999997" height="36.900000000000006" fill="var(--_node-fill)" stroke="none" />
+  <line x1="1254.1784999999998" y1="724.05" x2="1254.1784999999998" y2="760.9499999999999" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="1468.0404999999996" y1="724.05" x2="1468.0404999999996" y2="760.9499999999999" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <ellipse cx="1361.1094999999998" cy="760.9499999999999" rx="106.93099999999998" ry="7" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <ellipse cx="1361.1094999999998" cy="724.05" rx="106.93099999999998" ry="7" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1361.1094999999998" y="742.5" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">SQL Server (AngularAuthDb)</text>
+</g>
+<g class="node" data-id="CurrentUserService" data-label="CurrentUserService.cs" data-shape="rectangle">
+  <rect x="79.93833333333333" y="322.1" width="182.73999999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="171.30833333333334" y="340.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">CurrentUserService.cs</text>
+</g>
+<g class="node" data-id="C_Auth" data-label="AuthController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="405.3" width="145.69" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="168.78333333333333" y="423.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AuthController.cs</text>
+</g>
+<g class="node" data-id="C_Emp" data-label="EmployeesController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="466.2" width="184.22199999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="188.04933333333332" y="484.65" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">EmployeesController.cs</text>
+</g>
+<g class="node" data-id="C_Travel" data-label="TravelRequestsController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="527.0999999999999" width="215.34399999999997" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="203.6103333333333" y="545.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">TravelRequestsController.cs</text>
+</g>
+<g class="node" data-id="C_Appr" data-label="ApprovalsController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="593.7" width="181.25799999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="186.56733333333332" y="612.1500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ApprovalsController.cs</text>
+</g>
+<g class="node" data-id="C_Exp" data-label="ExpensesController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="650.6" width="179.77599999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="185.8263333333333" y="669.0500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ExpensesController.cs</text>
+</g>
+<g class="node" data-id="C_Pol" data-label="PoliciesController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="717.05" width="166.43800000000005" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="179.15733333333336" y="735.5" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">PoliciesController.cs</text>
+</g>
+<g class="node" data-id="C_Audit" data-label="AuditLogsController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="764.4" width="179.77599999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="185.8263333333333" y="782.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AuditLogsController.cs</text>
+</g>
+<g class="node" data-id="C_Supp" data-label="SupportController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="821.3" width="166.43800000000005" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="179.15733333333336" y="839.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">SupportController.cs</text>
+</g>
+<g class="node" data-id="C_Ana" data-label="AnalyticsController.cs" data-shape="rectangle">
+  <rect x="95.93833333333333" y="878.1999999999999" width="173.848" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="182.86233333333334" y="896.65" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AnalyticsController.cs</text>
+</g>
+<g class="node" data-id="Constants" data-label="AppConstants.cs (Roles, Statuses)" data-shape="rectangle">
+  <rect x="56" y="2657.5" width="243.50199999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="177.75099999999998" y="2675.95" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AppConstants.cs (Roles, Statuses)</text>
+</g>
+<g class="node" data-id="I_Auth" data-label="IAuthService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2006.2999999999997" width="136.798" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="592.901" y="2024.7499999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">IAuthService.cs</text>
+</g>
+<g class="node" data-id="I_Emp" data-label="IEmployeeService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2063.2" width="167.92" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="608.462" y="2081.6499999999996" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">IEmployeeService.cs</text>
+</g>
+<g class="node" data-id="I_Travel" data-label="ITravelRequestService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2120.1" width="199.04199999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="624.0229999999999" y="2138.5499999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ITravelRequestService.cs</text>
+</g>
+<g class="node" data-id="I_Appr" data-label="IApprovalService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2176.9999999999995" width="164.95600000000002" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="606.98" y="2195.4499999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">IApprovalService.cs</text>
+</g>
+<g class="node" data-id="I_Exp" data-label="IExpenseService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2221.2249999999995" width="163.474" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="606.2389999999999" y="2239.6749999999993" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">IExpenseService.cs</text>
+</g>
+<g class="node" data-id="I_Pol" data-label="IPolicyService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2278.125" width="147.17200000000003" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="598.088" y="2296.575" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">IPolicyService.cs</text>
+</g>
+<g class="node" data-id="I_Audit" data-label="IAuditService.cs" data-shape="rectangle">
+  <rect x="584.502" y="2372.5249999999996" width="139.762" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="654.3829999999999" y="2390.9749999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">IAuditService.cs</text>
+</g>
+<g class="node" data-id="I_Supp" data-label="ISupportService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2438.475" width="157.546" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="603.275" y="2456.9249999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ISupportService.cs</text>
+</g>
+<g class="node" data-id="I_Ana" data-label="IAnalyticsService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2494.5999999999995" width="164.95600000000002" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="606.98" y="2513.0499999999993" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">IAnalyticsService.cs</text>
+</g>
+<g class="node" data-id="I_Jwt" data-label="IJwtTokenService.cs" data-shape="rectangle">
+  <rect x="524.502" y="2551.4999999999995" width="169.402" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="609.203" y="2569.9499999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">IJwtTokenService.cs</text>
+</g>
+<g class="node" data-id="I_Curr" data-label="ICurrentUserService.cs" data-shape="rectangle">
+  <rect x="584.502" y="2624.95" width="185.70399999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="677.3539999999999" y="2643.3999999999996" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ICurrentUserService.cs</text>
+</g>
+<g class="node" data-id="S_Auth" data-label="AuthService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1056.6499999999999" width="133.834" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="411.981" y="1075.1" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AuthService.cs</text>
+</g>
+<g class="node" data-id="S_Emp" data-label="EmployeeService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1116.6499999999999" width="164.95600000000002" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="427.542" y="1135.1" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">EmployeeService.cs</text>
+</g>
+<g class="node" data-id="S_Travel" data-label="TravelRequestService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1175.1" width="196.07799999999997" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="443.10299999999995" y="1193.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">TravelRequestService.cs</text>
+</g>
+<g class="node" data-id="S_Appr" data-label="ApprovalService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1232" width="161.99200000000002" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="426.05999999999995" y="1250.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ApprovalService.cs</text>
+</g>
+<g class="node" data-id="S_Exp" data-label="ExpenseService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1288.8999999999999" width="160.51" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="425.31899999999996" y="1307.35" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ExpenseService.cs</text>
+</g>
+<g class="node" data-id="S_Pol" data-label="PolicyService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1345.8" width="144.208" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="417.16799999999995" y="1364.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">PolicyService.cs</text>
+</g>
+<g class="node" data-id="S_Audit" data-label="AuditService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1402.6999999999998" width="136.798" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="413.46299999999997" y="1421.1499999999999" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AuditService.cs</text>
+</g>
+<g class="node" data-id="S_Supp" data-label="SupportService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1459.6" width="154.582" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="422.35499999999996" y="1478.05" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">SupportService.cs</text>
+</g>
+<g class="node" data-id="S_Ana" data-label="AnalyticsService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1516.5" width="161.99200000000002" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="426.05999999999995" y="1534.95" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AnalyticsService.cs</text>
+</g>
+<g class="node" data-id="S_Jwt" data-label="JwtTokenService.cs" data-shape="rectangle">
+  <rect x="345.06399999999996" y="1573.3999999999999" width="166.438" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="428.28299999999996" y="1591.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">JwtTokenService.cs</text>
+</g>
+<g class="node" data-id="D_Auth" data-label="AuthDtos.cs" data-shape="rectangle">
+  <rect x="1114.494" y="2221.2249999999995" width="113.086" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1171.0369999999998" y="2239.6749999999993" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AuthDtos.cs</text>
+</g>
+<g class="node" data-id="D_Emp" data-label="EmployeeDtos.cs" data-shape="rectangle">
+  <rect x="1114.494" y="2278.125" width="144.208" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1186.598" y="2296.575" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">EmployeeDtos.cs</text>
+</g>
+<g class="node" data-id="D_Travel" data-label="TravelRequestDtos.cs" data-shape="rectangle">
+  <rect x="1114.494" y="2322.35" width="175.32999999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1202.1589999999999" y="2340.7999999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">TravelRequestDtos.cs</text>
+</g>
+<g class="node" data-id="D_Mgmt" data-label="ManagementDtos.cs" data-shape="rectangle">
+  <rect x="1150.494" y="2372.5249999999996" width="161.251" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1231.1195" y="2390.9749999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ManagementDtos.cs</text>
+</g>
+<g class="node" data-id="D_Supp" data-label="SupportDtos.cs" data-shape="rectangle">
+  <rect x="1114.494" y="2438.475" width="133.834" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1181.4109999999998" y="2456.9249999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">SupportDtos.cs</text>
+</g>
+<g class="node" data-id="AppDbContext" data-label="AppDbContext.cs (Entity Framework Core)" data-shape="rectangle">
+  <rect x="1216.7579999999998" y="338.16999999999996" width="288.703" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1361.1094999999998" y="356.61999999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AppDbContext.cs (Entity Framework Core)</text>
+</g>
+<g class="node" data-id="BaseRepo" data-label="Repository.cs / IRepository.cs" data-shape="rectangle">
+  <rect x="953.7089999999998" y="322.7" width="219.04899999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1063.2334999999998" y="341.15" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Repository.cs / IRepository.cs</text>
+</g>
+<g class="node" data-id="R_User" data-label="UserRepository.cs / IUserRepository.cs" data-shape="rectangle">
+  <rect x="455.04999999999995" y="192.89999999999998" width="278.32899999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="594.2144999999999" y="211.34999999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UserRepository.cs / IUserRepository.cs</text>
+</g>
+<g class="node" data-id="R_Travel" data-label="TravelRequestRepository.cs / ITravelRequestRepository.cs" data-shape="rectangle">
+  <rect x="415.53" y="257.79999999999995" width="396.8889999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="613.9744999999999" y="276.24999999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">TravelRequestRepository.cs / ITravelRequestRepository.cs</text>
+</g>
+<g class="node" data-id="R_Appr" data-label="ApprovalStepRepository.cs / IApprovalStepRepository.cs" data-shape="rectangle">
+  <rect x="422.93999999999994" y="338.16999999999996" width="382.0689999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="613.9744999999999" y="356.61999999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ApprovalStepRepository.cs / IApprovalStepRepository.cs</text>
+</g>
+<g class="node" data-id="R_Exp" data-label="ExpenseRepository.cs / IExpenseRepository.cs" data-shape="rectangle">
+  <rect x="451.09799999999996" y="405.3" width="325.7529999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="613.9744999999999" y="423.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ExpenseRepository.cs / IExpenseRepository.cs</text>
+</g>
+<g class="node" data-id="R_Pol" data-label="PolicyRepository.cs / IPolicyRepository.cs" data-shape="rectangle">
+  <rect x="467.4" y="466.2" width="293.1489999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="613.9744999999999" y="484.65" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">PolicyRepository.cs / IPolicyRepository.cs</text>
+</g>
+<g class="node" data-id="R_Audit" data-label="AuditLogRepository.cs / IAuditLogRepository.cs" data-shape="rectangle">
+  <rect x="451.09799999999996" y="527.0999999999999" width="325.7529999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="613.9744999999999" y="545.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AuditLogRepository.cs / IAuditLogRepository.cs</text>
+</g>
+<g class="node" data-id="R_Supp" data-label="SupportTicketRepository.cs / ISupportTicketRepository.cs" data-shape="rectangle">
+  <rect x="419.976" y="128" width="387.9969999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="613.9744999999999" y="146.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">SupportTicketRepository.cs / ISupportTicketRepository.cs</text>
+</g>
+<g class="node" data-id="E_User" data-label="User.cs" data-shape="rectangle">
+  <rect x="1655.871" y="289.79999999999995" width="89.374" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1700.558" y="308.24999999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">User.cs</text>
+</g>
+<g class="node" data-id="E_Dept" data-label="Department.cs" data-shape="rectangle">
+  <rect x="1682.547" y="338.16999999999996" width="126.424" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1745.759" y="356.61999999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Department.cs</text>
+</g>
+<g class="node" data-id="E_Travel" data-label="TravelRequest.cs" data-shape="rectangle">
+  <rect x="1713.669" y="466.2" width="148.654" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1787.996" y="484.65" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">TravelRequest.cs</text>
+</g>
+<g class="node" data-id="E_Seg" data-label="ItinerarySegment.cs" data-shape="rectangle">
+  <rect x="1549.461" y="527.0999999999999" width="160.51" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1629.716" y="545.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ItinerarySegment.cs</text>
+</g>
+<g class="node" data-id="E_Stay" data-label="Stay.cs" data-shape="rectangle">
+  <rect x="1549.461" y="289.79999999999995" width="86.41" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1592.666" y="308.24999999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Stay.cs</text>
+</g>
+<g class="node" data-id="E_Appr" data-label="ApprovalStep.cs" data-shape="rectangle">
+  <rect x="1706.259" y="405.3" width="141.244" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1776.881" y="423.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ApprovalStep.cs</text>
+</g>
+<g class="node" data-id="E_Exp" data-label="Expense.cs" data-shape="rectangle">
+  <rect x="1765.245" y="289.79999999999995" width="113.086" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1821.7879999999998" y="308.24999999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Expense.cs</text>
+</g>
+<g class="node" data-id="E_Pol" data-label="TravelPolicy.cs" data-shape="rectangle">
+  <rect x="1549.461" y="405.3" width="136.798" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1617.8600000000001" y="423.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">TravelPolicy.cs</text>
+</g>
+<g class="node" data-id="E_Audit" data-label="AuditLog.cs" data-shape="rectangle">
+  <rect x="1549.461" y="338.16999999999996" width="113.086" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1606.004" y="356.61999999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">AuditLog.cs</text>
+</g>
+<g class="node" data-id="E_Supp" data-label="SupportTicket.cs" data-shape="rectangle">
+  <rect x="1549.461" y="466.2" width="144.208" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1621.565" y="484.65" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">SupportTicket.cs</text>
+</g>
+</svg>
