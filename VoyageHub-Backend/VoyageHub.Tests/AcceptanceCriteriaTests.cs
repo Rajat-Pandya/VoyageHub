@@ -70,6 +70,7 @@ public class AcceptanceCriteriaTests : IDisposable
     {
         _context.Dispose();
         _connection.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     [Fact]
