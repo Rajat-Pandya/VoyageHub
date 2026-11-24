@@ -63,7 +63,7 @@ export class EmployeeManagement implements OnInit {
         set.add(emp.departmentName.trim());
       }
     }
-    return Array.from(set).sort();
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
   });
 
   readonly managerOptions = computed(() => {
