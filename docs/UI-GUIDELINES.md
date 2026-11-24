@@ -28,7 +28,7 @@ VoyageHub uses a **4px base** spacing scale defined as CSS Custom Properties on 
 | `--radius-sm` | `4px` | Status chips, entity pills, micro tags |
 | `--radius-md` | `8px` | Form inputs, select dropdowns, buttons, alert banners |
 | `--radius-lg` | `12px` | Content cards, data tables, modal dialogs |
-| `--radius-full` | `9999px` | Circular avatars, count badges, pill tabs |
+| `--radius-full` | `9999px` | Circular initials badges, count badges, pill tabs |
 
 ### Control & Interactive Target Heights
 

@@ -12,7 +12,6 @@ export interface UserProfile {
   departmentId?: string;
   departmentName?: string;
   managerName?: string;
-  avatarUrl?: string;
   registeredAt?: string;
   phoneNumber?: string;
   homeCity?: string;
@@ -44,6 +43,15 @@ export interface ForgotPasswordResponse {
 
 export const DEMO_PASSWORD = 'VoyageDemo2026!';
 
+export function getUserInitials(name?: string | null): string {
+  if (!name || !name.trim()) return 'U';
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) {
+    return parts[0].substring(0, Math.min(2, parts[0].length)).toUpperCase();
+  }
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
 export const PRESET_PERSONAS: UserProfile[] = [
   {
     id: 'A1111111-AAAA-AAAA-AAAA-AAAAAAAAAAAA',
@@ -51,7 +59,6 @@ export const PRESET_PERSONAS: UserProfile[] = [
     email: 'rohan.sharma@voyagehub.in',
     role: 'Employee',
     departmentName: 'Sales & Business Dev (Mumbai HQ)',
-    avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&q=80',
     phoneNumber: '+91 98201 44521',
     homeCity: 'Mumbai (BOM)',
     employeeCode: 'VH-EMP-1042',
@@ -71,7 +78,6 @@ export const PRESET_PERSONAS: UserProfile[] = [
     email: 'priya.nair@voyagehub.in',
     role: 'Manager',
     departmentName: 'Sales & Business Dev (India)',
-    avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&h=120&q=80',
     phoneNumber: '+91 98112 55903',
     homeCity: 'Bengaluru (BLR)',
     employeeCode: 'VH-MGR-2018',
@@ -91,7 +97,6 @@ export const PRESET_PERSONAS: UserProfile[] = [
     email: 'vikram.malhotra@voyagehub.in',
     role: 'Finance',
     departmentName: 'Finance & Tax Operations',
-    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
     phoneNumber: '+91 99304 88712',
     homeCity: 'New Delhi (DEL)',
     employeeCode: 'VH-FIN-3004',
@@ -111,7 +116,6 @@ export const PRESET_PERSONAS: UserProfile[] = [
     email: 'admin@voyagehub.in',
     role: 'Admin',
     departmentName: 'Corporate Administration',
-    avatarUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&h=120&q=80',
     phoneNumber: '+91 98450 11988',
     homeCity: 'Hyderabad (HYD)',
     employeeCode: 'VH-ADM-0001',
@@ -209,7 +213,6 @@ export class AuthService {
       {
         userId: updated.id,
         fullname: updated.fullname,
-        avatarUrl: updated.avatarUrl,
         phoneNumber: updated.phoneNumber,
         homeCity: updated.homeCity,
         seatPreference: updated.seatPreference,

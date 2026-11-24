@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService, UserProfile } from '../services/auth.service';
+import { AuthService, UserProfile, getUserInitials } from '../services/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,21 +13,12 @@ import { AuthService, UserProfile } from '../services/auth.service';
 export class Settings implements OnInit {
   readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  readonly getUserInitials = getUserInitials;
 
   readonly activeTab = signal<'profile' | 'travel' | 'notifications' | 'security'>('profile');
   readonly toastMessage = signal<string | null>(null);
   readonly isSaving = signal(false);
   readonly isAdmin = this.authService.isAdmin;
-
-  // Preset Avatars for quick selection
-  readonly presetAvatars: string[] = [
-    'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&q=80',
-    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&h=120&q=80',
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
-    'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&h=120&q=80',
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80',
-    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80'
-  ];
 
   // Profile fields
   fullname = '';
@@ -37,7 +28,6 @@ export class Settings implements OnInit {
   phoneNumber = '';
   homeCity = '';
   employeeCode = '';
-  avatarUrl = '';
 
   // Travel preferences
   seatPreference = 'Aisle';
@@ -71,7 +61,6 @@ export class Settings implements OnInit {
     this.phoneNumber = user.phoneNumber || '';
     this.homeCity = user.homeCity || '';
     this.employeeCode = user.employeeCode || '';
-    this.avatarUrl = user.avatarUrl || this.presetAvatars[0];
 
     this.seatPreference = user.seatPreference || 'Aisle';
     this.mealPreference = user.mealPreference || 'Standard';
@@ -89,11 +78,6 @@ export class Settings implements OnInit {
     this.activeTab.set(tab);
   }
 
-  selectAvatar(url: string): void {
-    if (!this.isAdmin()) return;
-    this.avatarUrl = url;
-  }
-
   saveProfile(): void {
     if (!this.isAdmin()) {
       this.showToast('Profile details can only be updated by a System Administrator.');
@@ -108,7 +92,6 @@ export class Settings implements OnInit {
     this.isSaving.set(true);
     this.authService.updateProfile({
       fullname: this.fullname.trim(),
-      avatarUrl: this.avatarUrl,
       phoneNumber: this.phoneNumber.trim(),
       homeCity: this.homeCity.trim(),
       employeeCode: this.employeeCode.trim()

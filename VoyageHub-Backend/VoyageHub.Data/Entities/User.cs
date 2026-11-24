@@ -37,9 +37,6 @@ public class User
 
     public ICollection<User> Subordinates { get; set; } = new List<User>();
 
-    [MaxLength(500)]
-    public string? AvatarUrl { get; set; }
-
     [MaxLength(255)]
     public string? PasswordResetToken { get; set; }
 

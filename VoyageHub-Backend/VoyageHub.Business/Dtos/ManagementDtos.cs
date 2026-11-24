@@ -19,7 +19,6 @@ public class ApprovalQueueItemDto
     public string RequestCode { get; set; } = string.Empty;
     public string EmployeeName { get; set; } = string.Empty;
     public string DepartmentName { get; set; } = string.Empty;
-    public string? EmployeeAvatar { get; set; }
     public string Destination { get; set; } = string.Empty;
     public string Purpose { get; set; } = string.Empty;
     public string TravelDates { get; set; } = string.Empty;
@@ -140,7 +139,6 @@ public class AuditLogDto
     public string EntityType { get; set; } = string.Empty;
     public string Action { get; set; } = string.Empty;
     public string Actor { get; set; } = string.Empty;
-    public string? ActorAvatar { get; set; }
     public string ChangeDetail { get; set; } = string.Empty;
     public string Severity { get; set; } = "LOW"; // LOW, MEDIUM, HIGH
 }

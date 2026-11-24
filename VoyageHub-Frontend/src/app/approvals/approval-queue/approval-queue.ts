@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VoyageService, ApprovalQueueItem } from '../../services/voyage.service';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, getUserInitials } from '../../services/auth.service';
 
 @Component({
   selector: 'app-approval-queue',
@@ -15,6 +15,7 @@ export class ApprovalQueue implements OnInit {
   private readonly voyageService = inject(VoyageService);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  readonly getUserInitials = getUserInitials;
 
   readonly items = signal<ApprovalQueueItem[]>([]);
   readonly pendingTotal = signal<number>(0);

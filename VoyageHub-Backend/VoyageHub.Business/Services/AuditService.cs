@@ -29,7 +29,6 @@ public class AuditService : IAuditService
             EntityType = a.EntityType,
             Action = a.Action,
             Actor = a.ActorName,
-            ActorAvatar = a.Actor != null ? a.Actor.AvatarUrl : null,
             ChangeDetail = a.ChangeDetail,
             Severity = a.Severity
         }).ToList();

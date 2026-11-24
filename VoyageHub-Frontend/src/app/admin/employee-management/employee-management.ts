@@ -8,6 +8,7 @@ import {
   UpdateEmployeePayload,
   BatchUploadResult
 } from '../../services/voyage.service';
+import { getUserInitials } from '../../services/auth.service';
 
 @Component({
   selector: 'app-employee-management',
@@ -18,6 +19,7 @@ import {
 })
 export class EmployeeManagement implements OnInit {
   private readonly voyageService = inject(VoyageService);
+  readonly getUserInitials = getUserInitials;
 
   readonly employees = signal<EmployeeItem[]>([]);
   readonly isLoading = signal(false);
@@ -40,8 +42,7 @@ export class EmployeeManagement implements OnInit {
     role: 'Employee',
     departmentName: '',
     managerId: '',
-    password: '',
-    avatarUrl: ''
+    password: ''
   };
 
   // Delete Modal
@@ -130,8 +131,7 @@ export class EmployeeManagement implements OnInit {
       role: 'Employee',
       departmentName: '',
       managerId: '',
-      password: '',
-      avatarUrl: ''
+      password: ''
     };
     this.showAddEditModal.set(true);
   }
@@ -145,8 +145,7 @@ export class EmployeeManagement implements OnInit {
       role: emp.role,
       departmentName: emp.departmentName || '',
       managerId: emp.managerId || '',
-      password: '',
-      avatarUrl: emp.avatarUrl || ''
+      password: ''
     };
     this.showAddEditModal.set(true);
   }
@@ -176,8 +175,7 @@ export class EmployeeManagement implements OnInit {
         role: this.employeeForm.role,
         departmentName: this.employeeForm.departmentName.trim() || undefined,
         managerId: this.employeeForm.managerId || undefined,
-        password: this.employeeForm.password.trim() || undefined,
-        avatarUrl: this.employeeForm.avatarUrl.trim() || undefined
+        password: this.employeeForm.password.trim() || undefined
       };
 
       this.voyageService.updateEmployee(id, payload).subscribe({
@@ -200,8 +198,7 @@ export class EmployeeManagement implements OnInit {
         role: this.employeeForm.role,
         departmentName: this.employeeForm.departmentName.trim() || undefined,
         managerId: this.employeeForm.managerId || undefined,
-        password: this.employeeForm.password.trim() || undefined,
-        avatarUrl: this.employeeForm.avatarUrl.trim() || undefined
+        password: this.employeeForm.password.trim() || undefined
       };
 
       this.voyageService.createEmployee(payload).subscribe({

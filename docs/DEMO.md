@@ -80,7 +80,7 @@ Complete these steps 10–15 minutes before beginning the demonstration:
      - Associated Request: Select `#TR-xxxx`.
      - Description: `Please arrange airport pickup at BLR airport on arrival day.`
    - Click **Submit Ticket**. Ticket code `#TICK-xxxx` is generated.
-7. **Sign Out**: Click user avatar in upper right and select **Logout**.
+7. **Sign Out**: Click user initials badge in sidebar footer and select **Logout**.
 
 ---
 
@@ -102,7 +102,7 @@ Complete these steps 10–15 minutes before beginning the demonstration:
    - In comments box, enter: `"Approved. Project budget is allocated for Q4 architecture review."`
    - Click **Approve Request**.
    - Request status transitions immediately to **Finance Review**, removing it from Priya's pending queue and placing it in the Finance queue.
-4. **Sign Out**: Click user avatar $\rightarrow$ **Logout**.
+4. **Sign Out**: Click user initials badge $\rightarrow$ **Logout**.
 
 ---
 
@@ -128,7 +128,7 @@ Complete these steps 10–15 minutes before beginning the demonstration:
    - Notice the total payout counter update at the top of the table.
    - Click **Process Batch Reimbursement**.
    - Claims transition to **Reimbursed**, and an audit record is generated recording the total disbursement.
-5. **Sign Out**: Click user avatar $\rightarrow$ **Logout**.
+5. **Sign Out**: Click user initials badge $\rightarrow$ **Logout**.
 
 ---
 

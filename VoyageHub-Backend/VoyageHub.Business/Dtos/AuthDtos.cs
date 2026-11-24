@@ -17,7 +17,6 @@ public class UserProfileDto
     public string? DepartmentName { get; set; }
     public Guid? DepartmentId { get; set; }
     public string? ManagerName { get; set; }
-    public string? AvatarUrl { get; set; }
     public string RegisteredAt { get; set; } = string.Empty;
 }
 
@@ -33,7 +32,6 @@ public class UpdateProfileDto
 {
     public Guid UserId { get; set; }
     public string? Fullname { get; set; }
-    public string? AvatarUrl { get; set; }
     public string? PhoneNumber { get; set; }
     public string? HomeCity { get; set; }
     public string? SeatPreference { get; set; }

@@ -13,7 +13,7 @@ This document provides a comprehensive catalog of all REST endpoints exposed by 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `POST` | `/api/Auth/login` | Anonymous | Authenticates with email and password, returning user profile and signed JWT token. | `{ "email": string, "password": string }` | `200 OK` `{ "success": true, "token": string, "user": UserDto }` | `400`, `401` |
 | `GET` | `/api/Auth/personas` | Anonymous | Lists pre-seeded personas for development persona switcher. | None | `200 OK` `UserDto[]` | None |
-| `PUT` | `/api/Auth/profile` | Any Authenticated | Updates the caller's display name and avatar URL. | `{ "fullName": string, "avatarUrl": string }` | `200 OK` `UserDto` | `400`, `401` |
+| `PUT` | `/api/Auth/profile` | Any Authenticated | Updates the caller's display name and profile preferences. | `{ "fullName": string, "phoneNumber": string }` | `200 OK` `UserDto` | `400`, `401` |
 | `POST` | `/api/Auth/change-password` | Any Authenticated | Validates existing password and hashes new password via BCrypt. | `{ "currentPassword": string, "newPassword": string }` | `200 OK` `{ "success": true, "message": string }` | `400`, `401` |
 | `POST` | `/api/Auth/forgot-password` | Anonymous | Generates password reset token for registered email. | `{ "email": string }` | `200 OK` `{ "success": true, "message": string }` | `400`, `404` |
 | `POST` | `/api/Auth/verify-reset-token`| Anonymous | Checks validity of password reset token. | `{ "email": string, "token": string }` | `200 OK` `{ "success": true, "message": string }` | `400` |

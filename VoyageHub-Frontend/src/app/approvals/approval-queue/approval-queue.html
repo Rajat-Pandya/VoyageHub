@@ -47,8 +47,9 @@
         @for (item of items(); track item.stepId) {
           <tr>
             <td class="employee-cell">
-              <img [src]="item.employeeAvatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80'" 
-                   alt="Avatar" class="emp-avatar" />
+              <div class="emp-initials-badge">
+                {{ getUserInitials(item.employeeName) }}
+              </div>
               <div class="emp-info">
                 <strong>{{ item.employeeName }}</strong>
                 <span>{{ item.departmentName }}</span>

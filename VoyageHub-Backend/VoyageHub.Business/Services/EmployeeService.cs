@@ -15,15 +15,6 @@ namespace VoyageHub.Business.Services;
 
 public class EmployeeService : IEmployeeService
 {
-    private static readonly string[] DefaultAvatars = new[]
-    {
-        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=256&q=80",
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&q=80",
-        "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=256&q=80",
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=256&q=80",
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=256&q=80"
-    };
-
     private static readonly HashSet<string> ValidRoles = new(StringComparer.OrdinalIgnoreCase)
     {
         "Employee", "Manager", "Finance", "Admin"
@@ -125,10 +116,6 @@ public class EmployeeService : IEmployeeService
         var rawPassword = string.IsNullOrWhiteSpace(dto.Password) ? "VoyageHub@2026" : dto.Password.Trim();
         var passwordHash = BCrypt.Net.BCrypt.HashPassword(rawPassword);
 
-        var avatar = !string.IsNullOrWhiteSpace(dto.AvatarUrl)
-            ? dto.AvatarUrl.Trim()
-            : DefaultAvatars[Math.Abs(name.GetHashCode()) % DefaultAvatars.Length];
-
         var newUser = new User
         {
             Id = Guid.NewGuid(),
@@ -138,7 +125,6 @@ public class EmployeeService : IEmployeeService
             Role = role,
             DepartmentId = deptId,
             ManagerId = dto.ManagerId,
-            AvatarUrl = avatar,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -210,11 +196,6 @@ public class EmployeeService : IEmployeeService
         else if (!dto.ManagerId.HasValue)
         {
             user.ManagerId = null;
-        }
-
-        if (!string.IsNullOrWhiteSpace(dto.AvatarUrl))
-        {
-            user.AvatarUrl = dto.AvatarUrl.Trim();
         }
 
         if (!string.IsNullOrWhiteSpace(dto.Password))
@@ -403,8 +384,6 @@ public class EmployeeService : IEmployeeService
                 : "VoyageHub@2026";
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(rawPwd);
 
-            var avatar = DefaultAvatars[Math.Abs(name.GetHashCode()) % DefaultAvatars.Length];
-
             var newUser = new User
             {
                 Id = Guid.NewGuid(),
@@ -414,7 +393,6 @@ public class EmployeeService : IEmployeeService
                 Role = role,
                 DepartmentId = deptId,
                 ManagerId = mgrId,
-                AvatarUrl = avatar,
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -429,7 +407,6 @@ public class EmployeeService : IEmployeeService
                 Role = newUser.Role,
                 DepartmentId = newUser.DepartmentId,
                 DepartmentName = deptCol >= 0 && deptCol < values.Count ? values[deptCol].Trim() : null,
-                AvatarUrl = newUser.AvatarUrl,
                 CreatedAt = newUser.CreatedAt
             });
         }
@@ -495,7 +472,6 @@ public class EmployeeService : IEmployeeService
             DepartmentName = u.Department != null ? u.Department.Name : "General",
             ManagerId = u.ManagerId,
             ManagerName = u.Manager != null ? u.Manager.Name : null,
-            AvatarUrl = u.AvatarUrl,
             CreatedAt = u.CreatedAt
         };
     }

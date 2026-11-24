@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService, getUserInitials } from '../services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class AppLayout {
   readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  readonly getUserInitials = getUserInitials;
 
   logout(): void {
     this.authService.logout();

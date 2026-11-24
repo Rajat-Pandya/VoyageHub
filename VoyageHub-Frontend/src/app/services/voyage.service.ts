@@ -112,7 +112,6 @@ export interface ApprovalQueueItem {
   requestCode: string;
   employeeName: string;
   departmentName: string;
-  employeeAvatar?: string;
   destination: string;
   purpose: string;
   travelDates: string;
@@ -151,7 +150,6 @@ export interface AuditLogItem {
   entityType: string;
   action: string;
   actor: string;
-  actorAvatar?: string;
   changeDetail: string;
   severity: string;
 }
@@ -395,7 +393,6 @@ export interface EmployeeItem {
   departmentName?: string;
   managerId?: string;
   managerName?: string;
-  avatarUrl?: string;
   createdAt: string;
 }
 
@@ -407,7 +404,6 @@ export interface CreateEmployeePayload {
   departmentId?: string;
   departmentName?: string;
   managerId?: string;
-  avatarUrl?: string;
 }
 
 export interface UpdateEmployeePayload {
@@ -418,7 +414,6 @@ export interface UpdateEmployeePayload {
   departmentId?: string;
   departmentName?: string;
   managerId?: string;
-  avatarUrl?: string;
 }
 
 export interface BatchUploadResult {

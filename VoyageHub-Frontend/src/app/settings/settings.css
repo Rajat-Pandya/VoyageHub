@@ -1,6 +1,4 @@
-.settings-page {
-  /* Layout managed by .page */
-}
+/* Page layout managed by global .page styling */
 
 .title-row {
   display: flex;
@@ -150,8 +148,8 @@
   margin-top: 4px;
 }
 
-/* Avatar Selection */
-.avatar-selection-section {
+/* Profile Initials Identity */
+.profile-identity-section {
   display: flex;
   align-items: center;
   gap: var(--space-6);
@@ -162,21 +160,38 @@
   margin-bottom: var(--space-6);
 }
 
-.current-avatar-preview {
-  width: 72px;
-  height: 72px;
+.profile-initials-badge {
+  width: 64px;
+  height: 64px;
   border-radius: var(--radius-full);
-  object-fit: cover;
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.5px;
   border: 3px solid #ffffff;
   box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
 }
 
-.avatar-controls {
+.profile-identity-info {
   flex: 1;
 }
 
-.custom-avatar-input {
-  max-width: 450px;
+.profile-identity-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0 0 2px 0;
+}
+
+.profile-identity-meta {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0 0 4px 0;
 }
 
 /* Form Grid */

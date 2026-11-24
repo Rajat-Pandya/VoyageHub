@@ -13,7 +13,6 @@ public class EmployeeDto
     public string? DepartmentName { get; set; }
     public Guid? ManagerId { get; set; }
     public string? ManagerName { get; set; }
-    public string? AvatarUrl { get; set; }
     public DateTime CreatedAt { get; set; }
 }
 
@@ -26,7 +25,6 @@ public class CreateEmployeeDto
     public Guid? DepartmentId { get; set; }
     public string? DepartmentName { get; set; }
     public Guid? ManagerId { get; set; }
-    public string? AvatarUrl { get; set; }
 }
 
 public class UpdateEmployeeDto
@@ -38,7 +36,6 @@ public class UpdateEmployeeDto
     public Guid? DepartmentId { get; set; }
     public string? DepartmentName { get; set; }
     public Guid? ManagerId { get; set; }
-    public string? AvatarUrl { get; set; }
 }
 
 public class BatchUploadResultDto

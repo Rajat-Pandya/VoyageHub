@@ -90,7 +90,6 @@ public class AuthService : IAuthService
             DepartmentId = user.DepartmentId,
             DepartmentName = user.Department?.Name ?? "General",
             ManagerName = user.Manager?.Name,
-            AvatarUrl = user.AvatarUrl,
             RegisteredAt = user.CreatedAt.ToString("o")
         };
 
@@ -117,7 +116,6 @@ public class AuthService : IAuthService
             Role = u.Role,
             DepartmentId = u.DepartmentId,
             DepartmentName = u.Department != null ? u.Department.Name : "General",
-            AvatarUrl = u.AvatarUrl,
             RegisteredAt = u.CreatedAt.ToString("o")
         }).ToList();
     }
@@ -145,11 +143,6 @@ public class AuthService : IAuthService
             user.Name = dto.Fullname.Trim();
         }
 
-        if (!string.IsNullOrWhiteSpace(dto.AvatarUrl))
-        {
-            user.AvatarUrl = dto.AvatarUrl.Trim();
-        }
-
         await _auditService.LogAsync(
             entityType: "ACCESS",
             entityId: user.Id,
@@ -171,7 +164,6 @@ public class AuthService : IAuthService
             DepartmentId = user.DepartmentId,
             DepartmentName = user.Department?.Name ?? "General",
             ManagerName = user.Manager?.Name,
-            AvatarUrl = user.AvatarUrl,
             RegisteredAt = user.CreatedAt.ToString("o")
         };
 

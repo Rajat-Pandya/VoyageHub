@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VoyageService, ExpenseItem } from '../../services/voyage.service';
+import { getUserInitials } from '../../services/auth.service';
 
 @Component({
   selector: 'app-expense-review',
@@ -11,6 +12,7 @@ import { VoyageService, ExpenseItem } from '../../services/voyage.service';
 })
 export class ExpenseReview implements OnInit {
   private readonly voyageService = inject(VoyageService);
+  readonly getUserInitials = getUserInitials;
 
   readonly claims = signal<ExpenseItem[]>([]);
   readonly totalPending = signal<number>(0);

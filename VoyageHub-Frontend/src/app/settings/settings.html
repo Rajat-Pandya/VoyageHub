@@ -67,16 +67,15 @@
       </div>
     </div>
 
-    <!-- Avatar Section -->
-    <div class="avatar-selection-section">
-      <img [src]="avatarUrl || presetAvatars[0]" alt="User Avatar" class="current-avatar-preview" />
-      <div class="avatar-controls">
-        <label class="field-label" for="customAvatarInput">Avatar Photo</label>
-        <div class="custom-avatar-input">
-          <input id="customAvatarInput" type="text" [value]="avatarUrl" readonly class="form-input readonly-input"
-            title="Managed via Employee Directory" />
-        </div>
-        <span class="field-hint">Avatar photo is managed via Corporate Directory / Employee Management</span>
+    <!-- User Initials Identity Section -->
+    <div class="profile-identity-section">
+      <div class="profile-initials-badge">
+        {{ getUserInitials(fullname) }}
+      </div>
+      <div class="profile-identity-info">
+        <h3 class="profile-identity-name">{{ fullname }}</h3>
+        <p class="profile-identity-meta">{{ role }} &bull; {{ departmentName || 'Corporate' }}</p>
+        <span class="field-hint">Profile identity is verified via user initials</span>
       </div>
     </div>
 

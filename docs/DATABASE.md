@@ -35,7 +35,6 @@ erDiagram
         string Role "nvarchar(50)"
         guid DepartmentId FK "nullable"
         guid ManagerId FK "nullable"
-        string AvatarUrl "nvarchar(500) nullable"
         string PasswordResetToken "nvarchar(200) nullable"
         datetime2 PasswordResetTokenExpires "nullable"
         datetime2 CreatedAt

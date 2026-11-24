@@ -74,7 +74,6 @@ public class ApprovalService : IApprovalService
             RequestCode = s.Request!.RequestCode,
             EmployeeName = s.Request.Employee?.Name ?? "Employee",
             DepartmentName = s.Request.Employee?.Department?.Name ?? "Sales Dept.",
-            EmployeeAvatar = s.Request.Employee?.AvatarUrl,
             Destination = s.Request.Destination,
             Purpose = s.Request.Purpose,
             TravelDates = $"{s.Request.StartDate:dd MMM} – {s.Request.EndDate:dd MMM}",

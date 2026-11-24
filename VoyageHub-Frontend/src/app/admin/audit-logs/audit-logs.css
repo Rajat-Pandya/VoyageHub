@@ -1,6 +1,4 @@
-.audit-page {
-  /* Layout managed by .page */
-}
+/* Page layout managed by global .page styling */
 
 .header-actions {
   display: flex;
@@ -80,7 +78,7 @@
   gap: 10px;
 }
 
-.actor-avatar-circle {
+.actor-initials-circle {
   width: 28px;
   height: 28px;
   border-radius: 50%;

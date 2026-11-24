@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VoyageService, AuditLogItem } from '../../services/voyage.service';
+import { getUserInitials } from '../../services/auth.service';
 
 @Component({
   selector: 'app-audit-logs',
@@ -11,6 +12,7 @@ import { VoyageService, AuditLogItem } from '../../services/voyage.service';
 })
 export class AuditLogs implements OnInit {
   private readonly voyageService = inject(VoyageService);
+  readonly getUserInitials = getUserInitials;
 
   readonly logs = signal<AuditLogItem[]>([]);
   readonly isLoading = signal(true);

@@ -50,7 +50,7 @@ VoyageHub is an enterprise corporate travel and expense management application d
 | **FR-AUTH-01** | The system shall authenticate users with email and password, returning profile information and a signed JWT token upon success. | Implemented | `AuthController.cs`, `AuthService.cs`, `auth.service.ts` | Verified |
 | **FR-AUTH-02** | The system shall permit bypass passwords during credential verification for testing. | **Retired** | `AuthService.cs` (Bypasses removed in favor of strict BCrypt verification) | Verified |
 | **FR-AUTH-03** | The system shall list pre-seeded user personas for instant demo persona switching in UI. | Implemented | `AuthController.cs`, `auth.service.ts` | Verified |
-| **FR-AUTH-04** | The system shall update a user's display name and avatar URL while persisting changes to the database. | Implemented | `AuthController.cs`, `AuthService.cs` | Verified |
+| **FR-AUTH-04** | The system shall update a user's display name and preferences while persisting changes to the database. | Implemented | `AuthController.cs`, `AuthService.cs` | Verified |
 | **FR-AUTH-05** | The system shall allow users to change passwords by validating current credentials and writing new BCrypt hashes. | Implemented | `AuthController.cs`, `AuthService.cs` | Verified |
 | **FR-AUTH-06** | The system shall support self-service password reset requests via password reset tokens. | Implemented | `AuthController.cs`, `AuthService.cs` | Verified |
 

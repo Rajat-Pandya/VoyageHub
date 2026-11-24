@@ -63,8 +63,8 @@
         @for (claim of claims(); track claim.id) {
           <tr>
             <td class="emp-profile-cell">
-              <div class="avatar-circle">
-                {{ claim.employeeName.charAt(0) }}
+              <div class="emp-initials-circle">
+                {{ getUserInitials(claim.employeeName) }}
               </div>
               <div class="emp-details">
                 <strong>{{ claim.employeeName }}</strong>
