@@ -504,7 +504,7 @@ public class EmployeeService : IEmployeeService
     {
         var list = new List<string>();
         var pattern = string.Format(@"(?<=^|{0})(\""(?:[^\""]|\""\"")*\""|[^\""{0}]*)", Regex.Escape(delimiter.ToString()));
-        var matches = Regex.Matches(row, pattern);
+        var matches = Regex.Matches(row, pattern, RegexOptions.None, TimeSpan.FromSeconds(1));
 
         foreach (Match match in matches)
         {
