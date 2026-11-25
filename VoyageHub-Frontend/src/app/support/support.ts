@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal, computed, PLATFORM_ID } from '@angul
 import { CommonModule, isPlatformBrowser, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { VoyageService, SupportTicketItem } from '../services/voyage.service';
+import { VoyageService, SupportTicketItem, TravelRequestItem } from '../services/voyage.service';
 
 export type SupportTicket = SupportTicketItem;
 
@@ -30,13 +30,14 @@ export class Support implements OnInit {
 
   // Tickets
   readonly tickets = signal<SupportTicket[]>([]);
+  readonly travelRequests = signal<TravelRequestItem[]>([]);
   readonly filterStatus = signal<string>('All');
   readonly selectedTicket = signal<SupportTicket | null>(null);
 
   // Form inputs
   ticketCategory = 'Flight / Itinerary Rescheduling';
   ticketPriority: 'Low' | 'Medium' | 'High' | 'Urgent' = 'High';
-  ticketRequestCode = '';
+  ticketRequestCode = 'None';
   ticketSubject = '';
   ticketDescription = '';
   ticketCallback = '';
@@ -103,6 +104,14 @@ export class Support implements OnInit {
       this.ticketCallback = user.phoneNumber || '';
     }
     this.loadTickets();
+    this.loadTravelRequests();
+  }
+
+  loadTravelRequests(): void {
+    this.voyageService.getRequests('All', '', 50).subscribe({
+      next: (data) => this.travelRequests.set(Array.isArray(data) ? data : []),
+      error: () => this.travelRequests.set([])
+    });
   }
 
   loadTickets(): void {

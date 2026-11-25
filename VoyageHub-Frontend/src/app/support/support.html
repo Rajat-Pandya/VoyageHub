@@ -109,11 +109,10 @@
         <div class="form-group">
           <label class="field-label" for="supportTicketRequestCode">Related Travel Request Code</label>
           <select id="supportTicketRequestCode" [(ngModel)]="ticketRequestCode" class="form-select">
-            <option value="#TR-2048">#TR-2048 (Bengaluru - Client Review &amp; Tech Summit)</option>
-            <option value="#TR-2041">#TR-2041 (New Delhi - Govt Partner Alignment)</option>
-            <option value="#TR-2035">#TR-2035 (Hyderabad - HITEC City Workshop)</option>
-            <option value="#TR-2055">#TR-2055 (San Francisco - AWS Global Summit)</option>
             <option value="None">None / General Corporate Inquiry</option>
+            @for (req of travelRequests(); track req.id) {
+              <option [value]="req.requestCode">{{ req.requestCode }} ({{ req.destination }} - {{ req.purpose }})</option>
+            }
           </select>
         </div>
 
