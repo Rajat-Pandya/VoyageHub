@@ -16,11 +16,6 @@ export interface UserProfile {
   phoneNumber?: string;
   homeCity?: string;
   employeeCode?: string;
-  seatPreference?: string;
-  mealPreference?: string;
-  roomPreference?: string;
-  airlineLoyalty?: string;
-  hotelLoyalty?: string;
   notifyTripStatus?: boolean;
   notifyExpensePayout?: boolean;
   notifyDailyDigest?: boolean;
@@ -62,11 +57,6 @@ export const PRESET_PERSONAS: UserProfile[] = [
     phoneNumber: '+91 98201 44521',
     homeCity: 'Mumbai (BOM)',
     employeeCode: 'VH-EMP-1042',
-    seatPreference: 'Aisle',
-    mealPreference: 'Vegetarian (Hindu)',
-    roomPreference: 'High Floor, Non-Smoking',
-    airlineLoyalty: 'Air India Flying Returns - AI-982144',
-    hotelLoyalty: 'Taj InnerCircle - TIC-40819',
     notifyTripStatus: true,
     notifyExpensePayout: true,
     notifyDailyDigest: false,
@@ -81,11 +71,6 @@ export const PRESET_PERSONAS: UserProfile[] = [
     phoneNumber: '+91 98112 55903',
     homeCity: 'Bengaluru (BLR)',
     employeeCode: 'VH-MGR-2018',
-    seatPreference: 'Window',
-    mealPreference: 'Vegetarian (Jain)',
-    roomPreference: 'Quiet Floor, King Bed',
-    airlineLoyalty: 'IndiGo 6E Rewards - 6E-55102',
-    hotelLoyalty: 'Marriott Bonvoy - MB-881903',
     notifyTripStatus: true,
     notifyExpensePayout: false,
     notifyDailyDigest: true,
@@ -100,11 +85,6 @@ export const PRESET_PERSONAS: UserProfile[] = [
     phoneNumber: '+91 99304 88712',
     homeCity: 'New Delhi (DEL)',
     employeeCode: 'VH-FIN-3004',
-    seatPreference: 'Aisle',
-    mealPreference: 'Non-Vegetarian',
-    roomPreference: 'Near Elevator, King Bed',
-    airlineLoyalty: 'Emirates Skywards - EK-771204',
-    hotelLoyalty: 'IHG One Rewards - IHG-66014',
     notifyTripStatus: false,
     notifyExpensePayout: true,
     notifyDailyDigest: true,
@@ -119,11 +99,6 @@ export const PRESET_PERSONAS: UserProfile[] = [
     phoneNumber: '+91 98450 11988',
     homeCity: 'Hyderabad (HYD)',
     employeeCode: 'VH-ADM-0001',
-    seatPreference: 'Window',
-    mealPreference: 'Vegan',
-    roomPreference: 'High Floor, Suite',
-    airlineLoyalty: 'Air India Flying Returns - AI-10293',
-    hotelLoyalty: 'Taj InnerCircle - TIC-99001',
     notifyTripStatus: true,
     notifyExpensePayout: true,
     notifyDailyDigest: true,
@@ -215,11 +190,6 @@ export class AuthService {
         fullname: updated.fullname,
         phoneNumber: updated.phoneNumber,
         homeCity: updated.homeCity,
-        seatPreference: updated.seatPreference,
-        mealPreference: updated.mealPreference,
-        roomPreference: updated.roomPreference,
-        airlineLoyalty: updated.airlineLoyalty,
-        hotelLoyalty: updated.hotelLoyalty,
         notifyTripStatus: updated.notifyTripStatus,
         notifyExpensePayout: updated.notifyExpensePayout,
         notifyDailyDigest: updated.notifyDailyDigest,

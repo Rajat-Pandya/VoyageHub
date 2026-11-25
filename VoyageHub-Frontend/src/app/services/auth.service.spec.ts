@@ -118,17 +118,17 @@ describe('AuthService', () => {
       const initialUser = PRESET_PERSONAS[0];
       service.currentUser.set(initialUser);
 
-      service.updateProfile({ seatPreference: 'Window', mealPreference: 'Vegetarian' }).subscribe((res) => {
+      service.updateProfile({ homeCity: 'Bengaluru (BLR)' }).subscribe((res) => {
         expect(res.success).toBe(true);
       });
 
       const req = httpMock.expectOne(`${environment.apiUrl}/auth/profile`);
       expect(req.request.method).toBe('PUT');
-      expect(req.request.body.seatPreference).toBe('Window');
+      expect(req.request.body.homeCity).toBe('Bengaluru (BLR)');
 
       req.flush({ success: true, message: 'Profile updated' });
 
-      expect(service.currentUser()?.seatPreference).toBe('Window');
+      expect(service.currentUser()?.homeCity).toBe('Bengaluru (BLR)');
     });
   });
 });

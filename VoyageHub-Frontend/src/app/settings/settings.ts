@@ -15,7 +15,7 @@ export class Settings implements OnInit {
   private readonly router = inject(Router);
   readonly getUserInitials = getUserInitials;
 
-  readonly activeTab = signal<'profile' | 'travel' | 'notifications' | 'security'>('profile');
+  readonly activeTab = signal<'profile' | 'notifications' | 'security'>('profile');
   readonly toastMessage = signal<string | null>(null);
   readonly isSaving = signal(false);
   readonly isAdmin = this.authService.isAdmin;
@@ -28,13 +28,6 @@ export class Settings implements OnInit {
   phoneNumber = '';
   homeCity = '';
   employeeCode = '';
-
-  // Travel preferences
-  seatPreference = 'Aisle';
-  mealPreference = 'Vegetarian (Hindu)';
-  roomPreference = 'High Floor, Non-Smoking';
-  airlineLoyalty = '';
-  hotelLoyalty = '';
 
   // Notifications
   notifyTripStatus = true;
@@ -62,19 +55,13 @@ export class Settings implements OnInit {
     this.homeCity = user.homeCity || '';
     this.employeeCode = user.employeeCode || '';
 
-    this.seatPreference = user.seatPreference || 'Aisle';
-    this.mealPreference = user.mealPreference || 'Standard';
-    this.roomPreference = user.roomPreference || 'Non-Smoking';
-    this.airlineLoyalty = user.airlineLoyalty || '';
-    this.hotelLoyalty = user.hotelLoyalty || '';
-
     this.notifyTripStatus = user.notifyTripStatus !== undefined ? user.notifyTripStatus : true;
     this.notifyExpensePayout = user.notifyExpensePayout !== undefined ? user.notifyExpensePayout : true;
     this.notifyDailyDigest = user.notifyDailyDigest !== undefined ? user.notifyDailyDigest : false;
     this.notifySmsAlerts = user.notifySmsAlerts !== undefined ? user.notifySmsAlerts : true;
   }
 
-  setTab(tab: 'profile' | 'travel' | 'notifications' | 'security'): void {
+  setTab(tab: 'profile' | 'notifications' | 'security'): void {
     this.activeTab.set(tab);
   }
 
@@ -103,26 +90,6 @@ export class Settings implements OnInit {
       error: () => {
         this.isSaving.set(false);
         this.showToast('Profile saved locally.');
-      }
-    });
-  }
-
-  saveTravelPreferences(): void {
-    this.isSaving.set(true);
-    this.authService.updateProfile({
-      seatPreference: this.seatPreference,
-      mealPreference: this.mealPreference,
-      roomPreference: this.roomPreference,
-      airlineLoyalty: this.airlineLoyalty.trim(),
-      hotelLoyalty: this.hotelLoyalty.trim()
-    }).subscribe({
-      next: (res) => {
-        this.isSaving.set(false);
-        this.showToast('Travel preferences saved successfully!');
-      },
-      error: () => {
-        this.isSaving.set(false);
-        this.showToast('Travel preferences saved locally.');
       }
     });
   }

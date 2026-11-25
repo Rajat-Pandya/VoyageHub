@@ -34,11 +34,6 @@ public class UpdateProfileDto
     public string? Fullname { get; set; }
     public string? PhoneNumber { get; set; }
     public string? HomeCity { get; set; }
-    public string? SeatPreference { get; set; }
-    public string? MealPreference { get; set; }
-    public string? RoomPreference { get; set; }
-    public string? AirlineLoyalty { get; set; }
-    public string? HotelLoyalty { get; set; }
     public bool? NotifyTripStatus { get; set; }
     public bool? NotifyExpensePayout { get; set; }
     public bool? NotifyDailyDigest { get; set; }

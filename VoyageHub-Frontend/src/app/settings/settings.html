@@ -9,7 +9,7 @@
           {{ role }}
         </span>
       </div>
-      <p class="subtitle">Manage your personal details, travel preferences, corporate loyalty IDs, and security</p>
+      <p class="subtitle">Manage your personal details, notification preferences, and security</p>
     </div>
   </header>
 
@@ -31,13 +31,6 @@
         <circle cx="12" cy="7" r="4" />
       </svg>
       Profile &amp; Personal
-    </button>
-    <button type="button" class="tab-btn" [class.active]="activeTab() === 'travel'" (click)="activeTab.set('travel')">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-        <path
-          d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z" />
-      </svg>
-      Travel Preferences
     </button>
     <button type="button" class="tab-btn" [class.active]="activeTab() === 'notifications'"
       (click)="activeTab.set('notifications')">
@@ -140,78 +133,7 @@
   </div>
   }
 
-  <!-- TAB 2: Travel Preferences -->
-  @if (activeTab() === 'travel') {
-  <div class="settings-card fade-in">
-    <div class="card-header">
-      <div>
-        <h2>Travel &amp; Booking Preferences</h2>
-        <p class="card-desc">Defaults auto-filled into flight and hotel reservations across VoyageHub</p>
-      </div>
-    </div>
-
-    <div class="form-grid">
-      <div class="form-group">
-        <label class="field-label" for="travelSeatPref">Flight Seat Preference</label>
-        <select id="travelSeatPref" title="seatPreference" [(ngModel)]="seatPreference" class="form-select">
-          <option value="Aisle">Aisle Seat</option>
-          <option value="Window">Window Seat</option>
-          <option value="Any">No Preference / Any</option>
-        </select>
-        <span class="field-hint">Auto-requested on flight segment creation</span>
-      </div>
-
-      <div class="form-group">
-        <label class="field-label" for="travelMealPref">Dietary &amp; In-Flight Meal</label>
-        <select id="travelMealPref" title="mealPreference" class="form-select">
-          <option value="Vegetarian (Hindu)">Vegetarian (Hindu / Asian)</option>
-          <option value="Vegetarian (Jain)">Vegetarian (Jain)</option>
-          <option value="Vegan">Vegan (Strictly Plant-Based)</option>
-          <option value="Non-Vegetarian">Non-Vegetarian Standard</option>
-          <option value="Halal">Halal Meal</option>
-          <option value="Kosher">Kosher Meal</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label class="field-label" for="travelRoomPref">Hotel Accommodation Preference</label>
-        <select id="travelRoomPref" title="roomPreference" class="form-select">
-          <option value="High Floor, Non-Smoking">High Floor, Non-Smoking</option>
-          <option value="Quiet Floor, King Bed">Quiet Floor, King Bed</option>
-          <option value="Twin Beds, Work Desk">Twin Beds, Dedicated Work Desk</option>
-          <option value="Near Elevator, Accessible">Near Elevator / Accessible</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label class="field-label" for="travelAirlineLoyalty">Airline Frequent Flyer Number</label>
-        <input id="travelAirlineLoyalty" type="text" [(ngModel)]="airlineLoyalty" class="form-input"
-          placeholder="e.g. Air India Flying Returns - AI-982144" />
-        <span class="field-hint">Miles accrued directly to your personal account</span>
-      </div>
-
-      <div class="form-group">
-        <label class="field-label" for="travelHotelLoyalty">Hotel Loyalty Membership</label>
-        <input id="travelHotelLoyalty" type="text" [(ngModel)]="hotelLoyalty" class="form-input"
-          placeholder="e.g. Taj InnerCircle - TIC-40819" />
-        <span class="field-hint">Eligible for corporate room upgrades &amp; breakfast</span>
-      </div>
-    </div>
-
-    <div class="card-footer">
-      <button type="button" class="btn-dark" [disabled]="isSaving()" (click)="saveTravelPreferences()">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-          <polyline points="17 21 17 13 7 13 7 21" />
-          <polyline points="7 3 7 8 15 8" />
-        </svg>
-        Save Travel Preferences
-      </button>
-    </div>
-  </div>
-  }
-
-  <!-- TAB 3: Notifications -->
+  <!-- TAB 2: Notifications -->
   @if (activeTab() === 'notifications') {
   <div class="settings-card fade-in">
     <div class="card-header">
