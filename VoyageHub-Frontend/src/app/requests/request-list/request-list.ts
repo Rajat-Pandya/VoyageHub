@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VoyageService, TravelRequestItem } from '../../services/voyage.service';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, getUserInitials } from '../../services/auth.service';
 import { createPagination } from '../../shared/pagination';
 
 
@@ -15,11 +15,13 @@ import { createPagination } from '../../shared/pagination';
 })
 export class RequestList implements OnInit {
   private readonly voyageService = inject(VoyageService);
-  private readonly authService = inject(AuthService);
+  readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  readonly getUserInitials = getUserInitials;
 
   readonly requests = signal<TravelRequestItem[]>([]);
   readonly isLoading = signal(true);
+  readonly scope = signal<'mine' | 'team'>('mine');
   readonly pagination = createPagination(this.requests, 10);
 
   searchQuery = '';
@@ -30,10 +32,17 @@ export class RequestList implements OnInit {
     this.loadRequests();
   }
 
+  setScope(scope: 'mine' | 'team'): void {
+    if (this.scope() === scope) return;
+    this.scope.set(scope);
+    this.loadRequests();
+  }
+
   loadRequests(): void {
     this.isLoading.set(true);
     this.pagination.reset();
-    this.voyageService.getRequests(this.selectedStatus, this.searchQuery, 100).subscribe({
+    const employeeId = this.scope() === 'mine' ? this.authService.currentUser()?.id : undefined;
+    this.voyageService.getRequests(this.selectedStatus, this.searchQuery, 100, employeeId).subscribe({
       next: (data) => {
         this.requests.set(data || []);
         this.isLoading.set(false);

@@ -2,17 +2,33 @@
   <!-- Top Bar -->
   <header class="page-top-bar">
     <div class="header-titles">
-      <h1>My Travel Requests</h1>
-      <p class="subtitle">View and manage all your historical and active trip requests</p>
+      <h1>{{ scope() === 'team' ? 'Team Travel Requests' : 'My Travel Requests' }}</h1>
+      <p class="subtitle">
+        {{ scope() === 'team'
+          ? 'View all historical and active trip requests submitted by your team'
+          : 'View and manage all your historical and active trip requests' }}
+      </p>
     </div>
 
-    <a routerLink="/requests/new" class="btn-primary">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M12 5v14"/>
-        <path d="M5 12h14"/>
-      </svg>
-      New Request
-    </a>
+    <div class="header-right-actions">
+      @if (authService.isManager() || authService.isAdmin()) {
+        <div class="scope-pills" role="group" aria-label="Request Scope">
+          <button type="button" class="scope-pill-btn" [class.active]="scope() === 'mine'" (click)="setScope('mine')">
+            My Trips
+          </button>
+          <button type="button" class="scope-pill-btn" [class.active]="scope() === 'team'" (click)="setScope('team')">
+            {{ authService.isAdmin() ? 'All Trips' : 'Team Trips' }}
+          </button>
+        </div>
+      }
+        <a routerLink="/requests/new" class="btn-primary">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 5v14"/>
+          <path d="M5 12h14"/>
+        </svg>
+        New Request
+      </a>
+    </div>
   </header>
 
   <!-- Filter & Search Toolbar (Page 4) -->
@@ -73,12 +89,12 @@
         @for (req of pagination.pagedItems(); track req.id) {
           <tr (click)="viewDetail(req)" class="clickable-row">
             <td class="dest-avatar-cell">
-              <div class="dest-avatar" [ngClass]="getAvatarClass(req.destination)">
-                {{ req.destination.charAt(0) }}
+              <div class="dest-avatar" [ngClass]="getAvatarClass(req.employeeName || req.destination)">
+                {{ getUserInitials(req.employeeName) }}
               </div>
               <div class="dest-info">
                 <strong>{{ req.destination }}</strong>
-                <span>{{ req.purpose }}</span>
+                <span>{{ req.employeeName }} &bull; {{ req.purpose }}</span>
               </div>
             </td>
             <td>{{ req.startDate | date:'dd MMM' }} – {{ req.endDate | date:'dd MMM, yyyy' }}</td>

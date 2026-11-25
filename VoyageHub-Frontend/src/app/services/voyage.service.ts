@@ -164,17 +164,20 @@ export class VoyageService {
   private readonly baseUrl = environment.apiUrl;
 
   // Requests
-  getRequests(status?: string, search?: string, limit?: number): Observable<TravelRequestItem[]> {
+  getRequests(status?: string, search?: string, limit?: number, employeeId?: string): Observable<TravelRequestItem[]> {
     let params = new HttpParams();
     if (status) params = params.set('status', status);
     if (search) params = params.set('search', search);
     if (limit) params = params.set('limit', limit.toString());
+    if (employeeId) params = params.set('employeeId', employeeId);
 
     return this.http.get<TravelRequestItem[]>(`${this.baseUrl}/travelrequests`, { params });
   }
 
-  getDashboardStats(): Observable<DashboardStats> {
-    return this.http.get<DashboardStats>(`${this.baseUrl}/travelrequests/stats`);
+  getDashboardStats(employeeId?: string): Observable<DashboardStats> {
+    let params = new HttpParams();
+    if (employeeId) params = params.set('employeeId', employeeId);
+    return this.http.get<DashboardStats>(`${this.baseUrl}/travelrequests/stats`, { params });
   }
 
   getRequestDetail(id: string): Observable<TravelRequestDetail> {

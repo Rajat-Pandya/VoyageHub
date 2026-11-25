@@ -34,8 +34,13 @@ export class Dashboard implements OnInit {
 
   loadDashboardData(): void {
     this.isLoading.set(true);
+    const user = this.authService.currentUser();
+    const ownId = user?.role === 'Manager' ? user.id : undefined;
 
-    this.voyageService.getDashboardStats().subscribe({
+    (ownId
+      ? this.voyageService.getDashboardStats(ownId)
+      : this.voyageService.getDashboardStats()
+    ).subscribe({
       next: (s) => this.stats.set(s),
       error: () => {}
     });
@@ -45,8 +50,13 @@ export class Dashboard implements OnInit {
 
   fetchRequests(): void {
     const filter = this.selectedFilter();
+    const user = this.authService.currentUser();
+    const ownId = user?.role === 'Manager' ? user.id : undefined;
 
-    this.voyageService.getRequests(filter, this.searchQuery, 8).subscribe({
+    (ownId
+      ? this.voyageService.getRequests(filter, this.searchQuery, 8, ownId)
+      : this.voyageService.getRequests(filter, this.searchQuery, 8)
+    ).subscribe({
       next: (data) => {
         this.requests.set(data || []);
         this.isLoading.set(false);
