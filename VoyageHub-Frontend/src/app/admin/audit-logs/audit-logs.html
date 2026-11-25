@@ -8,7 +8,8 @@
 
     <div class="header-actions">
       <div class="filter-select-group">
-        <select [(ngModel)]="selectedSeverity" (change)="loadLogs()" class="select-filter" title="Filter by Severity" aria-label="Filter by Severity">
+        <select [(ngModel)]="selectedSeverity" (change)="loadLogs()" class="select-filter" title="Filter by Severity"
+          aria-label="Filter by Severity">
           <option value="ALL">All Severities</option>
           <option value="LOW">Low Severity</option>
           <option value="MEDIUM">Medium Severity</option>
@@ -18,9 +19,9 @@
 
       <button type="button" class="btn-dark" (click)="downloadLogs()">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" x2="12" y1="15" y2="3"/>
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" x2="12" y1="15" y2="3" />
         </svg>
         Download Logs
       </button>
@@ -43,33 +44,33 @@
         </thead>
         <tbody>
           @for (log of pagination.pagedItems(); track log.id) {
-            <tr>
-              <td class="timestamp-cell">
-                {{ log.timestamp | date:'MMM dd, yyyy • HH:mm:ss' }}
-              </td>
-              <td>
-                <span class="entity-pill" [ngClass]="log.entityType.toLowerCase()">
-                  {{ log.entityType }}
-                </span>
-              </td>
-              <td><strong>{{ log.action }}</strong></td>
-              <td class="actor-cell">
-                <div class="actor-initials-circle">
-                  {{ getUserInitials(log.actor) }}
-                </div>
-                <span>{{ log.actor }}</span>
-              </td>
-              <td class="change-detail-cell">{{ log.changeDetail }}</td>
-              <td>
-                <span class="severity-pill" [ngClass]="log.severity.toLowerCase()">
-                  {{ log.severity }}
-                </span>
-              </td>
-            </tr>
+          <tr>
+            <td class="timestamp-cell">
+              {{ log.timestamp | date:'MMM dd, yyyy • HH:mm:ss' }}
+            </td>
+            <td>
+              <span class="entity-pill" [ngClass]="log.entityType.toLowerCase()">
+                {{ log.entityType }}
+              </span>
+            </td>
+            <td><strong>{{ log.action }}</strong></td>
+            <td class="actor-cell">
+              <div class="actor-initials-circle">
+                {{ getUserInitials(log.actor) }}
+              </div>
+              <span>{{ log.actor }}</span>
+            </td>
+            <td class="change-detail-cell">{{ log.changeDetail }}</td>
+            <td>
+              <span class="severity-pill" [ngClass]="log.severity.toLowerCase()">
+                {{ log.severity }}
+              </span>
+            </td>
+          </tr>
           } @empty {
-            <tr>
-              <td colspan="6" class="empty-state-cell">No audit log records found.</td>
-            </tr>
+          <tr>
+            <td colspan="6" class="empty-state-cell">No audit log records found.</td>
+          </tr>
           }
         </tbody>
       </table>
@@ -79,20 +80,23 @@
     <div class="pagination-footer">
       <span class="page-count-text">
         @if (pagination.totalItems() === 0) {
-          Showing 0 events
+        Showing 0 events
         } @else {
-          Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }} ({{ pagination.totalItems() }} total events)
+        Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }} ({{ pagination.totalItems() }} total
+        events)
         }
       </span>
       <div class="pagination-buttons">
         <button type="button" class="page-nav-btn" title="Previous page" aria-label="Previous page"
           [disabled]="pagination.currentPage() === 1" (click)="pagination.prevPage()">&lsaquo;</button>
         @for (page of pagination.pageNumbers(); track page) {
-          <button type="button" class="page-num-btn" [class.active]="pagination.currentPage() === page"
-            [title]="'Page ' + page" [attr.aria-label]="'Page ' + page" (click)="pagination.goToPage(page)">{{ page }}</button>
+        <button type="button" class="page-num-btn" [class.active]="pagination.currentPage() === page"
+          [title]="'Page ' + page" [attr.aria-label]="'Page ' + page" (click)="pagination.goToPage(page)">{{ page
+          }}</button>
         }
         <button type="button" class="page-nav-btn" title="Next page" aria-label="Next page"
-          [disabled]="pagination.currentPage() === pagination.totalPages()" (click)="pagination.nextPage()">&rsaquo;</button>
+          [disabled]="pagination.currentPage() === pagination.totalPages()"
+          (click)="pagination.nextPage()">&rsaquo;</button>
       </div>
     </div>
   </div>
