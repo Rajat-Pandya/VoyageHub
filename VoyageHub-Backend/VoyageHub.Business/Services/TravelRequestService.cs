@@ -338,7 +338,7 @@ public class TravelRequestService : ITravelRequestService
                 {
                     ApproverId = financeId,
                     Level = "Finance",
-                    Status = "Pending"
+                    Status = "Waiting"
                 });
             }
         }
@@ -414,23 +414,31 @@ public class TravelRequestService : ITravelRequestService
         var managerId = r.Employee?.ManagerId ?? await _travelRequestRepository.GetFirstManagerIdAsync(cancellationToken) ?? Guid.Empty;
         var financeId = await _travelRequestRepository.GetFirstFinanceIdAsync(cancellationToken);
 
-        _travelRequestRepository.RemoveApprovalSteps(r.ApprovalSteps);
-
-        r.ApprovalSteps.Add(new ApprovalStep
+        if (r.ApprovalSteps.Any())
         {
-            ApproverId = managerId,
+            _travelRequestRepository.RemoveApprovalSteps(r.ApprovalSteps.ToList());
+            r.ApprovalSteps.Clear();
+        }
+
+        var managerStep = new ApprovalStep
+        {
+            RequestId = r.Id,
+            ApproverId = managerId != Guid.Empty ? managerId : null,
             Level = "Manager",
             Status = "Pending"
-        });
+        };
+        await _travelRequestRepository.AddApprovalStepAsync(managerStep, cancellationToken);
 
         if (financeId != Guid.Empty)
         {
-            r.ApprovalSteps.Add(new ApprovalStep
+            var financeStep = new ApprovalStep
             {
+                RequestId = r.Id,
                 ApproverId = financeId,
                 Level = "Finance",
                 Status = "Waiting"
-            });
+            };
+            await _travelRequestRepository.AddApprovalStepAsync(financeStep, cancellationToken);
         }
 
         await _auditService.LogAsync(

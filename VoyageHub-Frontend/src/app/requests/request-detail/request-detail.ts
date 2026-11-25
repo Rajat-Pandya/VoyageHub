@@ -19,6 +19,8 @@ export class RequestDetail implements OnInit {
 
   readonly detail = signal<TravelRequestDetail | null>(null);
   readonly isLoading = signal(true);
+  readonly isSubmitting = signal(false);
+  readonly toastMessage = signal<string | null>(null);
   readonly activeTab = signal<'Itinerary' | 'Expenses' | 'Approval History'>('Itinerary');
 
   // Workflow Modals
@@ -108,14 +110,28 @@ export class RequestDetail implements OnInit {
     }
   }
 
+  showToast(msg: string): void {
+    this.toastMessage.set(msg);
+    setTimeout(() => {
+      if (this.toastMessage() === msg) {
+        this.toastMessage.set(null);
+      }
+    }, 4000);
+  }
+
   submitDraft(): void {
     const d = this.detail();
-    if (!d) return;
+    if (!d || this.isSubmitting()) return;
+    this.isSubmitting.set(true);
     this.voyageService.submitDraft(d.id).subscribe({
-      next: () => {
+      next: (res: any) => {
+        this.isSubmitting.set(false);
+        this.showToast(res?.message || 'Request submitted for Manager review.');
         this.loadDetail(d.id);
       },
-      error: () => {
+      error: (err: any) => {
+        this.isSubmitting.set(false);
+        this.showToast(err?.error?.message || err?.error || err?.message || 'Failed to submit draft.');
         this.loadDetail(d.id);
       }
     });

@@ -1,4 +1,9 @@
 <div class="page page-narrow trip-detail-page">
+  @if (toastMessage()) {
+    <div class="toast-banner fade-in">
+      <span>{{ toastMessage() }}</span>
+    </div>
+  }
   @if (detail(); as d) {
     <!-- Top Bar matching Page 5 -->
     <header class="page-header detail-header">
@@ -32,10 +37,10 @@
       <div class="header-actions">
         <!-- 1. Draft Actions -->
         @if (d.status === 'Draft') {
-          <button type="button" class="btn-primary" (click)="submitDraft()">
-            Submit for Approval
+          <button type="button" class="btn-primary" (click)="submitDraft()" [disabled]="isSubmitting()">
+            {{ isSubmitting() ? 'Submitting...' : 'Submit for Approval' }}
           </button>
-          <button type="button" class="btn-secondary" (click)="cancelRequest()">
+          <button type="button" class="btn-secondary" (click)="cancelRequest()" [disabled]="isSubmitting()">
             Discard Draft
           </button>
         }

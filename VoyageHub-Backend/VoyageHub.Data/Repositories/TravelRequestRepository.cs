@@ -159,6 +159,11 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
         Context.ApprovalSteps.RemoveRange(steps);
     }
 
+    public async Task AddApprovalStepAsync(ApprovalStep step, CancellationToken cancellationToken = default)
+    {
+        await Context.ApprovalSteps.AddAsync(step, cancellationToken);
+    }
+
     public async Task AddSegmentAsync(ItinerarySegment segment, CancellationToken cancellationToken = default)
     {
         await Context.ItinerarySegments.AddAsync(segment, cancellationToken);
