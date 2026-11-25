@@ -49,7 +49,7 @@ flowchart TD
     BizServices --> AuditEngine
     BizServices --> Repositories
     Repositories --> DbContext
-    DbContext -->|"T-SQL (TDS 1433)"| Database
+    DbContext -->|T-SQL - TDS 1433| Database
 ```
 
 ### Layer Responsibilities
