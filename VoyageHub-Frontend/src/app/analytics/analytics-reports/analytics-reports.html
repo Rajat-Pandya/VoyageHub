@@ -14,7 +14,7 @@
           <line x1="8" x2="8" y1="2" y2="6"/>
           <line x1="3" x2="21" y1="10" y2="10"/>
         </svg>
-        <span>Last 30 Days</span>
+        <span>Last 6 Months</span>
       </div>
       <button type="button" class="btn-dark" (click)="exportPdf()">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
@@ -59,12 +59,9 @@
         <line x1="50" y1="220" x2="880" y2="220" stroke="#e2e8f0" stroke-width="1"/>
 
         <!-- Y Axis Labels -->
-        <text x="35" y="24" text-anchor="end" class="chart-axis-label">₹30L</text>
-        <text x="35" y="64" text-anchor="end" class="chart-axis-label">₹25L</text>
-        <text x="35" y="104" text-anchor="end" class="chart-axis-label">₹20L</text>
-        <text x="35" y="144" text-anchor="end" class="chart-axis-label">₹15L</text>
-        <text x="35" y="184" text-anchor="end" class="chart-axis-label">₹10L</text>
-        <text x="35" y="224" text-anchor="end" class="chart-axis-label">₹0</text>
+        @for (axis of yAxisLabels(); track axis.y) {
+          <text x="44" [attr.y]="axis.y" text-anchor="end" class="chart-axis-label">{{ axis.label }}</text>
+        }
 
         <!-- Gradient Fill for Area Under Trend Curve -->
         <defs>

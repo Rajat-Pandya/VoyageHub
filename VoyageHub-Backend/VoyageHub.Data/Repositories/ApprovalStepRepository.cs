@@ -23,20 +23,48 @@ public class ApprovalStepRepository : Repository<ApprovalStep>, IApprovalStepRep
                         .ThenInclude(d => d!.Policy)
             .Where(s => s.Status == "Pending" && s.Request != null);
 
-        if (!string.IsNullOrWhiteSpace(role))
-        {
-            var r = role.Trim().ToLower();
-            if (r == "manager")
-            {
-                stepsQuery = stepsQuery.Where(s => s.Level == "Manager");
-            }
-            else if (r == "finance")
-            {
-                stepsQuery = stepsQuery.Where(s => s.Level == "Finance");
-            }
-        }
+        stepsQuery = ApplyRoleFilter(stepsQuery, role);
 
         return await stepsQuery.OrderByDescending(s => s.Request!.CreatedAt).ToListAsync(cancellationToken);
+    }
+
+    public async Task<double> GetAverageResponseTimeHoursAsync(Guid? approverId, string? role, CancellationToken cancellationToken = default)
+    {
+        var query = DbSet
+            .AsNoTracking()
+            .Where(s => s.DecidedAt != null && s.Request != null && (s.Status == "Approved" || s.Status == "Rejected"));
+
+        query = ApplyRoleFilter(query, role);
+
+        if (approverId.HasValue && approverId.Value != Guid.Empty)
+        {
+            query = query.Where(s => s.ApproverId == approverId.Value);
+        }
+
+        var durations = await query
+            .Select(s => new { DecidedAt = s.DecidedAt!.Value, CreatedAt = s.Request!.CreatedAt })
+            .ToListAsync(cancellationToken);
+
+        if (durations.Count == 0)
+        {
+            return 0.0;
+        }
+
+        var avgHours = durations
+            .Select(d => Math.Max(0.0, (d.DecidedAt - d.CreatedAt).TotalHours))
+            .Average();
+
+        return Math.Round(avgHours, 1);
+    }
+
+    private static IQueryable<ApprovalStep> ApplyRoleFilter(IQueryable<ApprovalStep> query, string? role)
+    {
+        if (string.IsNullOrWhiteSpace(role)) return query;
+
+        var r = role.Trim().ToLower();
+        if (r == "manager") return query.Where(s => s.Level == "Manager");
+        if (r == "finance") return query.Where(s => s.Level == "Finance");
+        return query;
     }
 
     public async Task<ApprovalStep?> GetByIdWithRequestAndApproverAsync(Guid stepId, CancellationToken cancellationToken = default)

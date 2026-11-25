@@ -65,6 +65,7 @@ public class ApprovalService : IApprovalService
         }
 
         var steps = await _approvalStepRepository.GetPendingStepsAsync(effectiveApproverId, effectiveRole, cancellationToken);
+        var avgResponseTimeHours = await _approvalStepRepository.GetAverageResponseTimeHoursAsync(effectiveApproverId, effectiveRole, cancellationToken);
 
         var pendingTotal = steps.Sum(s => s.Request!.EstimatedBudget);
 
@@ -103,7 +104,7 @@ public class ApprovalService : IApprovalService
         return new ApprovalQueueSummaryDto
         {
             PendingTotal = pendingTotal,
-            AvgResponseTimeHours = 0.0,
+            AvgResponseTimeHours = avgResponseTimeHours,
             PolicyCompliancePercent = compliancePercent,
             Items = items
         };

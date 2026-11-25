@@ -26,6 +26,24 @@ export class AnalyticsReports implements OnInit {
     categorySpend: []
   });
 
+  readonly yAxisLabels = computed(() => {
+    const list = this.analytics().monthlySpend;
+    const max = list && list.length > 0 ? Math.max(...list.map(m => m.amount), 1) : 100000;
+    const steps = [1, 0.8, 0.6, 0.4, 0.2, 0];
+    const yPositions = [24, 64, 104, 144, 184, 224];
+    return steps.map((ratio, idx) => ({
+      y: yPositions[idx],
+      label: this.formatCompactInr(Math.round(max * ratio))
+    }));
+  });
+
+  private formatCompactInr(val: number): string {
+    if (val === 0) return '₹0';
+    if (val >= 100000) return `₹${(val / 100000).toFixed(1)}L`;
+    if (val >= 1000) return `₹${(val / 1000).toFixed(0)}K`;
+    return `₹${val}`;
+  }
+
   readonly chartPoints = computed(() => {
     const list = this.analytics().monthlySpend;
     if (!list || list.length === 0) {
