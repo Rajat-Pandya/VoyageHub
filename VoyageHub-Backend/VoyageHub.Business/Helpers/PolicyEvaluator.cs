@@ -19,7 +19,7 @@ public static class PolicyEvaluator
         var reasons = new List<string>();
         var deptLabel = string.IsNullOrWhiteSpace(departmentName) ? "Department" : departmentName;
 
-        if (policy != null)
+        if (policy != null && policy.HardEnforcement)
         {
             if (policy.IntlBudgetLimit > 0 && estimatedBudget > policy.IntlBudgetLimit)
             {

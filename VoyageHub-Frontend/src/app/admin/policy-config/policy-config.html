@@ -142,7 +142,7 @@
       </div>
     </div>
 
-    <!-- Policy Hard Enforcement Card (Dark Navy matching Page 9) -->
+    <!-- Policy Compliance Enforcement Card -->
     <div class="enforcement-card">
       <div class="shield-watermark">
         <svg viewBox="0 0 24 24" width="120" height="120" fill="currentColor">
@@ -151,16 +151,16 @@
       </div>
 
       <div class="enforcement-content">
-        <h3>Policy Hard Enforcement</h3>
+        <h3>Policy Compliance Enforcement</h3>
         <p class="enforcement-desc">
-          When enabled, requests that exceed department limits will be automatically blocked from submission until adjusted or an override key is provided by an Admin.
+          When enabled, requests that exceed department budget or travel class limits are automatically flagged as Policy Exceptions for Manager and Finance review.
         </p>
 
         <div class="enforcement-actions">
           <button type="button" class="toggle-pill" [class.enabled]="hardEnforcementEnabled()" (click)="toggleEnforcement()">
             {{ hardEnforcementEnabled() ? 'Enabled' : 'Disabled' }}
           </button>
-          <a routerLink="/audit" class="override-logs-btn">Override Logs</a>
+          <a routerLink="/audit" class="override-logs-btn">Audit Logs</a>
         </div>
       </div>
     </div>

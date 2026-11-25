@@ -54,9 +54,18 @@ export class PolicyConfigComponent implements OnInit {
     this.hardEnforcementEnabled.set(nextVal);
     const list = this.policies();
     if (list.length > 0) {
-      this.voyageService.updatePolicy(list[0].id, { hardEnforcement: nextVal }).subscribe({
-        next: () => this.showToast(`Hard enforcement ${nextVal ? 'enabled' : 'disabled'}.`),
-        error: () => this.showToast(`Hard enforcement ${nextVal ? 'enabled' : 'disabled'}.`)
+      const target = list[0];
+      this.voyageService.updatePolicy(target.id, {
+        intlBudgetLimit: target.intlBudgetLimit,
+        domesticLimit: target.domesticLimit,
+        allowedClass: target.allowedClass,
+        hardEnforcement: nextVal
+      }).subscribe({
+        next: () => {
+          this.loadPolicies();
+          this.showToast(`Policy compliance enforcement ${nextVal ? 'enabled' : 'disabled'}.`);
+        },
+        error: () => this.showToast('Failed to update policy enforcement setting.')
       });
     }
   }
