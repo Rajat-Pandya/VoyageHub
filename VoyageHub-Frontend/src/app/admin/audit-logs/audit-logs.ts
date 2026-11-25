@@ -3,6 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VoyageService, AuditLogItem } from '../../services/voyage.service';
 import { getUserInitials } from '../../services/auth.service';
+import { createPagination } from '../../shared/pagination';
 
 @Component({
   selector: 'app-audit-logs',
@@ -16,6 +17,7 @@ export class AuditLogs implements OnInit {
 
   readonly logs = signal<AuditLogItem[]>([]);
   readonly isLoading = signal(true);
+  readonly pagination = createPagination(this.logs, 15);
 
   selectedSeverity = 'ALL';
   selectedEntityType = 'ALL';
@@ -26,6 +28,7 @@ export class AuditLogs implements OnInit {
 
   loadLogs(): void {
     this.isLoading.set(true);
+    this.pagination.reset();
     this.voyageService.getAuditLogs(this.selectedSeverity, this.selectedEntityType).subscribe({
       next: (data) => {
         this.logs.set(data);

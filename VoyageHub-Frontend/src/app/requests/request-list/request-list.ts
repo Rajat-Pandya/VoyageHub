@@ -4,6 +4,7 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VoyageService, TravelRequestItem } from '../../services/voyage.service';
 import { AuthService } from '../../services/auth.service';
+import { createPagination } from '../../shared/pagination';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class RequestList implements OnInit {
 
   readonly requests = signal<TravelRequestItem[]>([]);
   readonly isLoading = signal(true);
+  readonly pagination = createPagination(this.requests, 10);
 
   searchQuery = '';
   selectedStatus = 'All Statuses';
@@ -30,7 +32,8 @@ export class RequestList implements OnInit {
 
   loadRequests(): void {
     this.isLoading.set(true);
-    this.voyageService.getRequests(this.selectedStatus, this.searchQuery, 20).subscribe({
+    this.pagination.reset();
+    this.voyageService.getRequests(this.selectedStatus, this.searchQuery, 100).subscribe({
       next: (data) => {
         this.requests.set(data || []);
         this.isLoading.set(false);

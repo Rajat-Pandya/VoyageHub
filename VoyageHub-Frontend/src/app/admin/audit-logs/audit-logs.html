@@ -42,7 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (log of logs(); track log.id) {
+          @for (log of pagination.pagedItems(); track log.id) {
             <tr>
               <td class="timestamp-cell">
                 {{ log.timestamp | date:'MMM dd, yyyy • HH:mm:ss' }}
@@ -77,13 +77,22 @@
 
     <!-- Pagination Footer matching Page 10 -->
     <div class="pagination-footer">
-      <span class="page-count-text">Page 1 of 42 (1,248 total events)</span>
+      <span class="page-count-text">
+        @if (pagination.totalItems() === 0) {
+          Showing 0 events
+        } @else {
+          Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }} ({{ pagination.totalItems() }} total events)
+        }
+      </span>
       <div class="pagination-buttons">
-        <button type="button" class="page-nav-btn" title="Previous page" aria-label="Previous page">&lsaquo;</button>
-        <button type="button" class="page-num-btn active" title="Page 1" aria-label="Page 1">1</button>
-        <button type="button" class="page-num-btn" title="Page 2" aria-label="Page 2">2</button>
-        <button type="button" class="page-num-btn" title="Page 3" aria-label="Page 3">3</button>
-        <button type="button" class="page-nav-btn" title="Next page" aria-label="Next page">&rsaquo;</button>
+        <button type="button" class="page-nav-btn" title="Previous page" aria-label="Previous page"
+          [disabled]="pagination.currentPage() === 1" (click)="pagination.prevPage()">&lsaquo;</button>
+        @for (page of pagination.pageNumbers(); track page) {
+          <button type="button" class="page-num-btn" [class.active]="pagination.currentPage() === page"
+            [title]="'Page ' + page" [attr.aria-label]="'Page ' + page" (click)="pagination.goToPage(page)">{{ page }}</button>
+        }
+        <button type="button" class="page-nav-btn" title="Next page" aria-label="Next page"
+          [disabled]="pagination.currentPage() === pagination.totalPages()" (click)="pagination.nextPage()">&rsaquo;</button>
       </div>
     </div>
   </div>
