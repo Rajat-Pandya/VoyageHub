@@ -68,7 +68,7 @@ flowchart TD
 
     Database[("Microsoft SQL Server (AngularAuthDb)")]
 
-    Client -->|REST / JSON (JWT Bearer)| Controllers
+    Client -->|"REST / JSON (JWT Bearer)"| Controllers
     Controllers --> CurrentUser
     Controllers --> Services
     Services --> Audit

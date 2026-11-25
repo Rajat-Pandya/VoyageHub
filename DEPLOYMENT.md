@@ -27,7 +27,7 @@ flowchart TD
 
     User -->|HTTPS| SWA
     SWA -->|REST / CORS Bearer| API
-    API -->|TDS Encrypted (1433)| DB
+    API -->|"TDS Encrypted (Port 1433)"| DB
 ```
 
 ### Step 1: Azure SQL Database Setup
