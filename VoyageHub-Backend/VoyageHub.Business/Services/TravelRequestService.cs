@@ -462,6 +462,7 @@ public class TravelRequestService : ITravelRequestService
     {
         var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
         if (r == null) return (false, "Travel request not found.", null);
+        if (!IsOwnerOrAdmin(r.EmployeeId)) return (false, "You can only modify your own travel requests.", null);
 
         var segment = new ItinerarySegment
         {
@@ -490,6 +491,7 @@ public class TravelRequestService : ITravelRequestService
     {
         var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
         if (r == null) return (false, "Travel request not found.", null);
+        if (!IsOwnerOrAdmin(r.EmployeeId)) return (false, "You can only modify your own travel requests.", null);
 
         var stay = new Stay
         {
@@ -529,5 +531,13 @@ public class TravelRequestService : ITravelRequestService
 
         await _travelRequestRepository.SaveChangesAsync(cancellationToken);
         return (true, "Trip marked as completed and closed.");
+    }
+
+    private bool IsOwnerOrAdmin(Guid requestOwnerId)
+    {
+        var callerId = _currentUserService.UserId;
+        if (!callerId.HasValue) return true;
+        if (string.Equals(_currentUserService.UserRole, "Admin", StringComparison.OrdinalIgnoreCase)) return true;
+        return callerId.Value == requestOwnerId;
     }
 }

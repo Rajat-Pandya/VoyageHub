@@ -36,7 +36,7 @@
       <!-- Context-Aware Role Workflow Action Buttons -->
       <div class="header-actions">
         <!-- 1. Draft Actions -->
-        @if (d.status === 'Draft') {
+        @if (d.status === 'Draft' && canEditTrip(d)) {
           <button type="button" class="btn-primary" (click)="submitDraft()" [disabled]="isSubmitting()">
             {{ isSubmitting() ? 'Submitting...' : 'Submit for Approval' }}
           </button>
@@ -65,8 +65,8 @@
           </button>
         }
 
-        <!-- 4. Active Trip Actions (Employee or Admin) -->
-        @if (d.status === 'Approved') {
+        <!-- 4. Active Trip Actions (Owner or Admin) -->
+        @if (d.status === 'Approved' && canEditTrip(d)) {
           <button type="button" class="btn-primary" (click)="openExpenseModal()">
             + Submit Expense
           </button>
@@ -228,14 +228,16 @@
       <div class="tab-panel fade-in">
         <div class="panel-header-row">
           <h3>Travel Segments &amp; Stays</h3>
-          <div class="panel-actions-group">
-            <button type="button" class="btn-secondary-sm" (click)="openSegmentModal()">
-              + Add Flight / Train
-            </button>
-            <button type="button" class="btn-secondary-sm" (click)="openStayModal()">
-              + Add Hotel Stay
-            </button>
-          </div>
+          @if (canEditTrip(d)) {
+            <div class="panel-actions-group">
+              <button type="button" class="btn-secondary-sm" (click)="openSegmentModal()">
+                + Add Flight / Train
+              </button>
+              <button type="button" class="btn-secondary-sm" (click)="openStayModal()">
+                + Add Hotel Stay
+              </button>
+            </div>
+          }
         </div>
 
         <!-- Segments List -->
@@ -321,9 +323,11 @@
       <div class="tab-panel fade-in">
         <div class="panel-header-row">
           <h3>Trip Expenses &amp; Reimbursements</h3>
-          <button type="button" class="btn-primary" (click)="openExpenseModal()">
-            + Submit Expense Claim
-          </button>
+          @if (canEditTrip(d)) {
+            <button type="button" class="btn-primary" (click)="openExpenseModal()">
+              + Submit Expense Claim
+            </button>
+          }
         </div>
         <div class="segments-stack">
           @for (e of d.expenses; track e.id) {
@@ -362,12 +366,14 @@
                       View Proof
                     </button>
                   }
-                  <button type="button" class="proof-attach-btn" (click)="openAttachProofModal(e)" title="Attach or replace receipt document">
-                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                    </svg>
-                    {{ e.proofPath ? 'Replace' : 'Upload Proof' }}
-                  </button>
+                  @if (canEditTrip(d)) {
+                    <button type="button" class="proof-attach-btn" (click)="openAttachProofModal(e)" title="Attach or replace receipt document">
+                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                      </svg>
+                      {{ e.proofPath ? 'Replace' : 'Upload Proof' }}
+                    </button>
+                  }
                 </div>
               </div>
             </div>

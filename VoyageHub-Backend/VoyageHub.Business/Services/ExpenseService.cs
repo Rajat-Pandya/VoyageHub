@@ -71,6 +71,11 @@ public class ExpenseService : IExpenseService
             return (false, "Travel request not found.", null);
         }
 
+        if (!IsOwnerOrAdmin(request.EmployeeId))
+        {
+            return (false, "You can only submit expenses for your own travel requests.", null);
+        }
+
         var expense = new Expense
         {
             RequestId = dto.RequestId,
@@ -150,10 +155,15 @@ public class ExpenseService : IExpenseService
 
     public async Task<(bool Success, string Message, string? ProofPath)> AttachProofAsync(Guid id, string proofPath, CancellationToken cancellationToken = default)
     {
-        var expense = await _expenseRepository.GetByIdAsync(id, cancellationToken);
+        var expense = await _expenseRepository.GetByIdWithRequestAsync(id, cancellationToken);
         if (expense == null)
         {
             return (false, "Expense claim not found.", null);
+        }
+
+        if (expense.Request != null && !IsOwnerOrAdmin(expense.Request.EmployeeId))
+        {
+            return (false, "You can only attach proof to your own expense claims.", null);
         }
 
         expense.ProofPath = proofPath;
@@ -170,5 +180,13 @@ public class ExpenseService : IExpenseService
             cancellationToken: cancellationToken);
 
         return (true, "Proof document attached successfully.", proofPath);
+    }
+
+    private bool IsOwnerOrAdmin(Guid requestOwnerId)
+    {
+        var callerId = _currentUserService.UserId;
+        if (!callerId.HasValue) return true;
+        if (string.Equals(_currentUserService.UserRole, "Admin", StringComparison.OrdinalIgnoreCase)) return true;
+        return callerId.Value == requestOwnerId;
     }
 }

@@ -119,6 +119,11 @@ export class RequestDetail implements OnInit {
     }, 4000);
   }
 
+  canEditTrip(d: TravelRequestDetail): boolean {
+    const userId = this.authService.currentUser()?.id;
+    return this.authService.isAdmin() || (!!userId && userId.toLowerCase() === d.employeeId.toLowerCase());
+  }
+
   submitDraft(): void {
     const d = this.detail();
     if (!d || this.isSubmitting()) return;

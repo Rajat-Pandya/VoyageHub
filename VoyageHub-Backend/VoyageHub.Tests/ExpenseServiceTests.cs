@@ -120,6 +120,9 @@ public class ExpenseServiceTests
     {
         var requestId = Guid.NewGuid();
         var employeeId = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(employeeId);
+        _currentUserServiceMock.Setup(c => c.UserRole).Returns("Employee");
+
         var travelRequest = new TravelRequest
         {
             Id = requestId,
@@ -263,10 +266,19 @@ public class ExpenseServiceTests
     public async Task AttachProofAsync_Found_UpdatesProofPathAndLogsAudit()
     {
         var id = Guid.NewGuid();
-        var expense = new Expense { Id = id, Status = "Pending" };
+        var ownerId = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(ownerId);
+        _currentUserServiceMock.Setup(c => c.UserRole).Returns("Employee");
+
+        var expense = new Expense
+        {
+            Id = id,
+            Status = "Pending",
+            Request = new TravelRequest { EmployeeId = ownerId }
+        };
 
         _expenseRepoMock
-            .Setup(r => r.GetByIdAsync(id, It.IsAny<CancellationToken>()))
+            .Setup(r => r.GetByIdWithRequestAsync(id, It.IsAny<CancellationToken>()))
             .ReturnsAsync(expense);
 
         var (success, message, proofPath) = await _expenseService.AttachProofAsync(id, "receipts/hotel_123.pdf");
@@ -285,5 +297,47 @@ public class ExpenseServiceTests
             It.IsAny<string>(),
             "LOW",
             It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task SubmitExpenseAsync_NonOwnerManager_ReturnsFalse()
+    {
+        var requestId = Guid.NewGuid();
+        var employeeId = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(Guid.NewGuid());
+        _currentUserServiceMock.Setup(c => c.UserRole).Returns("Manager");
+
+        _expenseRepoMock
+            .Setup(r => r.FindTravelRequestWithEmployeeAsync(requestId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new TravelRequest { Id = requestId, EmployeeId = employeeId });
+
+        var (success, message, created) = await _expenseService.SubmitExpenseAsync(new SubmitExpenseDto
+        {
+            RequestId = requestId,
+            Amount = 500m,
+            Category = "Meals"
+        });
+
+        Assert.False(success);
+        Assert.Null(created);
+        Assert.Contains("own travel requests", message);
+    }
+
+    [Fact]
+    public async Task AttachProofAsync_NonOwnerManager_ReturnsFalse()
+    {
+        var id = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(Guid.NewGuid());
+        _currentUserServiceMock.Setup(c => c.UserRole).Returns("Manager");
+
+        _expenseRepoMock
+            .Setup(r => r.GetByIdWithRequestAsync(id, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Expense { Id = id, Request = new TravelRequest { EmployeeId = Guid.NewGuid() } });
+
+        var (success, message, proofPath) = await _expenseService.AttachProofAsync(id, "receipt.pdf");
+
+        Assert.False(success);
+        Assert.Null(proofPath);
+        Assert.Contains("own expense claims", message);
     }
 }
