@@ -86,7 +86,7 @@ public class TravelRequestsController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Employee,Manager,Admin")]
+    [Authorize(Roles = "Employee,Manager")]
     public async Task<ActionResult<TravelRequestDetailDto>> Create([FromBody] CreateTravelRequestDto dto, [FromQuery] Guid? employeeId)
     {
         if (dto == null) return BadRequest(new { message = "Invalid request data." });

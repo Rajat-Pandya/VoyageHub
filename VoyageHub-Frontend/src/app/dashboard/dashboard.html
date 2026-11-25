@@ -15,13 +15,15 @@
         <input type="text" placeholder="Search trips..." title="Search trips" aria-label="Search trips" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" />
       </div>
 
-      <a routerLink="/requests/new" class="btn-primary">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M12 5v14"/>
-          <path d="M5 12h14"/>
-        </svg>
-        New Request
-      </a>
+      @if (authService.currentUser()?.role !== 'Admin' && authService.currentUser()?.role !== 'Finance') {
+        <a routerLink="/requests/new" class="btn-primary">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 5v14"/>
+            <path d="M5 12h14"/>
+          </svg>
+          New Request
+        </a>
+      }
     </div>
   </header>
 

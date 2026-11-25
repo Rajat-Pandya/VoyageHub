@@ -29,6 +29,9 @@ export class RequestList implements OnInit {
   selectedDateRange = 'Last 6 Months';
 
   ngOnInit(): void {
+    if (this.authService.isAdmin()) {
+      this.scope.set('team');
+    }
     this.loadRequests();
   }
 

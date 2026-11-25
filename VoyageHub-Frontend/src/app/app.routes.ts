@@ -27,7 +27,7 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: Dashboard, canActivate: [roleGuard(['Employee', 'Manager', 'Finance', 'Admin'])] },
       { path: 'requests', component: RequestList, canActivate: [roleGuard(['Employee', 'Manager', 'Admin'])] },
-      { path: 'requests/new', component: NewRequest, canActivate: [roleGuard(['Employee', 'Manager', 'Admin'])] },
+      { path: 'requests/new', component: NewRequest, canActivate: [roleGuard(['Employee', 'Manager'])] },
       { path: 'requests/:id', component: RequestDetail, canActivate: [roleGuard(['Employee', 'Manager', 'Finance', 'Admin'])] },
       { path: 'approvals', component: ApprovalQueue, canActivate: [roleGuard(['Manager', 'Finance', 'Admin'])] },
       { path: 'expenses', component: ExpenseReview, canActivate: [roleGuard(['Finance', 'Admin'])] },
