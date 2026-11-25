@@ -1,11 +1,12 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { VoyageService, PolicyConfig } from '../../services/voyage.service';
 
 @Component({
   selector: 'app-policy-config',
-  imports: [CommonModule, CurrencyPipe, FormsModule],
+  imports: [CommonModule, CurrencyPipe, FormsModule, RouterLink],
   templateUrl: './policy-config.html',
   styleUrl: './policy-config.css'
 })
