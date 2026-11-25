@@ -378,7 +378,13 @@
               </div>
             </div>
           } @empty {
-            <p class="empty-note">No expenses submitted yet for this trip. Click <strong>+ Submit Expense Claim</strong> to add one.</p>
+            <p class="empty-note">
+              @if (canEditTrip(d)) {
+                No expenses submitted yet for this trip. Click <strong>+ Submit Expense Claim</strong> to add one.
+              } @else {
+                No expenses have been submitted for this trip yet.
+              }
+            </p>
           }
         </div>
       </div>
