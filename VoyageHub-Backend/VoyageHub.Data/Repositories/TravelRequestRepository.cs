@@ -85,7 +85,9 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
         }
 
         var drafts = await reqQuery.CountAsync(r => r.Status == "Draft", cancellationToken);
-        var pending = await reqQuery.CountAsync(r => r.Status == "In Review" || r.Status == "Manager Review" || r.Status == "Pending", cancellationToken);
+        var pending = await reqQuery.CountAsync(
+            r => r.Status == "In Review" || r.Status == "Manager Review" || r.Status == "Finance Review" || r.Status == "Pending",
+            cancellationToken);
         var upcoming = await reqQuery.CountAsync(r => r.Status == "Approved" && r.StartDate >= DateTime.UtcNow.Date, cancellationToken);
 
         var expenseQuery = Context.Expenses.AsQueryable();

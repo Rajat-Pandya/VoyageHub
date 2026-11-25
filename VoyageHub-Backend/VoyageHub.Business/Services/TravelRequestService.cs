@@ -114,9 +114,9 @@ public class TravelRequestService : ITravelRequestService
 
         return new DashboardStatsDto
         {
-            DraftsCount = stats.Drafts > 0 ? stats.Drafts : 1,
-            PendingCount = stats.Pending > 0 ? stats.Pending : 2,
-            UpcomingTripsCount = stats.Upcoming > 0 ? stats.Upcoming : 1,
+            DraftsCount = stats.Drafts,
+            PendingCount = stats.Pending,
+            UpcomingTripsCount = stats.Upcoming,
             TotalReimbursement = stats.Reimbursement
         };
     }
