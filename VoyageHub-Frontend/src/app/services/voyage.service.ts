@@ -91,6 +91,7 @@ export interface TravelRequestDetail {
   justification?: string;
   status: string;
   policyCompliance: string;
+  policyFlagReasons?: string[];
   submittedDate: string;
   primaryContact: string;
   segments: ItinerarySegment[];
@@ -117,6 +118,7 @@ export interface ApprovalQueueItem {
   travelDates: string;
   budget: number;
   policyStatus: string;
+  policyFlagReasons?: string[];
   status: string;
   level?: string; // Manager, Finance
 }

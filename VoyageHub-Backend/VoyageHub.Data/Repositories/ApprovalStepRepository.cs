@@ -20,6 +20,7 @@ public class ApprovalStepRepository : Repository<ApprovalStep>, IApprovalStepRep
             .Include(s => s.Request)
                 .ThenInclude(r => r!.Employee)
                     .ThenInclude(e => e!.Department)
+                        .ThenInclude(d => d!.Policy)
             .Where(s => s.Status == "Pending" && s.Request != null);
 
         if (!string.IsNullOrWhiteSpace(role))

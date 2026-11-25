@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using VoyageHub.Business.Dtos;
+using VoyageHub.Business.Helpers;
 using VoyageHub.Data.Entities;
 using VoyageHub.Data.Repositories;
 
@@ -67,20 +68,32 @@ public class ApprovalService : IApprovalService
 
         var pendingTotal = steps.Sum(s => s.Request!.EstimatedBudget);
 
-        var items = steps.Select(s => new ApprovalQueueItemDto
+        var items = steps.Select(s =>
         {
-            StepId = s.Id,
-            RequestId = s.RequestId,
-            RequestCode = s.Request!.RequestCode,
-            EmployeeName = s.Request.Employee?.Name ?? "Employee",
-            DepartmentName = s.Request.Employee?.Department?.Name ?? "Sales Dept.",
-            Destination = s.Request.Destination,
-            Purpose = s.Request.Purpose,
-            TravelDates = $"{s.Request.StartDate:dd MMM} – {s.Request.EndDate:dd MMM}",
-            Budget = s.Request.EstimatedBudget,
-            PolicyStatus = s.Request.PolicyCompliance,
-            Status = s.Status,
-            Level = s.Level
+            var req = s.Request!;
+            var (_, flagReasons) = PolicyEvaluator.Evaluate(
+                req.EstimatedBudget,
+                req.TravelClass,
+                req.Employee?.Department?.Policy,
+                req.Employee?.Department?.Name,
+                req.PolicyCompliance);
+
+            return new ApprovalQueueItemDto
+            {
+                StepId = s.Id,
+                RequestId = s.RequestId,
+                RequestCode = req.RequestCode,
+                EmployeeName = req.Employee?.Name ?? "Employee",
+                DepartmentName = req.Employee?.Department?.Name ?? "Sales Dept.",
+                Destination = req.Destination,
+                Purpose = req.Purpose,
+                TravelDates = $"{req.StartDate:dd MMM} – {req.EndDate:dd MMM}",
+                Budget = req.EstimatedBudget,
+                PolicyStatus = req.PolicyCompliance,
+                PolicyFlagReasons = flagReasons,
+                Status = s.Status,
+                Level = s.Level
+            };
         }).ToList();
 
         var compliancePercent = items.Count > 0

@@ -107,6 +107,7 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
         return await DbSet
             .Include(r => r.Employee)
                 .ThenInclude(e => e!.Department)
+                    .ThenInclude(d => d!.Policy)
             .Include(r => r.ItinerarySegments)
             .Include(r => r.Stays)
             .Include(r => r.Expenses)

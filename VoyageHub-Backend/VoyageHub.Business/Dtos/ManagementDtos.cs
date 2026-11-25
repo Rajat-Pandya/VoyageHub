@@ -24,6 +24,7 @@ public class ApprovalQueueItemDto
     public string TravelDates { get; set; } = string.Empty;
     public decimal Budget { get; set; }
     public string PolicyStatus { get; set; } = "Standard"; // Standard, Flagged
+    public List<string> PolicyFlagReasons { get; set; } = new();
     public string Status { get; set; } = "Pending";
     public string Level { get; set; } = "Manager"; // Manager, Finance
 }

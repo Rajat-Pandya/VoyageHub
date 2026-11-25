@@ -99,6 +99,7 @@ public class TravelRequestDetailDto
     public string? Justification { get; set; }
     public string Status { get; set; } = string.Empty;
     public string PolicyCompliance { get; set; } = "Standard";
+    public List<string> PolicyFlagReasons { get; set; } = new();
     public DateTime SubmittedDate { get; set; }
     public string PrimaryContact { get; set; } = "Global Support Desk (+1-800-VOYAGE)";
 

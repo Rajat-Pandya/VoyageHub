@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using VoyageHub.Business.Dtos;
+using VoyageHub.Business.Helpers;
 using VoyageHub.Data.Entities;
 using VoyageHub.Data.Repositories;
 
@@ -165,6 +166,12 @@ public class TravelRequestService : ITravelRequestService
             Justification = r.Justification,
             Status = r.Status,
             PolicyCompliance = r.PolicyCompliance,
+            PolicyFlagReasons = PolicyEvaluator.Evaluate(
+                r.EstimatedBudget,
+                r.TravelClass,
+                r.Employee?.Department?.Policy,
+                r.Employee?.Department?.Name,
+                r.PolicyCompliance).Reasons,
             SubmittedDate = r.CreatedAt,
             PrimaryContact = "VoyageHub India Corporate Desk (+91-80-4000-8800)",
             Segments = r.ItinerarySegments.Select(s => new ItinerarySegmentDto
@@ -257,15 +264,11 @@ public class TravelRequestService : ITravelRequestService
         var count = await _travelRequestRepository.GetCountAsync(cancellationToken);
         var code = $"#TR-{2050 + count + 1}";
 
-        var isFlagged = false;
-        if (employee.Department?.Policy != null)
-        {
-            var policy = employee.Department.Policy;
-            if (dto.EstimatedBudget > policy.IntlBudgetLimit)
-            {
-                isFlagged = true;
-            }
-        }
+        var (isFlagged, _) = PolicyEvaluator.Evaluate(
+            dto.EstimatedBudget,
+            dto.TravelClass,
+            employee.Department?.Policy,
+            employee.Department?.Name);
 
         var status = dto.SaveAsDraft ? "Draft" : "In Review";
 
@@ -399,14 +402,11 @@ public class TravelRequestService : ITravelRequestService
         if (r == null) return (404, "Travel request not found.");
         if (r.Status != "Draft") return (400, "Only Draft requests can be submitted.");
 
-        var isFlagged = false;
-        if (r.Employee?.Department?.Policy != null)
-        {
-            if (r.EstimatedBudget > r.Employee.Department.Policy.IntlBudgetLimit)
-            {
-                isFlagged = true;
-            }
-        }
+        var (isFlagged, _) = PolicyEvaluator.Evaluate(
+            r.EstimatedBudget,
+            r.TravelClass,
+            r.Employee?.Department?.Policy,
+            r.Employee?.Department?.Name);
         r.PolicyCompliance = isFlagged ? "Flagged" : "Standard";
         r.Status = "Manager Review";
         r.UpdatedAt = DateTime.UtcNow;

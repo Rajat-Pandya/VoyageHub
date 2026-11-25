@@ -323,6 +323,36 @@
   background: #b91c1c;
 }
 
+.policy-cell-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  max-width: 240px;
+}
+
+.policy-reason-text {
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: #b91c1c;
+  font-weight: 500;
+}
+
+.modal-policy-alert {
+  margin: 12px 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-size: 12.5px;
+}
+
+.modal-policy-alert ul {
+  margin: 6px 0 0 18px;
+  padding: 0;
+}
+
 @media (max-width: 1024px) {
   .kpi-grid-3 {
     grid-template-columns: repeat(2, 1fr);

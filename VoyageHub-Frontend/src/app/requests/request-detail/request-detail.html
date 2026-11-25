@@ -84,6 +84,26 @@
       </div>
     </header>
 
+    @if (d.policyCompliance === 'Flagged') {
+      <div class="policy-alert-banner">
+        <div class="policy-alert-title">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" x2="12" y1="8" y2="12"/>
+            <line x1="12" x2="12.01" y1="16" y2="16"/>
+          </svg>
+          <strong>Policy Exception Flagged</strong>
+        </div>
+        @if ((d.policyFlagReasons?.length || 0) > 0) {
+          <ul class="policy-alert-list">
+            @for (reason of d.policyFlagReasons || []; track reason) {
+              <li>{{ reason }}</li>
+            }
+          </ul>
+        }
+      </div>
+    }
+
     <!-- Interactive Workflow Stepper Tracker matching Workflow Diagram -->
     <div class="workflow-stepper-card">
       <!-- Step 1: Created / Submitted -->

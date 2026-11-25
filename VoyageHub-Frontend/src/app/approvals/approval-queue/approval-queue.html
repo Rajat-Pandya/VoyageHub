@@ -65,14 +65,19 @@
             <td class="budget-value">{{ item.budget | currency:'INR':'symbol':'1.0-0' }}</td>
             <td>
               @if (item.policyStatus === 'Flagged') {
-                <span class="badge-policy-flagged">
-                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="12" x2="12" y1="8" y2="12"/>
-                    <line x1="12" x2="12.01" y1="16" y2="16"/>
-                  </svg>
-                  Flagged
-                </span>
+                <div class="policy-cell-stack">
+                  <span class="badge-policy-flagged" [title]="(item.policyFlagReasons || []).join(' ')">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="12" x2="12" y1="8" y2="12"/>
+                      <line x1="12" x2="12.01" y1="16" y2="16"/>
+                    </svg>
+                    Flagged
+                  </span>
+                  @for (reason of item.policyFlagReasons || []; track reason) {
+                    <span class="policy-reason-text">{{ reason }}</span>
+                  }
+                </div>
               } @else {
                 <span class="badge-policy-standard">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -118,6 +123,16 @@
 
         <div class="modal-body">
           <p>You are about to <strong>{{ actionType().toLowerCase() }}</strong> the travel request <strong>{{ current.requestCode }}</strong> for <strong>{{ current.employeeName }}</strong> ({{ current.destination }}).</p>
+          @if (current.policyStatus === 'Flagged' && (current.policyFlagReasons?.length || 0) > 0) {
+            <div class="modal-policy-alert">
+              <strong>Policy Flagged:</strong>
+              <ul>
+                @for (reason of current.policyFlagReasons || []; track reason) {
+                  <li>{{ reason }}</li>
+                }
+              </ul>
+            </div>
+          }
           <div class="form-group modal-field">
             <label for="actionComment">Approval Comment / Remarks</label>
             <textarea id="actionComment" [(ngModel)]="actionComment" rows="3" class="form-textarea" placeholder="Add optional comments for the applicant..." title="Approval Comment / Remarks" aria-label="Approval Comment / Remarks"></textarea>
