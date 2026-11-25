@@ -65,6 +65,10 @@ public class ApprovalService : IApprovalService
         }
 
         var steps = await _approvalStepRepository.GetPendingStepsAsync(effectiveApproverId, effectiveRole, cancellationToken);
+        if (callerId.HasValue && callerId.Value != Guid.Empty)
+        {
+            steps = steps.Where(s => s.Request != null && s.Request.EmployeeId != callerId.Value).ToList();
+        }
         var avgResponseTimeHours = await _approvalStepRepository.GetAverageResponseTimeHoursAsync(effectiveApproverId, effectiveRole, cancellationToken);
 
         var pendingTotal = steps.Sum(s => s.Request!.EstimatedBudget);
@@ -116,6 +120,11 @@ public class ApprovalService : IApprovalService
         if (step == null)
         {
             return (false, "Approval step not found.");
+        }
+
+        if (step.Request != null && _currentUserService.UserId.HasValue && step.Request.EmployeeId == _currentUserService.UserId.Value)
+        {
+            return (false, "You cannot approve or reject your own travel request.");
         }
 
         var isApprove = string.Equals(dto.Action, "Approve", StringComparison.OrdinalIgnoreCase);

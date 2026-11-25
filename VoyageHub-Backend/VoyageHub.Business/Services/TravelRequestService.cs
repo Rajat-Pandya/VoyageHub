@@ -325,24 +325,14 @@ public class TravelRequestService : ITravelRequestService
 
         if (!dto.SaveAsDraft)
         {
-            var managerId = employee.ManagerId ?? await _travelRequestRepository.GetFirstManagerIdAsync(cancellationToken) ?? Guid.Empty;
-            var financeId = await _travelRequestRepository.GetFirstFinanceIdAsync(cancellationToken);
-
-            request.ApprovalSteps.Add(new ApprovalStep
+            var steps = await BuildWorkflowStepsAsync(request.Id, employee, cancellationToken);
+            if (steps.All(s => s.Level == "Finance"))
             {
-                ApproverId = managerId,
-                Level = "Manager",
-                Status = "Pending"
-            });
-
-            if (financeId != Guid.Empty)
+                request.Status = "Finance Review";
+            }
+            foreach (var step in steps)
             {
-                request.ApprovalSteps.Add(new ApprovalStep
-                {
-                    ApproverId = financeId,
-                    Level = "Finance",
-                    Status = "Waiting"
-                });
+                request.ApprovalSteps.Add(step);
             }
         }
 
@@ -411,34 +401,19 @@ public class TravelRequestService : ITravelRequestService
         r.Status = "Manager Review";
         r.UpdatedAt = DateTime.UtcNow;
 
-        var managerId = r.Employee?.ManagerId ?? await _travelRequestRepository.GetFirstManagerIdAsync(cancellationToken) ?? Guid.Empty;
-        var financeId = await _travelRequestRepository.GetFirstFinanceIdAsync(cancellationToken);
-
         if (r.ApprovalSteps.Any())
         {
             _travelRequestRepository.RemoveApprovalSteps(r.ApprovalSteps.ToList());
             r.ApprovalSteps.Clear();
         }
 
-        var managerStep = new ApprovalStep
-        {
-            RequestId = r.Id,
-            ApproverId = managerId != Guid.Empty ? managerId : null,
-            Level = "Manager",
-            Status = "Pending"
-        };
-        await _travelRequestRepository.AddApprovalStepAsync(managerStep, cancellationToken);
+        var workflowSteps = await BuildWorkflowStepsAsync(r.Id, r.Employee, cancellationToken);
+        var skippedManager = workflowSteps.All(s => s.Level == "Finance");
+        r.Status = skippedManager ? "Finance Review" : "Manager Review";
 
-        if (financeId != Guid.Empty)
+        foreach (var step in workflowSteps)
         {
-            var financeStep = new ApprovalStep
-            {
-                RequestId = r.Id,
-                ApproverId = financeId,
-                Level = "Finance",
-                Status = "Waiting"
-            };
-            await _travelRequestRepository.AddApprovalStepAsync(financeStep, cancellationToken);
+            await _travelRequestRepository.AddApprovalStepAsync(step, cancellationToken);
         }
 
         await _auditService.LogAsync(
@@ -447,12 +422,12 @@ public class TravelRequestService : ITravelRequestService
             action: "Submit Request",
             actorId: r.EmployeeId,
             actorName: r.Employee?.Name ?? "Employee",
-            changeDetail: $"Submitted {r.RequestCode} for Manager review (₹{r.EstimatedBudget:N0})",
+            changeDetail: $"Submitted {r.RequestCode} for {(skippedManager ? "Finance" : "Manager")} review (₹{r.EstimatedBudget:N0})",
             severity: isFlagged ? "MEDIUM" : "LOW",
             cancellationToken: cancellationToken);
 
         await _travelRequestRepository.SaveChangesAsync(cancellationToken);
-        return (200, new { success = true, message = "Request submitted for Manager review." });
+        return (200, new { success = true, message = $"Request submitted for {(skippedManager ? "Finance" : "Manager")} review." });
     }
 
     public async Task<(bool Success, string Message, ItinerarySegment? Segment)> AddSegmentAsync(
@@ -531,6 +506,72 @@ public class TravelRequestService : ITravelRequestService
 
         await _travelRequestRepository.SaveChangesAsync(cancellationToken);
         return (true, "Trip marked as completed and closed.");
+    }
+
+    private async Task<List<ApprovalStep>> BuildWorkflowStepsAsync(
+        Guid requestId,
+        User? requester,
+        CancellationToken cancellationToken)
+    {
+        var steps = new List<ApprovalStep>();
+        var requesterId = requester?.Id ?? Guid.Empty;
+        var isManagerOrAbove = string.Equals(requester?.Role, "Manager", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(requester?.Role, "Finance", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(requester?.Role, "Admin", StringComparison.OrdinalIgnoreCase);
+
+        Guid managerId = Guid.Empty;
+        if (requester?.ManagerId.HasValue == true && requester.ManagerId.Value != requesterId)
+        {
+            managerId = requester.ManagerId.Value;
+        }
+        else if (!isManagerOrAbove)
+        {
+            var fallbackManager = await _travelRequestRepository.GetFirstManagerIdAsync(cancellationToken) ?? Guid.Empty;
+            if (fallbackManager != requesterId)
+            {
+                managerId = fallbackManager;
+            }
+        }
+
+        var financeId = await _travelRequestRepository.GetFirstFinanceIdAsync(cancellationToken);
+        if (financeId == requesterId)
+        {
+            financeId = Guid.Empty;
+        }
+
+        if (managerId != Guid.Empty)
+        {
+            steps.Add(new ApprovalStep
+            {
+                RequestId = requestId,
+                ApproverId = managerId,
+                Level = "Manager",
+                Status = "Pending"
+            });
+
+            if (financeId != Guid.Empty)
+            {
+                steps.Add(new ApprovalStep
+                {
+                    RequestId = requestId,
+                    ApproverId = financeId,
+                    Level = "Finance",
+                    Status = "Waiting"
+                });
+            }
+        }
+        else if (financeId != Guid.Empty)
+        {
+            steps.Add(new ApprovalStep
+            {
+                RequestId = requestId,
+                ApproverId = financeId,
+                Level = "Finance",
+                Status = "Pending"
+            });
+        }
+
+        return steps;
     }
 
     private bool IsOwnerOrAdmin(Guid requestOwnerId)

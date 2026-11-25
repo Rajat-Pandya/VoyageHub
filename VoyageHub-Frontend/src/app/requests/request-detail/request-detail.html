@@ -45,8 +45,8 @@
           </button>
         }
 
-        <!-- 2. Manager Review Actions (If current user is Manager) -->
-        @if ((d.status === 'Manager Review' || d.status === 'In Review') && authService.isManager()) {
+        <!-- 2. Manager Review Actions (If current user is Manager and not requester) -->
+        @if ((d.status === 'Manager Review' || d.status === 'In Review') && authService.isManager() && !isOwnRequest(d)) {
           <button type="button" class="btn-primary btn-approve-action" (click)="quickApprove()">
             Approve as Manager
           </button>
@@ -55,8 +55,8 @@
           </button>
         }
 
-        <!-- 3. Finance Review Actions (If current user is Finance) -->
-        @if (d.status === 'Finance Review' && authService.isFinance()) {
+        <!-- 3. Finance Review Actions (If current user is Finance and not requester) -->
+        @if (d.status === 'Finance Review' && authService.isFinance() && !isOwnRequest(d)) {
           <button type="button" class="btn-primary btn-approve-action" (click)="quickApprove()">
             Approve as Finance
           </button>
