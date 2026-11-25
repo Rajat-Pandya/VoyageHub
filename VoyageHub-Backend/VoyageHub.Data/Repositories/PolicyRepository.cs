@@ -38,6 +38,16 @@ public class PolicyRepository : Repository<TravelPolicy>, IPolicyRepository
             .FirstOrDefaultAsync(d => d.Name.ToLower() == lowerName, cancellationToken);
     }
 
+    public async Task<List<string>> GetDepartmentsWithoutPolicyAsync(CancellationToken cancellationToken = default)
+    {
+        return await Context.Departments
+            .AsNoTracking()
+            .Where(d => d.Policy == null)
+            .OrderBy(d => d.Name)
+            .Select(d => d.Name)
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task AddDepartmentAsync(Department department, CancellationToken cancellationToken = default)
     {
         await Context.Departments.AddAsync(department, cancellationToken);

@@ -29,6 +29,14 @@ public class PoliciesController : ControllerBase
         return Ok(policies);
     }
 
+    [HttpGet("departments")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult<List<string>>> GetAvailableDepartments(CancellationToken cancellationToken)
+    {
+        var depts = await _policyService.GetAvailableDepartmentsAsync(cancellationToken);
+        return Ok(depts);
+    }
+
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdatePolicy(Guid id, [FromBody] UpdatePolicyDto dto, CancellationToken cancellationToken)

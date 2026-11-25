@@ -150,4 +150,9 @@ public class PolicyService : IPolicyService
         await _policyRepository.SaveChangesAsync(cancellationToken);
         return (true, "Policy deleted successfully.");
     }
+
+    public async Task<List<string>> GetAvailableDepartmentsAsync(CancellationToken cancellationToken = default)
+    {
+        return await _policyRepository.GetDepartmentsWithoutPolicyAsync(cancellationToken);
+    }
 }

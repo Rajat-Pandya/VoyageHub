@@ -286,6 +286,10 @@ export class VoyageService {
     return this.http.get<PolicyConfig[]>(`${this.baseUrl}/policies`);
   }
 
+  getAvailablePolicyDepartments(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/policies/departments`);
+  }
+
   createPolicy(payload: Partial<PolicyConfig>): Observable<PolicyConfig> {
     return this.http.post<PolicyConfig>(`${this.baseUrl}/policies`, payload);
   }

@@ -14,10 +14,12 @@ export class PolicyConfigComponent implements OnInit {
   private readonly voyageService = inject(VoyageService);
 
   readonly policies = signal<PolicyConfig[]>([]);
+  readonly availableDepartments = signal<string[]>([]);
   hardEnforcementEnabled = signal(true);
   readonly editingPolicy = signal<PolicyConfig | null>(null);
   readonly showAddModal = signal(false);
   readonly toastMessage = signal<string | null>(null);
+  selectedDepartmentOption = '__new__';
 
   newPolicy = {
     departmentName: '',
@@ -79,7 +81,24 @@ export class PolicyConfigComponent implements OnInit {
       allowedClass: 'ECONOMY+',
       hardEnforcement: this.hardEnforcementEnabled()
     };
+    this.selectedDepartmentOption = '__new__';
+    this.voyageService.getAvailablePolicyDepartments().subscribe({
+      next: (depts) => {
+        const list = Array.isArray(depts) ? depts : [];
+        this.availableDepartments.set(list);
+        if (list.length > 0) {
+          this.selectedDepartmentOption = list[0];
+          this.newPolicy.departmentName = list[0];
+        }
+      },
+      error: () => this.availableDepartments.set([])
+    });
     this.showAddModal.set(true);
+  }
+
+  onDepartmentOptionChange(value: string): void {
+    this.selectedDepartmentOption = value;
+    this.newPolicy.departmentName = value === '__new__' ? '' : value;
   }
 
   closeAddPolicy(): void {
@@ -88,7 +107,7 @@ export class PolicyConfigComponent implements OnInit {
 
   submitAddPolicy(): void {
     if (!this.newPolicy.departmentName.trim()) {
-      alert('Please enter a department name.');
+      this.showToast('Please select or enter a department name.');
       return;
     }
 

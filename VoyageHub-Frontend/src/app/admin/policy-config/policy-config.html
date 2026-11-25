@@ -210,9 +210,20 @@
         </div>
         <div class="modal-body">
           <div class="form-group edit-row">
-            <label for="newDeptName">Department Name</label>
-            <input id="newDeptName" type="text" [(ngModel)]="newPolicy.departmentName" class="form-input" placeholder="e.g. Research & Innovation (Pune)" title="Department Name" />
+            <label for="newDeptSelect">Department</label>
+            <select id="newDeptSelect" [ngModel]="selectedDepartmentOption" (ngModelChange)="onDepartmentOptionChange($event)" class="form-select" title="Select Department" aria-label="Select Department">
+              @for (dept of availableDepartments(); track dept) {
+                <option [value]="dept">{{ dept }}</option>
+              }
+              <option value="__new__">+ Create New Department...</option>
+            </select>
           </div>
+          @if (selectedDepartmentOption === '__new__') {
+            <div class="form-group edit-row">
+              <label for="newDeptName">New Department Name</label>
+              <input id="newDeptName" type="text" [(ngModel)]="newPolicy.departmentName" class="form-input" placeholder="e.g. Research & Innovation (Pune)" title="New Department Name" />
+            </div>
+          }
           <div class="form-group edit-row">
             <label for="newIntlLimit">Intl. Budget Limit (₹ INR)</label>
             <input id="newIntlLimit" type="number" [(ngModel)]="newPolicy.intlBudgetLimit" class="form-input" placeholder="250000" title="Intl. Budget Limit (₹ INR)" />
