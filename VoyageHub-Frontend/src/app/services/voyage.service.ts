@@ -281,9 +281,13 @@ export class VoyageService {
     return clean.endsWith('.pdf');
   }
 
-  // Policies (Admin)
+  // Policies (Admin & Employee)
   getPolicies(): Observable<PolicyConfig[]> {
     return this.http.get<PolicyConfig[]>(`${this.baseUrl}/policies`);
+  }
+
+  getMyPolicy(): Observable<PolicyConfig> {
+    return this.http.get<PolicyConfig>(`${this.baseUrl}/policies/my-policy`);
   }
 
   getAvailablePolicyDepartments(): Observable<string[]> {

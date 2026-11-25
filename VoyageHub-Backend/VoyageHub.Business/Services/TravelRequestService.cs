@@ -69,6 +69,7 @@ public class TravelRequestService : ITravelRequestService
                 Id = r.Id,
                 RequestCode = r.RequestCode,
                 Destination = r.Destination,
+                IsInternational = r.IsInternational,
                 Purpose = r.Purpose,
                 DatesFormatted = $"{r.StartDate:dd MMM} – {r.EndDate:dd MMM}",
                 StartDate = r.StartDate,
@@ -156,6 +157,7 @@ public class TravelRequestService : ITravelRequestService
             EmployeeEmail = r.Employee?.Email ?? "",
             DepartmentName = r.Employee?.Department?.Name ?? "General",
             Destination = r.Destination,
+            IsInternational = r.IsInternational,
             Purpose = r.Purpose,
             StartDate = r.StartDate,
             EndDate = r.EndDate,
@@ -171,7 +173,8 @@ public class TravelRequestService : ITravelRequestService
                 r.TravelClass,
                 r.Employee?.Department?.Policy,
                 r.Employee?.Department?.Name,
-                r.PolicyCompliance).Reasons,
+                r.PolicyCompliance,
+                r.IsInternational).Reasons,
             SubmittedDate = r.CreatedAt,
             PrimaryContact = "VoyageHub India Corporate Desk (+91-80-4000-8800)",
             Segments = r.ItinerarySegments.Select(s => new ItinerarySegmentDto
@@ -268,7 +271,9 @@ public class TravelRequestService : ITravelRequestService
             dto.EstimatedBudget,
             dto.TravelClass,
             employee.Department?.Policy,
-            employee.Department?.Name);
+            employee.Department?.Name,
+            null,
+            dto.IsInternational);
 
         var status = dto.SaveAsDraft ? "Draft" : "In Review";
 
@@ -277,6 +282,7 @@ public class TravelRequestService : ITravelRequestService
             RequestCode = code,
             EmployeeId = empId,
             Destination = dto.Destination.Trim(),
+            IsInternational = dto.IsInternational,
             Purpose = dto.Purpose.Trim(),
             StartDate = dto.StartDate,
             EndDate = dto.EndDate,
@@ -396,7 +402,9 @@ public class TravelRequestService : ITravelRequestService
             r.EstimatedBudget,
             r.TravelClass,
             r.Employee?.Department?.Policy,
-            r.Employee?.Department?.Name);
+            r.Employee?.Department?.Name,
+            null,
+            r.IsInternational);
         r.PolicyCompliance = isFlagged ? "Flagged" : "Standard";
         r.Status = "Manager Review";
         r.UpdatedAt = DateTime.UtcNow;

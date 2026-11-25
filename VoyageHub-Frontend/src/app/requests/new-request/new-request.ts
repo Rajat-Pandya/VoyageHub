@@ -1,8 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { VoyageService } from '../../services/voyage.service';
+import { PolicyConfig, VoyageService } from '../../services/voyage.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './new-request.html',
   styleUrl: './new-request.css'
 })
-export class NewRequest {
+export class NewRequest implements OnInit {
   private readonly voyageService = inject(VoyageService);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
@@ -19,10 +19,12 @@ export class NewRequest {
   currentStep = signal<1 | 2 | 3>(1);
   isSubmitting = signal(false);
   readonly errorMessage = signal<string | null>(null);
+  readonly myPolicy = signal<PolicyConfig | null>(null);
 
   // Form Fields
   tripPurpose = '';
   destinationCity = '';
+  isInternational = false;
   startDate = '';
   endDate = '';
   estimatedBudget = 0;
@@ -41,9 +43,58 @@ export class NewRequest {
   hotelNights = 1;
   hotelCost = 0;
 
-  // Policy threshold check (e.g. standard domestic departmental limit is ₹35,000)
+  ngOnInit(): void {
+    this.voyageService.getMyPolicy().subscribe({
+      next: (policy) => this.myPolicy.set(policy),
+      error: () => this.myPolicy.set(null)
+    });
+  }
+
+  get activeBudgetLimit(): number {
+    const policy = this.myPolicy();
+    if (!policy) return 0;
+    return this.isInternational ? policy.intlBudgetLimit : policy.domesticLimit;
+  }
+
+  get isBudgetExceeded(): boolean {
+    const policy = this.myPolicy();
+    const limit = this.activeBudgetLimit;
+    return Boolean(policy?.hardEnforcement && limit > 0 && this.estimatedBudget > limit);
+  }
+
+  get isClassExceeded(): boolean {
+    const policy = this.myPolicy();
+    if (!policy?.hardEnforcement || !policy.allowedClass || !this.travelClass) {
+      return false;
+    }
+    const allowed = policy.allowedClass.trim().toUpperCase();
+    const requested = this.travelClass.trim().toUpperCase();
+    const isBusinessOrFirst = requested.includes('BUSINESS') || requested.includes('FIRST');
+    return (allowed === 'ECONOMY' || allowed === 'ECONOMY+') && isBusinessOrFirst;
+  }
+
   get isPolicyExceeded(): boolean {
-    return this.estimatedBudget > 35000;
+    return this.isBudgetExceeded || this.isClassExceeded;
+  }
+
+  get policyAlertMessage(): string {
+    const policy = this.myPolicy();
+    if (!policy) return '';
+
+    const parts: string[] = [];
+    if (this.isBudgetExceeded) {
+      const tripLabel = this.isInternational ? 'international' : 'domestic';
+      parts.push(
+        `Estimated budget (₹${this.estimatedBudget.toLocaleString('en-IN')}) exceeds your ${policy.departmentName} ${tripLabel} limit (₹${this.activeBudgetLimit.toLocaleString('en-IN')}).`
+      );
+    }
+    if (this.isClassExceeded) {
+      parts.push(
+        `Requested travel class (${this.travelClass}) exceeds your allowed class (${policy.allowedClass}).`
+      );
+    }
+    parts.push('This request will be flagged as a Policy Exception for Manager and Finance review.');
+    return parts.join(' ');
   }
 
   nextStep(): void {
@@ -109,6 +160,7 @@ export class NewRequest {
     const payload = {
       purpose: this.tripPurpose.trim(),
       destination: this.destinationCity.trim(),
+      isInternational: this.isInternational,
       startDate: this.startDate,
       endDate: this.endDate,
       estimatedBudget: this.estimatedBudget,

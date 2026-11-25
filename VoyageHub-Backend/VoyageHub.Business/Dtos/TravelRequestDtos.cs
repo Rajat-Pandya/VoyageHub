@@ -17,6 +17,7 @@ public class TravelRequestListDto
     public Guid Id { get; set; }
     public string RequestCode { get; set; } = string.Empty;
     public string Destination { get; set; } = string.Empty;
+    public bool IsInternational { get; set; }
     public string Purpose { get; set; } = string.Empty;
     public string DatesFormatted { get; set; } = string.Empty;
     public DateTime StartDate { get; set; }
@@ -89,6 +90,7 @@ public class TravelRequestDetailDto
     public string EmployeeEmail { get; set; } = string.Empty;
     public string DepartmentName { get; set; } = string.Empty;
     public string Destination { get; set; } = string.Empty;
+    public bool IsInternational { get; set; }
     public string Purpose { get; set; } = string.Empty;
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
@@ -113,6 +115,8 @@ public class CreateTravelRequestDto
 {
     [Required(ErrorMessage = "Destination is required.")]
     public string Destination { get; set; } = string.Empty;
+
+    public bool IsInternational { get; set; } = false;
 
     [Required(ErrorMessage = "Purpose is required.")]
     public string Purpose { get; set; } = string.Empty;

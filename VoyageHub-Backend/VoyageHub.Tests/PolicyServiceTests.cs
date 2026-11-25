@@ -177,4 +177,29 @@ public class PolicyServiceTests
         Assert.False(success);
         Assert.Equal("Policy not found.", message);
     }
+
+    [Fact]
+    public void PolicyEvaluator_EvaluatesDomesticVsInternationalLimit()
+    {
+        var policy = new TravelPolicy
+        {
+            Id = Guid.NewGuid(),
+            DomesticLimit = 40000m,
+            IntlBudgetLimit = 250000m,
+            AllowedClass = "ECONOMY+",
+            HardEnforcement = true
+        };
+
+        // 50,000 exceeds domestic limit (40,000) -> flagged
+        var (domFlagged, domReasons) = VoyageHub.Business.Helpers.PolicyEvaluator.Evaluate(
+            50000m, "Economy (Standard)", policy, "Engineering", null, isInternational: false);
+        Assert.True(domFlagged);
+        Assert.Contains(domReasons, r => r.Contains("domestic budget limit"));
+
+        // 50,000 is within international limit (250,000) -> not flagged
+        var (intlFlagged, intlReasons) = VoyageHub.Business.Helpers.PolicyEvaluator.Evaluate(
+            50000m, "Economy (Standard)", policy, "Engineering", null, isInternational: true);
+        Assert.False(intlFlagged);
+        Assert.Empty(intlReasons);
+    }
 }

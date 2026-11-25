@@ -81,7 +81,8 @@ public class ApprovalService : IApprovalService
                 req.TravelClass,
                 req.Employee?.Department?.Policy,
                 req.Employee?.Department?.Name,
-                req.PolicyCompliance);
+                req.PolicyCompliance,
+                req.IsInternational);
 
             return new ApprovalQueueItemDto
             {

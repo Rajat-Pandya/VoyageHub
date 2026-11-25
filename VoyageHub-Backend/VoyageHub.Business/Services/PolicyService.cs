@@ -155,4 +155,29 @@ public class PolicyService : IPolicyService
     {
         return await _policyRepository.GetDepartmentsWithoutPolicyAsync(cancellationToken);
     }
+
+    public async Task<PolicyConfigDto?> GetMyPolicyAsync(CancellationToken cancellationToken = default)
+    {
+        if (!_currentUserService.UserId.HasValue)
+        {
+            return null;
+        }
+
+        var policy = await _policyRepository.GetPolicyByUserIdAsync(_currentUserService.UserId.Value, cancellationToken);
+        if (policy == null)
+        {
+            return null;
+        }
+
+        return new PolicyConfigDto
+        {
+            Id = policy.Id,
+            DepartmentId = policy.DepartmentId,
+            DepartmentName = policy.Department != null ? policy.Department.Name : "General",
+            IntlBudgetLimit = policy.IntlBudgetLimit,
+            DomesticLimit = policy.DomesticLimit,
+            AllowedClass = policy.AllowedClass,
+            HardEnforcement = policy.HardEnforcement
+        };
+    }
 }

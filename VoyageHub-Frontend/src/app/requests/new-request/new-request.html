@@ -55,6 +55,32 @@
     @if (currentStep() === 1) {
       <div class="step-content fade-in">
 
+        <!-- Department Policy Strip -->
+        @if (myPolicy(); as policy) {
+          <div class="my-policy-strip">
+            <div class="policy-strip-header">
+              <span class="policy-dept-badge">{{ policy.departmentName }} Policy</span>
+              <span class="policy-mode-badge" [class.hard]="policy.hardEnforcement">
+                {{ policy.hardEnforcement ? 'Policy Enforcement Active' : 'Soft Advisory' }}
+              </span>
+            </div>
+            <div class="policy-limits-row">
+              <div class="limit-pill" [class.active]="!isInternational">
+                <span class="limit-label">Domestic (National) Limit</span>
+                <strong>₹{{ policy.domesticLimit | number:'1.0-0' }}</strong>
+              </div>
+              <div class="limit-pill" [class.active]="isInternational">
+                <span class="limit-label">International Limit</span>
+                <strong>₹{{ policy.intlBudgetLimit | number:'1.0-0' }}</strong>
+              </div>
+              <div class="limit-pill">
+                <span class="limit-label">Allowed Class</span>
+                <strong>{{ policy.allowedClass }}</strong>
+              </div>
+            </div>
+          </div>
+        }
+
         <!-- Policy Alert Banner -->
         @if (isPolicyExceeded) {
           <div class="policy-alert-box">
@@ -66,8 +92,8 @@
               </svg>
             </div>
             <div class="alert-text">
-              <strong>Policy Alert</strong>
-              <p>Your estimated budget might exceed the standard department limit for international trips. Additional justification may be required.</p>
+              <strong>Policy Exception Warning</strong>
+              <p>{{ policyAlertMessage }}</p>
             </div>
           </div>
         }
@@ -76,6 +102,26 @@
           <div class="form-group full-col">
             <label for="tripPurpose">Trip Purpose / Title</label>
             <input id="tripPurpose" type="text" [(ngModel)]="tripPurpose" placeholder="e.g. Q3 Sales Conference Berlin" class="form-input" title="Trip Purpose / Title" />
+          </div>
+
+          <div class="form-group">
+            <label>Trip Type</label>
+            <div class="trip-type-toggle" role="group" aria-label="Trip Type">
+              <button
+                type="button"
+                class="trip-type-btn"
+                [class.active]="!isInternational"
+                (click)="isInternational = false">
+                Domestic (National)
+              </button>
+              <button
+                type="button"
+                class="trip-type-btn"
+                [class.active]="isInternational"
+                (click)="isInternational = true">
+                International
+              </button>
+            </div>
           </div>
 
           <div class="form-group">
@@ -212,6 +258,10 @@
           <div class="summary-row">
             <span class="summary-label">Destination</span>
             <strong>{{ destinationCity }}</strong>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Trip Type</span>
+            <strong>{{ isInternational ? 'International' : 'Domestic (National)' }}</strong>
           </div>
           <div class="summary-row">
             <span class="summary-label">Travel Dates</span>

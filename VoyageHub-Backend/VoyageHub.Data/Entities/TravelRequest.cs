@@ -24,6 +24,8 @@ public class TravelRequest
     [MaxLength(200)]
     public string Destination { get; set; } = string.Empty;
 
+    public bool IsInternational { get; set; } = false;
+
     [Required]
     [MaxLength(500)]
     public string Purpose { get; set; } = string.Empty;

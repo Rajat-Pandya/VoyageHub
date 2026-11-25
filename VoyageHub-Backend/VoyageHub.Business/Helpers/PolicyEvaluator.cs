@@ -14,20 +14,22 @@ public static class PolicyEvaluator
         string? travelClass,
         TravelPolicy? policy,
         string? departmentName = null,
-        string? existingStatus = null)
+        string? existingStatus = null,
+        bool isInternational = false)
     {
         var reasons = new List<string>();
         var deptLabel = string.IsNullOrWhiteSpace(departmentName) ? "Department" : departmentName;
 
         if (policy != null && policy.HardEnforcement)
         {
-            if (policy.IntlBudgetLimit > 0 && estimatedBudget > policy.IntlBudgetLimit)
+            var applicableLimit = isInternational
+                ? (policy.IntlBudgetLimit > 0 ? policy.IntlBudgetLimit : policy.MaxBudget)
+                : (policy.DomesticLimit > 0 ? policy.DomesticLimit : (policy.IntlBudgetLimit > 0 ? policy.IntlBudgetLimit : policy.MaxBudget));
+            var limitLabel = isInternational ? "international budget limit" : "domestic budget limit";
+
+            if (applicableLimit > 0 && estimatedBudget > applicableLimit)
             {
-                reasons.Add($"Estimated budget (₹{estimatedBudget:N0}) exceeds {deptLabel} budget limit (₹{policy.IntlBudgetLimit:N0}).");
-            }
-            else if (policy.MaxBudget > 0 && estimatedBudget > policy.MaxBudget)
-            {
-                reasons.Add($"Estimated budget (₹{estimatedBudget:N0}) exceeds {deptLabel} max budget cap (₹{policy.MaxBudget:N0}).");
+                reasons.Add($"Estimated budget (₹{estimatedBudget:N0}) exceeds {deptLabel} {limitLabel} (₹{applicableLimit:N0}).");
             }
 
             if (!string.IsNullOrWhiteSpace(policy.AllowedClass) && !string.IsNullOrWhiteSpace(travelClass))

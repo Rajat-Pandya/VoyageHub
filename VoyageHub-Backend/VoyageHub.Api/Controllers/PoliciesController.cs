@@ -29,6 +29,19 @@ public class PoliciesController : ControllerBase
         return Ok(policies);
     }
 
+    [HttpGet("my-policy")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
+    public async Task<ActionResult<PolicyConfigDto>> GetMyPolicy(CancellationToken cancellationToken)
+    {
+        var policy = await _policyService.GetMyPolicyAsync(cancellationToken);
+        if (policy == null)
+        {
+            return NotFound(new { message = "No travel policy configured for your department." });
+        }
+
+        return Ok(policy);
+    }
+
     [HttpGet("departments")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<List<string>>> GetAvailableDepartments(CancellationToken cancellationToken)
