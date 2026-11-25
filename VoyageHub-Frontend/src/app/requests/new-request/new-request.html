@@ -24,6 +24,10 @@
     </div>
   </header>
 
+  @if (errorMessage()) {
+    <div class="error-banner fade-in">{{ errorMessage() }}</div>
+  }
+
   <!-- Stepper Indicator (Page 3) -->
   <div class="stepper-bar">
     <div class="step-item" [class.active]="currentStep() === 1" [class.completed]="currentStep() > 1">
