@@ -95,6 +95,24 @@ export class RequestDetail implements OnInit {
     this.activeTab.set(tab);
   }
 
+  getActualSpend(d: TravelRequestDetail): number {
+    const segTotal = (d.segments || []).reduce((sum, s) => sum + (s.cost || 0), 0);
+    const stayTotal = (d.stays || []).reduce((sum, st) => sum + (st.cost || 0), 0);
+    const expTotal = (d.expenses || [])
+      .filter((e) => e.status !== 'Rejected')
+      .reduce((sum, e) => sum + (e.amount || 0), 0);
+    return segTotal + stayTotal + expTotal;
+  }
+
+  getSpendPercent(d: TravelRequestDetail): number {
+    if (!d.estimatedBudget || d.estimatedBudget <= 0) return 0;
+    return Math.min(100, Math.round((this.getActualSpend(d) / d.estimatedBudget) * 100));
+  }
+
+  isOverBudget(d: TravelRequestDetail): boolean {
+    return d.estimatedBudget > 0 && this.getActualSpend(d) > d.estimatedBudget;
+  }
+
   cancelRequest(): void {
     const d = this.detail();
     if (!d) return;

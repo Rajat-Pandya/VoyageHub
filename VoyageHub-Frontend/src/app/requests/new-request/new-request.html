@@ -231,6 +231,17 @@
           </div>
         </div>
 
+        @if (showBudgetSyncHint) {
+          <div class="budget-sync-hint">
+            <span>
+              Flight + Hotel costs (<strong>₹{{ itemizedTotal | number:'1.0-0' }}</strong>) exceed your current estimated budget (<strong>₹{{ estimatedBudget | number:'1.0-0' }}</strong>).
+            </span>
+            <button type="button" class="btn-sync-budget" (click)="syncEstimatedBudget()">
+              Sync Estimated Budget
+            </button>
+          </div>
+        }
+
         <div class="wizard-footer">
           <button type="button" class="btn-secondary" (click)="prevStep()">Back</button>
           <button type="button" class="btn-primary" (click)="nextStep()">

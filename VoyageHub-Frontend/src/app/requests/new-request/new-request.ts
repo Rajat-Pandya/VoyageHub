@@ -77,6 +77,18 @@ export class NewRequest implements OnInit {
     return this.isBudgetExceeded || this.isClassExceeded;
   }
 
+  get itemizedTotal(): number {
+    return (Number(this.flightCost) || 0) + (Number(this.hotelCost) || 0);
+  }
+
+  get showBudgetSyncHint(): boolean {
+    return this.itemizedTotal > 0 && this.itemizedTotal > (Number(this.estimatedBudget) || 0);
+  }
+
+  syncEstimatedBudget(): void {
+    this.estimatedBudget = this.itemizedTotal;
+  }
+
   get policyAlertMessage(): string {
     const policy = this.myPolicy();
     if (!policy) return '';

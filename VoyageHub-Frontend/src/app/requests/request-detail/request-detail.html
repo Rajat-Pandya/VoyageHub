@@ -307,6 +307,22 @@
             <div class="banner-value">{{ d.estimatedBudget | currency:'INR':'symbol':'1.0-0' }}</div>
           </div>
           <div class="summary-col">
+            <span class="banner-label">ACTUAL SPEND</span>
+            <div class="banner-value" [class.over-budget]="isOverBudget(d)">
+              {{ getActualSpend(d) | currency:'INR':'symbol':'1.0-0' }}
+            </div>
+            <div class="spend-progress-track">
+              <div class="spend-progress-fill" [class.over-budget]="isOverBudget(d)" [style.width.%]="getSpendPercent(d)"></div>
+            </div>
+            <span class="spend-meta" [class.over-budget]="isOverBudget(d)">
+              @if (isOverBudget(d)) {
+                Over est. budget by {{ (getActualSpend(d) - d.estimatedBudget) | currency:'INR':'symbol':'1.0-0' }}
+              } @else {
+                {{ getSpendPercent(d) }}% of est. budget used
+              }
+            </span>
+          </div>
+          <div class="summary-col">
             <span class="banner-label">TRIP DURATION</span>
             <div class="banner-value">{{ d.tripDurationDays }} Days, {{ d.tripDurationNights }} Nights</div>
           </div>

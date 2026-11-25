@@ -371,11 +371,18 @@
   border-radius: var(--radius-lg);
   padding: 24px 32px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-5);
   box-shadow: 0 12px 28px rgba(9, 13, 22, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
+
+.banner-value.over-budget,
+.spend-meta.over-budget { color: #fca5a5; }
+.spend-progress-track { height: 5px; border-radius: 999px; background: rgba(255, 255, 255, 0.14); margin: 8px 0 4px; overflow: hidden; }
+.spend-progress-fill { height: 100%; background: #6366f1; border-radius: 999px; transition: width 0.2s ease; }
+.spend-progress-fill.over-budget { background: #ef4444; }
+.spend-meta { font-size: 11.5px; color: #94a3b8; font-weight: 500; }
 
 .banner-label {
   display: block;
