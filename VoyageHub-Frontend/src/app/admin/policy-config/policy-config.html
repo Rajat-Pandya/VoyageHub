@@ -157,7 +157,7 @@
         </p>
 
         <div class="enforcement-actions">
-          <button type="button" class="toggle-pill" [class.enabled]="hardEnforcementEnabled()" (click)="toggleEnforcement()">
+          <button type="button" class="toggle-pill" [class.enabled]="!hardEnforcementEnabled()" (click)="toggleEnforcement()">
             {{ hardEnforcementEnabled() ? 'Disable' : 'Enable' }}
           </button>
           <a routerLink="/audit" class="override-logs-btn">Audit Logs</a>
