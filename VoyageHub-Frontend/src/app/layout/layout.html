@@ -265,8 +265,30 @@
       </div>
     </div>
 
-    <!-- User Profile & Sign Out in Sidebar Footer -->
+    <!-- Theme Quick Toggle & User Profile in Sidebar Footer -->
     <div class="sidebar-footer">
+      <button type="button" class="theme-toggle-btn" (click)="toggleTheme()"
+        [title]="themeService.isDark() ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+        [attr.aria-label]="themeService.isDark() ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+        <span class="theme-toggle-left">
+          @if (themeService.isDark()) {
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2m-7.07-15.07 1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <span>Light Mode</span>
+          } @else {
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+            <span>Dark Mode</span>
+          }
+        </span>
+        <span class="theme-switch-pill" [class.dark]="themeService.isDark()">
+          <span class="theme-switch-thumb"></span>
+        </span>
+      </button>
+
       <div class="user-profile-badge">
         <div class="user-initials-badge">
           {{ getUserInitials(authService.currentUser()?.fullname) }}

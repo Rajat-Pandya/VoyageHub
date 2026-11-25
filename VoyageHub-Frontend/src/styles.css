@@ -550,3 +550,114 @@ input, select, textarea {
   filter: brightness(0.97);
   transform: translateY(-0.5px);
 }
+
+/* ==========================================================================
+   Dark Mode Theme Overrides (Persisted via ThemeService)
+   ========================================================================== */
+:root[data-theme="dark"] {
+  --canvas-bg: #0b1120;
+  --surface-card: #111827;
+  --surface-subtle: #1e293b;
+  --border-light: #1f2937;
+  --border-card: #1f2937;
+  --border-subtle: rgba(51, 65, 85, 0.7);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+
+  --color-brand-light: rgba(99, 102, 241, 0.16);
+  --accent-success-bg: rgba(16, 185, 129, 0.15);
+  --accent-success-border: rgba(16, 185, 129, 0.35);
+  --accent-warning-bg: rgba(245, 158, 11, 0.15);
+  --accent-warning-border: rgba(245, 158, 11, 0.35);
+  --accent-danger-bg: rgba(239, 68, 68, 0.15);
+  --accent-danger-border: rgba(239, 68, 68, 0.35);
+  --accent-info-bg: rgba(14, 165, 233, 0.15);
+  --accent-info-border: rgba(14, 165, 233, 0.35);
+
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.45), 0 1px 2px -1px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] body {
+  background-color: var(--canvas-bg);
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .kpi-card,
+:root[data-theme="dark"] .stat-card,
+:root[data-theme="dark"] .table-card,
+:root[data-theme="dark"] .table-section-card,
+:root[data-theme="dark"] .settings-card,
+:root[data-theme="dark"] .support-card,
+:root[data-theme="dark"] .chart-card,
+:root[data-theme="dark"] .grid-card,
+:root[data-theme="dark"] .modal-card,
+:root[data-theme="dark"] .wizard-card,
+:root[data-theme="dark"] .workflow-stepper-card,
+:root[data-theme="dark"] .segment-item-card,
+:root[data-theme="dark"] .filter-summary-bar,
+:root[data-theme="dark"] .filter-bar,
+:root[data-theme="dark"] .policy-card {
+  background-color: var(--surface-card) !important;
+  border-color: var(--border-card) !important;
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .voyage-table th,
+:root[data-theme="dark"] .pagination-footer {
+  background-color: #0f172a !important;
+  border-color: var(--border-card) !important;
+  color: var(--text-muted) !important;
+}
+
+:root[data-theme="dark"] .voyage-table td {
+  border-color: var(--border-card) !important;
+  color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] .voyage-table tbody tr:hover {
+  background-color: rgba(30, 41, 59, 0.65) !important;
+}
+
+:root[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] .form-input,
+:root[data-theme="dark"] .form-select,
+:root[data-theme="dark"] .form-textarea,
+:root[data-theme="dark"] .filter-select {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="dark"] .btn-secondary,
+:root[data-theme="dark"] .btn-secondary-sm,
+:root[data-theme="dark"] .view-btn,
+:root[data-theme="dark"] .page-num-btn:not(.active),
+:root[data-theme="dark"] .page-nav-btn,
+:root[data-theme="dark"] .pill-btn:not(.active),
+:root[data-theme="dark"] .back-link,
+:root[data-theme="dark"] .date-filter-chip {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: var(--text-secondary) !important;
+}
+
+:root[data-theme="dark"] .btn-secondary:hover,
+:root[data-theme="dark"] .btn-secondary-sm:hover,
+:root[data-theme="dark"] .view-btn:hover,
+:root[data-theme="dark"] .page-num-btn:hover:not(.active),
+:root[data-theme="dark"] .page-nav-btn:hover:not(:disabled) {
+  background-color: #334155 !important;
+  color: #ffffff !important;
+}
+
+:root[data-theme="dark"] .glass-panel {
+  background: rgba(17, 24, 39, 0.85);
+  border-color: rgba(51, 65, 85, 0.6);
+}
