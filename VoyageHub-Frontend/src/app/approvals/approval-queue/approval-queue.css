@@ -110,12 +110,6 @@
   margin-bottom: var(--space-6);
 }
 
-.employee-cell {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 .emp-initials-badge {
   width: 34px;
   height: 34px;

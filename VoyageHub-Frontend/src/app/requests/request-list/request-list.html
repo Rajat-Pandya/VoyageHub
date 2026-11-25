@@ -88,13 +88,15 @@
       <tbody>
         @for (req of pagination.pagedItems(); track req.id) {
           <tr (click)="viewDetail(req)" class="clickable-row">
-            <td class="dest-avatar-cell">
-              <div class="dest-avatar" [ngClass]="getAvatarClass(req.employeeName || req.destination)">
-                {{ getUserInitials(req.employeeName) }}
-              </div>
-              <div class="dest-info">
-                <strong>{{ req.destination }}</strong>
-                <span>{{ req.employeeName }} &bull; {{ req.purpose }}</span>
+            <td>
+              <div class="table-avatar-cell">
+                <div class="dest-avatar" [ngClass]="getAvatarClass(req.employeeName || req.destination)">
+                  {{ getUserInitials(req.employeeName) }}
+                </div>
+                <div class="dest-info">
+                  <strong>{{ req.destination }}</strong>
+                  <span>{{ req.employeeName }} &bull; {{ req.purpose }}</span>
+                </div>
               </div>
             </td>
             <td>{{ req.startDate | date:'dd MMM' }} – {{ req.endDate | date:'dd MMM, yyyy' }}</td>

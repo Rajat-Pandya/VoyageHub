@@ -54,11 +54,13 @@
               </span>
             </td>
             <td><strong>{{ log.action }}</strong></td>
-            <td class="actor-cell">
-              <div class="actor-initials-circle">
-                {{ getUserInitials(log.actor) }}
+            <td>
+              <div class="table-avatar-cell">
+                <div class="actor-initials-circle">
+                  {{ getUserInitials(log.actor) }}
+                </div>
+                <span>{{ log.actor }}</span>
               </div>
-              <span>{{ log.actor }}</span>
             </td>
             <td class="change-detail-cell">{{ log.changeDetail }}</td>
             <td>

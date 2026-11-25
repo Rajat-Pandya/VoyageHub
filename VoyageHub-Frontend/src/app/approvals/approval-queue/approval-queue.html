@@ -46,13 +46,15 @@
       <tbody>
         @for (item of items(); track item.stepId) {
           <tr>
-            <td class="employee-cell">
-              <div class="emp-initials-badge">
-                {{ getUserInitials(item.employeeName) }}
-              </div>
-              <div class="emp-info">
-                <strong>{{ item.employeeName }}</strong>
-                <span>{{ item.departmentName }}</span>
+            <td>
+              <div class="table-avatar-cell">
+                <div class="emp-initials-badge">
+                  {{ getUserInitials(item.employeeName) }}
+                </div>
+                <div class="emp-info">
+                  <strong>{{ item.employeeName }}</strong>
+                  <span>{{ item.departmentName }}</span>
+                </div>
               </div>
             </td>
             <td>

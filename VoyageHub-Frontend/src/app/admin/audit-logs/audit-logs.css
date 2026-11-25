@@ -72,12 +72,6 @@
   border: 1px solid #bbf7d0;
 }
 
-.actor-cell {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .actor-initials-circle {
   width: 28px;
   height: 28px;

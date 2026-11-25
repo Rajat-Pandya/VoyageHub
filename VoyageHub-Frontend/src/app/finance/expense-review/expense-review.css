@@ -111,12 +111,6 @@
   margin-bottom: var(--space-6);
 }
 
-.emp-profile-cell {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 .emp-initials-circle {
   width: 36px;
   height: 36px;

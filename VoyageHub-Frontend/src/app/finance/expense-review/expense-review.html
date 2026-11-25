@@ -62,13 +62,15 @@
       <tbody>
         @for (claim of claims(); track claim.id) {
           <tr>
-            <td class="emp-profile-cell">
-              <div class="emp-initials-circle">
-                {{ getUserInitials(claim.employeeName) }}
-              </div>
-              <div class="emp-details">
-                <strong>{{ claim.employeeName }}</strong>
-                <span>{{ claim.departmentName }}</span>
+            <td>
+              <div class="table-avatar-cell">
+                <div class="emp-initials-circle">
+                  {{ getUserInitials(claim.employeeName) }}
+                </div>
+                <div class="emp-details">
+                  <strong>{{ claim.employeeName }}</strong>
+                  <span>{{ claim.departmentName }}</span>
+                </div>
               </div>
             </td>
             <td>
