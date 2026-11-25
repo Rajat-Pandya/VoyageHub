@@ -11,13 +11,13 @@
     </div>
 
     <div class="header-right-actions">
-      @if (authService.isManager() || authService.isAdmin()) {
+      @if (authService.isManager()) {
         <div class="scope-pills" role="group" aria-label="Request Scope">
           <button type="button" class="scope-pill-btn" [class.active]="scope() === 'mine'" (click)="setScope('mine')">
             My Trips
           </button>
           <button type="button" class="scope-pill-btn" [class.active]="scope() === 'team'" (click)="setScope('team')">
-            {{ authService.isAdmin() ? 'All Trips' : 'Team Trips' }}
+            Team Trips
           </button>
         </div>
       }
