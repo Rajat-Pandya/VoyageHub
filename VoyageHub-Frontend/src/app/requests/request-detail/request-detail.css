@@ -42,6 +42,11 @@
   line-height: 1.45;
 }
 
+.policy-alert-item {
+  display: list-item;
+  list-style-type: disc;
+}
+
 
 .detail-header {
   display: flex;

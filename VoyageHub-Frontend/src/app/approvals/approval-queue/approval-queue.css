@@ -348,9 +348,14 @@
   font-size: 12.5px;
 }
 
-.modal-policy-alert ul {
+.modal-policy-list {
   margin: 6px 0 0 18px;
   padding: 0;
+}
+
+.modal-policy-item {
+  display: list-item;
+  list-style-type: disc;
 }
 
 @media (max-width: 1024px) {

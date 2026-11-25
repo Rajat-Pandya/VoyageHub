@@ -95,11 +95,11 @@
           <strong>Policy Exception Flagged</strong>
         </div>
         @if ((d.policyFlagReasons?.length || 0) > 0) {
-          <ul class="policy-alert-list">
+          <div class="policy-alert-list">
             @for (reason of d.policyFlagReasons || []; track reason) {
-              <li>{{ reason }}</li>
+              <div class="policy-alert-item">{{ reason }}</div>
             }
-          </ul>
+          </div>
         }
       </div>
     }

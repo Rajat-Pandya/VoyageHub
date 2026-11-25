@@ -126,11 +126,11 @@
           @if (current.policyStatus === 'Flagged' && (current.policyFlagReasons?.length || 0) > 0) {
             <div class="modal-policy-alert">
               <strong>Policy Flagged:</strong>
-              <ul>
+              <div class="modal-policy-list">
                 @for (reason of current.policyFlagReasons || []; track reason) {
-                  <li>{{ reason }}</li>
+                  <div class="modal-policy-item">{{ reason }}</div>
                 }
-              </ul>
+              </div>
             </div>
           }
           <div class="form-group modal-field">
