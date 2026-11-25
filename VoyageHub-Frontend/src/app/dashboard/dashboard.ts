@@ -25,7 +25,7 @@ export class Dashboard implements OnInit {
 
   readonly requests = signal<TravelRequestItem[]>([]);
   readonly isLoading = signal(true);
-  readonly selectedFilter = signal<'All' | 'Pending' | 'Approved'>('All');
+  readonly selectedFilter = signal<'All' | 'Pending' | 'Approved' | 'Rejected'>('All');
   searchQuery = '';
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class Dashboard implements OnInit {
     });
   }
 
-  setFilter(filter: 'All' | 'Pending' | 'Approved'): void {
+  setFilter(filter: 'All' | 'Pending' | 'Approved' | 'Rejected'): void {
     this.selectedFilter.set(filter);
     this.fetchRequests();
   }
