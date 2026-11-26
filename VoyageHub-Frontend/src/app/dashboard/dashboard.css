@@ -272,6 +272,19 @@
   font-size: 13px;
 }
 
+.req-id-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.req-employee-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  font-family: var(--font-sans, sans-serif);
+}
+
 .actions-cell {
   text-align: right;
 }

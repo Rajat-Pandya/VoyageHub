@@ -2,8 +2,8 @@
   <!-- Page Header -->
   <header class="page-header page-top-bar">
     <div class="header-titles">
-      <h1>My Requests</h1>
-      <p class="subtitle">Track your travel approvals and itineraries</p>
+      <h1>{{ (authService.currentUser()?.role === 'Admin' || authService.currentUser()?.role === 'Finance') ? 'Travel Overview' : 'My Requests' }}</h1>
+      <p class="subtitle">{{ (authService.currentUser()?.role === 'Admin' || authService.currentUser()?.role === 'Finance') ? 'Company-wide travel approvals and itineraries' : 'Track your travel approvals and itineraries' }}</p>
     </div>
 
     <div class="header-actions">
@@ -105,7 +105,14 @@
         <tbody>
           @for (req of requests(); track req.id) {
             <tr (click)="viewDetail(req)" class="clickable-row">
-              <td class="req-code-cell">{{ req.requestCode }}</td>
+              <td class="req-code-cell">
+                <div class="req-id-stack">
+                  <span class="req-code-text">{{ req.requestCode }}</span>
+                  @if (req.employeeName) {
+                    <span class="req-employee-name">{{ req.employeeName }}</span>
+                  }
+                </div>
+              </td>
               <td class="dest-cell">
                 <strong>{{ req.destination }}</strong>
                 @if (req.purpose) {
