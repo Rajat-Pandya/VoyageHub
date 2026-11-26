@@ -208,11 +208,20 @@
         </div>
 
         <div class="segment-block">
-          <h4>Flight Segment</h4>
+          <h4>Primary Transport Segment</h4>
           <div class="form-grid">
             <div class="form-group">
-              <label for="flightCarrier">Carrier / Flight</label>
-              <input id="flightCarrier" type="text" [(ngModel)]="flightCarrier" class="form-input" placeholder="e.g. LUFTHANSA LH123" title="Carrier / Flight" />
+              <label for="transportMode">Transport Mode</label>
+              <select id="transportMode" [(ngModel)]="transportMode" class="form-select" title="Transport Mode" aria-label="Transport Mode">
+                <option value="Flight">Flight</option>
+                <option value="Train">Train</option>
+                <option value="Cab">Cab / Car Rental</option>
+                <option value="Bus">Bus</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="flightCarrier">Carrier / Provider</label>
+              <input id="flightCarrier" type="text" [(ngModel)]="flightCarrier" class="form-input" placeholder="e.g. IndiGo 6E-214 / Vande Bharat / Uber Intercity" title="Carrier / Provider" />
             </div>
             <div class="form-group">
               <label for="flightOrigin">Origin &rarr; Destination</label>
@@ -307,7 +316,7 @@
             <strong>{{ travelClass }}</strong>
           </div>
           <div class="summary-row">
-            <span class="summary-label">Flight / Train</span>
+            <span class="summary-label">Transport ({{ transportMode }})</span>
             <span>{{ flightCarrier }} ({{ flightOrigin }} &rarr; {{ flightDestination }}) - ₹{{ flightCost }}</span>
           </div>
           <div class="summary-row">

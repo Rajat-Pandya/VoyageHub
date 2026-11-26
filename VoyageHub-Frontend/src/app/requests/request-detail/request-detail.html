@@ -357,7 +357,7 @@
             <span class="claim-strip-label">Paid out-of-pocket? Claim itinerary costs directly:</span>
             <div class="claim-strip-actions">
               @for (s of getUnclaimedSegments(d); track s.id) {
-                <button type="button" class="btn-secondary-sm" (click)="claimItineraryExpense(d, 'Airfare', s.cost, s.origin + ' → ' + s.destination)">
+                <button type="button" class="btn-secondary-sm" (click)="claimItineraryExpense(d, s.mode === 'Flight' ? 'Airfare' : 'Transport', s.cost, s.origin + ' → ' + s.destination)">
                   + Claim {{ s.mode }} ({{ s.cost | currency:'INR':'symbol':'1.0-0' }})
                 </button>
               }

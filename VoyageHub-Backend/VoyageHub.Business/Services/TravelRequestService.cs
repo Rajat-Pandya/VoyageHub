@@ -340,7 +340,7 @@ public class TravelRequestService : ITravelRequestService
                 request.Expenses.Add(new Expense
                 {
                     RequestId = request.Id,
-                    Category = string.Equals(seg.Mode, "Train", StringComparison.OrdinalIgnoreCase) ? "Transport" : "Airfare",
+                    Category = string.Equals(seg.Mode, "Flight", StringComparison.OrdinalIgnoreCase) ? "Airfare" : "Transport",
                     Amount = seg.Cost,
                     Status = "Pending",
                     SubmittedAt = DateTime.UtcNow

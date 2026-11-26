@@ -32,7 +32,8 @@ export class NewRequest implements OnInit {
   travelClass = 'Economy (Standard)';
   detailedJustification = '';
 
-  // Segments (Flight / Train)
+  // Segments (Flight / Train / Cab / Bus)
+  transportMode = 'Flight';
   flightCarrier = '';
   flightOrigin = '';
   flightDestination = '';
@@ -148,7 +149,7 @@ export class NewRequest implements OnInit {
     const segments = hasSegment
       ? [
           {
-            mode: 'Flight',
+            mode: this.transportMode,
             carrier: this.flightCarrier.trim(),
             origin: this.flightOrigin.trim(),
             destination: this.flightDestination.trim(),

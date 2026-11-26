@@ -147,7 +147,7 @@ export class RequestDetail implements OnInit {
     return segTotal + stayTotal + expTotal;
   }
 
-  claimItineraryExpense(d: TravelRequestDetail, category: 'Airfare' | 'Hotel', amount: number, label: string): void {
+  claimItineraryExpense(d: TravelRequestDetail, category: 'Airfare' | 'Transport' | 'Hotel', amount: number, label: string): void {
     this.voyageService
       .submitExpense({
         requestId: d.id,
