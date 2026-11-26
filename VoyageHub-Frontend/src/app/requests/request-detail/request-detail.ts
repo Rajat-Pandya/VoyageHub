@@ -142,6 +142,10 @@ export class RequestDetail implements OnInit {
     return this.authService.isAdmin() || (!!userId && userId.toLowerCase() === d.employeeId.toLowerCase());
   }
 
+  canSubmitExpense(d: TravelRequestDetail): boolean {
+    return this.canEditTrip(d) && d.status === 'Approved';
+  }
+
   isOwnRequest(d: TravelRequestDetail): boolean {
     const userId = this.authService.currentUser()?.id;
     return !!userId && userId.toLowerCase() === d.employeeId.toLowerCase();

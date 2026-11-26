@@ -6,6 +6,7 @@ import { Dashboard } from './dashboard/dashboard';
 import { RequestList } from './requests/request-list/request-list';
 import { NewRequest } from './requests/new-request/new-request';
 import { RequestDetail } from './requests/request-detail/request-detail';
+import { MyReimbursements } from './requests/my-reimbursements/my-reimbursements';
 import { ApprovalQueue } from './approvals/approval-queue/approval-queue';
 import { ExpenseReview } from './finance/expense-review/expense-review';
 import { AnalyticsReports } from './analytics/analytics-reports/analytics-reports';
@@ -29,6 +30,7 @@ export const routes: Routes = [
       { path: 'requests', component: RequestList, canActivate: [roleGuard(['Employee', 'Manager', 'Admin'])] },
       { path: 'requests/new', component: NewRequest, canActivate: [roleGuard(['Employee', 'Manager'])] },
       { path: 'requests/:id', component: RequestDetail, canActivate: [roleGuard(['Employee', 'Manager', 'Finance', 'Admin'])] },
+      { path: 'reimbursements', component: MyReimbursements, canActivate: [roleGuard(['Employee', 'Manager', 'Finance', 'Admin'])] },
       { path: 'approvals', component: ApprovalQueue, canActivate: [roleGuard(['Manager', 'Finance', 'Admin'])] },
       { path: 'expenses', component: ExpenseReview, canActivate: [roleGuard(['Finance', 'Admin'])] },
       { path: 'analytics', component: AnalyticsReports, canActivate: [roleGuard(['Manager', 'Finance', 'Admin'])] },

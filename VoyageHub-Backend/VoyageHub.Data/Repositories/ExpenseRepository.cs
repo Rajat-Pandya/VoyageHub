@@ -16,11 +16,28 @@ public class ExpenseRepository : Repository<Expense>, IExpenseRepository
 
     public async Task<List<Expense>> GetPendingExpensesAsync(string? category, bool? highPriorityOnly, CancellationToken cancellationToken = default)
     {
+        return await GetExpensesByFilterAsync("Pending", category, highPriorityOnly, cancellationToken);
+    }
+
+    public async Task<List<Expense>> GetExpensesByFilterAsync(string? status, string? category, bool? highPriorityOnly, CancellationToken cancellationToken = default)
+    {
         var query = DbSet
             .Include(e => e.Request)
                 .ThenInclude(r => r!.Employee)
                     .ThenInclude(u => u!.Department)
-            .Where(e => e.Status == "Pending");
+            .Include(e => e.Request)
+                .ThenInclude(r => r!.ItinerarySegments)
+            .Include(e => e.Request)
+                .ThenInclude(r => r!.Stays)
+            .Include(e => e.Request)
+                .ThenInclude(r => r!.Expenses)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(status) && !string.Equals(status, "All", StringComparison.OrdinalIgnoreCase))
+        {
+            var normalizedStatus = status.Trim();
+            query = query.Where(e => e.Status == normalizedStatus);
+        }
 
         if (!string.IsNullOrWhiteSpace(category) && category.ToLower() != "all categories" && category.ToLower() != "all")
         {
@@ -33,7 +50,25 @@ public class ExpenseRepository : Repository<Expense>, IExpenseRepository
             query = query.Where(e => e.Amount >= 10000.00m);
         }
 
-        return await query.OrderByDescending(e => e.Amount).ToListAsync(cancellationToken);
+        return await query.OrderByDescending(e => e.SubmittedAt).ThenByDescending(e => e.Amount).ToListAsync(cancellationToken);
+    }
+
+    public async Task<List<Expense>> GetExpensesByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
+    {
+        return await DbSet
+            .AsNoTracking()
+            .Include(e => e.Request)
+                .ThenInclude(r => r!.Employee)
+                    .ThenInclude(u => u!.Department)
+            .Include(e => e.Request)
+                .ThenInclude(r => r!.ItinerarySegments)
+            .Include(e => e.Request)
+                .ThenInclude(r => r!.Stays)
+            .Include(e => e.Request)
+                .ThenInclude(r => r!.Expenses)
+            .Where(e => e.Request != null && e.Request.EmployeeId == userId)
+            .OrderByDescending(e => e.SubmittedAt)
+            .ToListAsync(cancellationToken);
     }
 
     public async Task<decimal> GetTotalPendingAmountAsync(CancellationToken cancellationToken = default)

@@ -37,9 +37,20 @@ public class ExpensesController : ControllerBase
     public async Task<ActionResult<ExpenseReviewSummaryDto>> GetPending(
         [FromQuery] string? category,
         [FromQuery] bool? highPriorityOnly,
-        CancellationToken cancellationToken)
+        [FromQuery] string? status = "Pending",
+        CancellationToken cancellationToken = default)
     {
-        var result = await _expenseService.GetPendingSummaryAsync(category, highPriorityOnly, cancellationToken);
+        var result = string.IsNullOrWhiteSpace(status) || string.Equals(status, "Pending", StringComparison.OrdinalIgnoreCase)
+            ? await _expenseService.GetPendingSummaryAsync(category, highPriorityOnly, cancellationToken)
+            : await _expenseService.GetExpensesSummaryAsync(status, category, highPriorityOnly, cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpGet("my-expenses")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
+    public async Task<ActionResult<List<ExpenseItemDto>>> GetMyExpenses(CancellationToken cancellationToken)
+    {
+        var result = await _expenseService.GetMyExpensesAsync(cancellationToken);
         return Ok(result);
     }
 

@@ -69,6 +69,9 @@ public class ExpenseItemDto
     public string? ProofPath { get; set; }
     public string Status { get; set; } = string.Empty;
     public DateTime SubmittedAt { get; set; }
+    public decimal ApprovedBudget { get; set; }
+    public decimal ActualSpend { get; set; }
+    public bool IsOverBudget { get; set; }
 }
 
 public class ApprovalStepItemDto

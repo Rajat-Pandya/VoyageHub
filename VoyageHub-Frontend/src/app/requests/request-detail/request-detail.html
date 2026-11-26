@@ -339,10 +339,12 @@
       <div class="tab-panel fade-in">
         <div class="panel-header-row">
           <h3>Trip Expenses &amp; Reimbursements</h3>
-          @if (canEditTrip(d)) {
+          @if (canSubmitExpense(d)) {
             <button type="button" class="btn-primary" (click)="openExpenseModal()">
               + Submit Expense Claim
             </button>
+          } @else if (canEditTrip(d)) {
+            <span class="expense-lock-hint">Expenses can be submitted once the trip is Approved.</span>
           }
         </div>
         <div class="segments-stack">

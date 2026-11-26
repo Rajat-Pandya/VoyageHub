@@ -153,7 +153,7 @@ public class ExpensesControllerTests : IDisposable
             .Setup(s => s.GetPendingSummaryAsync(null, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(summary);
 
-        var result = await _controller.GetPending(null, null, CancellationToken.None);
+        var result = await _controller.GetPending(null, null, "Pending", CancellationToken.None);
 
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
         Assert.Equal(summary, okResult.Value);

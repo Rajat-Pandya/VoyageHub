@@ -31,25 +31,62 @@ public class ExpenseService : IExpenseService
         var expenses = await _expenseRepository.GetPendingExpensesAsync(category, highPriorityOnly, cancellationToken);
         var total = await _expenseRepository.GetTotalPendingAmountAsync(cancellationToken);
 
-        var claims = expenses.Select(e => new ExpenseItemDto
+        return new ExpenseReviewSummaryDto
+        {
+            TotalPendingAmount = total,
+            PendingClaims = expenses.Select(MapToExpenseItemDto).ToList()
+        };
+    }
+
+    public async Task<ExpenseReviewSummaryDto> GetExpensesSummaryAsync(string? status, string? category, bool? highPriorityOnly, CancellationToken cancellationToken = default)
+    {
+        var expenses = await _expenseRepository.GetExpensesByFilterAsync(status, category, highPriorityOnly, cancellationToken);
+        var totalPending = await _expenseRepository.GetTotalPendingAmountAsync(cancellationToken);
+
+        return new ExpenseReviewSummaryDto
+        {
+            TotalPendingAmount = totalPending,
+            PendingClaims = expenses.Select(MapToExpenseItemDto).ToList()
+        };
+    }
+
+    public async Task<List<ExpenseItemDto>> GetMyExpensesAsync(CancellationToken cancellationToken = default)
+    {
+        if (!_currentUserService.UserId.HasValue)
+        {
+            return new List<ExpenseItemDto>();
+        }
+
+        var expenses = await _expenseRepository.GetExpensesByUserIdAsync(_currentUserService.UserId.Value, cancellationToken);
+        return expenses.Select(MapToExpenseItemDto).ToList();
+    }
+
+    private static ExpenseItemDto MapToExpenseItemDto(Expense e)
+    {
+        var req = e.Request;
+        var approvedBudget = req?.EstimatedBudget ?? 0m;
+        var actualSpend = req == null
+            ? e.Amount
+            : (req.ItinerarySegments?.Sum(s => s.Cost) ?? 0m)
+              + (req.Stays?.Sum(st => st.Cost) ?? 0m)
+              + (req.Expenses?.Where(x => !string.Equals(x.Status, "Rejected", StringComparison.OrdinalIgnoreCase)).Sum(x => x.Amount) ?? 0m);
+
+        return new ExpenseItemDto
         {
             Id = e.Id,
             RequestId = e.RequestId,
-            RequestCode = e.Request?.RequestCode ?? "#TR-2048",
-            EmployeeName = e.Request?.Employee?.Name ?? "Employee",
-            DepartmentName = e.Request?.Employee?.Department?.Name ?? "Sales",
-            TripPurpose = e.Request?.Purpose ?? "Trip Expense",
+            RequestCode = req?.RequestCode ?? "#TR-2048",
+            EmployeeName = req?.Employee?.Name ?? "Employee",
+            DepartmentName = req?.Employee?.Department?.Name ?? "Sales",
+            TripPurpose = req?.Purpose ?? "Trip Expense",
             Category = e.Category,
             Amount = e.Amount,
             ProofPath = e.ProofPath,
             Status = e.Status,
-            SubmittedAt = e.SubmittedAt
-        }).ToList();
-
-        return new ExpenseReviewSummaryDto
-        {
-            TotalPendingAmount = total,
-            PendingClaims = claims
+            SubmittedAt = e.SubmittedAt,
+            ApprovedBudget = approvedBudget,
+            ActualSpend = actualSpend,
+            IsOverBudget = approvedBudget > 0 && actualSpend > approvedBudget
         };
     }
 
@@ -76,12 +113,17 @@ public class ExpenseService : IExpenseService
             return (false, "You can only submit expenses for your own travel requests.", null);
         }
 
+        if (!string.Equals(request.Status, "Approved", StringComparison.OrdinalIgnoreCase))
+        {
+            return (false, "Expenses can only be submitted for Approved travel requests.", null);
+        }
+
         var expense = new Expense
         {
             RequestId = dto.RequestId,
             Category = string.IsNullOrWhiteSpace(dto.Category) ? "Airfare" : dto.Category,
             Amount = dto.Amount,
-            ProofPath = dto.ProofPath ?? $"receipt_{dto.Category.ToLower()}_{RandomNumberGenerator.GetInt32(100, 999)}.pdf",
+            ProofPath = string.IsNullOrWhiteSpace(dto.ProofPath) ? null : dto.ProofPath.Trim(),
             Status = "Pending",
             SubmittedAt = DateTime.UtcNow
         };

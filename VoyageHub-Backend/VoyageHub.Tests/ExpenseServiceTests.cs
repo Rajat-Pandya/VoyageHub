@@ -128,6 +128,7 @@ public class ExpenseServiceTests
             Id = requestId,
             RequestCode = "#TR-2000",
             EmployeeId = employeeId,
+            Status = "Approved",
             Employee = new User { Name = "Bob" }
         };
 
@@ -339,5 +340,54 @@ public class ExpenseServiceTests
         Assert.False(success);
         Assert.Null(proofPath);
         Assert.Contains("own expense claims", message);
+    }
+
+    [Fact]
+    public async Task SubmitExpenseAsync_WhenTripNotApproved_ReturnsFalse()
+    {
+        var requestId = Guid.NewGuid();
+        var employeeId = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(employeeId);
+        _currentUserServiceMock.Setup(c => c.UserRole).Returns("Employee");
+
+        _expenseRepoMock
+            .Setup(r => r.FindTravelRequestWithEmployeeAsync(requestId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new TravelRequest { Id = requestId, EmployeeId = employeeId, Status = "Draft" });
+
+        var (success, message, created) = await _expenseService.SubmitExpenseAsync(new SubmitExpenseDto
+        {
+            RequestId = requestId,
+            Amount = 500m,
+            Category = "Meals"
+        });
+
+        Assert.False(success);
+        Assert.Null(created);
+        Assert.Contains("Approved", message);
+    }
+
+    [Fact]
+    public async Task SubmitExpenseAsync_WhenNoProofPath_LeavesProofPathNull()
+    {
+        var requestId = Guid.NewGuid();
+        var employeeId = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(employeeId);
+        _currentUserServiceMock.Setup(c => c.UserRole).Returns("Employee");
+
+        _expenseRepoMock
+            .Setup(r => r.FindTravelRequestWithEmployeeAsync(requestId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new TravelRequest { Id = requestId, EmployeeId = employeeId, Status = "Approved" });
+
+        var (success, _, created) = await _expenseService.SubmitExpenseAsync(new SubmitExpenseDto
+        {
+            RequestId = requestId,
+            Amount = 750m,
+            Category = "Meals",
+            ProofPath = ""
+        });
+
+        Assert.True(success);
+        Assert.NotNull(created);
+        Assert.Null(created.ProofPath);
     }
 }

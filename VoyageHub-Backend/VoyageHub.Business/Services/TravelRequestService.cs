@@ -498,6 +498,11 @@ public class TravelRequestService : ITravelRequestService
     {
         var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
         if (r == null) return (false, "Travel request not found.");
+        if (!IsOwnerOrAdmin(r.EmployeeId)) return (false, "You can only close your own travel requests.");
+        if (!string.Equals(r.Status, "Approved", StringComparison.OrdinalIgnoreCase))
+        {
+            return (false, "Only Approved travel requests can be marked as Completed.");
+        }
 
         r.Status = "Completed";
         r.UpdatedAt = DateTime.UtcNow;
@@ -506,8 +511,8 @@ public class TravelRequestService : ITravelRequestService
             entityType: "REQUEST",
             entityId: r.Id,
             action: "Closed Request",
-            actorId: null,
-            actorName: "User",
+            actorId: _currentUserService.UserId ?? r.EmployeeId,
+            actorName: _currentUserService.UserName ?? "User",
             changeDetail: $"Marked {r.RequestCode} as Completed",
             severity: "LOW",
             cancellationToken: cancellationToken);

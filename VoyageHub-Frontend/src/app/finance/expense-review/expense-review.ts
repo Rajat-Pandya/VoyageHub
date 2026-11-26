@@ -19,6 +19,7 @@ export class ExpenseReview implements OnInit {
   readonly isLoading = signal(true);
 
   selectedCategory = 'All Categories';
+  selectedStatus = 'Pending';
   highPriorityOnly = false;
 
   // Receipt preview modal
@@ -30,7 +31,7 @@ export class ExpenseReview implements OnInit {
 
   loadExpenses(): void {
     this.isLoading.set(true);
-    this.voyageService.getPendingExpenses(this.selectedCategory, this.highPriorityOnly).subscribe({
+    this.voyageService.getPendingExpenses(this.selectedCategory, this.highPriorityOnly, this.selectedStatus).subscribe({
       next: (res) => {
         this.claims.set(res?.pendingClaims || []);
         this.totalPending.set(res?.totalPendingAmount || 0);

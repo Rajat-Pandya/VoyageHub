@@ -62,6 +62,9 @@ export interface ExpenseItem {
   proofPath?: string;
   status: string;
   submittedAt: string;
+  approvedBudget?: number;
+  actualSpend?: number;
+  isOverBudget?: boolean;
 }
 
 export interface ApprovalHistoryItem {
@@ -222,11 +225,16 @@ export class VoyageService {
     return this.http.post(`${this.baseUrl}/expenses`, payload);
   }
 
-  getPendingExpenses(category?: string, highPriorityOnly?: boolean): Observable<ExpenseReviewSummary> {
+  getPendingExpenses(category?: string, highPriorityOnly?: boolean, status: string = 'Pending'): Observable<ExpenseReviewSummary> {
     let params = new HttpParams();
     if (category) params = params.set('category', category);
     if (highPriorityOnly !== undefined) params = params.set('highPriorityOnly', highPriorityOnly.toString());
+    if (status) params = params.set('status', status);
     return this.http.get<ExpenseReviewSummary>(`${this.baseUrl}/expenses/pending`, { params });
+  }
+
+  getMyExpenses(): Observable<ExpenseItem[]> {
+    return this.http.get<ExpenseItem[]>(`${this.baseUrl}/expenses/my-expenses`);
   }
 
   takeExpenseAction(id: string, action: 'Approve' | 'Reject'): Observable<any> {
