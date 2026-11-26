@@ -347,6 +347,23 @@
             <span class="expense-lock-hint">Expenses can be submitted once the trip is Approved.</span>
           }
         </div>
+        @if (canSubmitExpense(d) && (getUnclaimedSegments(d).length > 0 || getUnclaimedStays(d).length > 0)) {
+          <div class="claim-itinerary-strip">
+            <span class="claim-strip-label">Paid out-of-pocket? Claim itinerary costs directly:</span>
+            <div class="claim-strip-actions">
+              @for (s of getUnclaimedSegments(d); track s.id) {
+                <button type="button" class="btn-secondary-sm" (click)="claimItineraryExpense(d, 'Airfare', s.cost, s.origin + ' → ' + s.destination)">
+                  + Claim {{ s.mode }} ({{ s.cost | currency:'INR':'symbol':'1.0-0' }})
+                </button>
+              }
+              @for (st of getUnclaimedStays(d); track st.id) {
+                <button type="button" class="btn-secondary-sm" (click)="claimItineraryExpense(d, 'Hotel', st.cost, st.hotelName)">
+                  + Claim {{ st.hotelName }} ({{ st.cost | currency:'INR':'symbol':'1.0-0' }})
+                </button>
+              }
+            </div>
+          </div>
+        }
         <div class="segments-stack">
           @for (e of d.expenses; track e.id) {
             <div class="segment-item-card">

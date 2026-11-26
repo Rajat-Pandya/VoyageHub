@@ -92,6 +92,10 @@ describe('RequestDetail', () => {
     expect(component.canModifyItinerary(sampleDetail)).toBe(true);
     expect(component.canModifyItinerary({ ...sampleDetail, status: 'Completed' })).toBe(false);
     expect(component.backRoute).toBe('/requests');
+    expect(component.getUnclaimedSegments(sampleDetail).length).toBe(1);
+    expect(component.getUnclaimedStays(sampleDetail).length).toBe(1);
+    component.claimItineraryExpense(sampleDetail, 'Airfare', 68500, 'SIN -> AKL');
+    expect(mockVoyageService.submitExpense).toHaveBeenCalled();
   });
 
   it('handles modals and mutations', () => {

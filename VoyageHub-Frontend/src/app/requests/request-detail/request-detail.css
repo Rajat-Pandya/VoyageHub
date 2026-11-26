@@ -365,6 +365,10 @@
 }
 
 
+.claim-itinerary-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
+.claim-strip-label { font-size: 12.5px; color: #475569; font-weight: 500; }
+.claim-strip-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
 .dark-summary-banner {
   background: linear-gradient(135deg, #090d16 0%, #151e33 100%);
   color: #ffffff;

@@ -65,11 +65,30 @@ public class ExpenseService : IExpenseService
     {
         var req = e.Request;
         var approvedBudget = req?.EstimatedBudget ?? 0m;
-        var actualSpend = req == null
-            ? e.Amount
-            : (req.ItinerarySegments?.Sum(s => s.Cost) ?? 0m)
-              + (req.Stays?.Sum(st => st.Cost) ?? 0m)
-              + (req.Expenses?.Where(x => !string.Equals(x.Status, "Rejected", StringComparison.OrdinalIgnoreCase)).Sum(x => x.Amount) ?? 0m);
+        decimal actualSpend;
+        if (req == null)
+        {
+            actualSpend = e.Amount;
+        }
+        else
+        {
+            var activeExpenses = req.Expenses?
+                .Where(x => !string.Equals(x.Status, "Rejected", StringComparison.OrdinalIgnoreCase))
+                .ToList() ?? new List<Expense>();
+            var unclaimedSegments = req.ItinerarySegments?
+                .Where(s => !activeExpenses.Any(x =>
+                    (string.Equals(x.Category, "Airfare", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(x.Category, "Transport", StringComparison.OrdinalIgnoreCase)) &&
+                    x.Amount == s.Cost))
+                .Sum(s => s.Cost) ?? 0m;
+            var unclaimedStays = req.Stays?
+                .Where(st => !activeExpenses.Any(x =>
+                    (string.Equals(x.Category, "Hotel", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(x.Category, "Lodging", StringComparison.OrdinalIgnoreCase)) &&
+                    x.Amount == st.Cost))
+                .Sum(st => st.Cost) ?? 0m;
+            actualSpend = unclaimedSegments + unclaimedStays + activeExpenses.Sum(x => x.Amount);
+        }
 
         return new ExpenseItemDto
         {

@@ -2,7 +2,7 @@
   <header class="page-header">
     <div>
       <h1>My Reimbursements</h1>
-      <p class="subtitle">Track your submitted expense claims and payout status across all trips</p>
+      <p class="subtitle">Out-of-pocket expense claims submitted for reimbursement (itinerary bookings are tracked on each trip)</p>
     </div>
     <div class="summary-pills">
       <div class="stat-pill pending">
@@ -51,7 +51,7 @@
               <td>
                 <div class="trip-col">
                   <strong>{{ item.tripPurpose }}</strong>
-                  <span class="trip-code">{{ item.requestCode }}</span>
+                  <span class="trip-code">{{ item.requestCode }}@if (item.actualSpend) { &bull; Trip Spend: {{ item.actualSpend | currency:'INR':'symbol':'1.0-0' }} }</span>
                 </div>
               </td>
               <td>{{ item.category }}</td>

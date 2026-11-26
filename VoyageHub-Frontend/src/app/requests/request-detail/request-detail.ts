@@ -95,13 +95,63 @@ export class RequestDetail implements OnInit {
     this.activeTab.set(tab);
   }
 
+  getUnclaimedSegments(d: TravelRequestDetail) {
+    const activeExp = (d.expenses || []).filter((e) => e.status !== 'Rejected');
+    return (d.segments || []).filter(
+      (s) =>
+        s.cost > 0 &&
+        !activeExp.some(
+          (e) =>
+            (e.category.toLowerCase() === 'airfare' || e.category.toLowerCase() === 'transport') &&
+            e.amount === s.cost
+        )
+    );
+  }
+
+  getUnclaimedStays(d: TravelRequestDetail) {
+    const activeExp = (d.expenses || []).filter((e) => e.status !== 'Rejected');
+    return (d.stays || []).filter(
+      (st) =>
+        st.cost > 0 &&
+        !activeExp.some(
+          (e) =>
+            (e.category.toLowerCase() === 'hotel' || e.category.toLowerCase() === 'lodging') &&
+            e.amount === st.cost
+        )
+    );
+  }
+
   getActualSpend(d: TravelRequestDetail): number {
-    const segTotal = (d.segments || []).reduce((sum, s) => sum + (s.cost || 0), 0);
-    const stayTotal = (d.stays || []).reduce((sum, st) => sum + (st.cost || 0), 0);
+    const segTotal = this.getUnclaimedSegments(d).reduce((sum, s) => sum + (s.cost || 0), 0);
+    const stayTotal = this.getUnclaimedStays(d).reduce((sum, st) => sum + (st.cost || 0), 0);
     const expTotal = (d.expenses || [])
       .filter((e) => e.status !== 'Rejected')
       .reduce((sum, e) => sum + (e.amount || 0), 0);
     return segTotal + stayTotal + expTotal;
+  }
+
+  claimItineraryExpense(d: TravelRequestDetail, category: 'Airfare' | 'Hotel', amount: number, label: string): void {
+    this.voyageService
+      .submitExpense({
+        requestId: d.id,
+        category,
+        amount,
+        description: `Out-of-pocket ${label}`
+      })
+      .subscribe({
+        next: (created: any) => {
+          if (created && created.id) {
+            this.detail.update((curr) =>
+              curr ? { ...curr, expenses: [created, ...(curr.expenses || [])] } : curr
+            );
+          }
+          this.showToast(`Claimed ${category} (₹${amount.toLocaleString('en-IN')}) for reimbursement.`);
+          this.loadDetail(d.id);
+        },
+        error: (err: any) => {
+          this.showToast(err?.error?.message || 'Failed to claim itinerary expense.');
+        }
+      });
   }
 
   getSpendPercent(d: TravelRequestDetail): number {
