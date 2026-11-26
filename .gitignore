@@ -67,3 +67,12 @@ desktop.ini
 # ===================================================================
 context.md
 **/context.md
+
+# ===================================================================
+# SonarQube / Coverage / Uploaded Runtime Files
+# ===================================================================
+.sonarqube/
+.scannerwork/
+coverage.xml
+*.lcov
+App_Data/Receipts/
