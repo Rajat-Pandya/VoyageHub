@@ -71,6 +71,8 @@ public class ExpenseItemDto
     public DateTime SubmittedAt { get; set; }
     public decimal ApprovedBudget { get; set; }
     public decimal ActualSpend { get; set; }
+    public decimal TripClaimedTotal { get; set; }
+    public decimal CorporatePaidAmount { get; set; }
     public bool IsOverBudget { get; set; }
 }
 
@@ -136,6 +138,7 @@ public class CreateTravelRequestDto
     public string TravelClass { get; set; } = "Economy (Standard)";
     public string? Justification { get; set; }
     public bool SaveAsDraft { get; set; } = false;
+    public bool SelfPaidItinerary { get; set; } = false;
 
     public List<CreateSegmentDto> Segments { get; set; } = new();
     public List<CreateStayDto> Stays { get; set; } = new();

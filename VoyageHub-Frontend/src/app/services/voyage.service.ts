@@ -64,6 +64,8 @@ export interface ExpenseItem {
   submittedAt: string;
   approvedBudget?: number;
   actualSpend?: number;
+  tripClaimedTotal?: number;
+  corporatePaidAmount?: number;
   isOverBudget?: boolean;
 }
 

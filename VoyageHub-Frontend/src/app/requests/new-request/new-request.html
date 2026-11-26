@@ -188,6 +188,26 @@
         <p class="step-desc">Specify flights, transport modes, and hotel bookings.</p>
 
         <div class="segment-block">
+          <h4>Who Paid for Flight &amp; Hotel?</h4>
+          <div class="trip-type-toggle" role="group" aria-label="Itinerary Payment Method">
+            <button
+              type="button"
+              class="trip-type-btn"
+              [class.active]="!selfPaidItinerary"
+              (click)="selfPaidItinerary = false">
+              Company / Travel Desk (Direct-Billed)
+            </button>
+            <button
+              type="button"
+              class="trip-type-btn"
+              [class.active]="selfPaidItinerary"
+              (click)="selfPaidItinerary = true">
+              Self-Paid (Auto-Claim Reimbursement)
+            </button>
+          </div>
+        </div>
+
+        <div class="segment-block">
           <h4>Flight Segment</h4>
           <div class="form-grid">
             <div class="form-group">
@@ -293,6 +313,10 @@
           <div class="summary-row">
             <span class="summary-label">Stay</span>
             <span>{{ hotelName }} ({{ hotelNights }} Nights) - ₹{{ hotelCost }}</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Itinerary Paid By</span>
+            <strong>{{ selfPaidItinerary ? 'Self-Paid (Auto-Claim Reimbursement)' : 'Company / Travel Desk' }}</strong>
           </div>
         </div>
 

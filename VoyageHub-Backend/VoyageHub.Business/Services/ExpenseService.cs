@@ -66,9 +66,13 @@ public class ExpenseService : IExpenseService
         var req = e.Request;
         var approvedBudget = req?.EstimatedBudget ?? 0m;
         decimal actualSpend;
+        decimal claimedTotal;
+        decimal corporatePaid;
         if (req == null)
         {
             actualSpend = e.Amount;
+            claimedTotal = string.Equals(e.Status, "Rejected", StringComparison.OrdinalIgnoreCase) ? 0m : e.Amount;
+            corporatePaid = 0m;
         }
         else
         {
@@ -87,7 +91,9 @@ public class ExpenseService : IExpenseService
                      string.Equals(x.Category, "Lodging", StringComparison.OrdinalIgnoreCase)) &&
                     x.Amount == st.Cost))
                 .Sum(st => st.Cost) ?? 0m;
-            actualSpend = unclaimedSegments + unclaimedStays + activeExpenses.Sum(x => x.Amount);
+            claimedTotal = activeExpenses.Sum(x => x.Amount);
+            corporatePaid = unclaimedSegments + unclaimedStays;
+            actualSpend = corporatePaid + claimedTotal;
         }
 
         return new ExpenseItemDto
@@ -105,6 +111,8 @@ public class ExpenseService : IExpenseService
             SubmittedAt = e.SubmittedAt,
             ApprovedBudget = approvedBudget,
             ActualSpend = actualSpend,
+            TripClaimedTotal = claimedTotal,
+            CorporatePaidAmount = corporatePaid,
             IsOverBudget = approvedBudget > 0 && actualSpend > approvedBudget
         };
     }

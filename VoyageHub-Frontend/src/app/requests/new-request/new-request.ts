@@ -25,6 +25,7 @@ export class NewRequest implements OnInit {
   tripPurpose = '';
   destinationCity = '';
   isInternational = false;
+  selfPaidItinerary = false;
   startDate = '';
   endDate = '';
   estimatedBudget = 0;
@@ -179,6 +180,7 @@ export class NewRequest implements OnInit {
       travelClass: this.travelClass,
       justification: this.detailedJustification,
       saveAsDraft: saveAsDraft,
+      selfPaidItinerary: this.selfPaidItinerary,
       segments,
       stays
     };

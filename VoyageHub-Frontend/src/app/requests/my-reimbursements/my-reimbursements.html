@@ -51,7 +51,14 @@
               <td>
                 <div class="trip-col">
                   <strong>{{ item.tripPurpose }}</strong>
-                  <span class="trip-code">{{ item.requestCode }}@if (item.actualSpend) { &bull; Trip Spend: {{ item.actualSpend | currency:'INR':'symbol':'1.0-0' }} }</span>
+                  <span class="trip-code">
+                    {{ item.requestCode }}
+                    @if (item.corporatePaidAmount) {
+                      &bull; {{ item.tripClaimedTotal | currency:'INR':'symbol':'1.0-0' }} Claimed + {{ item.corporatePaidAmount | currency:'INR':'symbol':'1.0-0' }} Corporate-Paid = {{ item.actualSpend | currency:'INR':'symbol':'1.0-0' }} Total
+                    } @else if (item.actualSpend) {
+                      &bull; Full Trip Claimed ({{ item.actualSpend | currency:'INR':'symbol':'1.0-0' }})
+                    }
+                  </span>
                 </div>
               </td>
               <td>{{ item.category }}</td>

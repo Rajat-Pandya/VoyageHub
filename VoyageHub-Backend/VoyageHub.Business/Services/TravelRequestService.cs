@@ -329,6 +329,32 @@ public class TravelRequestService : ITravelRequestService
             }
         }
 
+        if (dto.SelfPaidItinerary && !dto.SaveAsDraft)
+        {
+            foreach (var seg in request.ItinerarySegments.Where(s => s.Cost > 0))
+            {
+                request.Expenses.Add(new Expense
+                {
+                    RequestId = request.Id,
+                    Category = string.Equals(seg.Mode, "Train", StringComparison.OrdinalIgnoreCase) ? "Transport" : "Airfare",
+                    Amount = seg.Cost,
+                    Status = "Pending",
+                    SubmittedAt = DateTime.UtcNow
+                });
+            }
+            foreach (var stay in request.Stays.Where(st => st.Cost > 0))
+            {
+                request.Expenses.Add(new Expense
+                {
+                    RequestId = request.Id,
+                    Category = "Hotel",
+                    Amount = stay.Cost,
+                    Status = "Pending",
+                    SubmittedAt = DateTime.UtcNow
+                });
+            }
+        }
+
         if (!dto.SaveAsDraft)
         {
             var steps = await BuildWorkflowStepsAsync(request.Id, employee, cancellationToken);
