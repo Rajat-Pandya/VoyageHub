@@ -108,7 +108,7 @@
               <td class="req-code-cell">
                 <div class="req-id-stack">
                   <span class="req-code-text">{{ req.requestCode }}</span>
-                  @if (req.employeeName) {
+                  @if (req.employeeName && (authService.currentUser()?.role === 'Admin' || authService.currentUser()?.role === 'Finance')) {
                     <span class="req-employee-name">{{ req.employeeName }}</span>
                   }
                 </div>
