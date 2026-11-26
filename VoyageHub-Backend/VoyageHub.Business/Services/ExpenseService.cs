@@ -61,6 +61,129 @@ public class ExpenseService : IExpenseService
         return expenses.Select(MapToExpenseItemDto).ToList();
     }
 
+    public async Task<List<TripReimbursementReportDto>> GetMyReimbursementReportsAsync(CancellationToken cancellationToken = default)
+    {
+        if (!_currentUserService.UserId.HasValue)
+        {
+            return new List<TripReimbursementReportDto>();
+        }
+
+        var trips = await _expenseRepository.GetUserTripsForReimbursementAsync(_currentUserService.UserId.Value, cancellationToken);
+        return trips.Select(MapToTripReportDto).ToList();
+    }
+
+    private static (List<ItinerarySegment> UnclaimedSegments, List<Stay> UnclaimedStays, List<Expense> ActiveExpenses) PartitionTripCosts(TravelRequest req)
+    {
+        var activeExpenses = req.Expenses?
+            .Where(x => !string.Equals(x.Status, "Rejected", StringComparison.OrdinalIgnoreCase))
+            .ToList() ?? new List<Expense>();
+
+        var unclaimedSegments = req.ItinerarySegments?
+            .Where(s => !activeExpenses.Any(x =>
+                (string.Equals(x.Category, "Airfare", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(x.Category, "Transport", StringComparison.OrdinalIgnoreCase)) &&
+                x.Amount == s.Cost))
+            .ToList() ?? new List<ItinerarySegment>();
+
+        var unclaimedStays = req.Stays?
+            .Where(st => !activeExpenses.Any(x =>
+                (string.Equals(x.Category, "Hotel", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(x.Category, "Lodging", StringComparison.OrdinalIgnoreCase)) &&
+                x.Amount == st.Cost))
+            .ToList() ?? new List<Stay>();
+
+        return (unclaimedSegments, unclaimedStays, activeExpenses);
+    }
+
+    private static TripReimbursementReportDto MapToTripReportDto(TravelRequest req)
+    {
+        var (unclaimedSegments, unclaimedStays, activeExpenses) = PartitionTripCosts(req);
+        var corporatePaid = unclaimedSegments.Sum(s => s.Cost) + unclaimedStays.Sum(st => st.Cost);
+        var claimedTotal = activeExpenses.Sum(e => e.Amount);
+        var pendingAmount = activeExpenses.Where(e => string.Equals(e.Status, "Pending", StringComparison.OrdinalIgnoreCase)).Sum(e => e.Amount);
+        var reimbursedAmount = activeExpenses.Where(e => string.Equals(e.Status, "Reimbursed", StringComparison.OrdinalIgnoreCase)).Sum(e => e.Amount);
+
+        var lineItems = new List<ReimbursementLineItemDto>();
+        foreach (var seg in unclaimedSegments)
+        {
+            lineItems.Add(new ReimbursementLineItemDto
+            {
+                Kind = "Itinerary",
+                Category = seg.Mode,
+                Description = $"{seg.Origin} → {seg.Destination}" + (string.IsNullOrWhiteSpace(seg.Carrier) ? "" : $" ({seg.Carrier})"),
+                Amount = seg.Cost,
+                Status = "Corporate-Paid",
+                Date = seg.DepartureTime
+            });
+        }
+        foreach (var stay in unclaimedStays)
+        {
+            lineItems.Add(new ReimbursementLineItemDto
+            {
+                Kind = "Itinerary",
+                Category = "Hotel",
+                Description = $"{stay.HotelName} ({stay.Nights} Nights)",
+                Amount = stay.Cost,
+                Status = "Corporate-Paid",
+                Date = stay.CheckIn
+            });
+        }
+        foreach (var exp in (req.Expenses ?? new List<Expense>()).OrderByDescending(e => e.SubmittedAt))
+        {
+            lineItems.Add(new ReimbursementLineItemDto
+            {
+                Kind = "Expense",
+                Category = exp.Category,
+                Description = $"{exp.Category} Claim",
+                Amount = exp.Amount,
+                Status = exp.Status,
+                Date = exp.SubmittedAt,
+                ProofPath = exp.ProofPath
+            });
+        }
+
+        string reportStatus;
+        if (req.Expenses == null || req.Expenses.Count == 0)
+        {
+            reportStatus = "No Claims";
+        }
+        else if (pendingAmount > 0 && reimbursedAmount > 0)
+        {
+            reportStatus = "Partially Reimbursed";
+        }
+        else if (pendingAmount > 0)
+        {
+            reportStatus = "Pending";
+        }
+        else if (reimbursedAmount > 0)
+        {
+            reportStatus = "Reimbursed";
+        }
+        else
+        {
+            reportStatus = "Rejected";
+        }
+
+        return new TripReimbursementReportDto
+        {
+            RequestId = req.Id,
+            RequestCode = req.RequestCode,
+            Destination = req.Destination,
+            Purpose = req.Purpose,
+            StartDate = req.StartDate,
+            EndDate = req.EndDate,
+            TripStatus = req.Status,
+            ApprovedBudget = req.EstimatedBudget,
+            TotalTripSpend = corporatePaid + claimedTotal,
+            CorporatePaidAmount = corporatePaid,
+            ClaimedTotal = claimedTotal,
+            PendingAmount = pendingAmount,
+            ReimbursedAmount = reimbursedAmount,
+            ReportStatus = reportStatus,
+            LineItems = lineItems
+        };
+    }
+
     private static ExpenseItemDto MapToExpenseItemDto(Expense e)
     {
         var req = e.Request;
@@ -76,23 +199,9 @@ public class ExpenseService : IExpenseService
         }
         else
         {
-            var activeExpenses = req.Expenses?
-                .Where(x => !string.Equals(x.Status, "Rejected", StringComparison.OrdinalIgnoreCase))
-                .ToList() ?? new List<Expense>();
-            var unclaimedSegments = req.ItinerarySegments?
-                .Where(s => !activeExpenses.Any(x =>
-                    (string.Equals(x.Category, "Airfare", StringComparison.OrdinalIgnoreCase) ||
-                     string.Equals(x.Category, "Transport", StringComparison.OrdinalIgnoreCase)) &&
-                    x.Amount == s.Cost))
-                .Sum(s => s.Cost) ?? 0m;
-            var unclaimedStays = req.Stays?
-                .Where(st => !activeExpenses.Any(x =>
-                    (string.Equals(x.Category, "Hotel", StringComparison.OrdinalIgnoreCase) ||
-                     string.Equals(x.Category, "Lodging", StringComparison.OrdinalIgnoreCase)) &&
-                    x.Amount == st.Cost))
-                .Sum(st => st.Cost) ?? 0m;
+            var (unclaimedSegments, unclaimedStays, activeExpenses) = PartitionTripCosts(req);
             claimedTotal = activeExpenses.Sum(x => x.Amount);
-            corporatePaid = unclaimedSegments + unclaimedStays;
+            corporatePaid = unclaimedSegments.Sum(s => s.Cost) + unclaimedStays.Sum(st => st.Cost);
             actualSpend = corporatePaid + claimedTotal;
         }
 

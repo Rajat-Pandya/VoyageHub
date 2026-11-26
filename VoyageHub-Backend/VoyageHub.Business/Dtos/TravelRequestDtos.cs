@@ -76,6 +76,36 @@ public class ExpenseItemDto
     public bool IsOverBudget { get; set; }
 }
 
+public class ReimbursementLineItemDto
+{
+    public string Kind { get; set; } = "Expense"; // Itinerary, Expense
+    public string Category { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public decimal Amount { get; set; }
+    public string Status { get; set; } = string.Empty; // Corporate-Paid, Pending, Reimbursed, Rejected
+    public DateTime Date { get; set; }
+    public string? ProofPath { get; set; }
+}
+
+public class TripReimbursementReportDto
+{
+    public Guid RequestId { get; set; }
+    public string RequestCode { get; set; } = string.Empty;
+    public string Destination { get; set; } = string.Empty;
+    public string Purpose { get; set; } = string.Empty;
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public string TripStatus { get; set; } = string.Empty;
+    public decimal ApprovedBudget { get; set; }
+    public decimal TotalTripSpend { get; set; }
+    public decimal CorporatePaidAmount { get; set; }
+    public decimal ClaimedTotal { get; set; }
+    public decimal PendingAmount { get; set; }
+    public decimal ReimbursedAmount { get; set; }
+    public string ReportStatus { get; set; } = "No Claims";
+    public List<ReimbursementLineItemDto> LineItems { get; set; } = new();
+}
+
 public class ApprovalStepItemDto
 {
     public Guid Id { get; set; }

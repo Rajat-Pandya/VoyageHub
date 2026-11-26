@@ -71,6 +71,19 @@ public class ExpenseRepository : Repository<Expense>, IExpenseRepository
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<List<TravelRequest>> GetUserTripsForReimbursementAsync(Guid userId, CancellationToken cancellationToken = default)
+    {
+        return await Context.TravelRequests
+            .AsNoTracking()
+            .Include(r => r.ItinerarySegments)
+            .Include(r => r.Stays)
+            .Include(r => r.Expenses)
+            .Where(r => r.EmployeeId == userId &&
+                        (r.Status == "Approved" || r.Status == "Completed" || r.Expenses.Count > 0))
+            .OrderByDescending(r => r.CreatedAt)
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task<decimal> GetTotalPendingAmountAsync(CancellationToken cancellationToken = default)
     {
         return await DbSet.Where(e => e.Status == "Pending").SumAsync(e => (decimal?)e.Amount, cancellationToken) ?? 0m;

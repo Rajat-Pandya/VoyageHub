@@ -54,6 +54,14 @@ public class ExpensesController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("my-reports")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
+    public async Task<ActionResult<List<TripReimbursementReportDto>>> GetMyReports(CancellationToken cancellationToken)
+    {
+        var result = await _expenseService.GetMyReimbursementReportsAsync(cancellationToken);
+        return Ok(result);
+    }
+
     [HttpPost]
     [Authorize(Roles = "Employee,Manager,Finance,Admin")]
     public async Task<IActionResult> SubmitExpense([FromBody] SubmitExpenseDto dto, CancellationToken cancellationToken)

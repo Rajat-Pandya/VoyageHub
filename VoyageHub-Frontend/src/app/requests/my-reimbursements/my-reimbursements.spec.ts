@@ -10,40 +10,53 @@ describe('MyReimbursements', () => {
   let component: MyReimbursements;
   let fixture: ComponentFixture<MyReimbursements>;
 
-  const mockExpenses = [
+  const mockReports = [
     {
-      id: 'exp-1',
       requestId: 'req-1',
-      requestCode: '#TR-2048',
-      employeeName: 'Rohan',
-      departmentName: 'Sales',
-      tripPurpose: 'Summit',
-      category: 'Meals',
-      amount: 5000,
-      status: 'Pending',
-      submittedAt: '2026-11-25T10:00:00Z'
+      requestCode: '#TR-2054',
+      destination: 'Mumbai',
+      purpose: 'Server Recovery',
+      startDate: '2026-11-18',
+      endDate: '2026-11-20',
+      tripStatus: 'Completed',
+      approvedBudget: 32000,
+      totalTripSpend: 32000,
+      corporatePaidAmount: 27500,
+      claimedTotal: 4500,
+      pendingAmount: 0,
+      reimbursedAmount: 4500,
+      reportStatus: 'Reimbursed',
+      lineItems: [
+        { kind: 'Itinerary' as const, category: 'Flight', description: 'AMD → BOM', amount: 11500, status: 'Corporate-Paid', date: '2026-11-18' },
+        { kind: 'Expense' as const, category: 'Meals', description: 'Meals Claim', amount: 4500, status: 'Reimbursed', date: '2026-11-26' }
+      ]
     },
     {
-      id: 'exp-2',
       requestId: 'req-2',
-      requestCode: '#TR-2049',
-      employeeName: 'Rohan',
-      departmentName: 'Sales',
-      tripPurpose: 'Client Visit',
-      category: 'Cab',
-      amount: 1200,
-      status: 'Reimbursed',
-      submittedAt: '2026-11-24T10:00:00Z'
+      requestCode: '#TR-2055',
+      destination: 'Delhi',
+      purpose: 'Client Sync',
+      startDate: '2026-11-25',
+      endDate: '2026-11-26',
+      tripStatus: 'Approved',
+      approvedBudget: 20000,
+      totalTripSpend: 12000,
+      corporatePaidAmount: 10000,
+      claimedTotal: 2000,
+      pendingAmount: 2000,
+      reimbursedAmount: 0,
+      reportStatus: 'Pending',
+      lineItems: []
     }
   ];
 
   const mockVoyageService = {
-    getMyExpenses: vi.fn().mockReturnValue(of(mockExpenses))
+    getMyReimbursementReports: vi.fn().mockReturnValue(of(mockReports))
   };
 
   beforeEach(async () => {
     vi.clearAllMocks();
-    mockVoyageService.getMyExpenses.mockReturnValue(of(mockExpenses));
+    mockVoyageService.getMyReimbursementReports.mockReturnValue(of(mockReports));
 
     await TestBed.configureTestingModule({
       imports: [MyReimbursements],
@@ -58,22 +71,23 @@ describe('MyReimbursements', () => {
     await fixture.whenStable();
   });
 
-  it('loads expenses and computes totals and filtered lists', () => {
+  it('loads trip reports and computes pending, reimbursed, and corporate-paid totals', () => {
     expect(component).toBeTruthy();
     expect(component.isLoading()).toBe(false);
-    expect(component.totalPending()).toBe(5000);
-    expect(component.totalReimbursed()).toBe(1200);
-    expect(component.filteredExpenses().length).toBe(2);
+    expect(component.totalPending()).toBe(2000);
+    expect(component.totalReimbursed()).toBe(4500);
+    expect(component.totalCorporatePaid()).toBe(37500);
+    expect(component.filteredReports().length).toBe(2);
 
     component.statusFilter.set('Pending');
-    expect(component.filteredExpenses().length).toBe(1);
-    expect(component.filteredExpenses()[0].id).toBe('exp-1');
+    expect(component.filteredReports().length).toBe(1);
+    expect(component.filteredReports()[0].requestCode).toBe('#TR-2055');
   });
 
   it('handles API errors gracefully', () => {
-    mockVoyageService.getMyExpenses.mockReturnValue(throwError(() => new Error('fail')));
+    mockVoyageService.getMyReimbursementReports.mockReturnValue(throwError(() => new Error('fail')));
     component.ngOnInit();
-    expect(component.expenses()).toEqual([]);
+    expect(component.reports()).toEqual([]);
     expect(component.isLoading()).toBe(false);
   });
 });

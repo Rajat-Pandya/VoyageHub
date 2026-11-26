@@ -12,6 +12,7 @@ public interface IExpenseService
     Task<ExpenseReviewSummaryDto> GetPendingSummaryAsync(string? category, bool? highPriorityOnly, CancellationToken cancellationToken = default);
     Task<ExpenseReviewSummaryDto> GetExpensesSummaryAsync(string? status, string? category, bool? highPriorityOnly, CancellationToken cancellationToken = default);
     Task<List<ExpenseItemDto>> GetMyExpensesAsync(CancellationToken cancellationToken = default);
+    Task<List<TripReimbursementReportDto>> GetMyReimbursementReportsAsync(CancellationToken cancellationToken = default);
     Task<(bool Success, string Message, Expense? Expense)> SubmitExpenseAsync(SubmitExpenseDto dto, CancellationToken cancellationToken = default);
     Task<(bool Success, string Message)> TakeActionAsync(Guid id, ExpenseActionDto dto, CancellationToken cancellationToken = default);
     Task<(bool Success, string Message)> BatchPayoutAsync(BatchPayoutDto? dto, CancellationToken cancellationToken = default);

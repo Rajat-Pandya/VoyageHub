@@ -69,6 +69,34 @@ export interface ExpenseItem {
   isOverBudget?: boolean;
 }
 
+export interface ReimbursementLineItem {
+  kind: 'Itinerary' | 'Expense';
+  category: string;
+  description: string;
+  amount: number;
+  status: string;
+  date: string;
+  proofPath?: string;
+}
+
+export interface TripReimbursementReport {
+  requestId: string;
+  requestCode: string;
+  destination: string;
+  purpose: string;
+  startDate: string;
+  endDate: string;
+  tripStatus: string;
+  approvedBudget: number;
+  totalTripSpend: number;
+  corporatePaidAmount: number;
+  claimedTotal: number;
+  pendingAmount: number;
+  reimbursedAmount: number;
+  reportStatus: string;
+  lineItems: ReimbursementLineItem[];
+}
+
 export interface ApprovalHistoryItem {
   id: string;
   level: string;
@@ -237,6 +265,10 @@ export class VoyageService {
 
   getMyExpenses(): Observable<ExpenseItem[]> {
     return this.http.get<ExpenseItem[]>(`${this.baseUrl}/expenses/my-expenses`);
+  }
+
+  getMyReimbursementReports(): Observable<TripReimbursementReport[]> {
+    return this.http.get<TripReimbursementReport[]>(`${this.baseUrl}/expenses/my-reports`);
   }
 
   takeExpenseAction(id: string, action: 'Approve' | 'Reject'): Observable<any> {
