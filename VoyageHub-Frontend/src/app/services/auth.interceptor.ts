@@ -13,6 +13,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.method === 'GET') {
     headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
     headers['Pragma'] = 'no-cache';
+    return next(
+      req.clone({
+        setHeaders: headers,
+        params: req.params.set('_t', Date.now().toString())
+      })
+    );
   }
 
   if (Object.keys(headers).length > 0) {

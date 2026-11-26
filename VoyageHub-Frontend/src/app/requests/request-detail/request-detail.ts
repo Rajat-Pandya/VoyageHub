@@ -188,12 +188,18 @@ export class RequestDetail implements OnInit {
     const d = this.detail();
     if (!d) return;
     this.voyageService.addSegment(d.id, this.segmentForm).subscribe({
-      next: () => {
+      next: (created: any) => {
+        if (created && created.id) {
+          this.detail.update((curr) =>
+            curr ? { ...curr, segments: [...(curr.segments || []), created] } : curr
+          );
+        }
         this.closeSegmentModal();
         this.loadDetail(d.id);
       },
-      error: () => {
+      error: (err: any) => {
         this.closeSegmentModal();
+        this.showToast(err?.error?.message || 'Failed to add segment.');
       }
     });
   }
@@ -209,12 +215,18 @@ export class RequestDetail implements OnInit {
     const d = this.detail();
     if (!d) return;
     this.voyageService.addStay(d.id, this.stayForm).subscribe({
-      next: () => {
+      next: (created: any) => {
+        if (created && created.id) {
+          this.detail.update((curr) =>
+            curr ? { ...curr, stays: [...(curr.stays || []), created] } : curr
+          );
+        }
         this.closeStayModal();
         this.loadDetail(d.id);
       },
-      error: () => {
+      error: (err: any) => {
         this.closeStayModal();
+        this.showToast(err?.error?.message || 'Failed to add stay.');
       }
     });
   }
@@ -278,13 +290,19 @@ export class RequestDetail implements OnInit {
       description: this.expenseForm.description,
       proofPath: proofPath
     }).subscribe({
-      next: () => {
+      next: (created: any) => {
+        if (created && created.id) {
+          this.detail.update((curr) =>
+            curr ? { ...curr, expenses: [created, ...(curr.expenses || [])] } : curr
+          );
+        }
         this.closeExpenseModal();
-        this.loadDetail(d.id);
         this.activeTab.set('Expenses');
+        this.loadDetail(d.id);
       },
-      error: () => {
+      error: (err: any) => {
         this.closeExpenseModal();
+        this.showToast(err?.error?.message || 'Failed to submit expense claim.');
       }
     });
   }
