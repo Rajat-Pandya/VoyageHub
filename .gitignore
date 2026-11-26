@@ -75,4 +75,4 @@ context.md
 .scannerwork/
 coverage.xml
 *.lcov
-App_Data/Receipts/
+**/App_Data/Receipts/
