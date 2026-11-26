@@ -166,4 +166,54 @@ public class RepositoryAndControllerCoverageTests
         Assert.True(ok);
         Assert.Equal("Completed", approvedReq.Status);
     }
+
+    [Fact]
+    public async Task TravelRequestService_GetDetailAndGetRequests_MapsIsInternational()
+    {
+        var reqRepoMock = new Mock<ITravelRequestRepository>();
+        var auditMock = new Mock<IAuditService>();
+        var userMock = new Mock<ICurrentUserService>();
+        var empId = Guid.NewGuid();
+        userMock.Setup(u => u.UserId).Returns(empId);
+        userMock.Setup(u => u.UserRole).Returns("Employee");
+
+        var req = new TravelRequest
+        {
+            Id = Guid.NewGuid(),
+            RequestCode = "#TR-777",
+            EmployeeId = empId,
+            Destination = "Tokyo",
+            IsInternational = true,
+            Purpose = "Expo",
+            EstimatedBudget = 120000m,
+            StartDate = DateTime.UtcNow.Date,
+            EndDate = DateTime.UtcNow.Date.AddDays(3),
+            Status = "Approved",
+            Employee = new User
+            {
+                Id = empId,
+                Name = "Rohan",
+                Department = new Department
+                {
+                    Name = "Engineering",
+                    Policy = new TravelPolicy { DomesticLimit = 40000m, IntlBudgetLimit = 250000m, HardEnforcement = true }
+                }
+            }
+        };
+
+        reqRepoMock.Setup(r => r.GetDetailAsync(req.Id, It.IsAny<CancellationToken>())).ReturnsAsync(req);
+        reqRepoMock
+            .Setup(r => r.GetRequestsAsync(null, null, empId, null, null, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<TravelRequest> { req });
+
+        var sut = new TravelRequestService(reqRepoMock.Object, auditMock.Object, userMock.Object);
+
+        var detail = await sut.GetDetailAsync(req.Id);
+        Assert.NotNull(detail);
+        Assert.True(detail.IsInternational);
+
+        var list = await sut.GetRequestsAsync(null, null, null, null);
+        Assert.Single(list);
+        Assert.True(list[0].IsInternational);
+    }
 }

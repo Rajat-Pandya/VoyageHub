@@ -446,17 +446,20 @@ public class TravelRequestService : ITravelRequestService
         var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
         if (r == null) return (false, "Travel request not found.", null);
         if (!IsOwnerOrAdmin(r.EmployeeId)) return (false, "You can only modify your own travel requests.", null);
+        if (IsClosedOrTerminalStatus(r.Status)) return (false, $"Cannot add segments to a {r.Status} travel request.", null);
 
         var segment = new ItinerarySegment
         {
             RequestId = id,
             Mode = string.IsNullOrWhiteSpace(dto.Mode) ? "Flight" : dto.Mode,
-            Carrier = dto.Carrier ?? "LUFTHANSA LH123",
+            Carrier = string.IsNullOrWhiteSpace(dto.Carrier) ? "LUFTHANSA LH123" : dto.Carrier.Trim(),
             Origin = dto.Origin,
             Destination = dto.Destination,
             DepartureTime = dto.DepartureTime == default ? DateTime.UtcNow : dto.DepartureTime,
             ArrivalTime = dto.ArrivalTime,
-            ConfirmationNumber = dto.ConfirmationNumber ?? $"#AJK{RandomNumberGenerator.GetInt32(10, 99)}L",
+            ConfirmationNumber = string.IsNullOrWhiteSpace(dto.ConfirmationNumber)
+                ? $"#AJK{RandomNumberGenerator.GetInt32(10, 99)}L"
+                : dto.ConfirmationNumber.Trim(),
             Cost = dto.Cost
         };
 
@@ -475,6 +478,7 @@ public class TravelRequestService : ITravelRequestService
         var r = await _travelRequestRepository.GetByIdAsync(id, cancellationToken);
         if (r == null) return (false, "Travel request not found.", null);
         if (!IsOwnerOrAdmin(r.EmployeeId)) return (false, "You can only modify your own travel requests.", null);
+        if (IsClosedOrTerminalStatus(r.Status)) return (false, $"Cannot add hotel stays to a {r.Status} travel request.", null);
 
         var stay = new Stay
         {
@@ -483,7 +487,9 @@ public class TravelRequestService : ITravelRequestService
             CheckIn = dto.CheckIn == default ? DateTime.UtcNow : dto.CheckIn,
             CheckOut = dto.CheckOut == default ? DateTime.UtcNow.AddDays(1) : dto.CheckOut,
             Nights = dto.Nights > 0 ? dto.Nights : 1,
-            ConfirmationNumber = dto.ConfirmationNumber ?? $"#HY-{RandomNumberGenerator.GetInt32(100000, 999999)}",
+            ConfirmationNumber = string.IsNullOrWhiteSpace(dto.ConfirmationNumber)
+                ? $"#HY-{RandomNumberGenerator.GetInt32(100000, 999999)}"
+                : dto.ConfirmationNumber.Trim(),
             Cost = dto.Cost
         };
 
@@ -519,6 +525,13 @@ public class TravelRequestService : ITravelRequestService
 
         await _travelRequestRepository.SaveChangesAsync(cancellationToken);
         return (true, "Trip marked as completed and closed.");
+    }
+
+    private static bool IsClosedOrTerminalStatus(string? status)
+    {
+        return string.Equals(status, "Completed", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(status, "Rejected", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(status, "Cancelled", StringComparison.OrdinalIgnoreCase);
     }
 
     private async Task<List<ApprovalStep>> BuildWorkflowStepsAsync(

@@ -228,7 +228,7 @@
       <div class="tab-panel fade-in">
         <div class="panel-header-row">
           <h3>Travel Segments &amp; Stays</h3>
-          @if (canEditTrip(d)) {
+          @if (canModifyItinerary(d)) {
             <div class="panel-actions-group">
               <button type="button" class="btn-secondary-sm" (click)="openSegmentModal()">
                 + Add Flight / Train

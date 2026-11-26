@@ -146,6 +146,10 @@ export class RequestDetail implements OnInit {
     return this.canEditTrip(d) && d.status === 'Approved';
   }
 
+  canModifyItinerary(d: TravelRequestDetail): boolean {
+    return this.canEditTrip(d) && d.status !== 'Completed' && d.status !== 'Rejected' && d.status !== 'Cancelled';
+  }
+
   isOwnRequest(d: TravelRequestDetail): boolean {
     const userId = this.authService.currentUser()?.id;
     return !!userId && userId.toLowerCase() === d.employeeId.toLowerCase();

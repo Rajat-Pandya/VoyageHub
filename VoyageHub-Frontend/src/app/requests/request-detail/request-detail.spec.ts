@@ -89,6 +89,8 @@ describe('RequestDetail', () => {
     expect(component.canEditTrip(sampleDetail)).toBe(true);
     expect(component.canSubmitExpense(sampleDetail)).toBe(true);
     expect(component.canSubmitExpense({ ...sampleDetail, status: 'Draft' })).toBe(false);
+    expect(component.canModifyItinerary(sampleDetail)).toBe(true);
+    expect(component.canModifyItinerary({ ...sampleDetail, status: 'Completed' })).toBe(false);
   });
 
   it('handles modals and mutations', () => {
