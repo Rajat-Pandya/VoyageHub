@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { VoyageService, ExpenseItem } from '../../services/voyage.service';
 import { getUserInitials } from '../../services/auth.service';
@@ -12,6 +13,7 @@ import { getUserInitials } from '../../services/auth.service';
 })
 export class ExpenseReview implements OnInit {
   private readonly voyageService = inject(VoyageService);
+  private readonly sanitizer = inject(DomSanitizer);
   readonly getUserInitials = getUserInitials;
 
   readonly claims = signal<ExpenseItem[]>([]);
@@ -81,6 +83,11 @@ export class ExpenseReview implements OnInit {
 
   getProofUrl(proofPath?: string): string {
     return this.voyageService.getProofUrl(proofPath);
+  }
+
+  getSafeProofUrl(proofPath?: string): SafeResourceUrl | null {
+    const url = this.getProofUrl(proofPath);
+    return url ? this.sanitizer.bypassSecurityTrustResourceUrl(url) : null;
   }
 
   isImageProof(proofPath?: string): boolean {

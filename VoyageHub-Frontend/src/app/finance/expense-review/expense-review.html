@@ -167,6 +167,33 @@
           <button type="button" class="close-x-btn" (click)="closeReceiptModal()" title="Close receipt preview" aria-label="Close receipt preview">&times;</button>
         </div>
         <div class="modal-body receipt-body">
+          <div class="receipt-summary-grid">
+            <div class="receipt-summary-item">
+              <span>Employee</span>
+              <strong>{{ claim.employeeName }} ({{ claim.departmentName }})</strong>
+            </div>
+            <div class="receipt-summary-item">
+              <span>Trip Request</span>
+              <strong>{{ claim.requestCode }} &mdash; {{ claim.tripPurpose }}</strong>
+            </div>
+            <div class="receipt-summary-item">
+              <span>Claim Amount</span>
+              <strong class="receipt-amount">{{ claim.amount | currency:'INR':'symbol':'1.0-0' }}</strong>
+            </div>
+            <div class="receipt-summary-item">
+              <span>Status</span>
+              <span class="claim-status-pill" [class.reimbursed]="claim.status === 'Reimbursed'" [class.rejected]="claim.status === 'Rejected'" [class.pending]="claim.status === 'Pending'">
+                {{ claim.status }}
+              </span>
+            </div>
+          </div>
+
+          @if (claim.isOverBudget) {
+            <div class="receipt-budget-warning">
+              <strong>Over Trip Budget:</strong> Trip actual spend ({{ claim.actualSpend | currency:'INR':'symbol':'1.0-0' }}) exceeds approved budget ({{ claim.approvedBudget | currency:'INR':'symbol':'1.0-0' }}).
+            </div>
+          }
+
           <!-- Uploaded Document Visual Preview -->
           @if (isImageProof(claim.proofPath)) {
             <div class="receipt-document-viewport">
@@ -174,51 +201,35 @@
             </div>
           } @else if (isPdfProof(claim.proofPath)) {
             <div class="receipt-pdf-banner">
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-              <div class="pdf-details">
-                <strong>PDF Bill Document Attached</strong>
-                <code>{{ claim.proofPath }}</code>
+              <div class="pdf-info-left">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+                <div class="pdf-details">
+                  <strong>PDF Receipt Attached</strong>
+                  <code class="proof-filename">{{ claim.proofPath }}</code>
+                </div>
               </div>
               <a [href]="getProofUrl(claim.proofPath)" target="_blank" rel="noopener noreferrer" class="btn-outline-sm">
-                Open PDF
+                Open in New Tab
               </a>
             </div>
+            @if (getSafeProofUrl(claim.proofPath); as safePdfUrl) {
+              <iframe [src]="safePdfUrl" title="Receipt PDF Preview" class="receipt-pdf-frame"></iframe>
+            }
+          } @else {
+            <div class="no-proof-banner">No receipt document attached to this claim.</div>
           }
-
-          <div class="receipt-invoice-mock">
-            <div class="receipt-brand">VOYAGE CORPORATE TAX INVOICE &bull; GST COMPLIANT AUDIT</div>
-            <div class="receipt-row">
-              <span>Employee:</span>
-              <strong>{{ claim.employeeName }}</strong>
-            </div>
-            <div class="receipt-row">
-              <span>Trip Request:</span>
-              <strong>{{ claim.requestCode }} &mdash; {{ claim.tripPurpose }}</strong>
-            </div>
-            <div class="receipt-row">
-              <span>Expense Category:</span>
-              <strong>{{ claim.category }}</strong>
-            </div>
-            <div class="receipt-row">
-              <span>Claim Amount:</span>
-              <strong class="receipt-amount">{{ claim.amount | currency:'INR':'symbol':'1.0-0' }}</strong>
-            </div>
-            <div class="receipt-row">
-              <span>Proof Document:</span>
-              <code>{{ claim.proofPath || 'gst_invoice.pdf' }}</code>
-            </div>
-            <div class="receipt-stamp">STATUS: GST VERIFIED &amp; ELIGIBLE FOR REIMBURSEMENT</div>
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-secondary" (click)="closeReceiptModal()">Close</button>
-          <button type="button" class="btn-danger-outline" (click)="takeAction(claim, 'Reject'); closeReceiptModal()">Reject Claim</button>
-          <button type="button" class="btn-dark" (click)="takeAction(claim, 'Approve'); closeReceiptModal()">Verify &amp; Approve Claim</button>
+          @if (claim.status === 'Pending') {
+            <button type="button" class="btn-danger-outline" (click)="takeAction(claim, 'Reject'); closeReceiptModal()">Reject Claim</button>
+            <button type="button" class="btn-dark" (click)="takeAction(claim, 'Approve'); closeReceiptModal()">Verify &amp; Approve Claim</button>
+          }
         </div>
       </div>
     </div>
