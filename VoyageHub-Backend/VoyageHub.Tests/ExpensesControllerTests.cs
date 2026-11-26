@@ -160,6 +160,34 @@ public class ExpensesControllerTests : IDisposable
     }
 
     [Fact]
+    public async Task GetPending_WithReimbursedStatus_CallsGetExpensesSummaryAsync()
+    {
+        var summary = new ExpenseReviewSummaryDto { TotalPendingAmount = 0m, PendingClaims = new List<ExpenseItemDto>() };
+        _expenseServiceMock
+            .Setup(s => s.GetExpensesSummaryAsync("Reimbursed", null, null, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(summary);
+
+        var result = await _controller.GetPending(null, null, "Reimbursed", CancellationToken.None);
+
+        var okResult = Assert.IsType<OkObjectResult>(result.Result);
+        Assert.Equal(summary, okResult.Value);
+    }
+
+    [Fact]
+    public async Task GetMyExpenses_ReturnsOkList()
+    {
+        var list = new List<ExpenseItemDto> { new() { Id = Guid.NewGuid(), Category = "Meals", Amount = 500m } };
+        _expenseServiceMock
+            .Setup(s => s.GetMyExpensesAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(list);
+
+        var result = await _controller.GetMyExpenses(CancellationToken.None);
+
+        var okResult = Assert.IsType<OkObjectResult>(result.Result);
+        Assert.Equal(list, okResult.Value);
+    }
+
+    [Fact]
     public async Task TakeAction_CallsServiceAndReturnsOk()
     {
         var expenseId = Guid.NewGuid();

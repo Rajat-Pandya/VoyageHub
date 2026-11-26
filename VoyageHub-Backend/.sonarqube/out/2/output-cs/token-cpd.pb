@@ -1680,1227 +1680,7 @@ UseSwagger
 –– 
 ;
 –– c
-aC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\GlobalUsings.cs°Y
-tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\EmployeesController.cs
-	namespace 	
-	VoyageHub
- 
-. 
-Api 
-. 
-Controllers #
-;# $
-[ 
-ApiController 
-] 
-[ 
-Route 
-( 
-$str 
-) 
-] 
-[ 
-	Authorize 
-
-(
- 
-Roles 
-= 
-$str 
-) 
-] 
-public 
-class 
-EmployeesController  
-:! "
-ControllerBase# 1
-{ 
-private 
-readonly 
-IEmployeeService %
-_employeeService& 6
-;6 7
-public 
-
-EmployeesController 
-( 
-IEmployeeService /
-employeeService0 ?
-)? @
-{ 
-_employeeService 
-= 
-employeeService *
-;* +
-} 
-[ 
-HttpGet 
-] 
-public 
-
-async 
-Task 
-< 
-ActionResult "
-<" #
-List# '
-<' (
-EmployeeDto( 3
->3 4
->4 5
->5 6
-GetEmployees7 C
-(C D
-[ 	
-	FromQuery	 
-] 
-string 
-? 
-search "
-," #
-[ 	
-	FromQuery	 
-] 
-string 
-? 
-
-department &
-,& '
-[ 	
-	FromQuery	 
-] 
-string 
-? 
-role  
-,  !
-CancellationToken   
-cancellationToken   +
-)  + ,
-{!! 
-var"" 
-	employees"" 
-="" 
-await"" 
-_employeeService"" .
-."". /
-GetEmployeesAsync""/ @
-(""@ A
-search""A G
-,""G H
-
-department""I S
-,""S T
-role""U Y
-,""Y Z
-cancellationToken""[ l
-)""l m
-;""m n
-return## 
-Ok## 
-(## 
-	employees## 
-)## 
-;## 
-}$$ 
-[&& 
-HttpGet&& 
-(&& 
-$str&& 
-)&& 
-]&& 
-public'' 
-
-async'' 
-Task'' 
-<'' 
-ActionResult'' "
-<''" #
-EmployeeDto''# .
->''. /
->''/ 0
-GetEmployeeById''1 @
-(''@ A
-Guid''A E
-id''F H
-,''H I
-CancellationToken''J [
-cancellationToken''\ m
-)''m n
-{(( 
-var)) 
-employee)) 
-=)) 
-await)) 
-_employeeService)) -
-.))- . 
-GetEmployeeByIdAsync)). B
-())B C
-id))C E
-,))E F
-cancellationToken))G X
-)))X Y
-;))Y Z
-if** 
-
-(** 
-employee** 
-==** 
-null** 
-)** 
-{++ 	
-return,, 
-NotFound,, 
-(,, 
-new,, 
-{,,  !
-message,," )
-=,,* +
-$str,,, A
-},,B C
-),,C D
-;,,D E
-}-- 	
-return.. 
-Ok.. 
-(.. 
-employee.. 
-).. 
-;.. 
-}// 
-[11 
-HttpPost11 
-]11 
-public22 
-
-async22 
-Task22 
-<22 
-ActionResult22 "
-<22" #
-EmployeeDto22# .
->22. /
->22/ 0
-CreateEmployee221 ?
-(22? @
-[22@ A
-FromBody22A I
-]22I J
-CreateEmployeeDto22K \
-dto22] `
-,22` a
-CancellationToken22b s
-cancellationToken	22t Ö
-)
-22Ö Ü
-{33 
-var44 
-(44 
-success44 
-,44 
-message44 
-,44 
-employee44 '
-)44' (
-=44) *
-await44+ 0
-_employeeService441 A
-.44A B
-CreateEmployeeAsync44B U
-(44U V
-dto44V Y
-,44Y Z
-cancellationToken44[ l
-)44l m
-;44m n
-if55 
-
-(55 
-!55 
-success55 
-)55 
-{66 	
-return77 
-
-BadRequest77 
-(77 
-new77 !
-{77" #
-message77$ +
-}77, -
-)77- .
-;77. /
-}88 	
-return99 
-CreatedAtAction99 
-(99 
-nameof99 %
-(99% &
-GetEmployeeById99& 5
-)995 6
-,996 7
-new998 ;
-{99< =
-id99> @
-=99A B
-employee99C K
-!99K L
-.99L M
-Id99M O
-}99P Q
-,99Q R
-employee99S [
-)99[ \
-;99\ ]
-}:: 
-[<< 
-HttpPut<< 
-(<< 
-$str<< 
-)<< 
-]<< 
-public== 
-
-async== 
-Task== 
-<== 
-ActionResult== "
-<==" #
-EmployeeDto==# .
->==. /
->==/ 0
-UpdateEmployee==1 ?
-(==? @
-Guid==@ D
-id==E G
-,==G H
-[==I J
-FromBody==J R
-]==R S
-UpdateEmployeeDto==T e
-dto==f i
-,==i j
-CancellationToken==k |
-cancellationToken	==} é
-)
-==é è
-{>> 
-var?? 
-(?? 
-success?? 
-,?? 
-message?? 
-,?? 
-employee?? '
-)??' (
-=??) *
-await??+ 0
-_employeeService??1 A
-.??A B
-UpdateEmployeeAsync??B U
-(??U V
-id??V X
-,??X Y
-dto??Z ]
-,??] ^
-cancellationToken??_ p
-)??p q
-;??q r
-if@@ 
-
-(@@ 
-!@@ 
-success@@ 
-)@@ 
-{AA 	
-returnBB 
-
-BadRequestBB 
-(BB 
-newBB !
-{BB" #
-messageBB$ +
-}BB, -
-)BB- .
-;BB. /
-}CC 	
-returnDD 
-OkDD 
-(DD 
-employeeDD 
-)DD 
-;DD 
-}EE 
-[GG 
-
-HttpDeleteGG 
-(GG 
-$strGG 
-)GG 
-]GG 
-publicHH 
-
-asyncHH 
-TaskHH 
-<HH 
-IActionResultHH #
->HH# $
-DeleteEmployeeHH% 3
-(HH3 4
-GuidHH4 8
-idHH9 ;
-,HH; <
-CancellationTokenHH= N
-cancellationTokenHHO `
-)HH` a
-{II 
-varJJ 
-(JJ 
-successJJ 
-,JJ 
-messageJJ 
-)JJ 
-=JJ  
-awaitJJ! &
-_employeeServiceJJ' 7
-.JJ7 8
-DeleteEmployeeAsyncJJ8 K
-(JJK L
-idJJL N
-,JJN O
-cancellationTokenJJP a
-)JJa b
-;JJb c
-ifKK 
-
-(KK 
-!KK 
-successKK 
-)KK 
-{LL 	
-returnMM 
-
-BadRequestMM 
-(MM 
-newMM !
-{MM" #
-messageMM$ +
-}MM, -
-)MM- .
-;MM. /
-}NN 	
-returnOO 
-OkOO 
-(OO 
-newOO 
-{OO 
-successOO 
-=OO  !
-trueOO" &
-,OO& '
-messageOO( /
-}OO0 1
-)OO1 2
-;OO2 3
-}PP 
-[RR 
-HttpPostRR 
-(RR 
-$strRR 
-)RR 
-]RR 
-publicSS 
-
-asyncSS 
-TaskSS 
-<SS 
-ActionResultSS "
-<SS" # 
-BatchUploadResultDtoSS# 7
->SS7 8
->SS8 9
-BatchUploadSS: E
-(SSE F
-	IFormFileSSF O
-?SSO P
-fileSSQ U
-,SSU V
-CancellationTokenSSW h
-cancellationTokenSSi z
-)SSz {
-{TT 
-varVV 
-
-uploadFileVV 
-=VV 
-fileVV 
-??VV  
-(VV! "
-RequestVV" )
-.VV) *
-HasFormContentTypeVV* <
-&&VV= ?
-RequestVV@ G
-.VVG H
-FormVVH L
-.VVL M
-FilesVVM R
-.VVR S
-CountVVS X
->VVY Z
-$numVV[ \
-?VV] ^
-RequestVV_ f
-.VVf g
-FormVVg k
-.VVk l
-FilesVVl q
-[VVq r
-$numVVr s
-]VVs t
-:VVu v
-nullVVw {
-)VV{ |
-;VV| }
-ifXX 
-
-(XX 
-
-uploadFileXX 
-==XX 
-nullXX 
-||XX !
-
-uploadFileXX" ,
-.XX, -
-LengthXX- 3
-==XX4 6
-$numXX7 8
-)XX8 9
-{YY 	
-returnZZ 
-
-BadRequestZZ 
-(ZZ 
-newZZ !
-{ZZ" #
-messageZZ$ +
-=ZZ, -
-$strZZ. P
-}ZZQ R
-)ZZR S
-;ZZS T
-}[[ 	
-if]] 
-
-(]] 
-!]] 
-
-uploadFile]] 
-.]] 
-FileName]]  
-.]]  !
-EndsWith]]! )
-(]]) *
-$str]]* 0
-,]]0 1
-StringComparison]]2 B
-.]]B C
-OrdinalIgnoreCase]]C T
-)]]T U
-)]]U V
-{^^ 	
-return__ 
-
-BadRequest__ 
-(__ 
-new__ !
-{__" #
-message__$ +
-=__, -
-$str__. _
-}__` a
-)__a b
-;__b c
-}`` 	
-usingbb 
-varbb 
-streambb 
-=bb 
-
-uploadFilebb %
-.bb% &
-OpenReadStreambb& 4
-(bb4 5
-)bb5 6
-;bb6 7
-varcc 
-resultcc 
-=cc 
-awaitcc 
-_employeeServicecc +
-.cc+ ,
-BatchUploadCsvAsynccc, ?
-(cc? @
-streamcc@ F
-,ccF G
-cancellationTokenccH Y
-)ccY Z
-;ccZ [
-returndd 
-Okdd 
-(dd 
-resultdd 
-)dd 
-;dd 
-}ee 
-[gg 
-HttpGetgg 
-(gg 
-$strgg 
-)gg 
-]gg 
-[hh 
-AllowAnonymoushh 
-]hh 
-publicii 
-
-IActionResultii 
-DownloadCsvTemplateii ,
-(ii, -
-)ii- .
-{jj 
-varkk 
-
-csvBuilderkk 
-=kk 
-newkk 
-StringBuilderkk *
-(kk* +
-)kk+ ,
-;kk, -
-
-csvBuilderll 
-.ll 
-
-AppendLinell 
-(ll 
-$strll C
-)llC D
-;llD E
-
-csvBuildermm 
-.mm 
-
-AppendLinemm 
-(mm 
-$strmm h
-)mmh i
-;mmi j
-
-csvBuildernn 
-.nn 
-
-AppendLinenn 
-(nn 
-$strnn l
-)nnl m
-;nnm n
-
-csvBuilderoo 
-.oo 
-
-AppendLineoo 
-(oo 
-$stroo p
-)oop q
-;ooq r
-varqq 
-bytesqq 
-=qq 
-Encodingqq 
-.qq 
-UTF8qq !
-.qq! "
-GetBytesqq" *
-(qq* +
-
-csvBuilderqq+ 5
-.qq5 6
-ToStringqq6 >
-(qq> ?
-)qq? @
-)qq@ A
-;qqA B
-returnrr 
-Filerr 
-(rr 
-bytesrr 
-,rr 
-$strrr %
-,rr% &
-$strrr' ?
-)rr? @
-;rr@ A
-}ss 
-}tt ±L
-rC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\SupportController.cs
-	namespace 	
-	VoyageHub
- 
-. 
-Api 
-. 
-Controllers #
-;# $
-[ 
-ApiController 
-] 
-[ 
-Route 
-( 
-$str 
-) 
-] 
-[ 
-	Authorize 
-
-]
- 
-public 
-class 
-SupportController 
-:  
-ControllerBase! /
-{ 
-private 
-readonly 
-ISupportService $
-_supportService% 4
-;4 5
-private 
-readonly 
-ILogger 
-< 
-SupportController .
->. /
-_logger0 7
-;7 8
-public 
-
-SupportController 
-( 
-ISupportService ,
-supportService- ;
-,; <
-ILogger= D
-<D E
-SupportControllerE V
->V W
-loggerX ^
-)^ _
-{ 
-_supportService 
-= 
-supportService (
-;( )
-_logger 
-= 
-logger 
-; 
-} 
-[ 
-HttpGet 
-( 
-$str 
-) 
-] 
-[ 
-	Authorize 
-( 
-Roles 
-= 
-$str 7
-)7 8
-]8 9
-public 
-
-async 
-Task 
-< 
-ActionResult "
-<" #
-List# '
-<' (
-SupportTicketDto( 8
->8 9
->9 :
->: ;
-
-GetTickets< F
-(F G
-[ 	
-	FromQuery	 
-] 
-string 
-? 
-status "
-," #
-[ 	
-	FromQuery	 
-] 
-Guid 
-? 
-userId  
-,  !
-[   	
-	FromQuery  	 
-]   
-string   
-?   
-search   "
-,  " #
-CancellationToken!! 
-cancellationToken!! +
-)!!+ ,
-{"" 
-try## 
-{$$ 	
-var%% 
-tickets%% 
-=%% 
-await%% 
-_supportService%%  /
-.%%/ 0
-GetTicketsAsync%%0 ?
-(%%? @
-status%%@ F
-,%%F G
-userId%%H N
-,%%N O
-search%%P V
-,%%V W
-cancellationToken%%X i
-)%%i j
-;%%j k
-return&& 
-Ok&& 
-(&& 
-tickets&& 
-)&& 
-;&& 
-}'' 	
-catch(( 
-((( 
-	Exception(( 
-ex(( 
-)(( 
-{)) 	
-_logger** 
-.** 
-LogError** 
-(** 
-ex** 
-,**  
-$str**! A
-)**A B
-;**B C
-return++ 
-
-StatusCode++ 
-(++ 
-$num++ !
-,++! "
-new++# &
-{++' (
-message++) 0
-=++1 2
-$"++3 5
-$str++5 E
-{++E F
-ex++F H
-.++H I
-Message++I P
-}++P Q
-"++Q R
-}++S T
-)++T U
-;++U V
-},, 	
-}-- 
-[// 
-HttpGet// 
-(// 
-$str// 
-)// 
-]// 
-[00 
-	Authorize00 
-(00 
-Roles00 
-=00 
-$str00 7
-)007 8
-]008 9
-public11 
-
-async11 
-Task11 
-<11 
-ActionResult11 "
-<11" #
-SupportTicketDto11# 3
->113 4
->114 5
-GetTicketById116 C
-(11C D
-Guid11D H
-id11I K
-,11K L
-CancellationToken11M ^
-cancellationToken11_ p
-)11p q
-{22 
-try33 
-{44 	
-var55 
-ticket55 
-=55 
-await55 
-_supportService55 .
-.55. /
-GetTicketByIdAsync55/ A
-(55A B
-id55B D
-,55D E
-cancellationToken55F W
-)55W X
-;55X Y
-if66 
-(66 
-ticket66 
-==66 
-null66 
-)66 
-{77 
-return88 
-NotFound88 
-(88  
-new88  #
-{88$ %
-message88& -
-=88. /
-$str880 K
-}88L M
-)88M N
-;88N O
-}99 
-return;; 
-Ok;; 
-(;; 
-ticket;; 
-);; 
-;;; 
-}<< 	
-catch== 
-(== 
-	Exception== 
-ex== 
-)== 
-{>> 	
-_logger?? 
-.?? 
-LogError?? 
-(?? 
-ex?? 
-,??  
-$str??! @
-)??@ A
-;??A B
-return@@ 
-
-StatusCode@@ 
-(@@ 
-$num@@ !
-,@@! "
-new@@# &
-{@@' (
-message@@) 0
-=@@1 2
-$"@@3 5
-$str@@5 E
-{@@E F
-ex@@F H
-.@@H I
-Message@@I P
-}@@P Q
-"@@Q R
-}@@S T
-)@@T U
-;@@U V
-}AA 	
-}BB 
-[DD 
-HttpPostDD 
-(DD 
-$strDD 
-)DD 
-]DD 
-[EE 
-	AuthorizeEE 
-(EE 
-RolesEE 
-=EE 
-$strEE 7
-)EE7 8
-]EE8 9
-publicFF 
-
-asyncFF 
-TaskFF 
-<FF 
-ActionResultFF "
-<FF" #
-SupportTicketDtoFF# 3
->FF3 4
->FF4 5
-CreateTicketFF6 B
-(FFB C
-[FFC D
-FromBodyFFD L
-]FFL M"
-CreateSupportTicketDtoFFN d
-dtoFFe h
-,FFh i
-CancellationTokenFFj {
-cancellationToken	FF| ç
-)
-FFç é
-{GG 
-tryHH 
-{II 	
-varJJ 
-(JJ 
-successJJ 
-,JJ 
-messageJJ !
-,JJ! "
-ticketJJ# )
-)JJ) *
-=JJ+ ,
-awaitJJ- 2
-_supportServiceJJ3 B
-.JJB C
-CreateTicketAsyncJJC T
-(JJT U
-dtoJJU X
-,JJX Y
-cancellationTokenJJZ k
-)JJk l
-;JJl m
-ifKK 
-(KK 
-!KK 
-successKK 
-)KK 
-{LL 
-returnMM 
-
-BadRequestMM !
-(MM! "
-newMM" %
-{MM& '
-messageMM( /
-}MM0 1
-)MM1 2
-;MM2 3
-}NN 
-returnPP 
-CreatedAtActionPP "
-(PP" #
-nameofPP# )
-(PP) *
-GetTicketByIdPP* 7
-)PP7 8
-,PP8 9
-newPP: =
-{PP> ?
-idPP@ B
-=PPC D
-ticketPPE K
-!PPK L
-.PPL M
-IdPPM O
-}PPP Q
-,PPQ R
-ticketPPS Y
-)PPY Z
-;PPZ [
-}QQ 	
-catchRR 
-(RR 
-	ExceptionRR 
-exRR 
-)RR 
-{SS 	
-_loggerTT 
-.TT 
-LogErrorTT 
-(TT 
-exTT 
-,TT  
-$strTT! @
-)TT@ A
-;TTA B
-returnUU 
-
-StatusCodeUU 
-(UU 
-$numUU !
-,UU! "
-newUU# &
-{UU' (
-messageUU) 0
-=UU1 2
-$"UU3 5
-$strUU5 E
-{UUE F
-exUUF H
-.UUH I
-MessageUUI P
-}UUP Q
-"UUQ R
-}UUS T
-)UUT U
-;UUU V
-}VV 	
-}WW 
-[YY 
-HttpPostYY 
-(YY 
-$strYY #
-)YY# $
-]YY$ %
-[ZZ 
-	AuthorizeZZ 
-(ZZ 
-RolesZZ 
-=ZZ 
-$strZZ .
-)ZZ. /
-]ZZ/ 0
-public[[ 
-
-async[[ 
-Task[[ 
-<[[ 
-IActionResult[[ #
->[[# $
-UpdateTicketStatus[[% 7
-([[7 8
-Guid[[8 <
-id[[= ?
-,[[? @
-[[[A B
-FromBody[[B J
-][[J K!
-UpdateTicketStatusDto[[L a
-dto[[b e
-,[[e f
-CancellationToken[[g x
-cancellationToken	[[y ä
-)
-[[ä ã
-{\\ 
-try]] 
-{^^ 	
-var__ 
-(__ 
-success__ 
-,__ 
-message__ !
-)__! "
-=__# $
-await__% *
-_supportService__+ :
-.__: ;#
-UpdateTicketStatusAsync__; R
-(__R S
-id__S U
-,__U V
-dto__W Z
-,__Z [
-cancellationToken__\ m
-)__m n
-;__n o
-if`` 
-(`` 
-!`` 
-success`` 
-)`` 
-{aa 
-returnbb 
-NotFoundbb 
-(bb  
-newbb  #
-{bb$ %
-messagebb& -
-}bb. /
-)bb/ 0
-;bb0 1
-}cc 
-returnee 
-Okee 
-(ee 
-newee 
-{ee 
-successee #
-=ee$ %
-trueee& *
-,ee* +
-messageee, 3
-}ee4 5
-)ee5 6
-;ee6 7
-}ff 	
-catchgg 
-(gg 
-	Exceptiongg 
-exgg 
-)gg 
-{hh 	
-_loggerii 
-.ii 
-LogErrorii 
-(ii 
-exii 
-,ii  
-$strii! G
-)iiG H
-;iiH I
-returnjj 
-
-StatusCodejj 
-(jj 
-$numjj !
-,jj! "
-newjj# &
-{jj' (
-messagejj) 0
-=jj1 2
-$"jj3 5
-$strjj5 E
-{jjE F
-exjjF H
-.jjH I
-MessagejjI P
-}jjP Q
-"jjQ R
-}jjS T
-)jjT U
-;jjU V
-}kk 	
-}ll 
-}mm ı|
+aC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\GlobalUsings.csı|
 yC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\TravelRequestsController.cs
 	namespace
 
@@ -3334,9 +2114,9 @@ EmployeeIdOO, 6
 (YY 
 RolesYY 
 =YY 
-$strYY /
-)YY/ 0
-]YY0 1
+$strYY )
+)YY) *
+]YY* +
 publicZZ 
 
 asyncZZ 
@@ -3981,7 +2761,1037 @@ AddStayDto
 ííC D
 }
 ìì 
-}îî ç≥
+}îî ±L
+rC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\SupportController.cs
+	namespace 	
+	VoyageHub
+ 
+. 
+Api 
+. 
+Controllers #
+;# $
+[ 
+ApiController 
+] 
+[ 
+Route 
+( 
+$str 
+) 
+] 
+[ 
+	Authorize 
+
+]
+ 
+public 
+class 
+SupportController 
+:  
+ControllerBase! /
+{ 
+private 
+readonly 
+ISupportService $
+_supportService% 4
+;4 5
+private 
+readonly 
+ILogger 
+< 
+SupportController .
+>. /
+_logger0 7
+;7 8
+public 
+
+SupportController 
+( 
+ISupportService ,
+supportService- ;
+,; <
+ILogger= D
+<D E
+SupportControllerE V
+>V W
+loggerX ^
+)^ _
+{ 
+_supportService 
+= 
+supportService (
+;( )
+_logger 
+= 
+logger 
+; 
+} 
+[ 
+HttpGet 
+( 
+$str 
+) 
+] 
+[ 
+	Authorize 
+( 
+Roles 
+= 
+$str 7
+)7 8
+]8 9
+public 
+
+async 
+Task 
+< 
+ActionResult "
+<" #
+List# '
+<' (
+SupportTicketDto( 8
+>8 9
+>9 :
+>: ;
+
+GetTickets< F
+(F G
+[ 	
+	FromQuery	 
+] 
+string 
+? 
+status "
+," #
+[ 	
+	FromQuery	 
+] 
+Guid 
+? 
+userId  
+,  !
+[   	
+	FromQuery  	 
+]   
+string   
+?   
+search   "
+,  " #
+CancellationToken!! 
+cancellationToken!! +
+)!!+ ,
+{"" 
+try## 
+{$$ 	
+var%% 
+tickets%% 
+=%% 
+await%% 
+_supportService%%  /
+.%%/ 0
+GetTicketsAsync%%0 ?
+(%%? @
+status%%@ F
+,%%F G
+userId%%H N
+,%%N O
+search%%P V
+,%%V W
+cancellationToken%%X i
+)%%i j
+;%%j k
+return&& 
+Ok&& 
+(&& 
+tickets&& 
+)&& 
+;&& 
+}'' 	
+catch(( 
+((( 
+	Exception(( 
+ex(( 
+)(( 
+{)) 	
+_logger** 
+.** 
+LogError** 
+(** 
+ex** 
+,**  
+$str**! A
+)**A B
+;**B C
+return++ 
+
+StatusCode++ 
+(++ 
+$num++ !
+,++! "
+new++# &
+{++' (
+message++) 0
+=++1 2
+$"++3 5
+$str++5 E
+{++E F
+ex++F H
+.++H I
+Message++I P
+}++P Q
+"++Q R
+}++S T
+)++T U
+;++U V
+},, 	
+}-- 
+[// 
+HttpGet// 
+(// 
+$str// 
+)// 
+]// 
+[00 
+	Authorize00 
+(00 
+Roles00 
+=00 
+$str00 7
+)007 8
+]008 9
+public11 
+
+async11 
+Task11 
+<11 
+ActionResult11 "
+<11" #
+SupportTicketDto11# 3
+>113 4
+>114 5
+GetTicketById116 C
+(11C D
+Guid11D H
+id11I K
+,11K L
+CancellationToken11M ^
+cancellationToken11_ p
+)11p q
+{22 
+try33 
+{44 	
+var55 
+ticket55 
+=55 
+await55 
+_supportService55 .
+.55. /
+GetTicketByIdAsync55/ A
+(55A B
+id55B D
+,55D E
+cancellationToken55F W
+)55W X
+;55X Y
+if66 
+(66 
+ticket66 
+==66 
+null66 
+)66 
+{77 
+return88 
+NotFound88 
+(88  
+new88  #
+{88$ %
+message88& -
+=88. /
+$str880 K
+}88L M
+)88M N
+;88N O
+}99 
+return;; 
+Ok;; 
+(;; 
+ticket;; 
+);; 
+;;; 
+}<< 	
+catch== 
+(== 
+	Exception== 
+ex== 
+)== 
+{>> 	
+_logger?? 
+.?? 
+LogError?? 
+(?? 
+ex?? 
+,??  
+$str??! @
+)??@ A
+;??A B
+return@@ 
+
+StatusCode@@ 
+(@@ 
+$num@@ !
+,@@! "
+new@@# &
+{@@' (
+message@@) 0
+=@@1 2
+$"@@3 5
+$str@@5 E
+{@@E F
+ex@@F H
+.@@H I
+Message@@I P
+}@@P Q
+"@@Q R
+}@@S T
+)@@T U
+;@@U V
+}AA 	
+}BB 
+[DD 
+HttpPostDD 
+(DD 
+$strDD 
+)DD 
+]DD 
+[EE 
+	AuthorizeEE 
+(EE 
+RolesEE 
+=EE 
+$strEE 7
+)EE7 8
+]EE8 9
+publicFF 
+
+asyncFF 
+TaskFF 
+<FF 
+ActionResultFF "
+<FF" #
+SupportTicketDtoFF# 3
+>FF3 4
+>FF4 5
+CreateTicketFF6 B
+(FFB C
+[FFC D
+FromBodyFFD L
+]FFL M"
+CreateSupportTicketDtoFFN d
+dtoFFe h
+,FFh i
+CancellationTokenFFj {
+cancellationToken	FF| ç
+)
+FFç é
+{GG 
+tryHH 
+{II 	
+varJJ 
+(JJ 
+successJJ 
+,JJ 
+messageJJ !
+,JJ! "
+ticketJJ# )
+)JJ) *
+=JJ+ ,
+awaitJJ- 2
+_supportServiceJJ3 B
+.JJB C
+CreateTicketAsyncJJC T
+(JJT U
+dtoJJU X
+,JJX Y
+cancellationTokenJJZ k
+)JJk l
+;JJl m
+ifKK 
+(KK 
+!KK 
+successKK 
+)KK 
+{LL 
+returnMM 
+
+BadRequestMM !
+(MM! "
+newMM" %
+{MM& '
+messageMM( /
+}MM0 1
+)MM1 2
+;MM2 3
+}NN 
+returnPP 
+CreatedAtActionPP "
+(PP" #
+nameofPP# )
+(PP) *
+GetTicketByIdPP* 7
+)PP7 8
+,PP8 9
+newPP: =
+{PP> ?
+idPP@ B
+=PPC D
+ticketPPE K
+!PPK L
+.PPL M
+IdPPM O
+}PPP Q
+,PPQ R
+ticketPPS Y
+)PPY Z
+;PPZ [
+}QQ 	
+catchRR 
+(RR 
+	ExceptionRR 
+exRR 
+)RR 
+{SS 	
+_loggerTT 
+.TT 
+LogErrorTT 
+(TT 
+exTT 
+,TT  
+$strTT! @
+)TT@ A
+;TTA B
+returnUU 
+
+StatusCodeUU 
+(UU 
+$numUU !
+,UU! "
+newUU# &
+{UU' (
+messageUU) 0
+=UU1 2
+$"UU3 5
+$strUU5 E
+{UUE F
+exUUF H
+.UUH I
+MessageUUI P
+}UUP Q
+"UUQ R
+}UUS T
+)UUT U
+;UUU V
+}VV 	
+}WW 
+[YY 
+HttpPostYY 
+(YY 
+$strYY #
+)YY# $
+]YY$ %
+[ZZ 
+	AuthorizeZZ 
+(ZZ 
+RolesZZ 
+=ZZ 
+$strZZ .
+)ZZ. /
+]ZZ/ 0
+public[[ 
+
+async[[ 
+Task[[ 
+<[[ 
+IActionResult[[ #
+>[[# $
+UpdateTicketStatus[[% 7
+([[7 8
+Guid[[8 <
+id[[= ?
+,[[? @
+[[[A B
+FromBody[[B J
+][[J K!
+UpdateTicketStatusDto[[L a
+dto[[b e
+,[[e f
+CancellationToken[[g x
+cancellationToken	[[y ä
+)
+[[ä ã
+{\\ 
+try]] 
+{^^ 	
+var__ 
+(__ 
+success__ 
+,__ 
+message__ !
+)__! "
+=__# $
+await__% *
+_supportService__+ :
+.__: ;#
+UpdateTicketStatusAsync__; R
+(__R S
+id__S U
+,__U V
+dto__W Z
+,__Z [
+cancellationToken__\ m
+)__m n
+;__n o
+if`` 
+(`` 
+!`` 
+success`` 
+)`` 
+{aa 
+returnbb 
+NotFoundbb 
+(bb  
+newbb  #
+{bb$ %
+messagebb& -
+}bb. /
+)bb/ 0
+;bb0 1
+}cc 
+returnee 
+Okee 
+(ee 
+newee 
+{ee 
+successee #
+=ee$ %
+trueee& *
+,ee* +
+messageee, 3
+}ee4 5
+)ee5 6
+;ee6 7
+}ff 	
+catchgg 
+(gg 
+	Exceptiongg 
+exgg 
+)gg 
+{hh 	
+_loggerii 
+.ii 
+LogErrorii 
+(ii 
+exii 
+,ii  
+$strii! G
+)iiG H
+;iiH I
+returnjj 
+
+StatusCodejj 
+(jj 
+$numjj !
+,jj! "
+newjj# &
+{jj' (
+messagejj) 0
+=jj1 2
+$"jj3 5
+$strjj5 E
+{jjE F
+exjjF H
+.jjH I
+MessagejjI P
+}jjP Q
+"jjQ R
+}jjS T
+)jjT U
+;jjU V
+}kk 	
+}ll 
+}mm ÿ?
+sC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\PoliciesController.cs
+	namespace
+
+ 	
+	VoyageHub
+
+
+ 
+.
+
+ 
+Api
+
+ 
+.
+
+ 
+Controllers
+
+ #
+;
+
+# $
+[ 
+ApiController 
+] 
+[ 
+Route 
+( 
+$str 
+) 
+] 
+[ 
+	Authorize 
+
+]
+ 
+public 
+class 
+PoliciesController 
+:  !
+ControllerBase" 0
+{ 
+private 
+readonly 
+IPolicyService #
+_policyService$ 2
+;2 3
+public 
+
+PoliciesController 
+( 
+IPolicyService ,
+policyService- :
+): ;
+{ 
+_policyService 
+= 
+policyService &
+;& '
+} 
+[ 
+HttpGet 
+] 
+[ 
+	Authorize 
+( 
+Roles 
+= 
+$str 7
+)7 8
+]8 9
+public 
+
+async 
+Task 
+< 
+ActionResult "
+<" #
+List# '
+<' (
+PolicyConfigDto( 7
+>7 8
+>8 9
+>9 :
+GetPolicies; F
+(F G
+CancellationTokenG X
+cancellationTokenY j
+)j k
+{ 
+var 
+policies 
+= 
+await 
+_policyService +
+.+ ,
+GetPoliciesAsync, <
+(< =
+cancellationToken= N
+)N O
+;O P
+return 
+Ok 
+( 
+policies 
+) 
+; 
+} 
+[   
+HttpGet   
+(   
+$str   
+)   
+]   
+[!! 
+	Authorize!! 
+(!! 
+Roles!! 
+=!! 
+$str!! 7
+)!!7 8
+]!!8 9
+public"" 
+
+async"" 
+Task"" 
+<"" 
+ActionResult"" "
+<""" #
+PolicyConfigDto""# 2
+>""2 3
+>""3 4
+GetMyPolicy""5 @
+(""@ A
+CancellationToken""A R
+cancellationToken""S d
+)""d e
+{## 
+var$$ 
+policy$$ 
+=$$ 
+await$$ 
+_policyService$$ )
+.$$) *
+GetMyPolicyAsync$$* :
+($$: ;
+cancellationToken$$; L
+)$$L M
+;$$M N
+if%% 
+
+(%% 
+policy%% 
+==%% 
+null%% 
+)%% 
+{&& 	
+return'' 
+NotFound'' 
+('' 
+new'' 
+{''  !
+message''" )
+=''* +
+$str'', ^
+}''_ `
+)''` a
+;''a b
+}(( 	
+return** 
+Ok** 
+(** 
+policy** 
+)** 
+;** 
+}++ 
+[-- 
+HttpGet-- 
+(-- 
+$str-- 
+)-- 
+]-- 
+[.. 
+	Authorize.. 
+(.. 
+Roles.. 
+=.. 
+$str.. 
+).. 
+]..  
+public// 
+
+async// 
+Task// 
+<// 
+ActionResult// "
+<//" #
+List//# '
+<//' (
+string//( .
+>//. /
+>/// 0
+>//0 1#
+GetAvailableDepartments//2 I
+(//I J
+CancellationToken//J [
+cancellationToken//\ m
+)//m n
+{00 
+var11 
+depts11 
+=11 
+await11 
+_policyService11 (
+.11( )(
+GetAvailableDepartmentsAsync11) E
+(11E F
+cancellationToken11F W
+)11W X
+;11X Y
+return22 
+Ok22 
+(22 
+depts22 
+)22 
+;22 
+}33 
+[55 
+HttpPut55 
+(55 
+$str55 
+)55 
+]55 
+[66 
+	Authorize66 
+(66 
+Roles66 
+=66 
+$str66 
+)66 
+]66  
+public77 
+
+async77 
+Task77 
+<77 
+IActionResult77 #
+>77# $
+UpdatePolicy77% 1
+(771 2
+Guid772 6
+id777 9
+,779 :
+[77; <
+FromBody77< D
+]77D E
+UpdatePolicyDto77F U
+dto77V Y
+,77Y Z
+CancellationToken77[ l
+cancellationToken77m ~
+)77~ 
+{88 
+var99 
+(99 
+success99 
+,99 
+message99 
+)99 
+=99  
+await99! &
+_policyService99' 5
+.995 6
+UpdatePolicyAsync996 G
+(99G H
+id99H J
+,99J K
+dto99L O
+,99O P
+cancellationToken99Q b
+)99b c
+;99c d
+if:: 
+
+(:: 
+!:: 
+success:: 
+):: 
+{;; 	
+return<< 
+NotFound<< 
+(<< 
+new<< 
+{<<  !
+message<<" )
+}<<* +
+)<<+ ,
+;<<, -
+}== 	
+return?? 
+Ok?? 
+(?? 
+new?? 
+{?? 
+success?? 
+=??  !
+true??" &
+,??& '
+message??( /
+}??0 1
+)??1 2
+;??2 3
+}@@ 
+[BB 
+HttpPostBB 
+]BB 
+[CC 
+	AuthorizeCC 
+(CC 
+RolesCC 
+=CC 
+$strCC 
+)CC 
+]CC  
+publicDD 
+
+asyncDD 
+TaskDD 
+<DD 
+ActionResultDD "
+<DD" #
+PolicyConfigDtoDD# 2
+>DD2 3
+>DD3 4
+CreatePolicyDD5 A
+(DDA B
+[DDB C
+FromBodyDDC K
+]DDK L
+CreatePolicyDtoDDM \
+dtoDD] `
+,DD` a
+CancellationTokenDDb s
+cancellationToken	DDt Ö
+)
+DDÖ Ü
+{EE 
+varFF 
+(FF 
+successFF 
+,FF 
+messageFF 
+,FF 
+policyFF %
+)FF% &
+=FF' (
+awaitFF) .
+_policyServiceFF/ =
+.FF= >
+CreatePolicyAsyncFF> O
+(FFO P
+dtoFFP S
+,FFS T
+cancellationTokenFFU f
+)FFf g
+;FFg h
+ifGG 
+
+(GG 
+!GG 
+successGG 
+)GG 
+{HH 	
+returnII 
+
+BadRequestII 
+(II 
+newII !
+{II" #
+messageII$ +
+}II, -
+)II- .
+;II. /
+}JJ 	
+returnLL 
+OkLL 
+(LL 
+policyLL 
+)LL 
+;LL 
+}MM 
+[OO 
+
+HttpDeleteOO 
+(OO 
+$strOO 
+)OO 
+]OO 
+[PP 
+	AuthorizePP 
+(PP 
+RolesPP 
+=PP 
+$strPP 
+)PP 
+]PP  
+publicQQ 
+
+asyncQQ 
+TaskQQ 
+<QQ 
+IActionResultQQ #
+>QQ# $
+DeletePolicyQQ% 1
+(QQ1 2
+GuidQQ2 6
+idQQ7 9
+,QQ9 :
+CancellationTokenQQ; L
+cancellationTokenQQM ^
+)QQ^ _
+{RR 
+varSS 
+(SS 
+successSS 
+,SS 
+messageSS 
+)SS 
+=SS  
+awaitSS! &
+_policyServiceSS' 5
+.SS5 6
+DeletePolicyAsyncSS6 G
+(SSG H
+idSSH J
+,SSJ K
+cancellationTokenSSL ]
+)SS] ^
+;SS^ _
+ifTT 
+
+(TT 
+!TT 
+successTT 
+)TT 
+{UU 	
+returnVV 
+NotFoundVV 
+(VV 
+newVV 
+{VV  !
+messageVV" )
+}VV* +
+)VV+ ,
+;VV, -
+}WW 	
+returnYY 
+OkYY 
+(YY 
+newYY 
+{YY 
+successYY 
+=YY  !
+trueYY" &
+,YY& '
+messageYY( /
+}YY0 1
+)YY1 2
+;YY2 3
+}ZZ 
+}[[ Ø≠
 sC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\ExpensesController.cs
 	namespace 	
 	VoyageHub
@@ -4108,163 +3918,1904 @@ GetPending%%= G
 bool'' 
 ?'' 
 highPriorityOnly'' *
-,''* +
-CancellationToken(( 
-cancellationToken(( +
-)((+ ,
-{)) 
-var** 
-result** 
-=** 
-await** 
-_expenseService** *
-.*** +"
-GetPendingSummaryAsync**+ A
-(**A B
-category**B J
-,**J K
-highPriorityOnly**L \
-,**\ ]
-cancellationToken**^ o
-)**o p
-;**p q
-return++ 
-Ok++ 
-(++ 
-result++ 
-)++ 
-;++ 
-},, 
-[.. 
-HttpPost.. 
-].. 
-[// 
-	Authorize// 
-(// 
-Roles// 
-=// 
-$str// 7
-)//7 8
-]//8 9
-public00 
+,''* +
+[(( 	
+	FromQuery((	 
+](( 
+string(( 
+?(( 
+status(( "
+=((# $
+$str((% .
+,((. /
+CancellationToken)) 
+cancellationToken)) +
+=)), -
+default)). 5
+)))5 6
+{** 
+var++ 
+result++ 
+=++ 
+string++ 
+.++ 
+IsNullOrWhiteSpace++ .
+(++. /
+status++/ 5
+)++5 6
+||++7 9
+string++: @
+.++@ A
+Equals++A G
+(++G H
+status++H N
+,++N O
+$str++P Y
+,++Y Z
+StringComparison++[ k
+.++k l
+OrdinalIgnoreCase++l }
+)++} ~
+?,, 
+await,, 
+_expenseService,, #
+.,,# $"
+GetPendingSummaryAsync,,$ :
+(,,: ;
+category,,; C
+,,,C D
+highPriorityOnly,,E U
+,,,U V
+cancellationToken,,W h
+),,h i
+:-- 
+await-- 
+_expenseService-- #
+.--# $#
+GetExpensesSummaryAsync--$ ;
+(--; <
+status--< B
+,--B C
+category--D L
+,--L M
+highPriorityOnly--N ^
+,--^ _
+cancellationToken--` q
+)--q r
+;--r s
+return.. 
+Ok.. 
+(.. 
+result.. 
+).. 
+;.. 
+}// 
+[11 
+HttpGet11 
+(11 
+$str11 
+)11 
+]11 
+[22 
+	Authorize22 
+(22 
+Roles22 
+=22 
+$str22 7
+)227 8
+]228 9
+public33 
 
-async00 
-Task00 
-<00 
-IActionResult00 #
->00# $
-SubmitExpense00% 2
-(002 3
-[003 4
-FromBody004 <
-]00< =
-SubmitExpenseDto00> N
-dto00O R
-,00R S
-CancellationToken00T e
-cancellationToken00f w
-)00w x
-{11 
-var22 
-(22 
-success22 
-,22 
-message22 
-,22 
-expense22 &
-)22& '
-=22( )
-await22* /
-_expenseService220 ?
-.22? @
-SubmitExpenseAsync22@ R
-(22R S
-dto22S V
-,22V W
-cancellationToken22X i
-)22i j
-;22j k
-if33 
+async33 
+Task33 
+<33 
+ActionResult33 "
+<33" #
+List33# '
+<33' (
+ExpenseItemDto33( 6
+>336 7
+>337 8
+>338 9
+GetMyExpenses33: G
+(33G H
+CancellationToken33H Y
+cancellationToken33Z k
+)33k l
+{44 
+var55 
+result55 
+=55 
+await55 
+_expenseService55 *
+.55* +
+GetMyExpensesAsync55+ =
+(55= >
+cancellationToken55> O
+)55O P
+;55P Q
+return66 
+Ok66 
+(66 
+result66 
+)66 
+;66 
+}77 
+[99 
+HttpPost99 
+]99 
+[:: 
+	Authorize:: 
+(:: 
+Roles:: 
+=:: 
+$str:: 7
+)::7 8
+]::8 9
+public;; 
+
+async;; 
+Task;; 
+<;; 
+IActionResult;; #
+>;;# $
+SubmitExpense;;% 2
+(;;2 3
+[;;3 4
+FromBody;;4 <
+];;< =
+SubmitExpenseDto;;> N
+dto;;O R
+,;;R S
+CancellationToken;;T e
+cancellationToken;;f w
+);;w x
+{<< 
+var== 
+(== 
+success== 
+,== 
+message== 
+,== 
+expense== &
+)==& '
+===( )
+await==* /
+_expenseService==0 ?
+.==? @
+SubmitExpenseAsync==@ R
+(==R S
+dto==S V
+,==V W
+cancellationToken==X i
+)==i j
+;==j k
+if>> 
 
-(33 
-!33 
-success33 
-)33 
-{44 	
-return55 
+(>> 
+!>> 
+success>> 
+)>> 
+{?? 	
+return@@ 
 
-BadRequest55 
-(55 
-new55 !
-{55" #
-message55$ +
-}55, -
-)55- .
-;55. /
-}66 	
-return88 
-Ok88 
-(88 
-expense88 
-)88 
-;88 
-}99 
-[;; 
-HttpPost;; 
-(;; 
-$str;; 
-);; 
-];; 
-[<< 
-	Authorize<< 
-(<< 
-Roles<< 
-=<< 
-$str<< &
-)<<& '
-]<<' (
+BadRequest@@ 
+(@@ 
+new@@ !
+{@@" #
+message@@$ +
+}@@, -
+)@@- .
+;@@. /
+}AA 	
+returnCC 
+OkCC 
+(CC 
+expenseCC 
+)CC 
+;CC 
+}DD 
+[FF 
+HttpPostFF 
+(FF 
+$strFF 
+)FF 
+]FF 
+[GG 
+	AuthorizeGG 
+(GG 
+RolesGG 
+=GG 
+$strGG &
+)GG& '
+]GG' (
+publicHH 
+
+asyncHH 
+TaskHH 
+<HH 
+IActionResultHH #
+>HH# $
+
+TakeActionHH% /
+(HH/ 0
+GuidHH0 4
+idHH5 7
+,HH7 8
+[HH9 :
+FromBodyHH: B
+]HHB C
+ExpenseActionDtoHHD T
+dtoHHU X
+,HHX Y
+CancellationTokenHHZ k
+cancellationTokenHHl }
+)HH} ~
+{II 
+varJJ 
+(JJ 
+successJJ 
+,JJ 
+messageJJ 
+)JJ 
+=JJ  
+awaitJJ! &
+_expenseServiceJJ' 6
+.JJ6 7
+TakeActionAsyncJJ7 F
+(JJF G
+idJJG I
+,JJI J
+dtoJJK N
+,JJN O
+cancellationTokenJJP a
+)JJa b
+;JJb c
+ifKK 
+
+(KK 
+!KK 
+successKK 
+)KK 
+{LL 	
+returnMM 
+NotFoundMM 
+(MM 
+newMM 
+{MM  !
+messageMM" )
+}MM* +
+)MM+ ,
+;MM, -
+}NN 	
+returnPP 
+OkPP 
+(PP 
+newPP 
+{PP 
+successPP 
+=PP  !
+truePP" &
+,PP& '
+messagePP( /
+}PP0 1
+)PP1 2
+;PP2 3
+}QQ 
+[SS 
+HttpPostSS 
+(SS 
+$strSS 
+)SS 
+]SS 
+[TT 
+	AuthorizeTT 
+(TT 
+RolesTT 
+=TT 
+$strTT &
+)TT& '
+]TT' (
+publicUU 
+
+asyncUU 
+TaskUU 
+<UU 
+IActionResultUU #
+>UU# $
+BatchPayoutUU% 0
+(UU0 1
+[UU1 2
+FromBodyUU2 :
+]UU: ;
+BatchPayoutDtoUU< J
+?UUJ K
+dtoUUL O
+,UUO P
+CancellationTokenUUQ b
+cancellationTokenUUc t
+)UUt u
+{VV 
+varWW 
+(WW 
+successWW 
+,WW 
+messageWW 
+)WW 
+=WW  
+awaitWW! &
+_expenseServiceWW' 6
+.WW6 7
+BatchPayoutAsyncWW7 G
+(WWG H
+dtoWWH K
+,WWK L
+cancellationTokenWWM ^
+)WW^ _
+;WW_ `
+ifXX 
+
+(XX 
+!XX 
+successXX 
+)XX 
+{YY 	
+returnZZ 
+
+BadRequestZZ 
+(ZZ 
+newZZ !
+{ZZ" #
+messageZZ$ +
+}ZZ, -
+)ZZ- .
+;ZZ. /
+}[[ 	
+return]] 
+Ok]] 
+(]] 
+new]] 
+{]] 
+success]] 
+=]]  !
+true]]" &
+,]]& '
+message]]( /
+}]]0 1
+)]]1 2
+;]]2 3
+}^^ 
+[`` 
+HttpPost`` 
+(`` 
+$str`` 
+)`` 
+]`` 
+[aa 
+	Authorizeaa 
+(aa 
+Rolesaa 
+=aa 
+$straa 7
+)aa7 8
+]aa8 9
+publicbb 
+
+asyncbb 
+Taskbb 
+<bb 
+IActionResultbb #
+>bb# $
+UploadProofbb% 0
+(bb0 1
+	IFormFilebb1 :
+?bb: ;
+filebb< @
+,bb@ A
+CancellationTokenbbB S
+cancellationTokenbbT e
+)bbe f
+{cc 
+vardd 
+(dd 
+errorResultdd 
+,dd 
+relativeUrldd %
+,dd% &
+fileNamedd' /
+)dd/ 0
+=dd1 2
+awaitdd3 8
+SaveProofFileAsyncdd9 K
+(ddK L
+fileddL P
+,ddP Q
+cancellationTokenddR c
+)ddc d
+;ddd e
+ifee 
+
+(ee 
+errorResultee 
+!=ee 
+nullee 
+)ee  
+{ff 	
+returngg 
+errorResultgg 
+;gg 
+}hh 	
+returnjj 
+Okjj 
+(jj 
+newjj 
+{kk 	
+successll 
+=ll 
+truell 
+,ll 
+	proofPathmm 
+=mm 
+relativeUrlmm #
+,mm# $
+fileNamenn 
+,nn 
+fileUrloo 
+=oo 
+$"oo 
+{oo 
+Requestoo  
+.oo  !
+Schemeoo! '
+}oo' (
+$stroo( +
+{oo+ ,
+Requestoo, 3
+.oo3 4
+Hostoo4 8
+}oo8 9
+{oo9 :
+relativeUrloo: E
+}ooE F
+"ooF G
+}pp 	
+)pp	 
+
+;pp
+ 
+}qq 
+[ss 
+HttpPostss 
+(ss 
+$strss 
+)ss 
+]ss 
+[tt 
+	Authorizett 
+(tt 
+Rolestt 
+=tt 
+$strtt 7
+)tt7 8
+]tt8 9
+publicuu 
+
+asyncuu 
+Taskuu 
+<uu 
+IActionResultuu #
+>uu# $
+AttachProofuu% 0
+(uu0 1
+Guiduu1 5
+iduu6 8
+,uu8 9
+	IFormFileuu: C
+?uuC D
+fileuuE I
+,uuI J
+CancellationTokenuuK \
+cancellationTokenuu] n
+)uun o
+{vv 
+varww 
+(ww 
+errorResultww 
+,ww 
+relativeUrlww %
+,ww% &
+fileNameww' /
+)ww/ 0
+=ww1 2
+awaitww3 8
+SaveProofFileAsyncww9 K
+(wwK L
+filewwL P
+,wwP Q
+cancellationTokenwwR c
+)wwc d
+;wwd e
+ifxx 
+
+(xx 
+errorResultxx 
+!=xx 
+nullxx 
+)xx  
+{yy 	
+returnzz 
+errorResultzz 
+;zz 
+}{{ 	
+var}} 
+(}} 
+success}} 
+,}} 
+message}} 
+,}} 
+	proofPath}} (
+)}}( )
+=}}* +
+await}}, 1
+_expenseService}}2 A
+.}}A B
+AttachProofAsync}}B R
+(}}R S
+id}}S U
+,}}U V
+relativeUrl}}W b
+!}}b c
+,}}c d
+cancellationToken}}e v
+)}}v w
+;}}w x
+if~~ 
+
+(~~ 
+!~~ 
+success~~ 
+)~~ 
+{ 	
+return
+ÄÄ 
+NotFound
+ÄÄ 
+(
+ÄÄ 
+new
+ÄÄ 
+{
+ÄÄ  !
+message
+ÄÄ" )
+}
+ÄÄ* +
+)
+ÄÄ+ ,
+;
+ÄÄ, -
+}
+ÅÅ 	
+return
+ÉÉ 
+Ok
+ÉÉ 
+(
+ÉÉ 
+new
+ÉÉ 
+{
+ÑÑ 	
+success
+ÖÖ 
+=
+ÖÖ 
+true
+ÖÖ 
+,
+ÖÖ 
+	proofPath
+ÜÜ 
+=
+ÜÜ 
+relativeUrl
+ÜÜ #
+,
+ÜÜ# $
+fileName
+áá 
+,
+áá 
+fileUrl
+àà 
+=
+àà 
+$"
+àà 
+{
+àà 
+Request
+àà  
+.
+àà  !
+Scheme
+àà! '
+}
+àà' (
+$str
+àà( +
+{
+àà+ ,
+Request
+àà, 3
+.
+àà3 4
+Host
+àà4 8
+}
+àà8 9
+{
+àà9 :
+relativeUrl
+àà: E
+}
+ààE F
+"
+ààF G
+,
+ààG H
+message
+ââ 
+}
+ää 	
+)
+ää	 
+
+;
+ää
+ 
+}
+ãã 
+private
+çç 
+async
+çç 
+Task
+çç 
+<
+çç 
+(
+çç 
+IActionResult
+çç %
+?
+çç% &
+ErrorResult
+çç' 2
+,
+çç2 3
+string
+çç4 :
+?
+çç: ;
+RelativeUrl
+çç< G
+,
+ççG H
+string
+ççI O
+?
+ççO P
+FileName
+ççQ Y
+)
+ççY Z
+>
+ççZ [ 
+SaveProofFileAsync
+çç\ n
+(
+ççn o
+	IFormFile
+çço x
+?
+ççx y
+file
+ççz ~
+,
+çç~ !
+CancellationTokenççÄ ë!
+cancellationTokenççí £
+)çç£ §
+{
+éé 
+if
+èè 
+
+(
+èè 
+file
+èè 
+==
+èè 
+null
+èè 
+||
+èè 
+file
+èè  
+.
+èè  !
+Length
+èè! '
+==
+èè( *
+$num
+èè+ ,
+)
+èè, -
+{
+êê 	
+return
+ëë 
+(
+ëë 
+
+BadRequest
+ëë 
+(
+ëë 
+new
+ëë "
+{
+ëë# $
+message
+ëë% ,
+=
+ëë- .
+$str
+ëë/ R
+}
+ëëS T
+)
+ëëT U
+,
+ëëU V
+null
+ëëW [
+,
+ëë[ \
+null
+ëë] a
+)
+ëëa b
+;
+ëëb c
+}
+íí 	
+if
+îî 
+
+(
+îî 
+file
+îî 
+.
+îî 
+Length
+îî 
+>
+îî 
+$num
+îî 
+*
+îî 
+$num
+îî #
+*
+îî$ %
+$num
+îî& *
+)
+îî* +
+{
+ïï 	
+return
+ññ 
+(
+ññ 
+
+BadRequest
+ññ 
+(
+ññ 
+new
+ññ "
+{
+ññ# $
+message
+ññ% ,
+=
+ññ- .
+$str
+ññ/ R
+}
+ññS T
+)
+ññT U
+,
+ññU V
+null
+ññW [
+,
+ññ[ \
+null
+ññ] a
+)
+ñña b
+;
+ññb c
+}
+óó 	
+var
+ôô 
+ext
+ôô 
+=
+ôô 
+Path
+ôô 
+.
+ôô 
+GetExtension
+ôô #
+(
+ôô# $
+file
+ôô$ (
+.
+ôô( )
+FileName
+ôô) 1
+)
+ôô1 2
+.
+ôô2 3
+ToLowerInvariant
+ôô3 C
+(
+ôôC D
+)
+ôôD E
+;
+ôôE F
+if
+öö 
+
+(
+öö 
+!
+öö 
+AllowedExtensions
+öö 
+.
+öö 
+Contains
+öö '
+(
+öö' (
+ext
+öö( +
+)
+öö+ ,
+)
+öö, -
+{
+õõ 	
+return
+úú 
+(
+úú 
+
+BadRequest
+úú 
+(
+úú 
+new
+úú "
+{
+úú# $
+message
+úú% ,
+=
+úú- .
+$strúú/ Ä
+}úúÅ Ç
+)úúÇ É
+,úúÉ Ñ
+nullúúÖ â
+,úúâ ä
+nullúúã è
+)úúè ê
+;úúê ë
+}
+ùù 	
+var
+üü 
+receiptsDir
+üü 
+=
+üü 
+Path
+üü 
+.
+üü 
+Combine
+üü &
+(
+üü& '
+_environment
+üü' 3
+.
+üü3 4
+ContentRootPath
+üü4 C
+,
+üüC D
+$str
+üüE O
+,
+üüO P
+$str
+üüQ [
+)
+üü[ \
+;
+üü\ ]
+if
+†† 
+
+(
+†† 
+!
+†† 
+	Directory
+†† 
+.
+†† 
+Exists
+†† 
+(
+†† 
+receiptsDir
+†† )
+)
+††) *
+)
+††* +
+{
+°° 	
+	Directory
+¢¢ 
+.
+¢¢ 
+CreateDirectory
+¢¢ %
+(
+¢¢% &
+receiptsDir
+¢¢& 1
+)
+¢¢1 2
+;
+¢¢2 3
+}
+££ 	
+var
+•• 
+safeFileName
+•• 
+=
+•• 
+$"
+•• 
+{
+•• 
+Guid
+•• "
+.
+••" #
+NewGuid
+••# *
+(
+••* +
+)
+••+ ,
+:
+••, -
+$str
+••- .
+}
+••. /
+$str
+••/ 0
+{
+••0 1
+Path
+••1 5
+.
+••5 6)
+GetFileNameWithoutExtension
+••6 Q
+(
+••Q R
+file
+••R V
+.
+••V W
+FileName
+••W _
+)
+••_ `
+.
+••` a
+Replace
+••a h
+(
+••h i
+$str
+••i l
+,
+••l m
+$str
+••n q
+)
+••q r
+}
+••r s
+{
+••s t
+ext
+••t w
+}
+••w x
+"
+••x y
+;
+••y z
+var
+¶¶ 
+filePath
+¶¶ 
+=
+¶¶ 
+Path
+¶¶ 
+.
+¶¶ 
+Combine
+¶¶ #
+(
+¶¶# $
+receiptsDir
+¶¶$ /
+,
+¶¶/ 0
+safeFileName
+¶¶1 =
+)
+¶¶= >
+;
+¶¶> ?
+await
+®® 
+using
+®® 
+(
+®® 
+var
+®® 
+stream
+®® 
+=
+®®  !
+new
+®®" %
+
+FileStream
+®®& 0
+(
+®®0 1
+filePath
+®®1 9
+,
+®®9 :
+FileMode
+®®; C
+.
+®®C D
+Create
+®®D J
+)
+®®J K
+)
+®®K L
+{
+©© 	
+await
+™™ 
+file
+™™ 
+.
+™™ 
+CopyToAsync
+™™ "
+(
+™™" #
+stream
+™™# )
+,
+™™) *
+cancellationToken
+™™+ <
+)
+™™< =
+;
+™™= >
+}
+´´ 	
+var
+≠≠ 
+relativeUrl
+≠≠ 
+=
+≠≠ 
+$"
+≠≠ 
+$str
+≠≠ 0
+{
+≠≠0 1
+safeFileName
+≠≠1 =
+}
+≠≠= >
+"
+≠≠> ?
+;
+≠≠? @
+return
+ÆÆ 
+(
+ÆÆ 
+null
+ÆÆ 
+,
+ÆÆ 
+relativeUrl
+ÆÆ !
+,
+ÆÆ! "
+file
+ÆÆ# '
+.
+ÆÆ' (
+FileName
+ÆÆ( 0
+)
+ÆÆ0 1
+;
+ÆÆ1 2
+}
+ØØ 
+[
+±± 
+HttpGet
+±± 
+(
+±± 
+$str
+±± 
+)
+±±  
+]
+±±  !
+[
+≤≤ 
+	Authorize
+≤≤ 
+(
+≤≤ 
+Roles
+≤≤ 
+=
+≤≤ 
+$str
+≤≤ 7
+)
+≤≤7 8
+]
+≤≤8 9
+public
+≥≥ 
+
+IActionResult
+≥≥ 
+GetProofFile
+≥≥ %
+(
+≥≥% &
+string
+≥≥& ,
+fileName
+≥≥- 5
+)
+≥≥5 6
+{
+¥¥ 
+if
+µµ 
+
+(
+µµ 
+string
+µµ 
+.
+µµ  
+IsNullOrWhiteSpace
+µµ %
+(
+µµ% &
+fileName
+µµ& .
+)
+µµ. /
+)
+µµ/ 0
+{
+∂∂ 	
+return
+∑∑ 
+
+BadRequest
+∑∑ 
+(
+∑∑ 
+new
+∑∑ !
+{
+∑∑" #
+message
+∑∑$ +
+=
+∑∑, -
+$str
+∑∑. F
+}
+∑∑G H
+)
+∑∑H I
+;
+∑∑I J
+}
+∏∏ 	
+var
+∫∫ 
+	cleanName
+∫∫ 
+=
+∫∫ 
+Path
+∫∫ 
+.
+∫∫ 
+GetFileName
+∫∫ (
+(
+∫∫( )
+fileName
+∫∫) 1
+)
+∫∫1 2
+;
+∫∫2 3
+var
+ªª 
+receiptsDir
+ªª 
+=
+ªª 
+Path
+ªª 
+.
+ªª 
+Combine
+ªª &
+(
+ªª& '
+_environment
+ªª' 3
+.
+ªª3 4
+ContentRootPath
+ªª4 C
+,
+ªªC D
+$str
+ªªE O
+,
+ªªO P
+$str
+ªªQ [
+)
+ªª[ \
+;
+ªª\ ]
+var
+ºº 
+filePath
+ºº 
+=
+ºº 
+Path
+ºº 
+.
+ºº 
+Combine
+ºº #
+(
+ºº# $
+receiptsDir
+ºº$ /
+,
+ºº/ 0
+	cleanName
+ºº1 :
+)
+ºº: ;
+;
+ºº; <
+if
+ææ 
+
+(
+ææ 
+!
+ææ 
+System
+ææ 
+.
+ææ 
+IO
+ææ 
+.
+ææ 
+File
+ææ 
+.
+ææ 
+Exists
+ææ "
+(
+ææ" #
+filePath
+ææ# +
+)
+ææ+ ,
+)
+ææ, -
+{
+øø 	
+return
+¿¿ 
+NotFound
+¿¿ 
+(
+¿¿ 
+new
+¿¿ 
+{
+¿¿  !
+message
+¿¿" )
+=
+¿¿* +
+$str
+¿¿, I
+}
+¿¿J K
+)
+¿¿K L
+;
+¿¿L M
+}
+¡¡ 	
+var
+√√ 
+ext
+√√ 
+=
+√√ 
+Path
+√√ 
+.
+√√ 
+GetExtension
+√√ #
+(
+√√# $
+	cleanName
+√√$ -
+)
+√√- .
+.
+√√. /
+ToLowerInvariant
+√√/ ?
+(
+√√? @
+)
+√√@ A
+;
+√√A B
+var
+ƒƒ 
+contentType
+ƒƒ 
+=
+ƒƒ 
+ext
+ƒƒ 
+switch
+ƒƒ $
+{
+≈≈ 	
+$str
+∆∆ 
+=>
+∆∆ 
+$str
+∆∆ '
+,
+∆∆' (
+$str
+«« 
+=>
+«« 
+$str
+«« !
+,
+««! "
+$str
+»» 
+or
+»» 
+$str
+»» 
+=>
+»»  
+$str
+»»! -
+,
+»»- .
+$str
+…… 
+=>
+…… 
+$str
+…… #
+,
+……# $
+_
+   
+=>
+   
+$str
+   +
+}
+ÀÀ 	
+;
+ÀÀ	 
+
+var
+ÕÕ 
+stream
+ÕÕ 
+=
+ÕÕ 
+new
+ÕÕ 
+
+FileStream
+ÕÕ #
+(
+ÕÕ# $
+filePath
+ÕÕ$ ,
+,
+ÕÕ, -
+FileMode
+ÕÕ. 6
+.
+ÕÕ6 7
+Open
+ÕÕ7 ;
+,
+ÕÕ; <
+
+FileAccess
+ÕÕ= G
+.
+ÕÕG H
+Read
+ÕÕH L
+,
+ÕÕL M
+	FileShare
+ÕÕN W
+.
+ÕÕW X
+Read
+ÕÕX \
+)
+ÕÕ\ ]
+;
+ÕÕ] ^
+return
+ŒŒ 
+File
+ŒŒ 
+(
+ŒŒ 
+stream
+ŒŒ 
+,
+ŒŒ 
+contentType
+ŒŒ '
+,
+ŒŒ' (
+	cleanName
+ŒŒ) 2
+,
+ŒŒ2 3#
+enableRangeProcessing
+ŒŒ4 I
+:
+ŒŒI J
+true
+ŒŒK O
+)
+ŒŒO P
+;
+ŒŒP Q
+}
+œœ 
+}–– ÃU
+tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\EmployeesController.cs
+	namespace 	
+	VoyageHub
+ 
+. 
+Api 
+. 
+Controllers #
+;# $
+[ 
+ApiController 
+] 
+[ 
+Route 
+( 
+$str 
+) 
+] 
+[ 
+	Authorize 
+
+(
+ 
+Roles 
+= 
+$str 
+) 
+] 
+public 
+class 
+EmployeesController  
+:! "
+ControllerBase# 1
+{ 
+private 
+readonly 
+IEmployeeService %
+_employeeService& 6
+;6 7
+public 
+
+EmployeesController 
+( 
+IEmployeeService /
+employeeService0 ?
+)? @
+{ 
+_employeeService 
+= 
+employeeService *
+;* +
+} 
+[ 
+HttpGet 
+] 
+public 
+
+async 
+Task 
+< 
+ActionResult "
+<" #
+List# '
+<' (
+EmployeeDto( 3
+>3 4
+>4 5
+>5 6
+GetEmployees7 C
+(C D
+[ 	
+	FromQuery	 
+] 
+string 
+? 
+search "
+," #
+[ 	
+	FromQuery	 
+] 
+string 
+? 
+
+department &
+,& '
+[ 	
+	FromQuery	 
+] 
+string 
+? 
+role  
+,  !
+CancellationToken   
+cancellationToken   +
+)  + ,
+{!! 
+var"" 
+	employees"" 
+="" 
+await"" 
+_employeeService"" .
+."". /
+GetEmployeesAsync""/ @
+(""@ A
+search""A G
+,""G H
+
+department""I S
+,""S T
+role""U Y
+,""Y Z
+cancellationToken""[ l
+)""l m
+;""m n
+return## 
+Ok## 
+(## 
+	employees## 
+)## 
+;## 
+}$$ 
+[&& 
+HttpGet&& 
+(&& 
+$str&& 
+)&& 
+]&& 
+public'' 
+
+async'' 
+Task'' 
+<'' 
+ActionResult'' "
+<''" #
+EmployeeDto''# .
+>''. /
+>''/ 0
+GetEmployeeById''1 @
+(''@ A
+Guid''A E
+id''F H
+,''H I
+CancellationToken''J [
+cancellationToken''\ m
+)''m n
+{(( 
+var)) 
+employee)) 
+=)) 
+await)) 
+_employeeService)) -
+.))- . 
+GetEmployeeByIdAsync)). B
+())B C
+id))C E
+,))E F
+cancellationToken))G X
+)))X Y
+;))Y Z
+if** 
+
+(** 
+employee** 
+==** 
+null** 
+)** 
+{++ 	
+return,, 
+NotFound,, 
+(,, 
+new,, 
+{,,  !
+message,," )
+=,,* +
+$str,,, A
+},,B C
+),,C D
+;,,D E
+}-- 	
+return.. 
+Ok.. 
+(.. 
+employee.. 
+).. 
+;.. 
+}// 
+[11 
+HttpPost11 
+]11 
+public22 
+
+async22 
+Task22 
+<22 
+ActionResult22 "
+<22" #
+EmployeeDto22# .
+>22. /
+>22/ 0
+CreateEmployee221 ?
+(22? @
+[22@ A
+FromBody22A I
+]22I J
+CreateEmployeeDto22K \
+dto22] `
+,22` a
+CancellationToken22b s
+cancellationToken	22t Ö
+)
+22Ö Ü
+{33 
+var44 
+(44 
+success44 
+,44 
+message44 
+,44 
+employee44 '
+)44' (
+=44) *
+await44+ 0
+_employeeService441 A
+.44A B
+CreateEmployeeAsync44B U
+(44U V
+dto44V Y
+,44Y Z
+cancellationToken44[ l
+)44l m
+;44m n
+if55 
+
+(55 
+!55 
+success55 
+)55 
+{66 	
+return77 
+
+BadRequest77 
+(77 
+new77 !
+{77" #
+message77$ +
+}77, -
+)77- .
+;77. /
+}88 	
+return99 
+CreatedAtAction99 
+(99 
+nameof99 %
+(99% &
+GetEmployeeById99& 5
+)995 6
+,996 7
+new998 ;
+{99< =
+id99> @
+=99A B
+employee99C K
+!99K L
+.99L M
+Id99M O
+}99P Q
+,99Q R
+employee99S [
+)99[ \
+;99\ ]
+}:: 
+[<< 
+HttpPut<< 
+(<< 
+$str<< 
+)<< 
+]<< 
 public== 
 
 async== 
 Task== 
-<== 
-IActionResult== #
->==# $
-
-TakeAction==% /
-(==/ 0
-Guid==0 4
-id==5 7
-,==7 8
-[==9 :
-FromBody==: B
-]==B C
-ExpenseActionDto==D T
-dto==U X
-,==X Y
-CancellationToken==Z k
-cancellationToken==l }
-)==} ~
+<== 
+ActionResult== "
+<==" #
+EmployeeDto==# .
+>==. /
+>==/ 0
+UpdateEmployee==1 ?
+(==? @
+Guid==@ D
+id==E G
+,==G H
+[==I J
+FromBody==J R
+]==R S
+UpdateEmployeeDto==T e
+dto==f i
+,==i j
+CancellationToken==k |
+cancellationToken	==} é
+)
+==é è
 {>> 
 var?? 
 (?? 
 success?? 
 ,?? 
 message?? 
-)?? 
-=??  
-await??! &
-_expenseService??' 6
-.??6 7
-TakeActionAsync??7 F
-(??F G
-id??G I
-,??I J
-dto??K N
-,??N O
-cancellationToken??P a
-)??a b
-;??b c
+,?? 
+employee?? '
+)??' (
+=??) *
+await??+ 0
+_employeeService??1 A
+.??A B
+UpdateEmployeeAsync??B U
+(??U V
+id??V X
+,??X Y
+dto??Z ]
+,??] ^
+cancellationToken??_ p
+)??p q
+;??q r
 if@@ 
 
 (@@ 
@@ -4272,1862 +5823,310 @@ TakeAction==% /
 success@@ 
 )@@ 
 {AA 	
-returnBB 
-NotFoundBB 
-(BB 
-newBB 
-{BB  !
-messageBB" )
-}BB* +
-)BB+ ,
-;BB, -
+returnBB 
+
+BadRequestBB 
+(BB 
+newBB !
+{BB" #
+messageBB$ +
+}BB, -
+)BB- .
+;BB. /
 }CC 	
-returnEE 
-OkEE 
-(EE 
-newEE 
-{EE 
-successEE 
-=EE  !
-trueEE" &
-,EE& '
-messageEE( /
-}EE0 1
-)EE1 2
-;EE2 3
-}FF 
-[HH 
-HttpPostHH 
-(HH 
-$strHH 
-)HH 
-]HH 
-[II 
-	AuthorizeII 
-(II 
-RolesII 
-=II 
-$strII &
-)II& '
-]II' (
-publicJJ 
-
-asyncJJ 
-TaskJJ 
-<JJ 
-IActionResultJJ #
->JJ# $
-BatchPayoutJJ% 0
-(JJ0 1
-[JJ1 2
-FromBodyJJ2 :
-]JJ: ;
-BatchPayoutDtoJJ< J
-?JJJ K
-dtoJJL O
-,JJO P
-CancellationTokenJJQ b
-cancellationTokenJJc t
-)JJt u
-{KK 
-varLL 
-(LL 
-successLL 
-,LL 
-messageLL 
-)LL 
-=LL  
-awaitLL! &
-_expenseServiceLL' 6
-.LL6 7
-BatchPayoutAsyncLL7 G
-(LLG H
-dtoLLH K
-,LLK L
-cancellationTokenLLM ^
-)LL^ _
-;LL_ `
-ifMM 
-
-(MM 
-!MM 
-successMM 
-)MM 
-{NN 	
-returnOO 
-
-BadRequestOO 
-(OO 
-newOO !
-{OO" #
-messageOO$ +
-}OO, -
-)OO- .
-;OO. /
-}PP 	
-returnRR 
-OkRR 
-(RR 
-newRR 
-{RR 
-successRR 
-=RR  !
-trueRR" &
-,RR& '
-messageRR( /
-}RR0 1
-)RR1 2
-;RR2 3
-}SS 
-[UU 
-HttpPostUU 
-(UU 
-$strUU 
-)UU 
-]UU 
-[VV 
-	AuthorizeVV 
-(VV 
-RolesVV 
-=VV 
-$strVV 7
-)VV7 8
-]VV8 9
-publicWW 
-
-asyncWW 
-TaskWW 
-<WW 
-IActionResultWW #
->WW# $
-UploadProofWW% 0
-(WW0 1
-	IFormFileWW1 :
-?WW: ;
-fileWW< @
-,WW@ A
-CancellationTokenWWB S
-cancellationTokenWWT e
-)WWe f
-{XX 
-varYY 
-
-uploadFileYY 
-=YY 
-fileYY 
-??YY  
-(YY! "
-RequestYY" )
-.YY) *
-HasFormContentTypeYY* <
-&&YY= ?
-RequestYY@ G
-.YYG H
-FormYYH L
-.YYL M
-FilesYYM R
-.YYR S
-CountYYS X
->YYY Z
-$numYY[ \
-?YY] ^
-RequestYY_ f
-.YYf g
-FormYYg k
-.YYk l
-FilesYYl q
-[YYq r
-$numYYr s
-]YYs t
-:YYu v
-nullYYw {
-)YY{ |
-;YY| }
-if[[ 
-
-([[ 
-
-uploadFile[[ 
-==[[ 
-null[[ 
-||[[ !
-
-uploadFile[[" ,
-.[[, -
-Length[[- 3
-==[[4 6
-$num[[7 8
-)[[8 9
-{\\ 	
-return]] 
-
-BadRequest]] 
-(]] 
-new]] !
-{]]" #
-message]]$ +
-=]], -
-$str]]. Q
-}]]R S
-)]]S T
-;]]T U
-}^^ 	
-if`` 
-
-(`` 
-
-uploadFile`` 
-.`` 
-Length`` 
->`` 
-$num``  "
-*``# $
-$num``% )
-*``* +
-$num``, 0
-)``0 1
-{aa 	
-returnbb 
-
-BadRequestbb 
-(bb 
-newbb !
-{bb" #
-messagebb$ +
-=bb, -
-$strbb. Q
-}bbR S
-)bbS T
-;bbT U
-}cc 	
-varee 
-extee 
-=ee 
-Pathee 
-.ee 
-GetExtensionee #
-(ee# $
-
-uploadFileee$ .
-.ee. /
-FileNameee/ 7
-)ee7 8
-.ee8 9
-ToLowerInvariantee9 I
-(eeI J
-)eeJ K
-;eeK L
-ifff 
-
-(ff 
-!ff 
-AllowedExtensionsff 
-.ff 
-Containsff '
-(ff' (
-extff( +
-)ff+ ,
-)ff, -
-{gg 	
-returnhh 
-
-BadRequesthh 
-(hh 
-newhh !
-{hh" #
-messagehh$ +
-=hh, -
-$strhh. 
-}
-hhÄ Å
-)
-hhÅ Ç
-;
-hhÇ É
-}ii 	
-varkk 
-receiptsDirkk 
-=kk 
-Pathkk 
-.kk 
-Combinekk &
-(kk& '
-_environmentkk' 3
-.kk3 4
-ContentRootPathkk4 C
-,kkC D
-$strkkE O
-,kkO P
-$strkkQ [
-)kk[ \
-;kk\ ]
-ifll 
-
-(ll 
-!ll 
-	Directoryll 
-.ll 
-Existsll 
-(ll 
-receiptsDirll )
-)ll) *
-)ll* +
-{mm 	
-	Directorynn 
-.nn 
-CreateDirectorynn %
-(nn% &
-receiptsDirnn& 1
-)nn1 2
-;nn2 3
-}oo 	
-varqq 
-safeFileNameqq 
-=qq 
-$"qq 
-{qq 
-Guidqq "
-.qq" #
-NewGuidqq# *
-(qq* +
-)qq+ ,
-:qq, -
-$strqq- .
-}qq. /
-$strqq/ 0
-{qq0 1
-Pathqq1 5
-.qq5 6'
-GetFileNameWithoutExtensionqq6 Q
-(qqQ R
-
-uploadFileqqR \
-.qq\ ]
-FileNameqq] e
-)qqe f
-.qqf g
-Replaceqqg n
-(qqn o
-$strqqo r
-,qqr s
-$strqqt w
-)qqw x
-}qqx y
-{qqy z
-extqqz }
-}qq} ~
-"qq~ 
-;	qq Ä
-varrr 
-filePathrr 
-=rr 
-Pathrr 
-.rr 
-Combinerr #
-(rr# $
-receiptsDirrr$ /
-,rr/ 0
-safeFileNamerr1 =
-)rr= >
-;rr> ?
-awaittt 
-usingtt 
-(tt 
-vartt 
-streamtt 
-=tt  !
-newtt" %
-
-FileStreamtt& 0
-(tt0 1
-filePathtt1 9
-,tt9 :
-FileModett; C
-.ttC D
-CreatettD J
-)ttJ K
-)ttK L
-{uu 	
-awaitvv 
-
-uploadFilevv 
-.vv 
-CopyToAsyncvv (
-(vv( )
-streamvv) /
-,vv/ 0
-cancellationTokenvv1 B
-)vvB C
-;vvC D
-}ww 	
-varyy 
-relativeUrlyy 
-=yy 
-$"yy 
-$stryy 0
-{yy0 1
-safeFileNameyy1 =
-}yy= >
-"yy> ?
-;yy? @
-returnzz 
-Okzz 
-(zz 
-newzz 
-{{{ 	
-success|| 
-=|| 
-true|| 
-,|| 
-	proofPath}} 
-=}} 
-relativeUrl}} #
-,}}# $
-fileName~~ 
-=~~ 
-
-uploadFile~~ !
-.~~! "
-FileName~~" *
-,~~* +
-fileUrl 
-= 
-$" 
-{ 
-Request  
-.  !
-Scheme! '
-}' (
-$str( +
-{+ ,
-Request, 3
-.3 4
-Host4 8
-}8 9
-{9 :
-relativeUrl: E
-}E F
-"F G
-}
-ÄÄ 	
-)
-ÄÄ	 
-
-;
-ÄÄ
- 
-}
-ÅÅ 
-[
-ÉÉ 
-HttpPost
-ÉÉ 
-(
-ÉÉ 
-$str
-ÉÉ 
-)
-ÉÉ 
-]
-ÉÉ 
-[
-ÑÑ 
-	Authorize
-ÑÑ 
-(
-ÑÑ 
-Roles
-ÑÑ 
-=
-ÑÑ 
-$str
-ÑÑ 7
-)
-ÑÑ7 8
-]
-ÑÑ8 9
-public
-ÖÖ 
-
-async
-ÖÖ 
-Task
-ÖÖ 
-<
-ÖÖ 
-IActionResult
-ÖÖ #
->
-ÖÖ# $
-AttachProof
-ÖÖ% 0
-(
-ÖÖ0 1
-Guid
-ÖÖ1 5
-id
-ÖÖ6 8
-,
-ÖÖ8 9
-	IFormFile
-ÖÖ: C
-?
-ÖÖC D
-file
-ÖÖE I
-,
-ÖÖI J
-CancellationToken
-ÖÖK \
-cancellationToken
-ÖÖ] n
-)
-ÖÖn o
-{
-ÜÜ 
-var
-áá 
-
-uploadFile
-áá 
-=
-áá 
-file
-áá 
-??
-áá  
-(
-áá! "
-Request
-áá" )
-.
-áá) * 
-HasFormContentType
-áá* <
-&&
-áá= ?
-Request
-áá@ G
-.
-ááG H
-Form
-ááH L
-.
-ááL M
-Files
-ááM R
-.
-ááR S
-Count
-ááS X
->
-ááY Z
-$num
-áá[ \
-?
-áá] ^
-Request
-áá_ f
-.
-ááf g
-Form
-áág k
-.
-áák l
-Files
-áál q
-[
-ááq r
-$num
-áár s
-]
-áás t
-:
-ááu v
-null
-ááw {
-)
-áá{ |
-;
-áá| }
-if
-ââ 
-
-(
-ââ 
-
-uploadFile
-ââ 
-==
-ââ 
-null
-ââ 
-||
-ââ !
-
-uploadFile
-ââ" ,
-.
-ââ, -
-Length
-ââ- 3
-==
-ââ4 6
-$num
-ââ7 8
-)
-ââ8 9
-{
-ää 	
-return
-ãã 
-
-BadRequest
-ãã 
-(
-ãã 
-new
-ãã !
-{
-ãã" #
-message
-ãã$ +
-=
-ãã, -
-$str
-ãã. Q
-}
-ããR S
-)
-ããS T
-;
-ããT U
-}
-åå 	
-var
-éé 
-ext
-éé 
-=
-éé 
-Path
-éé 
-.
-éé 
-GetExtension
-éé #
-(
-éé# $
-
-uploadFile
-éé$ .
-.
-éé. /
-FileName
-éé/ 7
-)
-éé7 8
-.
-éé8 9
-ToLowerInvariant
-éé9 I
-(
-ééI J
-)
-ééJ K
-;
-ééK L
-if
-èè 
-
-(
-èè 
-!
-èè 
-AllowedExtensions
-èè 
-.
-èè 
-Contains
-èè '
-(
-èè' (
-ext
-èè( +
-)
-èè+ ,
-)
-èè, -
-{
-êê 	
-return
-ëë 
-
-BadRequest
-ëë 
-(
-ëë 
-new
-ëë !
-{
-ëë" #
-message
-ëë$ +
-=
-ëë, -
-$str
-ëë. 
-}ëëÄ Å
-)ëëÅ Ç
-;ëëÇ É
-}
-íí 	
-var
-îî 
-receiptsDir
-îî 
-=
-îî 
-Path
-îî 
-.
-îî 
-Combine
-îî &
-(
-îî& '
-_environment
-îî' 3
-.
-îî3 4
-ContentRootPath
-îî4 C
-,
-îîC D
-$str
-îîE O
-,
-îîO P
-$str
-îîQ [
-)
-îî[ \
-;
-îî\ ]
-if
-ïï 
-
-(
-ïï 
-!
-ïï 
-	Directory
-ïï 
-.
-ïï 
-Exists
-ïï 
-(
-ïï 
-receiptsDir
-ïï )
-)
-ïï) *
-)
-ïï* +
-{
-ññ 	
-	Directory
-óó 
-.
-óó 
-CreateDirectory
-óó %
-(
-óó% &
-receiptsDir
-óó& 1
-)
-óó1 2
-;
-óó2 3
-}
-òò 	
-var
-öö 
-safeFileName
-öö 
-=
-öö 
-$"
-öö 
-{
-öö 
-Guid
-öö "
-.
-öö" #
-NewGuid
-öö# *
-(
-öö* +
-)
-öö+ ,
-:
-öö, -
-$str
-öö- .
-}
-öö. /
-$str
-öö/ 0
-{
-öö0 1
-Path
-öö1 5
-.
-öö5 6)
-GetFileNameWithoutExtension
-öö6 Q
-(
-ööQ R
-
-uploadFile
-ööR \
-.
-öö\ ]
-FileName
-öö] e
-)
-ööe f
-.
-ööf g
-Replace
-öög n
-(
-öön o
-$str
-ööo r
-,
-öör s
-$str
-ööt w
-)
-ööw x
-}
-ööx y
-{
-ööy z
-ext
-ööz }
-}
-öö} ~
-"
-öö~ 
-;öö Ä
-var
-õõ 
-filePath
-õõ 
-=
-õõ 
-Path
-õõ 
-.
-õõ 
-Combine
-õõ #
-(
-õõ# $
-receiptsDir
-õõ$ /
-,
-õõ/ 0
-safeFileName
-õõ1 =
-)
-õõ= >
-;
-õõ> ?
-await
-ùù 
-using
-ùù 
-(
-ùù 
-var
-ùù 
-stream
-ùù 
-=
-ùù  !
-new
-ùù" %
-
-FileStream
-ùù& 0
-(
-ùù0 1
-filePath
-ùù1 9
-,
-ùù9 :
-FileMode
-ùù; C
-.
-ùùC D
-Create
-ùùD J
-)
-ùùJ K
-)
-ùùK L
-{
-ûû 	
-await
-üü 
-
-uploadFile
-üü 
-.
-üü 
-CopyToAsync
-üü (
-(
-üü( )
-stream
-üü) /
-,
-üü/ 0
-cancellationToken
-üü1 B
-)
-üüB C
-;
-üüC D
-}
-†† 	
-var
-¢¢ 
-relativeUrl
-¢¢ 
-=
-¢¢ 
-$"
-¢¢ 
-$str
-¢¢ 0
-{
-¢¢0 1
-safeFileName
-¢¢1 =
-}
-¢¢= >
-"
-¢¢> ?
-;
-¢¢? @
-var
-££ 
-(
-££ 
-success
-££ 
-,
-££ 
-message
-££ 
-,
-££ 
-	proofPath
-££ (
-)
-££( )
-=
-££* +
-await
-££, 1
-_expenseService
-££2 A
-.
-££A B
-AttachProofAsync
-££B R
-(
-££R S
-id
-££S U
-,
-££U V
-relativeUrl
-££W b
-,
-££b c
-cancellationToken
-££d u
-)
-££u v
-;
-££v w
-if
-§§ 
-
-(
-§§ 
-!
-§§ 
-success
-§§ 
-)
-§§ 
-{
-•• 	
-return
-¶¶ 
-NotFound
-¶¶ 
-(
-¶¶ 
-new
-¶¶ 
-{
-¶¶  !
-message
-¶¶" )
-}
-¶¶* +
-)
-¶¶+ ,
-;
-¶¶, -
-}
-ßß 	
-return
-©© 
-Ok
-©© 
-(
-©© 
-new
-©© 
-{
-™™ 	
-success
-´´ 
-=
-´´ 
-true
-´´ 
-,
-´´ 
-	proofPath
-¨¨ 
-=
-¨¨ 
-relativeUrl
-¨¨ #
-,
-¨¨# $
-fileName
-≠≠ 
-=
-≠≠ 
-
-uploadFile
-≠≠ !
-.
-≠≠! "
-FileName
-≠≠" *
-,
-≠≠* +
-fileUrl
-ÆÆ 
-=
-ÆÆ 
-$"
-ÆÆ 
-{
-ÆÆ 
-Request
-ÆÆ  
-.
-ÆÆ  !
-Scheme
-ÆÆ! '
-}
-ÆÆ' (
-$str
-ÆÆ( +
-{
-ÆÆ+ ,
-Request
-ÆÆ, 3
-.
-ÆÆ3 4
-Host
-ÆÆ4 8
-}
-ÆÆ8 9
-{
-ÆÆ9 :
-relativeUrl
-ÆÆ: E
-}
-ÆÆE F
-"
-ÆÆF G
-,
-ÆÆG H
-message
-ØØ 
-}
-∞∞ 	
-)
-∞∞	 
-
-;
-∞∞
- 
-}
-±± 
-[
-≥≥ 
-HttpGet
-≥≥ 
-(
-≥≥ 
-$str
-≥≥ 
-)
-≥≥  
-]
-≥≥  !
-[
-¥¥ 
-	Authorize
-¥¥ 
-(
-¥¥ 
-Roles
-¥¥ 
-=
-¥¥ 
-$str
-¥¥ 7
-)
-¥¥7 8
-]
-¥¥8 9
-public
-µµ 
-
-IActionResult
-µµ 
-GetProofFile
-µµ %
-(
-µµ% &
-string
-µµ& ,
-fileName
-µµ- 5
-)
-µµ5 6
-{
-∂∂ 
-if
-∑∑ 
-
-(
-∑∑ 
-string
-∑∑ 
-.
-∑∑  
-IsNullOrWhiteSpace
-∑∑ %
-(
-∑∑% &
-fileName
-∑∑& .
-)
-∑∑. /
-)
-∑∑/ 0
-{
-∏∏ 	
-return
-ππ 
-
-BadRequest
-ππ 
-(
-ππ 
-new
-ππ !
-{
-ππ" #
-message
-ππ$ +
-=
-ππ, -
-$str
-ππ. F
-}
-ππG H
-)
-ππH I
-;
-ππI J
-}
-∫∫ 	
-var
-ºº 
-	cleanName
-ºº 
-=
-ºº 
-Path
-ºº 
-.
-ºº 
-GetFileName
-ºº (
-(
-ºº( )
-fileName
-ºº) 1
-)
-ºº1 2
-;
-ºº2 3
-var
-ΩΩ 
-receiptsDir
-ΩΩ 
-=
-ΩΩ 
-Path
-ΩΩ 
-.
-ΩΩ 
-Combine
-ΩΩ &
-(
-ΩΩ& '
-_environment
-ΩΩ' 3
-.
-ΩΩ3 4
-ContentRootPath
-ΩΩ4 C
-,
-ΩΩC D
-$str
-ΩΩE O
-,
-ΩΩO P
-$str
-ΩΩQ [
-)
-ΩΩ[ \
-;
-ΩΩ\ ]
-var
-ææ 
-filePath
-ææ 
-=
-ææ 
-Path
-ææ 
-.
-ææ 
-Combine
-ææ #
-(
-ææ# $
-receiptsDir
-ææ$ /
-,
-ææ/ 0
-	cleanName
-ææ1 :
-)
-ææ: ;
-;
-ææ; <
-if
-¿¿ 
-
-(
-¿¿ 
-!
-¿¿ 
-System
-¿¿ 
-.
-¿¿ 
-IO
-¿¿ 
-.
-¿¿ 
-File
-¿¿ 
-.
-¿¿ 
-Exists
-¿¿ "
-(
-¿¿" #
-filePath
-¿¿# +
-)
-¿¿+ ,
-)
-¿¿, -
-{
-¡¡ 	
-return
-¬¬ 
-NotFound
-¬¬ 
-(
-¬¬ 
-new
-¬¬ 
-{
-¬¬  !
-message
-¬¬" )
-=
-¬¬* +
-$str
-¬¬, I
-}
-¬¬J K
-)
-¬¬K L
-;
-¬¬L M
-}
-√√ 	
-var
-≈≈ 
-ext
-≈≈ 
-=
-≈≈ 
-Path
-≈≈ 
-.
-≈≈ 
-GetExtension
-≈≈ #
-(
-≈≈# $
-	cleanName
-≈≈$ -
-)
-≈≈- .
-.
-≈≈. /
-ToLowerInvariant
-≈≈/ ?
-(
-≈≈? @
-)
-≈≈@ A
-;
-≈≈A B
-var
-∆∆ 
-contentType
-∆∆ 
-=
-∆∆ 
-ext
-∆∆ 
-switch
-∆∆ $
-{
-«« 	
-$str
-»» 
-=>
-»» 
-$str
-»» '
-,
-»»' (
-$str
-…… 
-=>
-…… 
-$str
-…… !
-,
-……! "
-$str
-   
-or
-   
-$str
-   
-=>
-    
-$str
-  ! -
-,
-  - .
-$str
-ÀÀ 
-=>
-ÀÀ 
-$str
-ÀÀ #
-,
-ÀÀ# $
-_
-ÃÃ 
-=>
-ÃÃ 
-$str
-ÃÃ +
-}
-ÕÕ 	
-;
-ÕÕ	 
-
-var
-œœ 
-stream
-œœ 
-=
-œœ 
-new
-œœ 
-
-FileStream
-œœ #
-(
-œœ# $
-filePath
-œœ$ ,
-,
-œœ, -
-FileMode
-œœ. 6
-.
-œœ6 7
-Open
-œœ7 ;
-,
-œœ; <
-
-FileAccess
-œœ= G
-.
-œœG H
-Read
-œœH L
-,
-œœL M
-	FileShare
-œœN W
-.
-œœW X
-Read
-œœX \
-)
-œœ\ ]
-;
-œœ] ^
-return
-–– 
-File
-–– 
-(
-–– 
-stream
-–– 
-,
-–– 
-contentType
-–– '
-,
-––' (
-	cleanName
-––) 2
-,
-––2 3#
-enableRangeProcessing
-––4 I
-:
-––I J
-true
-––K O
-)
-––O P
-;
-––P Q
-}
-—— 
-}““ â/
-sC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\PoliciesController.cs
-	namespace
-
- 	
-	VoyageHub
-
-
- 
-.
-
- 
-Api
-
- 
-.
-
- 
-Controllers
-
- #
-;
-
-# $
-[ 
-ApiController 
-] 
-[ 
-Route 
-( 
-$str 
-) 
-] 
-[ 
-	Authorize 
-
-]
- 
-public 
-class 
-PoliciesController 
-:  !
-ControllerBase" 0
-{ 
-private 
-readonly 
-IPolicyService #
-_policyService$ 2
-;2 3
-public 
-
-PoliciesController 
-( 
-IPolicyService ,
-policyService- :
-): ;
-{ 
-_policyService 
-= 
-policyService &
-;& '
-} 
-[ 
-HttpGet 
-] 
-[ 
-	Authorize 
-( 
-Roles 
-= 
-$str 7
-)7 8
-]8 9
-public 
-
-async 
-Task 
-< 
-ActionResult "
-<" #
-List# '
-<' (
-PolicyConfigDto( 7
->7 8
->8 9
->9 :
-GetPolicies; F
-(F G
-CancellationTokenG X
-cancellationTokenY j
-)j k
-{ 
-var 
-policies 
-= 
-await 
-_policyService +
-.+ ,
-GetPoliciesAsync, <
-(< =
-cancellationToken= N
-)N O
-;O P
-return 
-Ok 
-( 
-policies 
-) 
-; 
-} 
-[   
-HttpPut   
-(   
-$str   
-)   
-]   
-[!! 
-	Authorize!! 
-(!! 
-Roles!! 
-=!! 
-$str!! 
-)!! 
-]!!  
-public"" 
-
-async"" 
-Task"" 
-<"" 
-IActionResult"" #
->""# $
-UpdatePolicy""% 1
-(""1 2
-Guid""2 6
-id""7 9
-,""9 :
-[""; <
-FromBody""< D
-]""D E
-UpdatePolicyDto""F U
-dto""V Y
-,""Y Z
-CancellationToken""[ l
-cancellationToken""m ~
-)""~ 
-{## 
-var$$ 
-($$ 
-success$$ 
-,$$ 
-message$$ 
-)$$ 
-=$$  
-await$$! &
-_policyService$$' 5
-.$$5 6
-UpdatePolicyAsync$$6 G
-($$G H
-id$$H J
-,$$J K
-dto$$L O
-,$$O P
-cancellationToken$$Q b
-)$$b c
-;$$c d
-if%% 
-
-(%% 
-!%% 
-success%% 
-)%% 
-{&& 	
-return'' 
-NotFound'' 
-('' 
-new'' 
-{''  !
-message''" )
-}''* +
-)''+ ,
-;'', -
-}(( 	
-return** 
-Ok** 
-(** 
-new** 
-{** 
-success** 
-=**  !
-true**" &
-,**& '
-message**( /
-}**0 1
-)**1 2
-;**2 3
-}++ 
-[-- 
-HttpPost-- 
-]-- 
-[.. 
-	Authorize.. 
-(.. 
-Roles.. 
-=.. 
-$str.. 
-).. 
-]..  
-public// 
-
-async// 
-Task// 
-<// 
-ActionResult// "
-<//" #
-PolicyConfigDto//# 2
->//2 3
->//3 4
-CreatePolicy//5 A
-(//A B
-[//B C
-FromBody//C K
-]//K L
-CreatePolicyDto//M \
-dto//] `
-,//` a
-CancellationToken//b s
-cancellationToken	//t Ö
-)
-//Ö Ü
-{00 
-var11 
-(11 
-success11 
-,11 
-message11 
-,11 
-policy11 %
-)11% &
-=11' (
-await11) .
-_policyService11/ =
-.11= >
-CreatePolicyAsync11> O
-(11O P
-dto11P S
-,11S T
-cancellationToken11U f
-)11f g
-;11g h
-if22 
-
-(22 
-!22 
-success22 
-)22 
-{33 	
-return44 
-
-BadRequest44 
-(44 
-new44 !
-{44" #
-message44$ +
-}44, -
-)44- .
-;44. /
-}55 	
-return77 
-Ok77 
-(77 
-policy77 
-)77 
-;77 
-}88 
-[:: 
-
-HttpDelete:: 
-(:: 
-$str:: 
-):: 
-]:: 
-[;; 
-	Authorize;; 
-(;; 
-Roles;; 
-=;; 
-$str;; 
-);; 
-];;  
-public<< 
-
-async<< 
-Task<< 
-<<< 
-IActionResult<< #
-><<# $
-DeletePolicy<<% 1
-(<<1 2
-Guid<<2 6
-id<<7 9
-,<<9 :
-CancellationToken<<; L
-cancellationToken<<M ^
-)<<^ _
-{== 
-var>> 
-(>> 
-success>> 
-,>> 
-message>> 
-)>> 
-=>>  
-await>>! &
-_policyService>>' 5
-.>>5 6
-DeletePolicyAsync>>6 G
-(>>G H
-id>>H J
-,>>J K
-cancellationToken>>L ]
-)>>] ^
-;>>^ _
-if?? 
-
-(?? 
-!?? 
-success?? 
-)?? 
-{@@ 	
-returnAA 
-NotFoundAA 
-(AA 
-newAA 
-{AA  !
-messageAA" )
-}AA* +
-)AA+ ,
-;AA, -
-}BB 	
 returnDD 
 OkDD 
-(DD 
-newDD 
-{DD 
-successDD 
-=DD  !
-trueDD" &
-,DD& '
-messageDD( /
-}DD0 1
-)DD1 2
-;DD2 3
-}EE 
-}FF ñb
+(DD 
+employeeDD 
+)DD 
+;DD 
+}EE 
+[GG 
+
+HttpDeleteGG 
+(GG 
+$strGG 
+)GG 
+]GG 
+publicHH 
+
+asyncHH 
+TaskHH 
+<HH 
+IActionResultHH #
+>HH# $
+DeleteEmployeeHH% 3
+(HH3 4
+GuidHH4 8
+idHH9 ;
+,HH; <
+CancellationTokenHH= N
+cancellationTokenHHO `
+)HH` a
+{II 
+varJJ 
+(JJ 
+successJJ 
+,JJ 
+messageJJ 
+)JJ 
+=JJ  
+awaitJJ! &
+_employeeServiceJJ' 7
+.JJ7 8
+DeleteEmployeeAsyncJJ8 K
+(JJK L
+idJJL N
+,JJN O
+cancellationTokenJJP a
+)JJa b
+;JJb c
+ifKK 
+
+(KK 
+!KK 
+successKK 
+)KK 
+{LL 	
+returnMM 
+
+BadRequestMM 
+(MM 
+newMM !
+{MM" #
+messageMM$ +
+}MM, -
+)MM- .
+;MM. /
+}NN 	
+returnOO 
+OkOO 
+(OO 
+newOO 
+{OO 
+successOO 
+=OO  !
+trueOO" &
+,OO& '
+messageOO( /
+}OO0 1
+)OO1 2
+;OO2 3
+}PP 
+[RR 
+HttpPostRR 
+(RR 
+$strRR 
+)RR 
+]RR 
+publicSS 
+
+asyncSS 
+TaskSS 
+<SS 
+ActionResultSS "
+<SS" # 
+BatchUploadResultDtoSS# 7
+>SS7 8
+>SS8 9
+BatchUploadSS: E
+(SSE F
+	IFormFileSSF O
+?SSO P
+fileSSQ U
+,SSU V
+CancellationTokenSSW h
+cancellationTokenSSi z
+)SSz {
+{TT 
+varUU 
+
+uploadFileUU 
+=UU 
+fileUU 
+;UU 
+ifWW 
+
+(WW 
+
+uploadFileWW 
+==WW 
+nullWW 
+||WW !
+
+uploadFileWW" ,
+.WW, -
+LengthWW- 3
+==WW4 6
+$numWW7 8
+)WW8 9
+{XX 	
+returnYY 
+
+BadRequestYY 
+(YY 
+newYY !
+{YY" #
+messageYY$ +
+=YY, -
+$strYY. P
+}YYQ R
+)YYR S
+;YYS T
+}ZZ 	
+if\\ 
+
+(\\ 
+!\\ 
+
+uploadFile\\ 
+.\\ 
+FileName\\  
+.\\  !
+EndsWith\\! )
+(\\) *
+$str\\* 0
+,\\0 1
+StringComparison\\2 B
+.\\B C
+OrdinalIgnoreCase\\C T
+)\\T U
+)\\U V
+{]] 	
+return^^ 
+
+BadRequest^^ 
+(^^ 
+new^^ !
+{^^" #
+message^^$ +
+=^^, -
+$str^^. _
+}^^` a
+)^^a b
+;^^b c
+}__ 	
+usingaa 
+varaa 
+streamaa 
+=aa 
+
+uploadFileaa %
+.aa% &
+OpenReadStreamaa& 4
+(aa4 5
+)aa5 6
+;aa6 7
+varbb 
+resultbb 
+=bb 
+awaitbb 
+_employeeServicebb +
+.bb+ ,
+BatchUploadCsvAsyncbb, ?
+(bb? @
+streambb@ F
+,bbF G
+cancellationTokenbbH Y
+)bbY Z
+;bbZ [
+returncc 
+Okcc 
+(cc 
+resultcc 
+)cc 
+;cc 
+}dd 
+[ff 
+HttpGetff 
+(ff 
+$strff 
+)ff 
+]ff 
+[gg 
+AllowAnonymousgg 
+]gg 
+publichh 
+
+IActionResulthh 
+DownloadCsvTemplatehh ,
+(hh, -
+)hh- .
+{ii 
+varjj 
+
+csvBuilderjj 
+=jj 
+newjj 
+StringBuilderjj *
+(jj* +
+)jj+ ,
+;jj, -
+
+csvBuilderkk 
+.kk 
+
+AppendLinekk 
+(kk 
+$strkk C
+)kkC D
+;kkD E
+
+csvBuilderll 
+.ll 
+
+AppendLinell 
+(ll 
+$strll h
+)llh i
+;lli j
+
+csvBuildermm 
+.mm 
+
+AppendLinemm 
+(mm 
+$strmm l
+)mml m
+;mmm n
+
+csvBuildernn 
+.nn 
+
+AppendLinenn 
+(nn 
+$strnn p
+)nnp q
+;nnq r
+varpp 
+bytespp 
+=pp 
+Encodingpp 
+.pp 
+UTF8pp !
+.pp! "
+GetBytespp" *
+(pp* +
+
+csvBuilderpp+ 5
+.pp5 6
+ToStringpp6 >
+(pp> ?
+)pp? @
+)pp@ A
+;ppA B
+returnqq 
+Fileqq 
+(qq 
+bytesqq 
+,qq 
+$strqq %
+,qq% &
+$strqq' ?
+)qq? @
+;qq@ A
+}rr 
+}ss ñb
 oC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AuthController.cs
 	namespace 	
 	VoyageHub
@@ -7054,7 +7053,183 @@ entityType> H
 ) 
 ; 
 }   
-}!! ú
+}!! ∑
+tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AnalyticsController.cs
+	namespace		 	
+	VoyageHub		
+ 
+.		 
+Api		 
+.		 
+Controllers		 #
+;		# $
+[ 
+ApiController 
+] 
+[ 
+Route 
+( 
+$str 
+) 
+] 
+[ 
+	Authorize 
+
+(
+ 
+Roles 
+= 
+$str *
+)* +
+]+ ,
+public 
+class 
+AnalyticsController  
+:! "
+ControllerBase# 1
+{ 
+private 
+readonly 
+IAnalyticsService &
+_analyticsService' 8
+;8 9
+public 
+
+AnalyticsController 
+( 
+IAnalyticsService 0
+analyticsService1 A
+)A B
+{ 
+_analyticsService 
+= 
+analyticsService ,
+;, -
+} 
+[ 
+HttpGet 
+( 
+$str 
+) 
+] 
+public 
+
+async 
+Task 
+< 
+ActionResult "
+<" # 
+AnalyticsOverviewDto# 7
+>7 8
+>8 9
+GetOverview: E
+(E F
+CancellationTokenF W
+cancellationTokenX i
+)i j
+{ 
+var 
+overview 
+= 
+await 
+_analyticsService .
+.. /
+GetOverviewAsync/ ?
+(? @
+cancellationToken@ Q
+)Q R
+;R S
+return 
+Ok 
+( 
+overview 
+) 
+; 
+} 
+[ 
+HttpGet 
+( 
+$str 
+)  
+]  !
+public 
+
+async 
+Task 
+< 
+ActionResult "
+<" #
+List# '
+<' ("
+EmployeeSpendReportDto( >
+>> ?
+>? @
+>@ A
+GetEmployeeReportsB T
+(T U
+CancellationTokenU f
+cancellationTokeng x
+)x y
+{   
+var!! 
+reports!! 
+=!! 
+await!! 
+_analyticsService!! -
+.!!- .'
+GetEmployeeSpendReportAsync!!. I
+(!!I J
+cancellationToken!!J [
+)!![ \
+;!!\ ]
+return"" 
+Ok"" 
+("" 
+reports"" 
+)"" 
+;"" 
+}## 
+[%% 
+HttpGet%% 
+(%% 
+$str%% 
+)%% 
+]%% 
+public&& 
+
+async&& 
+Task&& 
+<&& 
+ActionResult&& "
+<&&" # 
+CostSummaryReportDto&&# 7
+>&&7 8
+>&&8 9
+GetCostReports&&: H
+(&&H I
+CancellationToken&&I Z
+cancellationToken&&[ l
+)&&l m
+{'' 
+var(( 
+report(( 
+=(( 
+await(( 
+_analyticsService(( ,
+.((, -%
+GetCostSummaryReportAsync((- F
+(((F G
+cancellationToken((G X
+)((X Y
+;((Y Z
+return)) 
+Ok)) 
+()) 
+report)) 
+))) 
+;)) 
+}** 
+}++ ú
 tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\ApprovalsController.cs
 	namespace		 	
 	VoyageHub		
@@ -7247,180 +7422,4 @@ TakeAction""% /
 )**1 2
 ;**2 3
 }++ 
-},, ∑
-tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AnalyticsController.cs
-	namespace		 	
-	VoyageHub		
- 
-.		 
-Api		 
-.		 
-Controllers		 #
-;		# $
-[ 
-ApiController 
-] 
-[ 
-Route 
-( 
-$str 
-) 
-] 
-[ 
-	Authorize 
-
-(
- 
-Roles 
-= 
-$str *
-)* +
-]+ ,
-public 
-class 
-AnalyticsController  
-:! "
-ControllerBase# 1
-{ 
-private 
-readonly 
-IAnalyticsService &
-_analyticsService' 8
-;8 9
-public 
-
-AnalyticsController 
-( 
-IAnalyticsService 0
-analyticsService1 A
-)A B
-{ 
-_analyticsService 
-= 
-analyticsService ,
-;, -
-} 
-[ 
-HttpGet 
-( 
-$str 
-) 
-] 
-public 
-
-async 
-Task 
-< 
-ActionResult "
-<" # 
-AnalyticsOverviewDto# 7
->7 8
->8 9
-GetOverview: E
-(E F
-CancellationTokenF W
-cancellationTokenX i
-)i j
-{ 
-var 
-overview 
-= 
-await 
-_analyticsService .
-.. /
-GetOverviewAsync/ ?
-(? @
-cancellationToken@ Q
-)Q R
-;R S
-return 
-Ok 
-( 
-overview 
-) 
-; 
-} 
-[ 
-HttpGet 
-( 
-$str 
-)  
-]  !
-public 
-
-async 
-Task 
-< 
-ActionResult "
-<" #
-List# '
-<' ("
-EmployeeSpendReportDto( >
->> ?
->? @
->@ A
-GetEmployeeReportsB T
-(T U
-CancellationTokenU f
-cancellationTokeng x
-)x y
-{   
-var!! 
-reports!! 
-=!! 
-await!! 
-_analyticsService!! -
-.!!- .'
-GetEmployeeSpendReportAsync!!. I
-(!!I J
-cancellationToken!!J [
-)!![ \
-;!!\ ]
-return"" 
-Ok"" 
-("" 
-reports"" 
-)"" 
-;"" 
-}## 
-[%% 
-HttpGet%% 
-(%% 
-$str%% 
-)%% 
-]%% 
-public&& 
-
-async&& 
-Task&& 
-<&& 
-ActionResult&& "
-<&&" # 
-CostSummaryReportDto&&# 7
->&&7 8
->&&8 9
-GetCostReports&&: H
-(&&H I
-CancellationToken&&I Z
-cancellationToken&&[ l
-)&&l m
-{'' 
-var(( 
-report(( 
-=(( 
-await(( 
-_analyticsService(( ,
-.((, -%
-GetCostSummaryReportAsync((- F
-(((F G
-cancellationToken((G X
-)((X Y
-;((Y Z
-return)) 
-Ok)) 
-()) 
-report)) 
-))) 
-;)) 
-}** 
-}++ 
+},, 

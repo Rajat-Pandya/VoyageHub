@@ -409,7 +409,7 @@ public class TravelRequestService : ITravelRequestService
         r.Status = "Manager Review";
         r.UpdatedAt = DateTime.UtcNow;
 
-        if (r.ApprovalSteps.Any())
+        if (r.ApprovalSteps.Count > 0)
         {
             _travelRequestRepository.RemoveApprovalSteps(r.ApprovalSteps.ToList());
             r.ApprovalSteps.Clear();

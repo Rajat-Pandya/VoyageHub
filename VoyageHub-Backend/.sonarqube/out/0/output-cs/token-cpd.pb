@@ -366,7 +366,7 @@ Department55 &
 )??* +
 ;??+ ,
 }@@ 
-}AA ã∑
+}AA ˘Ω
 zC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\TravelRequestRepository.cs
 	namespace		 	
 	VoyageHub		
@@ -983,851 +983,819 @@ CountAsyncWW$ .
 
 CountAsyncXX% /
 (XX/ 0
-rXX0 1
-=>XX2 4
-rXX5 6
-.XX6 7
-StatusXX7 =
-==XX> @
-$strXXA L
-||XXM O
-rXXP Q
-.XXQ R
-StatusXXR X
-==XXY [
-$strXX\ l
-||XXm o
-rXXp q
-.XXq r
-StatusXXr x
-==XXy {
-$str	XX| Ö
+rYY 
+=>YY 
+rYY 
+.YY 
+StatusYY 
+==YY 
+$strYY (
+||YY) +
+rYY, -
+.YY- .
+StatusYY. 4
+==YY5 7
+$strYY8 H
+||YYI K
+rYYL M
+.YYM N
+StatusYYN T
+==YYU W
+$strYYX h
+||YYi k
+rYYl m
+.YYm n
+StatusYYn t
+==YYu w
+$str	YYx Å
 ,
-XXÖ Ü
-cancellationToken
-XXá ò
-)
-XXò ô
-;
-XXô ö
-varYY 
-upcomingYY 
-=YY 
-awaitYY 
-reqQueryYY %
-.YY% &
+YYÅ Ç
+cancellationTokenZZ 
+)ZZ 
+;ZZ 
+var[[ 
+upcoming[[ 
+=[[ 
+await[[ 
+reqQuery[[ %
+.[[% &
 
-CountAsyncYY& 0
-(YY0 1
-rYY1 2
-=>YY3 5
-rYY6 7
-.YY7 8
-StatusYY8 >
-==YY? A
-$strYYB L
-&&YYM O
-rYYP Q
-.YYQ R
-	StartDateYYR [
->=YY\ ^
-DateTimeYY_ g
-.YYg h
-UtcNowYYh n
-.YYn o
-DateYYo s
-,YYs t
-cancellationToken	YYu Ü
+CountAsync[[& 0
+([[0 1
+r[[1 2
+=>[[3 5
+r[[6 7
+.[[7 8
+Status[[8 >
+==[[? A
+$str[[B L
+&&[[M O
+r[[P Q
+.[[Q R
+	StartDate[[R [
+>=[[\ ^
+DateTime[[_ g
+.[[g h
+UtcNow[[h n
+.[[n o
+Date[[o s
+,[[s t
+cancellationToken	[[u Ü
 )
-YYÜ á
+[[Ü á
 ;
-YYá à
-var[[ 
-expenseQuery[[ 
-=[[ 
-Context[[ "
-.[[" #
-Expenses[[# +
-.[[+ ,
-AsQueryable[[, 7
-([[7 8
-)[[8 9
-;[[9 :
-if\\ 
+[[á à
+var]] 
+expenseQuery]] 
+=]] 
+Context]] "
+.]]" #
+Expenses]]# +
+.]]+ ,
+AsQueryable]], 7
+(]]7 8
+)]]8 9
+;]]9 :
+if^^ 
 
-(\\ 
+(^^ 
 
-employeeId\\ 
-.\\ 
-HasValue\\ 
-&&\\  "
+employeeId^^ 
+.^^ 
+HasValue^^ 
+&&^^  "
 
-employeeId\\# -
-!=\\. 0
-Guid\\1 5
-.\\5 6
-Empty\\6 ;
-)\\; <
-{]] 	
-expenseQuery^^ 
-=^^ 
-expenseQuery^^ '
-.^^' (
-Where^^( -
-(^^- .
-e^^. /
-=>^^0 2
-e^^3 4
-.^^4 5
-Request^^5 <
-!=^^= ?
-null^^@ D
-&&^^E G
-e^^H I
-.^^I J
-Request^^J Q
-.^^Q R
+employeeId^^# -
+!=^^. 0
+Guid^^1 5
+.^^5 6
+Empty^^6 ;
+)^^; <
+{__ 	
+expenseQuery`` 
+=`` 
+expenseQuery`` '
+.``' (
+Where``( -
+(``- .
+e``. /
+=>``0 2
+e``3 4
+.``4 5
+Request``5 <
+!=``= ?
+null``@ D
+&&``E G
+e``H I
+.``I J
+Request``J Q
+.``Q R
 
-EmployeeId^^R \
-==^^] _
+EmployeeId``R \
+==``] _
 
-employeeId^^` j
-.^^j k
-Value^^k p
-)^^p q
-;^^q r
-}__ 	
-else`` 
-if`` 
-(`` 
-	managerId`` 
-.`` 
-HasValue`` #
-&&``$ &
-	managerId``' 0
-!=``1 3
-Guid``4 8
-.``8 9
-Empty``9 >
-)``> ?
-{aa 	
-expenseQuerybb 
-=bb 
-expenseQuerybb '
-.bb' (
-Wherebb( -
-(bb- .
-ebb. /
-=>bb0 2
-ebb3 4
-.bb4 5
-Requestbb5 <
-!=bb= ?
-nullbb@ D
-&&bbE G
-(bbH I
-ebbI J
-.bbJ K
-RequestbbK R
-.bbR S
+employeeId``` j
+.``j k
+Value``k p
+)``p q
+;``q r
+}aa 	
+elsebb 
+ifbb 
+(bb 
+	managerIdbb 
+.bb 
+HasValuebb #
+&&bb$ &
+	managerIdbb' 0
+!=bb1 3
+Guidbb4 8
+.bb8 9
+Emptybb9 >
+)bb> ?
+{cc 	
+expenseQuerydd 
+=dd 
+expenseQuerydd '
+.dd' (
+Wheredd( -
+(dd- .
+edd. /
+=>dd0 2
+edd3 4
+.dd4 5
+Requestdd5 <
+!=dd= ?
+nulldd@ D
+&&ddE G
+(ddH I
+eddI J
+.ddJ K
+RequestddK R
+.ddR S
 
-EmployeeIdbbS ]
-==bb^ `
-	managerIdbba j
-.bbj k
-Valuebbk p
-||bbq s
-(bbt u
-ebbu v
-.bbv w
-Requestbbw ~
-.bb~ 
-Employee	bb á
+EmployeeIdddS ]
+==dd^ `
+	managerIddda j
+.ddj k
+Valueddk p
+||ddq s
+(ddt u
+eddu v
+.ddv w
+Requestddw ~
+.dd~ 
+Employee	dd á
 !=
-bbà ä
+ddà ä
 null
-bbã è
+ddã è
 &&
-bbê í
+ddê í
 e
-bbì î
+ddì î
 .
-bbî ï
+ddî ï
 Request
-bbï ú
+ddï ú
 .
-bbú ù
+ddú ù
 Employee
-bbù •
+ddù •
 .
-bb• ¶
+dd• ¶
 	ManagerId
-bb¶ Ø
+dd¶ Ø
 ==
-bb∞ ≤
+dd∞ ≤
 	managerId
-bb≥ º
+dd≥ º
 .
-bbº Ω
+ddº Ω
 Value
-bbΩ ¬
+ddΩ ¬
 )
-bb¬ √
+dd¬ √
 )
-bb√ ƒ
+dd√ ƒ
 )
-bbƒ ≈
+ddƒ ≈
 ;
-bb≈ ∆
-}cc 	
-vardd 
-reimbursementdd 
-=dd 
-awaitdd !
-expenseQuerydd" .
-.dd. /
-Wheredd/ 4
-(dd4 5
-edd5 6
-=>dd7 9
-edd: ;
-.dd; <
-Statusdd< B
-==ddC E
-$strddF O
-)ddO P
-.ddP Q
-SumAsyncddQ Y
-(ddY Z
-eddZ [
-=>dd\ ^
-(dd_ `
-decimaldd` g
-?ddg h
-)ddh i
-eddi j
-.ddj k
-Amountddk q
-,ddq r
-cancellationToken	dds Ñ
+dd≈ ∆
+}ee 	
+varff 
+reimbursementff 
+=ff 
+awaitff !
+expenseQueryff" .
+.ff. /
+Whereff/ 4
+(ff4 5
+eff5 6
+=>ff7 9
+eff: ;
+.ff; <
+Statusff< B
+==ffC E
+$strffF O
+)ffO P
+.ffP Q
+SumAsyncffQ Y
+(ffY Z
+effZ [
+=>ff\ ^
+(ff_ `
+decimalff` g
+?ffg h
+)ffh i
+effi j
+.ffj k
+Amountffk q
+,ffq r
+cancellationToken	ffs Ñ
 )
-ddÑ Ö
+ffÑ Ö
 ??
-ddÜ à
+ffÜ à
 $num
-ddâ ã
+ffâ ã
 ;
-ddã å
-returnff 
-(ff 
-draftsff 
-,ff 
-pendingff 
-,ff  
-upcomingff! )
-,ff) *
-reimbursementff+ 8
-)ff8 9
-;ff9 :
-}gg 
-publicii 
+ffã å
+returnhh 
+(hh 
+draftshh 
+,hh 
+pendinghh 
+,hh  
+upcominghh! )
+,hh) *
+reimbursementhh+ 8
+)hh8 9
+;hh9 :
+}ii 
+publickk 
 
-asyncii 
-Taskii 
-<ii 
-TravelRequestii #
-?ii# $
->ii$ %
-GetDetailAsyncii& 4
-(ii4 5
-Guidii5 9
-idii: <
-,ii< =
-CancellationTokenii> O
-cancellationTokeniiP a
-=iib c
-defaultiid k
-)iik l
-{jj 
-returnkk 
-awaitkk 
-DbSetkk 
-.ll 
-Includell 
-(ll 
-rll 
-=>ll 
-rll 
-.ll 
-Employeell $
-)ll$ %
-.mm 
-ThenIncludemm 
-(mm 
-emm 
-=>mm !
-emm" #
-!mm# $
-.mm$ %
-
-Departmentmm% /
-)mm/ 0
+asynckk 
+Taskkk 
+<kk 
+TravelRequestkk #
+?kk# $
+>kk$ %
+GetDetailAsynckk& 4
+(kk4 5
+Guidkk5 9
+idkk: <
+,kk< =
+CancellationTokenkk> O
+cancellationTokenkkP a
+=kkb c
+defaultkkd k
+)kkk l
+{ll 
+returnmm 
+awaitmm 
+DbSetmm 
 .nn 
 Includenn 
 (nn 
 rnn 
 =>nn 
 rnn 
-.nn 
-ItinerarySegmentsnn -
-)nn- .
-.oo 
-Includeoo 
-(oo 
-roo 
-=>oo 
-roo 
-.oo 
-Staysoo !
-)oo! "
-.pp 
-Includepp 
-(pp 
-rpp 
-=>pp 
-rpp 
-.pp 
-Expensespp $
-)pp$ %
+.nn 
+Employeenn $
+)nn$ %
+.oo 
+ThenIncludeoo 
+(oo 
+eoo 
+=>oo !
+eoo" #
+!oo# $
+.oo$ %
+
+Departmentoo% /
+)oo/ 0
+.pp 
+ThenIncludepp  
+(pp  !
+dpp! "
+=>pp# %
+dpp& '
+!pp' (
+.pp( )
+Policypp) /
+)pp/ 0
 .qq 
 Includeqq 
 (qq 
 rqq 
 =>qq 
 rqq 
-.qq 
-ApprovalStepsqq )
-)qq) *
-.rr 
-ThenIncluderr 
-(rr 
-srr 
-=>rr !
-srr" #
-.rr# $
-Approverrr$ ,
-)rr, -
-.ss 
-FirstOrDefaultAsyncss  
-(ss  !
-rss! "
-=>ss# %
-rss& '
-.ss' (
-Idss( *
-==ss+ -
-idss. 0
-,ss0 1
-cancellationTokenss2 C
-)ssC D
-;ssD E
-}tt 
-publicvv 
+.qq 
+ItinerarySegmentsqq -
+)qq- .
+.rr 
+Includerr 
+(rr 
+rrr 
+=>rr 
+rrr 
+.rr 
+Staysrr !
+)rr! "
+.ss 
+Includess 
+(ss 
+rss 
+=>ss 
+rss 
+.ss 
+Expensesss $
+)ss$ %
+.tt 
+Includett 
+(tt 
+rtt 
+=>tt 
+rtt 
+.tt 
+ApprovalStepstt )
+)tt) *
+.uu 
+ThenIncludeuu 
+(uu 
+suu 
+=>uu !
+suu" #
+.uu# $
+Approveruu$ ,
+)uu, -
+.vv 
+FirstOrDefaultAsyncvv  
+(vv  !
+rvv! "
+=>vv# %
+rvv& '
+.vv' (
+Idvv( *
+==vv+ -
+idvv. 0
+,vv0 1
+cancellationTokenvv2 C
+)vvC D
+;vvD E
+}ww 
+publicyy 
 
-asyncvv 
-Taskvv 
-<vv 
-Uservv 
-?vv 
->vv 4
-(GetEmployeeWithDepartmentAndManagerAsyncvv E
-(vvE F
-GuidvvF J
+asyncyy 
+Taskyy 
+<yy 
+Useryy 
+?yy 
+>yy 4
+(GetEmployeeWithDepartmentAndManagerAsyncyy E
+(yyE F
+GuidyyF J
 
-employeeIdvvK U
-,vvU V
-CancellationTokenvvW h
-cancellationTokenvvi z
-=vv{ |
-default	vv} Ñ
+employeeIdyyK U
+,yyU V
+CancellationTokenyyW h
+cancellationTokenyyi z
+=yy{ |
+default	yy} Ñ
 )
-vvÑ Ö
-{ww 
-returnxx 
-awaitxx 
-Contextxx 
-.xx 
-Usersxx "
-.yy 
-Includeyy 
-(yy 
-uyy 
-=>yy 
-uyy 
-.yy 
+yyÑ Ö
+{zz 
+return{{ 
+await{{ 
+Context{{ 
+.{{ 
+Users{{ "
+.|| 
+Include|| 
+(|| 
+u|| 
+=>|| 
+u|| 
+.|| 
 
-Departmentyy &
-)yy& '
-.zz 
-ThenIncludezz 
-(zz 
-dzz 
-=>zz !
-dzz" #
-!zz# $
-.zz$ %
-Policyzz% +
-)zz+ ,
-.{{ 
-Include{{ 
-({{ 
-u{{ 
-=>{{ 
-u{{ 
-.{{ 
-Manager{{ #
-){{# $
-.|| 
-FirstOrDefaultAsync||  
-(||  !
-u||! "
-=>||# %
-u||& '
-.||' (
-Id||( *
-==||+ -
+Department|| &
+)||& '
+.}} 
+ThenInclude}} 
+(}} 
+d}} 
+=>}} !
+d}}" #
+!}}# $
+.}}$ %
+Policy}}% +
+)}}+ ,
+.~~ 
+Include~~ 
+(~~ 
+u~~ 
+=>~~ 
+u~~ 
+.~~ 
+Manager~~ #
+)~~# $
+. 
+FirstOrDefaultAsync  
+(  !
+u! "
+=># %
+u& '
+.' (
+Id( *
+==+ -
 
-employeeId||. 8
-,||8 9
-cancellationToken||: K
-)||K L
-;||L M
-}}} 
-public 
-
-async 
-Task 
-< 
-Guid 
-> #
-GetFirstEmployeeIdAsync 3
-(3 4
-CancellationToken4 E
-cancellationTokenF W
-=X Y
-defaultZ a
-)a b
-{
+employeeId. 8
+,8 9
+cancellationToken: K
+)K L
+;L M
+}
 ÄÄ 
-return
-ÅÅ 
-await
-ÅÅ 
-Context
-ÅÅ 
-.
-ÅÅ 
-Users
-ÅÅ "
-.
-ÅÅ" #
-Where
-ÅÅ# (
-(
-ÅÅ( )
-u
-ÅÅ) *
-=>
-ÅÅ+ -
-u
-ÅÅ. /
-.
-ÅÅ/ 0
-Role
-ÅÅ0 4
-==
-ÅÅ5 7
-$str
-ÅÅ8 B
-)
-ÅÅB C
-.
-ÅÅC D
-Select
-ÅÅD J
-(
-ÅÅJ K
-u
-ÅÅK L
-=>
-ÅÅM O
-u
-ÅÅP Q
-.
-ÅÅQ R
-Id
-ÅÅR T
-)
-ÅÅT U
-.
-ÅÅU V!
-FirstOrDefaultAsync
-ÅÅV i
-(
-ÅÅi j
-cancellationToken
-ÅÅj {
-)
-ÅÅ{ |
-;
-ÅÅ| }
-}
-ÇÇ 
 public
-ÑÑ 
+ÇÇ 
 
 async
-ÑÑ 
+ÇÇ 
 Task
-ÑÑ 
+ÇÇ 
 <
-ÑÑ 
+ÇÇ 
 Guid
-ÑÑ 
-?
-ÑÑ 
+ÇÇ 
 >
-ÑÑ $
-GetFirstManagerIdAsync
-ÑÑ 3
+ÇÇ %
+GetFirstEmployeeIdAsync
+ÇÇ 3
 (
-ÑÑ3 4
+ÇÇ3 4
 CancellationToken
-ÑÑ4 E
+ÇÇ4 E
 cancellationToken
-ÑÑF W
+ÇÇF W
 =
-ÑÑX Y
+ÇÇX Y
 default
-ÑÑZ a
+ÇÇZ a
 )
-ÑÑa b
+ÇÇa b
 {
+ÉÉ 
+return
+ÑÑ 
+await
+ÑÑ 
+Context
+ÑÑ 
+.
+ÑÑ 
+Users
+ÑÑ "
+.
+ÑÑ" #
+Where
+ÑÑ# (
+(
+ÑÑ( )
+u
+ÑÑ) *
+=>
+ÑÑ+ -
+u
+ÑÑ. /
+.
+ÑÑ/ 0
+Role
+ÑÑ0 4
+==
+ÑÑ5 7
+$str
+ÑÑ8 B
+)
+ÑÑB C
+.
+ÑÑC D
+Select
+ÑÑD J
+(
+ÑÑJ K
+u
+ÑÑK L
+=>
+ÑÑM O
+u
+ÑÑP Q
+.
+ÑÑQ R
+Id
+ÑÑR T
+)
+ÑÑT U
+.
+ÑÑU V!
+FirstOrDefaultAsync
+ÑÑV i
+(
+ÑÑi j
+cancellationToken
+ÑÑj {
+)
+ÑÑ{ |
+;
+ÑÑ| }
+}
 ÖÖ 
-return
-ÜÜ 
-await
-ÜÜ 
-Context
-ÜÜ 
-.
-ÜÜ 
-Users
-ÜÜ "
-.
-ÜÜ" #
-Where
-ÜÜ# (
-(
-ÜÜ( )
-u
-ÜÜ) *
-=>
-ÜÜ+ -
-u
-ÜÜ. /
-.
-ÜÜ/ 0
-Role
-ÜÜ0 4
-==
-ÜÜ5 7
-$str
-ÜÜ8 A
-)
-ÜÜA B
-.
-ÜÜB C
-Select
-ÜÜC I
-(
-ÜÜI J
-u
-ÜÜJ K
-=>
-ÜÜL N
-(
-ÜÜO P
+public
+áá 
+
+async
+áá 
+Task
+áá 
+<
+áá 
 Guid
-ÜÜP T
+áá 
 ?
-ÜÜT U
-)
-ÜÜU V
-u
-ÜÜV W
-.
-ÜÜW X
-Id
-ÜÜX Z
-)
-ÜÜZ [
-.
-ÜÜ[ \!
-FirstOrDefaultAsync
-ÜÜ\ o
-(
-ÜÜo p 
-cancellationTokenÜÜp Å
-)ÜÜÅ Ç
-;ÜÜÇ É
-}
-áá 
-public
-ââ 
-
-async
-ââ 
-Task
-ââ 
-<
-ââ 
-Guid
-ââ 
+áá 
 >
-ââ $
-GetFirstFinanceIdAsync
-ââ 2
+áá $
+GetFirstManagerIdAsync
+áá 3
 (
-ââ2 3
+áá3 4
 CancellationToken
-ââ3 D
+áá4 E
 cancellationToken
-ââE V
+ááF W
 =
-ââW X
+ááX Y
 default
-ââY `
+ááZ a
 )
-ââ` a
+ááa b
 {
-ää 
+àà 
 return
-ãã 
+ââ 
 await
-ãã 
+ââ 
 Context
-ãã 
+ââ 
 .
-ãã 
+ââ 
 Users
-ãã "
+ââ "
 .
-ãã" #
+ââ" #
 Where
-ãã# (
+ââ# (
 (
-ãã( )
+ââ( )
 u
-ãã) *
+ââ) *
 =>
-ãã+ -
+ââ+ -
 u
-ãã. /
+ââ. /
 .
-ãã/ 0
+ââ/ 0
 Role
-ãã0 4
+ââ0 4
 ==
-ãã5 7
+ââ5 7
 $str
-ãã8 A
+ââ8 A
 )
-ããA B
+ââA B
 .
-ããB C
+ââB C
 Select
-ããC I
+ââC I
 (
-ããI J
+ââI J
 u
-ããJ K
+ââJ K
 =>
-ããL N
-u
-ããO P
-.
-ããP Q
-Id
-ããQ S
-)
-ããS T
-.
-ããT U!
-FirstOrDefaultAsync
-ããU h
+ââL N
 (
-ããh i
-cancellationToken
-ããi z
+ââO P
+Guid
+ââP T
+?
+ââT U
 )
-ããz {
-;
-ãã{ |
+ââU V
+u
+ââV W
+.
+ââW X
+Id
+ââX Z
+)
+ââZ [
+.
+ââ[ \!
+FirstOrDefaultAsync
+ââ\ o
+(
+ââo p 
+cancellationTokenââp Å
+)ââÅ Ç
+;ââÇ É
 }
-åå 
+ää 
 public
-éé 
+åå 
 
 async
-éé 
+åå 
 Task
-éé 
+åå 
 <
-éé 
-int
-éé 
+åå 
+Guid
+åå 
 >
-éé 
-GetCountAsync
-éé (
+åå $
+GetFirstFinanceIdAsync
+åå 2
 (
-éé( )
+åå2 3
 CancellationToken
-éé) :
+åå3 D
 cancellationToken
-éé; L
+ååE V
 =
-ééM N
+ååW X
 default
-ééO V
+ååY `
 )
-ééV W
+åå` a
 {
-èè 
+çç 
 return
-êê 
+éé 
 await
-êê 
-DbSet
-êê 
+éé 
+Context
+éé 
 .
-êê 
+éé 
+Users
+éé "
+.
+éé" #
+Where
+éé# (
+(
+éé( )
+u
+éé) *
+=>
+éé+ -
+u
+éé. /
+.
+éé/ 0
+Role
+éé0 4
+==
+éé5 7
+$str
+éé8 A
+)
+ééA B
+.
+ééB C
+Select
+ééC I
+(
+ééI J
+u
+ééJ K
+=>
+ééL N
+u
+ééO P
+.
+ééP Q
+Id
+ééQ S
+)
+ééS T
+.
+ééT U!
+FirstOrDefaultAsync
+ééU h
+(
+ééh i
+cancellationToken
+ééi z
+)
+ééz {
+;
+éé{ |
+}
+èè 
+public
+ëë 
+
+async
+ëë 
+Task
+ëë 
+<
+ëë 
+int
+ëë 
+>
+ëë 
+GetCountAsync
+ëë (
+(
+ëë( )
+CancellationToken
+ëë) :
+cancellationToken
+ëë; L
+=
+ëëM N
+default
+ëëO V
+)
+ëëV W
+{
+íí 
+return
+ìì 
+await
+ìì 
+DbSet
+ìì 
+.
+ìì 
 
 CountAsync
-êê %
+ìì %
 (
-êê% &
+ìì% &
 cancellationToken
-êê& 7
+ìì& 7
 )
-êê7 8
+ìì7 8
 ;
-êê8 9
+ìì8 9
 }
-ëë 
+îî 
 public
-ìì 
+ññ 
 
 async
-ìì 
+ññ 
 Task
-ìì 
+ññ 
 <
-ìì 
+ññ 
 TravelRequest
-ìì #
+ññ #
 ?
-ìì# $
+ññ# $
 >
-ìì$ %(
+ññ$ %(
 GetDraftForSubmissionAsync
-ìì& @
+ññ& @
 (
-ìì@ A
+ññ@ A
 Guid
-ììA E
+ññA E
 id
-ììF H
+ññF H
 ,
-ììH I
+ññH I
 CancellationToken
-ììJ [
+ññJ [
 cancellationToken
-ìì\ m
+ññ\ m
 =
-ììn o
+ññn o
 default
-ììp w
+ññp w
 )
-ììw x
+ññw x
 {
-îî 
+óó 
 return
-ïï 
+òò 
 await
-ïï 
+òò 
 DbSet
-ïï 
-.
-ññ 
-Include
-ññ 
-(
-ññ 
-r
-ññ 
-=>
-ññ 
-r
-ññ 
-.
-ññ 
-Employee
-ññ $
-)
-ññ$ %
-.
-óó 
-ThenInclude
-óó 
-(
-óó 
-e
-óó 
-=>
-óó !
-e
-óó" #
-!
-óó# $
-.
-óó$ %
-
-Department
-óó% /
-)
-óó/ 0
-.
-òò 
-ThenInclude
-òò  
-(
-òò  !
-d
-òò! "
-=>
-òò# %
-d
-òò& '
-!
-òò' (
-.
-òò( )
-Policy
-òò) /
-)
-òò/ 0
+òò 
 .
 ôô 
 Include
@@ -1841,195 +1809,309 @@ Department
 r
 ôô 
 .
-ôô 
-ApprovalSteps
-ôô )
+ôô 
+Employee
+ôô $
 )
-ôô) *
+ôô$ %
 .
-öö !
-FirstOrDefaultAsync
-öö  
+öö 
+ThenInclude
+öö 
 (
-öö  !
-r
-öö! "
+öö 
+e
+öö 
 =>
-öö# %
-r
-öö& '
+öö !
+e
+öö" #
+!
+öö# $
 .
-öö' (
-Id
-öö( *
-==
-öö+ -
-id
-öö. 0
-,
-öö0 1
-cancellationToken
-öö2 C
+öö$ %
+
+Department
+öö% /
 )
-ööC D
-;
-ööD E
-}
-õõ 
-public
-ùù 
-
-void
-ùù !
-RemoveApprovalSteps
-ùù #
+öö/ 0
+.
+õõ 
+ThenInclude
+õõ  
 (
-ùù# $
-IEnumerable
-ùù$ /
-<
-ùù/ 0
-ApprovalStep
-ùù0 <
->
-ùù< =
-steps
-ùù> C
+õõ  !
+d
+õõ! "
+=>
+õõ# %
+d
+õõ& '
+!
+õõ' (
+.
+õõ( )
+Policy
+õõ) /
+)
+õõ/ 0
+.
+úú 
+Include
+úú 
+(
+úú 
+r
+úú 
+=>
+úú 
+r
+úú 
+.
+úú 
+ApprovalSteps
+úú )
+)
+úú) *
+.
+ùù !
+FirstOrDefaultAsync
+ùù  
+(
+ùù  !
+r
+ùù! "
+=>
+ùù# %
+r
+ùù& '
+.
+ùù' (
+Id
+ùù( *
+==
+ùù+ -
+id
+ùù. 0
+,
+ùù0 1
+cancellationToken
+ùù2 C
 )
 ùùC D
-{
-ûû 
-Context
-üü 
-.
-üü 
-ApprovalSteps
-üü 
-.
-üü 
-RemoveRange
-üü )
+;
+ùùD E
+}
+ûû 
+public
+†† 
+
+void
+†† !
+RemoveApprovalSteps
+†† #
 (
-üü) *
+††# $
+IEnumerable
+††$ /
+<
+††/ 0
+ApprovalStep
+††0 <
+>
+††< =
 steps
-üü* /
+††> C
 )
-üü/ 0
+††C D
+{
+°° 
+Context
+¢¢ 
+.
+¢¢ 
+ApprovalSteps
+¢¢ 
+.
+¢¢ 
+RemoveRange
+¢¢ )
+(
+¢¢) *
+steps
+¢¢* /
+)
+¢¢/ 0
 ;
-üü0 1
+¢¢0 1
 }
-†† 
+££ 
 public
-¢¢ 
+•• 
 
 async
-¢¢ 
+•• 
 Task
-¢¢ 
+•• "
+AddApprovalStepAsync
+•• *
+(
+••* +
+ApprovalStep
+••+ 7
+step
+••8 <
+,
+••< =
+CancellationToken
+••> O
+cancellationToken
+••P a
+=
+••b c
+default
+••d k
+)
+••k l
+{
+¶¶ 
+await
+ßß 
+Context
+ßß 
+.
+ßß 
+ApprovalSteps
+ßß #
+.
+ßß# $
+AddAsync
+ßß$ ,
+(
+ßß, -
+step
+ßß- 1
+,
+ßß1 2
+cancellationToken
+ßß3 D
+)
+ßßD E
+;
+ßßE F
+}
+®® 
+public
+™™ 
+
+async
+™™ 
+Task
+™™ 
 AddSegmentAsync
-¢¢ %
+™™ %
 (
-¢¢% &
+™™% &
 ItinerarySegment
-¢¢& 6
+™™& 6
 segment
-¢¢7 >
+™™7 >
 ,
-¢¢> ?
+™™> ?
 CancellationToken
-¢¢@ Q
+™™@ Q
 cancellationToken
-¢¢R c
+™™R c
 =
-¢¢d e
+™™d e
 default
-¢¢f m
+™™f m
 )
-¢¢m n
+™™m n
 {
-££ 
+´´ 
 await
-§§ 
+¨¨ 
 Context
-§§ 
+¨¨ 
 .
-§§ 
+¨¨ 
 ItinerarySegments
-§§ '
+¨¨ '
 .
-§§' (
+¨¨' (
 AddAsync
-§§( 0
+¨¨( 0
 (
-§§0 1
+¨¨0 1
 segment
-§§1 8
+¨¨1 8
 ,
-§§8 9
+¨¨8 9
 cancellationToken
-§§: K
+¨¨: K
 )
-§§K L
+¨¨K L
 ;
-§§L M
+¨¨L M
 }
-•• 
+≠≠ 
 public
-ßß 
+ØØ 
 
 async
-ßß 
+ØØ 
 Task
-ßß 
+ØØ 
 AddStayAsync
-ßß "
+ØØ "
 (
-ßß" #
+ØØ" #
 Stay
-ßß# '
+ØØ# '
 stay
-ßß( ,
+ØØ( ,
 ,
-ßß, -
+ØØ, -
 CancellationToken
-ßß. ?
+ØØ. ?
 cancellationToken
-ßß@ Q
+ØØ@ Q
 =
-ßßR S
+ØØR S
 default
-ßßT [
+ØØT [
 )
-ßß[ \
+ØØ[ \
 {
-®® 
+∞∞ 
 await
-©© 
+±± 
 Context
-©© 
+±± 
 .
-©© 
+±± 
 Stays
-©© 
+±± 
 .
-©© 
+±± 
 AddAsync
-©© $
+±± $
 (
-©©$ %
+±±$ %
 stay
-©©% )
+±±% )
 ,
-©©) *
+±±) *
 cancellationToken
-©©+ <
+±±+ <
 )
-©©< =
+±±< =
 ;
-©©= >
+±±= >
 }
-™™ 
-}´´ Œ;
+≤≤ 
+}≥≥ Œ;
 zC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\SupportTicketRepository.cs
 	namespace		 	
 	VoyageHub		
@@ -2687,7 +2769,7 @@ Repository 
 )//8 9
 ;//9 :
 }00 
-}11 Ω!
+}11 ß4
 sC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\PolicyRepository.cs
 	namespace		 	
 	VoyageHub		
@@ -2899,35 +2981,173 @@ Department!!  
 public)) 
 
 async)) 
-Task)) 
-AddDepartmentAsync)) (
-())( )
+Task)) 
+<)) 
+List)) 
+<)) 
+string)) !
+>))! "
+>))" #,
+ GetDepartmentsWithoutPolicyAsync))$ D
+())D E
+CancellationToken))E V
+cancellationToken))W h
+=))i j
+default))k r
+)))r s
+{** 
+return++ 
+await++ 
+Context++ 
+.++ 
+Departments++ (
+.,, 
+AsNoTracking,, 
+(,, 
+),, 
+.-- 
+Where-- 
+(-- 
+d-- 
+=>-- 
+d-- 
+.-- 
+Policy--  
+==--! #
+null--$ (
+)--( )
+... 
+OrderBy.. 
+(.. 
+d.. 
+=>.. 
+d.. 
+... 
+Name..  
+)..  !
+.// 
+Select// 
+(// 
+d// 
+=>// 
+d// 
+.// 
+Name// 
+)//  
+.00 
+ToListAsync00 
+(00 
+cancellationToken00 *
+)00* +
+;00+ ,
+}11 
+public33 
+
+async33 
+Task33 
+<33 
+TravelPolicy33 "
+?33" #
+>33# $"
+GetPolicyByUserIdAsync33% ;
+(33; <
+Guid33< @
+userId33A G
+,33G H
+CancellationToken33I Z
+cancellationToken33[ l
+=33m n
+default33o v
+)33v w
+{44 
+var55 
+user55 
+=55 
+await55 
+Context55  
+.55  !
+Users55! &
+.66 
+AsNoTracking66 
+(66 
+)66 
+.77 
+Include77 
+(77 
+u77 
+=>77 
+u77 
+.77 
 
-Department))) 3
+Department77 &
+)77& '
+.88 
+ThenInclude88 
+(88 
+d88 
+=>88 
+d88 
+!88  
+.88  !
+Policy88! '
+)88' (
+.99 
+FirstOrDefaultAsync99  
+(99  !
+u99! "
+=>99# %
+u99& '
+.99' (
+Id99( *
+==99+ -
+userId99. 4
+,994 5
+cancellationToken996 G
+)99G H
+;99H I
+return;; 
+user;; 
+?;; 
+.;; 
 
-department))4 >
-,))> ?
-CancellationToken))@ Q
-cancellationToken))R c
-=))d e
-default))f m
-)))m n
-{** 
-await++ 
-Context++ 
-.++ 
-Departments++ !
-.++! "
-AddAsync++" *
-(++* +
+Department;; 
+?;;  
+.;;  !
+Policy;;! '
+;;;' (
+}<< 
+public>> 
+
+async>> 
+Task>> 
+AddDepartmentAsync>> (
+(>>( )
 
-department+++ 5
-,++5 6
-cancellationToken++7 H
-)++H I
-;++I J
-},, 
-}-- ˙
+Department>>) 3
+
+department>>4 >
+,>>> ?
+CancellationToken>>@ Q
+cancellationToken>>R c
+=>>d e
+default>>f m
+)>>m n
+{?? 
+await@@ 
+Context@@ 
+.@@ 
+Departments@@ !
+.@@! "
+AddAsync@@" *
+(@@* +
+
+department@@+ 5
+,@@5 6
+cancellationToken@@7 H
+)@@H I
+;@@I J
+}AA 
+}BB ˙
 rC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\IUserRepository.cs
 	namespace 	
 	VoyageHub
@@ -3044,7 +3264,7 @@ rC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.D
 default` g
 )g h
 ;h i
-} ÿ"
+} ÷$
 {C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\ITravelRequestRepository.cs
 	namespace 	
 	VoyageHub
@@ -3261,31 +3481,43 @@ employeeId> H
 steps7 <
 )< =
 ;= >
-Task 
-AddSegmentAsync	 
-( 
-ItinerarySegment )
-segment* 1
-,1 2
-CancellationToken3 D
-cancellationTokenE V
-=W X
-defaultY `
-)` a
-;a b
-Task 
-AddStayAsync	 
-( 
-Stay 
-stay 
-,  
-CancellationToken! 2
-cancellationToken3 D
-=E F
-defaultG N
-)N O
-;O P
-} ä
+Task  
+AddApprovalStepAsync	 
+( 
+ApprovalStep *
+step+ /
+,/ 0
+CancellationToken1 B
+cancellationTokenC T
+=U V
+defaultW ^
+)^ _
+;_ `
+Task 
+AddSegmentAsync	 
+( 
+ItinerarySegment )
+segment* 1
+,1 2
+CancellationToken3 D
+cancellationTokenE V
+=W X
+defaultY `
+)` a
+;a b
+Task 
+AddStayAsync	 
+( 
+Stay 
+stay 
+,  
+CancellationToken! 2
+cancellationToken3 D
+=E F
+defaultG N
+)N O
+;O P
+} ä
 {C:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\ISupportTicketRepository.cs
 	namespace 	
 	VoyageHub
@@ -3504,7 +3736,7 @@ nC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.D
 default@ G
 )G H
 ;H I
-} ˘
+} Î
 tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\IPolicyRepository.cs
 	namespace 	
 	VoyageHub
@@ -3544,11 +3776,11 @@ tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.D
 < 	
 TravelPolicy	 
 ? 
-> &
-GetByIdWithDepartmentAsync 2
-(2 3
-Guid3 7
-id8 :
+> "
+GetPolicyByUserIdAsync .
+(. /
+Guid/ 3
+userId4 :
 ,: ;
 CancellationToken< M
 cancellationTokenN _
@@ -3557,37 +3789,68 @@ tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.D
 )i j
 ;j k
 Task 
-< 	
+< 	
+List	 
+< 
+string 
+> 
+> ,
+ GetDepartmentsWithoutPolicyAsync 7
+(7 8
+CancellationToken8 I
+cancellationTokenJ [
+=\ ]
+default^ e
+)e f
+;f g
+Task 
+< 	
+TravelPolicy	 
+? 
+> &
+GetByIdWithDepartmentAsync 2
+(2 3
+Guid3 7
+id8 :
+,: ;
+CancellationToken< M
+cancellationTokenN _
+=` a
+defaultb i
+)i j
+;j k
+Task 
+< 	
 
-Department	 
-? 
-> .
-"GetDepartmentByNameWithPolicyAsync 8
-(8 9
-string9 ?
-name@ D
-,D E
-CancellationTokenF W
-cancellationTokenX i
-=j k
-defaultl s
-)s t
-;t u
-Task 
-AddDepartmentAsync	 
-( 
+Department	 
+? 
+> .
+"GetDepartmentByNameWithPolicyAsync 8
+(8 9
+string9 ?
+name@ D
+,D E
+CancellationTokenF W
+cancellationTokenX i
+=j k
+defaultl s
+)s t
+;t u
+Task 
+AddDepartmentAsync	 
+( 
 
-Department &
+Department &
 
-department' 1
-,1 2
-CancellationToken3 D
-cancellationTokenE V
-=W X
-defaultY `
-)` a
-;a b
-} ´
+department' 1
+,1 2
+CancellationToken3 D
+cancellationTokenE V
+=W X
+defaultY `
+)` a
+;a b
+} ô
 uC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\IExpenseRepository.cs
 	namespace 	
 	VoyageHub
@@ -3635,72 +3898,246 @@ uC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.D
 ;
 à â
 Task 
-< 	
-decimal	 
-> &
-GetTotalPendingAmountAsync ,
-(, -
-CancellationToken- >
-cancellationToken? P
-=Q R
-defaultS Z
-)Z [
-;[ \
+< 	
+List	 
+< 
+Expense 
+> 
+> $
+GetExpensesByFilterAsync 0
+(0 1
+string1 7
+?7 8
+status9 ?
+,? @
+stringA G
+?G H
+categoryI Q
+,Q R
+boolS W
+?W X
+highPriorityOnlyY i
+,i j
+CancellationTokenk |
+cancellationToken	} é
+=
+è ê
+default
+ë ò
+)
+ò ô
+;
+ô ö
 Task 
-< 	
-TravelRequest	 
-? 
-> .
-"FindTravelRequestWithEmployeeAsync ;
-(; <
-Guid< @
-	requestIdA J
-,J K
-CancellationTokenL ]
-cancellationToken^ o
-=p q
-defaultr y
-)y z
-;z {
+< 	
+List	 
+< 
+Expense 
+> 
+> $
+GetExpensesByUserIdAsync 0
+(0 1
+Guid1 5
+userId6 <
+,< =
+CancellationToken> O
+cancellationTokenP a
+=b c
+defaultd k
+)k l
+;l m
 Task 
 < 	
-Expense	 
-? 
-> #
-GetByIdWithRequestAsync *
-(* +
-Guid+ /
-id0 2
-,2 3
-CancellationToken4 E
-cancellationTokenF W
-=X Y
-defaultZ a
-)a b
-;b c
+decimal	 
+> &
+GetTotalPendingAmountAsync ,
+(, -
+CancellationToken- >
+cancellationToken? P
+=Q R
+defaultS Z
+)Z [
+;[ \
+Task 
+< 	
+TravelRequest	 
+? 
+> .
+"FindTravelRequestWithEmployeeAsync ;
+(; <
+Guid< @
+	requestIdA J
+,J K
+CancellationTokenL ]
+cancellationToken^ o
+=p q
+defaultr y
+)y z
+;z {
+Task 
+< 	
+Expense	 
+? 
+> #
+GetByIdWithRequestAsync *
+(* +
+Guid+ /
+id0 2
+,2 3
+CancellationToken4 E
+cancellationTokenF W
+=X Y
+defaultZ a
+)a b
+;b c
+Task 
+< 	
+List	 
+< 
+Expense 
+> 
+> (
+GetPendingExpensesByIdsAsync 4
+(4 5
+List5 9
+<9 :
+Guid: >
+>> ?
+?? @
+
+expenseIdsA K
+,K L
+CancellationTokenM ^
+cancellationToken_ p
+=q r
+defaults z
+)z {
+;{ |
+} ◊
+zC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\IApprovalStepRepository.cs
+	namespace 	
+	VoyageHub
+ 
+. 
+Data 
+. 
+Repositories %
+;% &
+public		 
+	interface		 #
+IApprovalStepRepository		 (
+:		) *
+IRepository		+ 6
+<		6 7
+ApprovalStep		7 C
+>		C D
+{
+
+ 
+Task 
+< 	
+List	 
+< 
+ApprovalStep 
+> 
+>  
+GetPendingStepsAsync 1
+(1 2
+Guid2 6
+?6 7
+
+approverId8 B
+,B C
+stringD J
+?J K
+roleL P
+,P Q
+CancellationTokenR c
+cancellationTokend u
+=v w
+defaultx 
+)	 Ä
+;
+Ä Å
+Task 
+< 	
+double	 
+> ,
+ GetAverageResponseTimeHoursAsync 1
+(1 2
+Guid2 6
+?6 7
+
+approverId8 B
+,B C
+stringD J
+?J K
+roleL P
+,P Q
+CancellationTokenR c
+cancellationTokend u
+=v w
+defaultx 
+)	 Ä
+;
+Ä Å
+Task 
+< 	
+ApprovalStep	 
+? 
+> .
+"GetByIdWithRequestAndApproverAsync :
+(: ;
+Guid; ?
+stepId@ F
+,F G
+CancellationTokenH Y
+cancellationTokenZ k
+=l m
+defaultn u
+)u v
+;v w
+Task 
+< 	
+ApprovalStep	 
+? 
+>  
+FindFinanceStepAsync ,
+(, -
+Guid- 1
+	requestId2 ;
+,; <
+CancellationToken= N
+cancellationTokenO `
+=a b
+defaultc j
+)j k
+;k l
 Task 
 < 	
 List	 
-< 
-Expense 
-> 
-> (
-GetPendingExpensesByIdsAsync 4
-(4 5
-List5 9
-<9 :
-Guid: >
->> ?
-?? @
-
-expenseIdsA K
-,K L
-CancellationTokenM ^
-cancellationToken_ p
-=q r
-defaults z
-)z {
-;{ |
+< 
+ApprovalStep 
+> 
+> -
+!GetRemainingNonApprovedStepsAsync >
+(> ?
+Guid? C
+	requestIdD M
+,M N
+GuidO S
+currentStepIdT a
+,a b
+CancellationTokenc t
+cancellationToken	u Ü
+=
+á à
+default
+â ê
+)
+ê ë
+;
+ë í
 }  
 vC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\IAuditLogRepository.cs
 	namespace 	
@@ -3809,7 +4246,7 @@ entityType
 
 
 ä ã
-} ¬=
+} ág
 tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\ExpenseRepository.cs
 	namespace		 	
 	VoyageHub		
@@ -3873,301 +4310,314 @@ Repository! +
 ç î
 )
 î ï
-{ 
-var 
-query 
-= 
-DbSet 
-. 
-Include 
-( 
-e 
-=> 
-e 
-. 
-Request #
-)# $
-. 
-ThenInclude 
-( 
-r 
-=> !
-r" #
-!# $
-.$ %
-Employee% -
-)- .
-. 
-ThenInclude  
-(  !
-u! "
-=># %
-u& '
-!' (
-.( )
+{ 
+return 
+await $
+GetExpensesByFilterAsync -
+(- .
+$str. 7
+,7 8
+category9 A
+,A B
+highPriorityOnlyC S
+,S T
+cancellationTokenU f
+)f g
+;g h
+} 
+public 
+
+async 
+Task 
+< 
+List 
+< 
+Expense "
+>" #
+># $$
+GetExpensesByFilterAsync% =
+(= >
+string> D
+?D E
+statusF L
+,L M
+stringN T
+?T U
+categoryV ^
+,^ _
+bool` d
+?d e
+highPriorityOnlyf v
+,v w
+CancellationToken	x â
+cancellationToken
+ä õ
+=
+ú ù
+default
+û •
+)
+• ¶
+{ 
+var 
+query 
+= 
+DbSet 
+. 
+Include 
+( 
+e 
+=> 
+e 
+. 
+Request #
+)# $
+. 
+ThenInclude 
+( 
+r 
+=> !
+r" #
+!# $
+.$ %
+Employee% -
+)- .
+. 
+ThenInclude  
+(  !
+u! "
+=># %
+u& '
+!' (
+.( )
 
-Department) 3
-)3 4
-. 
-Where 
-( 
-e 
-=> 
-e 
-. 
-Status  
-==! #
-$str$ -
-)- .
-;. /
-if 
+Department) 3
+)3 4
+. 
+Include 
+( 
+e 
+=> 
+e 
+. 
+Request #
+)# $
+. 
+ThenInclude 
+( 
+r 
+=> !
+r" #
+!# $
+.$ %
+ItinerarySegments% 6
+)6 7
+. 
+Include 
+( 
+e 
+=> 
+e 
+. 
+Request #
+)# $
+. 
+ThenInclude 
+( 
+r 
+=> !
+r" #
+!# $
+.$ %
+Stays% *
+)* +
+.   
+Include   
+(   
+e   
+=>   
+e   
+.   
+Request   #
+)  # $
+.!! 
+ThenInclude!! 
+(!! 
+r!! 
+=>!! !
+r!!" #
+!!!# $
+.!!$ %
+Expenses!!% -
+)!!- .
+."" 
+AsQueryable"" 
+("" 
+)"" 
+;"" 
+if$$ 
 
-( 
-! 
-string 
-. 
-IsNullOrWhiteSpace &
-(& '
-category' /
-)/ 0
-&&1 3
-category4 <
-.< =
-ToLower= D
-(D E
-)E F
-!=G I
-$strJ Z
-&&[ ]
-category^ f
-.f g
-ToLowerg n
-(n o
-)o p
-!=q s
-$strt y
-)y z
-{ 	
-var 
-cat 
-= 
-category 
-. 
-Trim #
-(# $
-)$ %
-.% &
-ToLower& -
-(- .
-). /
-;/ 0
-query 
-= 
-query 
-. 
-Where 
-(  
-e  !
-=>" $
-e% &
-.& '
-Category' /
-./ 0
-ToLower0 7
-(7 8
-)8 9
-==: <
-cat= @
-)@ A
-;A B
-} 	
-if 
+($$ 
+!$$ 
+string$$ 
+.$$ 
+IsNullOrWhiteSpace$$ &
+($$& '
+status$$' -
+)$$- .
+&&$$/ 1
+!$$2 3
+string$$3 9
+.$$9 :
+Equals$$: @
+($$@ A
+status$$A G
+,$$G H
+$str$$I N
+,$$N O
+StringComparison$$P `
+.$$` a
+OrdinalIgnoreCase$$a r
+)$$r s
+)$$s t
+{%% 	
+var&& 
+normalizedStatus&&  
+=&&! "
+status&&# )
+.&&) *
+Trim&&* .
+(&&. /
+)&&/ 0
+;&&0 1
+query'' 
+='' 
+query'' 
+.'' 
+Where'' 
+(''  
+e''  !
+=>''" $
+e''% &
+.''& '
+Status''' -
+==''. 0
+normalizedStatus''1 A
+)''A B
+;''B C
+}(( 	
+if** 
 
-( 
-highPriorityOnly 
-== 
-true  $
-)$ %
-{   	
-query!! 
-=!! 
-query!! 
-.!! 
-Where!! 
-(!!  
-e!!  !
-=>!!" $
-e!!% &
-.!!& '
-Amount!!' -
->=!!. 0
-$num!!1 :
-)!!: ;
-;!!; <
-}"" 	
-return$$ 
-await$$ 
-query$$ 
-.$$ 
-OrderByDescending$$ ,
-($$, -
-e$$- .
-=>$$/ 1
-e$$2 3
-.$$3 4
-Amount$$4 :
-)$$: ;
-.$$; <
-ToListAsync$$< G
-($$G H
-cancellationToken$$H Y
-)$$Y Z
-;$$Z [
-}%% 
-public'' 
-
-async'' 
-Task'' 
-<'' 
-decimal'' 
->'' &
-GetTotalPendingAmountAsync'' 9
-(''9 :
-CancellationToken'': K
-cancellationToken''L ]
-=''^ _
-default''` g
-)''g h
-{(( 
-return)) 
-await)) 
-DbSet)) 
-.)) 
-Where))  
-())  !
-e))! "
-=>))# %
-e))& '
-.))' (
-Status))( .
-==))/ 1
-$str))2 ;
-))); <
-.))< =
-SumAsync))= E
-())E F
-e))F G
-=>))H J
-())K L
-decimal))L S
-?))S T
-)))T U
-e))U V
-.))V W
-Amount))W ]
-,))] ^
-cancellationToken))_ p
-)))p q
-??))r t
-$num))u w
-;))w x
-}** 
-public,, 
-
-async,, 
-Task,, 
-<,, 
-TravelRequest,, #
-?,,# $
->,,$ %.
-"FindTravelRequestWithEmployeeAsync,,& H
-(,,H I
-Guid,,I M
-	requestId,,N W
-,,,W X
-CancellationToken,,Y j
-cancellationToken,,k |
-=,,} ~
-default	,, Ü
-)
-,,Ü á
-{-- 
-return.. 
-await.. 
-Context.. 
-... 
-TravelRequests.. +
-...+ ,
-Include.., 3
-(..3 4
-r..4 5
-=>..6 8
-r..9 :
-...: ;
-Employee..; C
-)..C D
-...D E
-FirstOrDefaultAsync..E X
-(..X Y
-r..Y Z
-=>..[ ]
-r..^ _
-..._ `
-Id..` b
-==..c e
-	requestId..f o
-,..o p
-cancellationToken	..q Ç
-)
-..Ç É
-;
-..É Ñ
-}// 
-public11 
-
-async11 
-Task11 
-<11 
-Expense11 
-?11 
->11 #
-GetByIdWithRequestAsync11  7
-(117 8
-Guid118 <
-id11= ?
-,11? @
-CancellationToken11A R
-cancellationToken11S d
-=11e f
-default11g n
-)11n o
-{22 
-return33 
-await33 
-DbSet33 
-.44 
-Include44 
-(44 
-e44 
-=>44 
-e44 
-.44 
-Request44 #
-)44# $
-.55 
-FirstOrDefaultAsync55  
-(55  !
-e55! "
-=>55# %
-e55& '
-.55' (
-Id55( *
-==55+ -
-id55. 0
-,550 1
-cancellationToken552 C
-)55C D
-;55D E
+(** 
+!** 
+string** 
+.** 
+IsNullOrWhiteSpace** &
+(**& '
+category**' /
+)**/ 0
+&&**1 3
+category**4 <
+.**< =
+ToLower**= D
+(**D E
+)**E F
+!=**G I
+$str**J Z
+&&**[ ]
+category**^ f
+.**f g
+ToLower**g n
+(**n o
+)**o p
+!=**q s
+$str**t y
+)**y z
+{++ 	
+var,, 
+cat,, 
+=,, 
+category,, 
+.,, 
+Trim,, #
+(,,# $
+),,$ %
+.,,% &
+ToLower,,& -
+(,,- .
+),,. /
+;,,/ 0
+query-- 
+=-- 
+query-- 
+.-- 
+Where-- 
+(--  
+e--  !
+=>--" $
+e--% &
+.--& '
+Category--' /
+.--/ 0
+ToLower--0 7
+(--7 8
+)--8 9
+==--: <
+cat--= @
+)--@ A
+;--A B
+}.. 	
+if00 
+
+(00 
+highPriorityOnly00 
+==00 
+true00  $
+)00$ %
+{11 	
+query22 
+=22 
+query22 
+.22 
+Where22 
+(22  
+e22  !
+=>22" $
+e22% &
+.22& '
+Amount22' -
+>=22. 0
+$num221 :
+)22: ;
+;22; <
+}33 	
+return55 
+await55 
+query55 
+.55 
+OrderByDescending55 ,
+(55, -
+e55- .
+=>55/ 1
+e552 3
+.553 4
+SubmittedAt554 ?
+)55? @
+.55@ A
+ThenByDescending55A Q
+(55Q R
+e55R S
+=>55T V
+e55W X
+.55X Y
+Amount55Y _
+)55_ `
+.55` a
+ToListAsync55a l
+(55l m
+cancellationToken55m ~
+)55~ 
+;	55 Ä
 }66 
 public88 
 
@@ -4178,197 +4628,390 @@ Department) 3
 <88 
 Expense88 "
 >88" #
->88# $(
-GetPendingExpensesByIdsAsync88% A
-(88A B
-List88B F
-<88F G
-Guid88G K
->88K L
-?88L M
+>88# $$
+GetExpensesByUserIdAsync88% =
+(88= >
+Guid88> B
+userId88C I
+,88I J
+CancellationToken88K \
+cancellationToken88] n
+=88o p
+default88q x
+)88x y
+{99 
+return:: 
+await:: 
+DbSet:: 
+.;; 
+AsNoTracking;; 
+(;; 
+);; 
+.<< 
+Include<< 
+(<< 
+e<< 
+=><< 
+e<< 
+.<< 
+Request<< #
+)<<# $
+.== 
+ThenInclude== 
+(== 
+r== 
+=>== !
+r==" #
+!==# $
+.==$ %
+Employee==% -
+)==- .
+.>> 
+ThenInclude>>  
+(>>  !
+u>>! "
+=>>># %
+u>>& '
+!>>' (
+.>>( )
 
-expenseIds88N X
-,88X Y
-CancellationToken88Z k
-cancellationToken88l }
-=88~ 
-default
-88Ä á
+Department>>) 3
+)>>3 4
+.?? 
+Include?? 
+(?? 
+e?? 
+=>?? 
+e?? 
+.?? 
+Request?? #
+)??# $
+.@@ 
+ThenInclude@@ 
+(@@ 
+r@@ 
+=>@@ !
+r@@" #
+!@@# $
+.@@$ %
+ItinerarySegments@@% 6
+)@@6 7
+.AA 
+IncludeAA 
+(AA 
+eAA 
+=>AA 
+eAA 
+.AA 
+RequestAA #
+)AA# $
+.BB 
+ThenIncludeBB 
+(BB 
+rBB 
+=>BB !
+rBB" #
+!BB# $
+.BB$ %
+StaysBB% *
+)BB* +
+.CC 
+IncludeCC 
+(CC 
+eCC 
+=>CC 
+eCC 
+.CC 
+RequestCC #
+)CC# $
+.DD 
+ThenIncludeDD 
+(DD 
+rDD 
+=>DD !
+rDD" #
+!DD# $
+.DD$ %
+ExpensesDD% -
+)DD- .
+.EE 
+WhereEE 
+(EE 
+eEE 
+=>EE 
+eEE 
+.EE 
+RequestEE !
+!=EE" $
+nullEE% )
+&&EE* ,
+eEE- .
+.EE. /
+RequestEE/ 6
+.EE6 7
+
+EmployeeIdEE7 A
+==EEB D
+userIdEEE K
+)EEK L
+.FF 
+OrderByDescendingFF 
+(FF 
+eFF  
+=>FF! #
+eFF$ %
+.FF% &
+SubmittedAtFF& 1
+)FF1 2
+.GG 
+ToListAsyncGG 
+(GG 
+cancellationTokenGG *
+)GG* +
+;GG+ ,
+}HH 
+publicJJ 
+
+asyncJJ 
+TaskJJ 
+<JJ 
+decimalJJ 
+>JJ &
+GetTotalPendingAmountAsyncJJ 9
+(JJ9 :
+CancellationTokenJJ: K
+cancellationTokenJJL ]
+=JJ^ _
+defaultJJ` g
+)JJg h
+{KK 
+returnLL 
+awaitLL 
+DbSetLL 
+.LL 
+WhereLL  
+(LL  !
+eLL! "
+=>LL# %
+eLL& '
+.LL' (
+StatusLL( .
+==LL/ 1
+$strLL2 ;
+)LL; <
+.LL< =
+SumAsyncLL= E
+(LLE F
+eLLF G
+=>LLH J
+(LLK L
+decimalLLL S
+?LLS T
+)LLT U
+eLLU V
+.LLV W
+AmountLLW ]
+,LL] ^
+cancellationTokenLL_ p
+)LLp q
+??LLr t
+$numLLu w
+;LLw x
+}MM 
+publicOO 
+
+asyncOO 
+TaskOO 
+<OO 
+TravelRequestOO #
+?OO# $
+>OO$ %.
+"FindTravelRequestWithEmployeeAsyncOO& H
+(OOH I
+GuidOOI M
+	requestIdOON W
+,OOW X
+CancellationTokenOOY j
+cancellationTokenOOk |
+=OO} ~
+default	OO Ü
 )
-88á à
-{99 
-if:: 
+OOÜ á
+{PP 
+returnQQ 
+awaitQQ 
+ContextQQ 
+.QQ 
+TravelRequestsQQ +
+.QQ+ ,
+IncludeQQ, 3
+(QQ3 4
+rQQ4 5
+=>QQ6 8
+rQQ9 :
+.QQ: ;
+EmployeeQQ; C
+)QQC D
+.QQD E
+FirstOrDefaultAsyncQQE X
+(QQX Y
+rQQY Z
+=>QQ[ ]
+rQQ^ _
+.QQ_ `
+IdQQ` b
+==QQc e
+	requestIdQQf o
+,QQo p
+cancellationToken	QQq Ç
+)
+QQÇ É
+;
+QQÉ Ñ
+}RR 
+publicTT 
+
+asyncTT 
+TaskTT 
+<TT 
+ExpenseTT 
+?TT 
+>TT #
+GetByIdWithRequestAsyncTT  7
+(TT7 8
+GuidTT8 <
+idTT= ?
+,TT? @
+CancellationTokenTTA R
+cancellationTokenTTS d
+=TTe f
+defaultTTg n
+)TTn o
+{UU 
+returnVV 
+awaitVV 
+DbSetVV 
+.WW 
+IncludeWW 
+(WW 
+eWW 
+=>WW 
+eWW 
+.WW 
+RequestWW #
+)WW# $
+.XX 
+FirstOrDefaultAsyncXX  
+(XX  !
+eXX! "
+=>XX# %
+eXX& '
+.XX' (
+IdXX( *
+==XX+ -
+idXX. 0
+,XX0 1
+cancellationTokenXX2 C
+)XXC D
+;XXD E
+}YY 
+public[[ 
+
+async[[ 
+Task[[ 
+<[[ 
+List[[ 
+<[[ 
+Expense[[ "
+>[[" #
+>[[# $(
+GetPendingExpensesByIdsAsync[[% A
+([[A B
+List[[B F
+<[[F G
+Guid[[G K
+>[[K L
+?[[L M
+
+expenseIds[[N X
+,[[X Y
+CancellationToken[[Z k
+cancellationToken[[l }
+=[[~ 
+default
+[[Ä á
+)
+[[á à
+{\\ 
+if]] 
 
-(:: 
+(]] 
 
-expenseIds:: 
-!=:: 
-null:: 
-&&:: !
+expenseIds]] 
+!=]] 
+null]] 
+&&]] !
 
-expenseIds::" ,
-.::, -
-Count::- 2
->::3 4
-$num::5 6
-)::6 7
-{;; 	
-return<< 
-await<< 
-DbSet<< 
-.<< 
-Where<< $
-(<<$ %
-e<<% &
-=><<' )
+expenseIds]]" ,
+.]], -
+Count]]- 2
+>]]3 4
+$num]]5 6
+)]]6 7
+{^^ 	
+return__ 
+await__ 
+DbSet__ 
+.__ 
+Where__ $
+(__$ %
+e__% &
+=>__' )
 
-expenseIds<<* 4
-.<<4 5
-Contains<<5 =
-(<<= >
-e<<> ?
-.<<? @
-Id<<@ B
-)<<B C
-&&<<D F
-e<<G H
-.<<H I
-Status<<I O
-==<<P R
-$str<<S \
-)<<\ ]
-.<<] ^
-ToListAsync<<^ i
-(<<i j
-cancellationToken<<j {
-)<<{ |
-;<<| }
-}== 	
-return?? 
-await?? 
-DbSet?? 
-.?? 
-Where??  
-(??  !
-e??! "
-=>??# %
-e??& '
-.??' (
-Status??( .
-==??/ 1
-$str??2 ;
-)??; <
-.??< =
-ToListAsync??= H
-(??H I
-cancellationToken??I Z
-)??Z [
-;??[ \
-}@@ 
-}AA «
-zC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\IApprovalStepRepository.cs
-	namespace 	
-	VoyageHub
- 
-. 
-Data 
-. 
-Repositories %
-;% &
-public		 
-	interface		 #
-IApprovalStepRepository		 (
-:		) *
-IRepository		+ 6
-<		6 7
-ApprovalStep		7 C
->		C D
-{
-
- 
-Task 
-< 	
-List	 
-< 
-ApprovalStep 
-> 
->  
-GetPendingStepsAsync 1
-(1 2
-Guid2 6
-?6 7
-
-approverId8 B
-,B C
-stringD J
-?J K
-roleL P
-,P Q
-CancellationTokenR c
-cancellationTokend u
-=v w
-defaultx 
-)	 Ä
-;
-Ä Å
-Task 
-< 	
-ApprovalStep	 
-? 
-> .
-"GetByIdWithRequestAndApproverAsync :
-(: ;
-Guid; ?
-stepId@ F
-,F G
-CancellationTokenH Y
-cancellationTokenZ k
-=l m
-defaultn u
-)u v
-;v w
-Task 
-< 	
-ApprovalStep	 
-? 
->  
-FindFinanceStepAsync ,
-(, -
-Guid- 1
-	requestId2 ;
-,; <
-CancellationToken= N
-cancellationTokenO `
-=a b
-defaultc j
-)j k
-;k l
-Task 
-< 	
-List	 
-< 
-ApprovalStep 
-> 
-> -
-!GetRemainingNonApprovedStepsAsync >
-(> ?
-Guid? C
-	requestIdD M
-,M N
-GuidO S
-currentStepIdT a
-,a b
-CancellationTokenc t
-cancellationToken	u Ü
-=
-á à
-default
-â ê
-)
-ê ë
-;
-ë í
-} √
+expenseIds__* 4
+.__4 5
+Contains__5 =
+(__= >
+e__> ?
+.__? @
+Id__@ B
+)__B C
+&&__D F
+e__G H
+.__H I
+Status__I O
+==__P R
+$str__S \
+)__\ ]
+.__] ^
+ToListAsync__^ i
+(__i j
+cancellationToken__j {
+)__{ |
+;__| }
+}`` 	
+returnbb 
+awaitbb 
+DbSetbb 
+.bb 
+Wherebb  
+(bb  !
+ebb! "
+=>bb# %
+ebb& '
+.bb' (
+Statusbb( .
+==bb/ 1
+$strbb2 ;
+)bb; <
+.bb< =
+ToListAsyncbb= H
+(bbH I
+cancellationTokenbbI Z
+)bbZ [
+;bb[ \
+}cc 
+}dd √
 uC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\AuditLogRepository.cs
 	namespace		 	
 	VoyageHub		
@@ -4591,7 +5234,7 @@ EntityType  ' 1
 )%%* +
 ;%%+ ,
 }&& 
-}'' Ù3
+}'' ˝S
 yC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Repositories\ApprovalStepRepository.cs
 	namespace		 	
 	VoyageHub		
@@ -4692,294 +5335,541 @@ stepsQuery 
 
 Department) 3
 )3 4
-. 
-Where 
-( 
-s 
-=> 
-s 
-. 
-Status  
-==! #
-$str$ -
-&&. 0
-s1 2
-.2 3
-Request3 :
-!=; =
-null> B
-)B C
-;C D
-if 
-
-( 
-! 
-string 
-. 
-IsNullOrWhiteSpace &
-(& '
-role' +
-)+ ,
-), -
-{ 	
-var 
-r 
-= 
-role 
-. 
-Trim 
-( 
-) 
-.  
-ToLower  '
-(' (
-)( )
-;) *
-if 
-( 
-r 
-== 
-$str 
-) 
-{ 
+. 
+ThenInclude $
+($ %
+d% &
+=>' )
+d* +
+!+ ,
+., -
+Policy- 3
+)3 4
+. 
+Where 
+( 
+s 
+=> 
+s 
+. 
+Status  
+==! #
+$str$ -
+&&. 0
+s1 2
+.2 3
+Request3 :
+!=; =
+null> B
+)B C
+;C D
 
-stepsQuery 
-= 
+stepsQuery 
+= 
+ApplyRoleFilter $
+($ %
 
-stepsQuery '
-.' (
-Where( -
-(- .
-s. /
-=>0 2
-s3 4
-.4 5
-Level5 :
-==; =
-$str> G
-)G H
-;H I
-} 
-else   
-if   
-(   
-r   
-==   
-$str   #
-)  # $
-{!! 
+stepsQuery% /
+,/ 0
+role1 5
+)5 6
+;6 7
+return 
+await 
 
-stepsQuery"" 
-="" 
-
-stepsQuery"" '
-.""' (
-Where""( -
-(""- .
-s"". /
-=>""0 2
-s""3 4
-.""4 5
-Level""5 :
-==""; =
-$str""> G
-)""G H
-;""H I
-}## 
-}$$ 	
-return&& 
-await&& 
-
-stepsQuery&& 
-.&&  
-OrderByDescending&&  1
-(&&1 2
-s&&2 3
-=>&&4 6
-s&&7 8
-.&&8 9
-Request&&9 @
-!&&@ A
-.&&A B
-	CreatedAt&&B K
-)&&K L
-.&&L M
-ToListAsync&&M X
-(&&X Y
-cancellationToken&&Y j
-)&&j k
-;&&k l
-}'' 
-public)) 
+stepsQuery 
+.  
+OrderByDescending  1
+(1 2
+s2 3
+=>4 6
+s7 8
+.8 9
+Request9 @
+!@ A
+.A B
+	CreatedAtB K
+)K L
+.L M
+ToListAsyncM X
+(X Y
+cancellationTokenY j
+)j k
+;k l
+} 
+public 
 
-async)) 
-Task)) 
-<)) 
-ApprovalStep)) "
-?))" #
->))# $.
-"GetByIdWithRequestAndApproverAsync))% G
-())G H
-Guid))H L
-stepId))M S
-,))S T
-CancellationToken))U f
-cancellationToken))g x
-=))y z
-default	)){ Ç
-)
-))Ç É
-{** 
-return++ 
-await++ 
-DbSet++ 
-.,, 
-Include,, 
-(,, 
-s,, 
-=>,, 
-s,, 
-.,, 
-Request,, #
-),,# $
-.-- 
-Include-- 
-(-- 
-s-- 
-=>-- 
-s-- 
-.-- 
-Approver-- $
-)--$ %
-... 
-FirstOrDefaultAsync..  
-(..  !
-s..! "
-=>..# %
-s..& '
-...' (
-Id..( *
-==..+ -
-stepId... 4
-,..4 5
-cancellationToken..6 G
-)..G H
-;..H I
-}// 
-public11 
-
-async11 
-Task11 
-<11 
-ApprovalStep11 "
-?11" #
->11# $ 
-FindFinanceStepAsync11% 9
-(119 :
-Guid11: >
-	requestId11? H
-,11H I
-CancellationToken11J [
-cancellationToken11\ m
-=11n o
-default11p w
-)11w x
-{22 
-return33 
-await33 
-DbSet33 
-.44 
-FirstOrDefaultAsync44  
-(44  !
-s44! "
-=>44# %
-s44& '
-.44' (
-	RequestId44( 1
-==442 4
-	requestId445 >
-&&44? A
-s44B C
-.44C D
-Level44D I
-==44J L
-$str44M V
-&&44W Y
-s44Z [
-.44[ \
-Status44\ b
-!=44c e
-$str44f p
-,44p q
-cancellationToken	44r É
-)
-44É Ñ
-;
-44Ñ Ö
-}55 
-public77 
-
-async77 
-Task77 
-<77 
-List77 
-<77 
-ApprovalStep77 '
->77' (
->77( )-
-!GetRemainingNonApprovedStepsAsync77* K
-(77K L
-Guid77L P
-	requestId77Q Z
-,77Z [
-Guid77\ `
-currentStepId77a n
-,77n o
-CancellationToken	77p Å
-cancellationToken
-77Ç ì
+async 
+Task 
+< 
+double 
+> ,
+ GetAverageResponseTimeHoursAsync >
+(> ?
+Guid? C
+?C D
+
+approverIdE O
+,O P
+stringQ W
+?W X
+roleY ]
+,] ^
+CancellationToken_ p
+cancellationToken	q Ç
 =
-77î ï
+É Ñ
 default
-77ñ ù
+Ö å
 )
-77ù û
-{88 
-return99 
-await99 
-DbSet99 
-.:: 
-Where:: 
-(:: 
-s:: 
-=>:: 
-s:: 
-.:: 
-	RequestId:: #
-==::$ &
-	requestId::' 0
-&&::1 3
-s::4 5
-.::5 6
-Id::6 8
-!=::9 ;
-currentStepId::< I
-&&::J L
-s::M N
-.::N O
-Status::O U
-!=::V X
-$str::Y c
-)::c d
-.;; 
-ToListAsync;; 
-(;; 
-cancellationToken;; *
-);;* +
-;;;+ ,
-}<< 
-}== d
-bC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\GlobalUsings.cs·)
+å ç
+{   
+var!! 
+query!! 
+=!! 
+DbSet!! 
+."" 
+AsNoTracking"" 
+("" 
+)"" 
+.## 
+Where## 
+(## 
+s## 
+=>## 
+s## 
+.## 
+	DecidedAt## #
+!=##$ &
+null##' +
+&&##, .
+s##/ 0
+.##0 1
+Request##1 8
+!=##9 ;
+null##< @
+&&##A C
+(##D E
+s##E F
+.##F G
+Status##G M
+==##N P
+$str##Q [
+||##\ ^
+s##_ `
+.##` a
+Status##a g
+==##h j
+$str##k u
+)##u v
+)##v w
+;##w x
+query%% 
+=%% 
+ApplyRoleFilter%% 
+(%%  
+query%%  %
+,%%% &
+role%%' +
+)%%+ ,
+;%%, -
+if'' 
+
+('' 
+
+approverId'' 
+.'' 
+HasValue'' 
+&&''  "
+
+approverId''# -
+.''- .
+Value''. 3
+!=''4 6
+Guid''7 ;
+.''; <
+Empty''< A
+)''A B
+{(( 	
+query)) 
+=)) 
+query)) 
+.)) 
+Where)) 
+())  
+s))  !
+=>))" $
+s))% &
+.))& '
+
+ApproverId))' 1
+==))2 4
+
+approverId))5 ?
+.))? @
+Value))@ E
+)))E F
+;))F G
+}** 	
+var,, 
+	durations,, 
+=,, 
+await,, 
+query,, #
+.-- 
+Select-- 
+(-- 
+s-- 
+=>-- 
+new-- 
+{-- 
+	DecidedAt-- (
+=--) *
+s--+ ,
+.--, -
+	DecidedAt--- 6
+!--6 7
+.--7 8
+Value--8 =
+,--= >
+	CreatedAt--? H
+=--I J
+s--K L
+.--L M
+Request--M T
+!--T U
+.--U V
+	CreatedAt--V _
+}--` a
+)--a b
+... 
+ToListAsync.. 
+(.. 
+cancellationToken.. *
+)..* +
+;..+ ,
+if00 
+
+(00 
+	durations00 
+.00 
+Count00 
+==00 
+$num00  
+)00  !
+{11 	
+return22 
+$num22 
+;22 
+}33 	
+var55 
+avgHours55 
+=55 
+	durations55  
+.66 
+Select66 
+(66 
+d66 
+=>66 
+Math66 
+.66 
+Max66 !
+(66! "
+$num66" %
+,66% &
+(66' (
+d66( )
+.66) *
+	DecidedAt66* 3
+-664 5
+d666 7
+.667 8
+	CreatedAt668 A
+)66A B
+.66B C
+
+TotalHours66C M
+)66M N
+)66N O
+.77 
+Average77 
+(77 
+)77 
+;77 
+return99 
+Math99 
+.99 
+Round99 
+(99 
+avgHours99 "
+,99" #
+$num99$ %
+)99% &
+;99& '
+}:: 
+private<< 
+static<< 
+
+IQueryable<< 
+<<< 
+ApprovalStep<< *
+><<* +
+ApplyRoleFilter<<, ;
+(<<; <
+
+IQueryable<<< F
+<<<F G
+ApprovalStep<<G S
+><<S T
+query<<U Z
+,<<Z [
+string<<\ b
+?<<b c
+role<<d h
+)<<h i
+{== 
+if>> 
+
+(>> 
+string>> 
+.>> 
+IsNullOrWhiteSpace>> %
+(>>% &
+role>>& *
+)>>* +
+)>>+ ,
+return>>- 3
+query>>4 9
+;>>9 :
+var@@ 
+r@@ 
+=@@ 
+role@@ 
+.@@ 
+Trim@@ 
+(@@ 
+)@@ 
+.@@ 
+ToLower@@ #
+(@@# $
+)@@$ %
+;@@% &
+ifAA 
+
+(AA 
+rAA 
+==AA 
+$strAA 
+)AA 
+returnAA "
+queryAA# (
+.AA( )
+WhereAA) .
+(AA. /
+sAA/ 0
+=>AA1 3
+sAA4 5
+.AA5 6
+LevelAA6 ;
+==AA< >
+$strAA? H
+)AAH I
+;AAI J
+ifBB 
+
+(BB 
+rBB 
+==BB 
+$strBB 
+)BB 
+returnBB "
+queryBB# (
+.BB( )
+WhereBB) .
+(BB. /
+sBB/ 0
+=>BB1 3
+sBB4 5
+.BB5 6
+LevelBB6 ;
+==BB< >
+$strBB? H
+)BBH I
+;BBI J
+returnCC 
+queryCC 
+;CC 
+}DD 
+publicFF 
+
+asyncFF 
+TaskFF 
+<FF 
+ApprovalStepFF "
+?FF" #
+>FF# $.
+"GetByIdWithRequestAndApproverAsyncFF% G
+(FFG H
+GuidFFH L
+stepIdFFM S
+,FFS T
+CancellationTokenFFU f
+cancellationTokenFFg x
+=FFy z
+default	FF{ Ç
+)
+FFÇ É
+{GG 
+returnHH 
+awaitHH 
+DbSetHH 
+.II 
+IncludeII 
+(II 
+sII 
+=>II 
+sII 
+.II 
+RequestII #
+)II# $
+.JJ 
+IncludeJJ 
+(JJ 
+sJJ 
+=>JJ 
+sJJ 
+.JJ 
+ApproverJJ $
+)JJ$ %
+.KK 
+FirstOrDefaultAsyncKK  
+(KK  !
+sKK! "
+=>KK# %
+sKK& '
+.KK' (
+IdKK( *
+==KK+ -
+stepIdKK. 4
+,KK4 5
+cancellationTokenKK6 G
+)KKG H
+;KKH I
+}LL 
+publicNN 
+
+asyncNN 
+TaskNN 
+<NN 
+ApprovalStepNN "
+?NN" #
+>NN# $ 
+FindFinanceStepAsyncNN% 9
+(NN9 :
+GuidNN: >
+	requestIdNN? H
+,NNH I
+CancellationTokenNNJ [
+cancellationTokenNN\ m
+=NNn o
+defaultNNp w
+)NNw x
+{OO 
+returnPP 
+awaitPP 
+DbSetPP 
+.QQ 
+FirstOrDefaultAsyncQQ  
+(QQ  !
+sQQ! "
+=>QQ# %
+sQQ& '
+.QQ' (
+	RequestIdQQ( 1
+==QQ2 4
+	requestIdQQ5 >
+&&QQ? A
+sQQB C
+.QQC D
+LevelQQD I
+==QQJ L
+$strQQM V
+&&QQW Y
+sQQZ [
+.QQ[ \
+StatusQQ\ b
+!=QQc e
+$strQQf p
+,QQp q
+cancellationToken	QQr É
+)
+QQÉ Ñ
+;
+QQÑ Ö
+}RR 
+publicTT 
+
+asyncTT 
+TaskTT 
+<TT 
+ListTT 
+<TT 
+ApprovalStepTT '
+>TT' (
+>TT( )-
+!GetRemainingNonApprovedStepsAsyncTT* K
+(TTK L
+GuidTTL P
+	requestIdTTQ Z
+,TTZ [
+GuidTT\ `
+currentStepIdTTa n
+,TTn o
+CancellationToken	TTp Å
+cancellationToken
+TTÇ ì
+=
+TTî ï
+default
+TTñ ù
+)
+TTù û
+{UU 
+returnVV 
+awaitVV 
+DbSetVV 
+.WW 
+WhereWW 
+(WW 
+sWW 
+=>WW 
+sWW 
+.WW 
+	RequestIdWW #
+==WW$ &
+	requestIdWW' 0
+&&WW1 3
+sWW4 5
+.WW5 6
+IdWW6 8
+!=WW9 ;
+currentStepIdWW< I
+&&WWJ L
+sWWM N
+.WWN O
+StatusWWO U
+!=WWV X
+$strWWY c
+)WWc d
+.XX 
+ToListAsyncXX 
+(XX 
+cancellationTokenXX *
+)XX* +
+;XX+ ,
+}YY 
+}ZZ d
+bC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\GlobalUsings.cs–'
 cC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Entities\User.cs
 	namespace 	
 	VoyageHub
@@ -5212,102 +6102,85 @@ ForeignKey## 
 public)) 
 
 string)) 
-?)) 
-	AvatarUrl)) 
-{)) 
-get)) "
-;))" #
-set))$ '
-;))' (
-}))) *
-[++ 
-	MaxLength++ 
-(++ 
-$num++ 
-)++ 
-]++ 
-public,, 
-
-string,, 
-?,, 
-PasswordResetToken,, %
-{,,& '
-get,,( +
-;,,+ ,
-set,,- 0
-;,,0 1
-},,2 3
-public.. 
+?)) 
+PasswordResetToken)) %
+{))& '
+get))( +
+;))+ ,
+set))- 0
+;))0 1
+}))2 3
+public++ 
 
-DateTime.. 
-?.. %
-PasswordResetTokenExpires.. .
-{../ 0
-get..1 4
-;..4 5
-set..6 9
-;..9 :
-}..; <
+DateTime++ 
+?++ %
+PasswordResetTokenExpires++ .
+{++/ 0
+get++1 4
+;++4 5
+set++6 9
+;++9 :
+}++; <
+public-- 
+
+DateTime-- 
+	CreatedAt-- 
+{-- 
+get--  #
+;--# $
+set--% (
+;--( )
+}--* +
+=--, -
+DateTime--. 6
+.--6 7
+UtcNow--7 =
+;--= >
+public// 
+
+ICollection// 
+<// 
+TravelRequest// $
+>//$ %
+TravelRequests//& 4
+{//5 6
+get//7 :
+;//: ;
+set//< ?
+;//? @
+}//A B
+=//C D
+new//E H
+List//I M
+<//M N
+TravelRequest//N [
+>//[ \
+(//\ ]
+)//] ^
+;//^ _
 public00 
-
-DateTime00 
-	CreatedAt00 
-{00 
-get00  #
-;00# $
-set00% (
-;00( )
-}00* +
-=00, -
-DateTime00. 6
-.006 7
-UtcNow007 =
-;00= >
-public22 
 
-ICollection22 
-<22 
-TravelRequest22 $
->22$ %
-TravelRequests22& 4
-{225 6
-get227 :
-;22: ;
-set22< ?
-;22? @
-}22A B
-=22C D
-new22E H
-List22I M
-<22M N
-TravelRequest22N [
->22[ \
-(22\ ]
-)22] ^
-;22^ _
-public33 
-
-ICollection33 
-<33 
-ApprovalStep33 #
->33# $
-ApprovalSteps33% 2
-{333 4
-get335 8
-;338 9
-set33: =
-;33= >
-}33? @
-=33A B
-new33C F
-List33G K
-<33K L
-ApprovalStep33L X
->33X Y
-(33Y Z
-)33Z [
-;33[ \
-}44 Æ2
+ICollection00 
+<00 
+ApprovalStep00 #
+>00# $
+ApprovalSteps00% 2
+{003 4
+get005 8
+;008 9
+set00: =
+;00= >
+}00? @
+=00A B
+new00C F
+List00G K
+<00K L
+ApprovalStep00L X
+>00X Y
+(00Y Z
+)00Z [
+;00[ \
+}11 Ä4
 lC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Entities\TravelRequest.cs
 	namespace 	
 	VoyageHub
@@ -5432,275 +6305,288 @@ EmployeeId !
 string. 4
 .4 5
 Empty5 :
-;: ;
-[ 
-Required 
-] 
-[ 
-	MaxLength 
-( 
-$num 
-) 
-] 
-public 
+;: ;
+public 
+
+bool 
+IsInternational 
+{  !
+get" %
+;% &
+set' *
+;* +
+}, -
+=. /
+false0 5
+;5 6
+[ 
+Required 
+] 
+[ 
+	MaxLength 
+( 
+$num 
+) 
+] 
+public 
 
-string 
-Purpose 
-{ 
-get 
-;  
-set! $
-;$ %
-}& '
-=( )
-string* 0
-.0 1
-Empty1 6
-;6 7
-[ 
-Column 
-( 
-TypeName 
-= 
-$str 
-) 
-] 
-public   
+string 
+Purpose 
+{ 
+get 
+;  
+set! $
+;$ %
+}& '
+=( )
+string* 0
+.0 1
+Empty1 6
+;6 7
+[!! 
+Column!! 
+(!! 
+TypeName!! 
+=!! 
+$str!! 
+)!! 
+]!! 
+public"" 
 
-DateTime   
-	StartDate   
-{   
-get    #
-;  # $
-set  % (
-;  ( )
-}  * +
-["" 
-Column"" 
-("" 
-TypeName"" 
-="" 
-$str"" 
-)"" 
-]"" 
-public## 
+DateTime"" 
+	StartDate"" 
+{"" 
+get""  #
+;""# $
+set""% (
+;""( )
+}""* +
+[$$ 
+Column$$ 
+($$ 
+TypeName$$ 
+=$$ 
+$str$$ 
+)$$ 
+]$$ 
+public%% 
 
-DateTime## 
-EndDate## 
-{## 
-get## !
-;##! "
-set### &
-;##& '
-}##( )
-[%% 
-Column%% 
-(%% 
-TypeName%% 
-=%% 
-$str%% &
-)%%& '
-]%%' (
-public&& 
+DateTime%% 
+EndDate%% 
+{%% 
+get%% !
+;%%! "
+set%%# &
+;%%& '
+}%%( )
+['' 
+Column'' 
+('' 
+TypeName'' 
+='' 
+$str'' &
+)''& '
+]''' (
+public(( 
 
-decimal&& 
-EstimatedBudget&& "
-{&&# $
-get&&% (
-;&&( )
-set&&* -
-;&&- .
-}&&/ 0
-[(( 
-	MaxLength(( 
-((( 
-$num(( 
-)(( 
-](( 
-public)) 
-
-string)) 
-TravelClass)) 
-{)) 
-get))  #
-;))# $
-set))% (
-;))( )
-}))* +
-=)), -
-$str)). B
-;))B C
+decimal(( 
+EstimatedBudget(( "
+{((# $
+get((% (
+;((( )
+set((* -
+;((- .
+}((/ 0
+[** 
+	MaxLength** 
+(** 
+$num** 
+)** 
+]** 
 public++ 
 
-string++ 
-?++ 
-Justification++  
-{++! "
-get++# &
-;++& '
-set++( +
-;+++ ,
-}++- .
-[-- 
-Required-- 
-]-- 
-[.. 
-	MaxLength.. 
-(.. 
-$num.. 
-).. 
-].. 
-public// 
+string++ 
+TravelClass++ 
+{++ 
+get++  #
+;++# $
+set++% (
+;++( )
+}++* +
+=++, -
+$str++. B
+;++B C
+public-- 
 
-string// 
-Status// 
-{// 
-get// 
-;// 
-set//  #
-;//# $
-}//% &
-=//' (
-$str//) 0
-;//0 1
-[11 
-	MaxLength11 
-(11 
-$num11 
-)11 
-]11 
-public22 
+string-- 
+?-- 
+Justification--  
+{--! "
+get--# &
+;--& '
+set--( +
+;--+ ,
+}--- .
+[// 
+Required// 
+]// 
+[00 
+	MaxLength00 
+(00 
+$num00 
+)00 
+]00 
+public11 
 
-string22 
-PolicyCompliance22 "
-{22# $
-get22% (
-;22( )
-set22* -
-;22- .
-}22/ 0
-=221 2
-$str223 =
-;22= >
+string11 
+Status11 
+{11 
+get11 
+;11 
+set11  #
+;11# $
+}11% &
+=11' (
+$str11) 0
+;110 1
+[33 
+	MaxLength33 
+(33 
+$num33 
+)33 
+]33 
 public44 
-
-DateTime44 
-	CreatedAt44 
-{44 
-get44  #
-;44# $
-set44% (
-;44( )
-}44* +
-=44, -
-DateTime44. 6
-.446 7
-UtcNow447 =
+
+string44 
+PolicyCompliance44 "
+{44# $
+get44% (
+;44( )
+set44* -
+;44- .
+}44/ 0
+=441 2
+$str443 =
 ;44= >
-public55 
+public66 
 
-DateTime55 
-	UpdatedAt55 
-{55 
-get55  #
-;55# $
-set55% (
-;55( )
-}55* +
-=55, -
-DateTime55. 6
-.556 7
-UtcNow557 =
-;55= >
+DateTime66 
+	CreatedAt66 
+{66 
+get66  #
+;66# $
+set66% (
+;66( )
+}66* +
+=66, -
+DateTime66. 6
+.666 7
+UtcNow667 =
+;66= >
 public77 
-
-ICollection77 
-<77 
-ApprovalStep77 #
->77# $
-ApprovalSteps77% 2
-{773 4
-get775 8
-;778 9
-set77: =
-;77= >
-}77? @
-=77A B
-new77C F
-List77G K
-<77K L
-ApprovalStep77L X
->77X Y
-(77Y Z
-)77Z [
-;77[ \
-public88 
-
-ICollection88 
-<88 
-ItinerarySegment88 '
->88' (
-ItinerarySegments88) :
-{88; <
-get88= @
-;88@ A
-set88B E
-;88E F
-}88G H
-=88I J
-new88K N
-List88O S
-<88S T
-ItinerarySegment88T d
->88d e
-(88e f
-)88f g
-;88g h
+
+DateTime77 
+	UpdatedAt77 
+{77 
+get77  #
+;77# $
+set77% (
+;77( )
+}77* +
+=77, -
+DateTime77. 6
+.776 7
+UtcNow777 =
+;77= >
 public99 
 
 ICollection99 
-<99 
-Stay99 
->99 
-Stays99 "
-{99# $
-get99% (
-;99( )
-set99* -
-;99- .
-}99/ 0
-=991 2
-new993 6
-List997 ;
-<99; <
-Stay99< @
->99@ A
-(99A B
-)99B C
-;99C D
+<99 
+ApprovalStep99 #
+>99# $
+ApprovalSteps99% 2
+{993 4
+get995 8
+;998 9
+set99: =
+;99= >
+}99? @
+=99A B
+new99C F
+List99G K
+<99K L
+ApprovalStep99L X
+>99X Y
+(99Y Z
+)99Z [
+;99[ \
 public:: 
 
 ICollection:: 
-<:: 
-Expense:: 
->:: 
-Expenses::  (
-{::) *
-get::+ .
-;::. /
-set::0 3
-;::3 4
-}::5 6
-=::7 8
-new::9 <
-List::= A
-<::A B
-Expense::B I
->::I J
-(::J K
-)::K L
-;::L M
-};; ¡
+<:: 
+ItinerarySegment:: '
+>::' (
+ItinerarySegments::) :
+{::; <
+get::= @
+;::@ A
+set::B E
+;::E F
+}::G H
+=::I J
+new::K N
+List::O S
+<::S T
+ItinerarySegment::T d
+>::d e
+(::e f
+)::f g
+;::g h
+public;; 
+
+ICollection;; 
+<;; 
+Stay;; 
+>;; 
+Stays;; "
+{;;# $
+get;;% (
+;;;( )
+set;;* -
+;;;- .
+};;/ 0
+=;;1 2
+new;;3 6
+List;;7 ;
+<;;; <
+Stay;;< @
+>;;@ A
+(;;A B
+);;B C
+;;;C D
+public<< 
+
+ICollection<< 
+<<< 
+Expense<< 
+><< 
+Expenses<<  (
+{<<) *
+get<<+ .
+;<<. /
+set<<0 3
+;<<3 4
+}<<5 6
+=<<7 8
+new<<9 <
+List<<= A
+<<<A B
+Expense<<B I
+><<I J
+(<<J K
+)<<K L
+;<<L M
+}== ¡
 kC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Entities\TravelPolicy.cs
 	namespace 	
 	VoyageHub
@@ -6911,7 +7797,187 @@ Department		 
 set' *
 ;* +
 }, -
-} ‡
+} á
+kC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Entities\ApprovalStep.cs
+	namespace 	
+	VoyageHub
+ 
+. 
+Data 
+. 
+Entities !
+;! "
+[ 
+Table 
+( 
+$str 
+) 
+] 
+public 
+class 
+ApprovalStep 
+{		 
+[
+
+ 
+Key
+
+ 
+]
+
+ 	
+public 
+
+Guid 
+Id 
+{ 
+get 
+; 
+set 
+; 
+}  
+=! "
+Guid# '
+.' (
+NewGuid( /
+(/ 0
+)0 1
+;1 2
+[ 
+Required 
+] 
+public 
+
+Guid 
+	RequestId 
+{ 
+get 
+;  
+set! $
+;$ %
+}& '
+[ 
+
+ForeignKey 
+( 
+nameof 
+( 
+	RequestId  
+)  !
+)! "
+]" #
+public 
+
+TravelRequest 
+? 
+Request !
+{" #
+get$ '
+;' (
+set) ,
+;, -
+}. /
+public 
+
+Guid 
+? 
+
+ApproverId 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+[ 
+
+ForeignKey 
+( 
+nameof 
+( 
+
+ApproverId !
+)! "
+)" #
+]# $
+public 
+
+User 
+? 
+Approver 
+{ 
+get 
+;  
+set! $
+;$ %
+}& '
+[ 
+Required 
+] 
+[ 
+	MaxLength 
+( 
+$num 
+) 
+] 
+public 
+
+string 
+Level 
+{ 
+get 
+; 
+set "
+;" #
+}$ %
+=& '
+$str( 1
+;1 2
+[ 
+Required 
+] 
+[ 
+	MaxLength 
+( 
+$num 
+) 
+] 
+public 
+
+string 
+Status 
+{ 
+get 
+; 
+set  #
+;# $
+}% &
+=' (
+$str) 2
+;2 3
+public 
+
+string 
+? 
+Comment 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+public   
+
+DateTime   
+?   
+	DecidedAt   
+{    
+get  ! $
+;  $ %
+set  & )
+;  ) *
+}  + ,
+}!! ‡
 gC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Entities\AuditLog.cs
 	namespace 	
 	VoyageHub
@@ -7126,187 +8192,7 @@ ForeignKey 
 .&&6 7
 UtcNow&&7 =
 ;&&= >
-}'' á
-kC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\Entities\ApprovalStep.cs
-	namespace 	
-	VoyageHub
- 
-. 
-Data 
-. 
-Entities !
-;! "
-[ 
-Table 
-( 
-$str 
-) 
-] 
-public 
-class 
-ApprovalStep 
-{		 
-[
-
- 
-Key
-
- 
-]
-
- 	
-public 
-
-Guid 
-Id 
-{ 
-get 
-; 
-set 
-; 
-}  
-=! "
-Guid# '
-.' (
-NewGuid( /
-(/ 0
-)0 1
-;1 2
-[ 
-Required 
-] 
-public 
-
-Guid 
-	RequestId 
-{ 
-get 
-;  
-set! $
-;$ %
-}& '
-[ 
-
-ForeignKey 
-( 
-nameof 
-( 
-	RequestId  
-)  !
-)! "
-]" #
-public 
-
-TravelRequest 
-? 
-Request !
-{" #
-get$ '
-;' (
-set) ,
-;, -
-}. /
-public 
-
-Guid 
-? 
-
-ApproverId 
-{ 
-get !
-;! "
-set# &
-;& '
-}( )
-[ 
-
-ForeignKey 
-( 
-nameof 
-( 
-
-ApproverId !
-)! "
-)" #
-]# $
-public 
-
-User 
-? 
-Approver 
-{ 
-get 
-;  
-set! $
-;$ %
-}& '
-[ 
-Required 
-] 
-[ 
-	MaxLength 
-( 
-$num 
-) 
-] 
-public 
-
-string 
-Level 
-{ 
-get 
-; 
-set "
-;" #
-}$ %
-=& '
-$str( 1
-;1 2
-[ 
-Required 
-] 
-[ 
-	MaxLength 
-( 
-$num 
-) 
-] 
-public 
-
-string 
-Status 
-{ 
-get 
-; 
-set  #
-;# $
-}% &
-=' (
-$str) 2
-;2 3
-public 
-
-string 
-? 
-Comment 
-{ 
-get  
-;  !
-set" %
-;% &
-}' (
-public   
-
-DateTime   
-?   
-	DecidedAt   
-{    
-get  ! $
-;  $ %
-set  & )
-;  ) *
-}  + ,
-}!! ë
+}'' ë
 bC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Data\AppDbContext.cs
 	namespace 	
 	VoyageHub

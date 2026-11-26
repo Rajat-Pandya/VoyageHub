@@ -390,4 +390,65 @@ public class ExpenseServiceTests
         Assert.NotNull(created);
         Assert.Null(created.ProofPath);
     }
+
+    [Fact]
+    public async Task GetExpensesSummaryAsync_MapsOverBudgetFlag()
+    {
+        var reqId = Guid.NewGuid();
+        var expenses = new List<Expense>
+        {
+            new()
+            {
+                Id = Guid.NewGuid(),
+                RequestId = reqId,
+                Category = "Meals",
+                Amount = 15000m,
+                Status = "Pending",
+                Request = new TravelRequest
+                {
+                    Id = reqId,
+                    RequestCode = "#TR-5001",
+                    EstimatedBudget = 50000m,
+                    ItinerarySegments = new List<ItinerarySegment> { new() { Cost = 30000m } },
+                    Stays = new List<Stay> { new() { Cost = 10000m } },
+                    Expenses = new List<Expense> { new() { Amount = 15000m, Status = "Pending" } },
+                    Employee = new User { Name = "Alice", Department = new Department { Name = "Engineering" } }
+                }
+            }
+        };
+
+        _expenseRepoMock
+            .Setup(r => r.GetExpensesByFilterAsync("All", null, null, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(expenses);
+        _expenseRepoMock
+            .Setup(r => r.GetTotalPendingAmountAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(15000m);
+
+        var summary = await _expenseService.GetExpensesSummaryAsync("All", null, null);
+
+        Assert.Single(summary.PendingClaims);
+        Assert.True(summary.PendingClaims[0].IsOverBudget);
+        Assert.Equal(55000m, summary.PendingClaims[0].ActualSpend);
+        Assert.Equal(50000m, summary.PendingClaims[0].ApprovedBudget);
+    }
+
+    [Fact]
+    public async Task GetMyExpensesAsync_ReturnsUserExpensesOrEmptyWhenAnonymous()
+    {
+        _currentUserServiceMock.Setup(c => c.UserId).Returns((Guid?)null);
+        Assert.Empty(await _expenseService.GetMyExpensesAsync());
+
+        var userId = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(userId);
+        _expenseRepoMock
+            .Setup(r => r.GetExpensesByUserIdAsync(userId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<Expense>
+            {
+                new() { Id = Guid.NewGuid(), Category = "Cab", Amount = 800m, Status = "Reimbursed" }
+            });
+
+        var result = await _expenseService.GetMyExpensesAsync();
+        Assert.Single(result);
+        Assert.Equal("Reimbursed", result[0].Status);
+    }
 }

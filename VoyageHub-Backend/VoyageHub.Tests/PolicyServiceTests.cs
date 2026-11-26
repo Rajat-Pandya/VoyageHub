@@ -202,4 +202,57 @@ public class PolicyServiceTests
         Assert.False(intlFlagged);
         Assert.Empty(intlReasons);
     }
+
+    [Fact]
+    public async Task GetAvailableDepartmentsAsync_ReturnsDepartmentsWithoutPolicy()
+    {
+        _policyRepoMock
+            .Setup(r => r.GetDepartmentsWithoutPolicyAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new List<string> { "Analytics", "IT" });
+
+        var result = await _sut.GetAvailableDepartmentsAsync();
+
+        Assert.Equal(2, result.Count);
+        Assert.Contains("Analytics", result);
+        Assert.Contains("IT", result);
+    }
+
+    [Fact]
+    public async Task GetMyPolicyAsync_ReturnsCurrentUsersDepartmentPolicy()
+    {
+        var userId = Guid.NewGuid();
+        var deptId = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(userId);
+        _policyRepoMock
+            .Setup(r => r.GetPolicyByUserIdAsync(userId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new TravelPolicy
+            {
+                Id = Guid.NewGuid(),
+                DepartmentId = deptId,
+                Department = new Department { Id = deptId, Name = "Engineering" },
+                DomesticLimit = 40000m,
+                IntlBudgetLimit = 250000m,
+                AllowedClass = "ECONOMY+",
+                HardEnforcement = true
+            });
+
+        var result = await _sut.GetMyPolicyAsync();
+
+        Assert.NotNull(result);
+        Assert.Equal("Engineering", result.DepartmentName);
+        Assert.Equal(40000m, result.DomesticLimit);
+        Assert.Equal(250000m, result.IntlBudgetLimit);
+    }
+
+    [Fact]
+    public async Task GetMyPolicyAsync_WhenNoUserOrPolicy_ReturnsNull()
+    {
+        _currentUserServiceMock.Setup(c => c.UserId).Returns((Guid?)null);
+        Assert.Null(await _sut.GetMyPolicyAsync());
+
+        var userId = Guid.NewGuid();
+        _currentUserServiceMock.Setup(c => c.UserId).Returns(userId);
+        _policyRepoMock.Setup(r => r.GetPolicyByUserIdAsync(userId, It.IsAny<CancellationToken>())).ReturnsAsync((TravelPolicy?)null);
+        Assert.Null(await _sut.GetMyPolicyAsync());
+    }
 }
