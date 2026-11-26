@@ -211,7 +211,11 @@ public class TravelRequestService : ITravelRequestService
                 Amount = e.Amount,
                 ProofPath = e.ProofPath,
                 Status = e.Status,
-                SubmittedAt = e.SubmittedAt
+                SubmittedAt = e.SubmittedAt,
+                RejectionReason = e.RejectionReason,
+                OriginalCurrency = string.IsNullOrWhiteSpace(e.OriginalCurrency) ? "INR" : e.OriginalCurrency,
+                OriginalAmount = e.OriginalAmount > 0 ? e.OriginalAmount : e.Amount,
+                ExchangeRate = e.ExchangeRate > 0 ? e.ExchangeRate : 1m
             }).ToList(),
             ApprovalHistory = r.ApprovalSteps.Select(a => new ApprovalStepItemDto
             {
@@ -534,6 +538,10 @@ public class TravelRequestService : ITravelRequestService
         if (!string.Equals(r.Status, "Approved", StringComparison.OrdinalIgnoreCase))
         {
             return (false, "Only Approved travel requests can be marked as Completed.");
+        }
+        if (await _travelRequestRepository.HasPendingExpensesAsync(id, cancellationToken))
+        {
+            return (false, "Cannot close trip while expense claims are still pending Finance review.");
         }
 
         r.Status = "Completed";

@@ -6,14 +6,19 @@
       <p class="subtitle">Process pending claims across all travel requests</p>
     </div>
 
-    <button type="button" class="btn-dark batch-btn" (click)="batchPayout()" [disabled]="selectedStatus !== 'Pending'">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" x2="12" y1="15" y2="3"/>
-      </svg>
-      Batch Payout
-    </button>
+    <div class="header-actions-row">
+      <button type="button" class="btn-outline-sm export-csv-btn" (click)="exportCsv()">
+        Export Payout CSV
+      </button>
+      <button type="button" class="btn-dark batch-btn" (click)="batchPayout()" [disabled]="selectedStatus !== 'Pending'">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" x2="12" y1="15" y2="3"/>
+        </svg>
+        Batch Payout
+      </button>
+    </div>
   </header>
  
   @if (toastMessage()) {
@@ -109,7 +114,12 @@
             </td>
             <td class="amount-cell">
               <div class="amount-stack">
-                <span>{{ claim.amount | currency:'INR':'symbol':'1.0-0' }}</span>
+                <span>
+                  {{ claim.amount | currency:'INR':'symbol':'1.0-0' }}
+                  @if (claim.originalCurrency && claim.originalCurrency !== 'INR') {
+                    <small class="fx-sub">({{ claim.originalAmount }} {{ claim.originalCurrency }})</small>
+                  }
+                </span>
                 @if (claim.approvedBudget) {
                   <span class="budget-context-sub">
                     Trip: {{ claim.actualSpend | currency:'INR':'symbol':'1.0-0' }} / {{ claim.approvedBudget | currency:'INR':'symbol':'1.0-0' }}
@@ -119,6 +129,12 @@
                   <span class="over-budget-badge" title="Trip actual spend ({{ claim.actualSpend | currency:'INR':'symbol':'1.0-0' }}) exceeds approved budget ({{ claim.approvedBudget | currency:'INR':'symbol':'1.0-0' }})">
                     Over Trip Budget
                   </span>
+                }
+                @if (claim.isPotentialDuplicate) {
+                  <span class="over-budget-badge duplicate-badge">Potential Duplicate</span>
+                }
+                @if (claim.policyWarning) {
+                  <span class="over-budget-badge" [title]="claim.policyWarning">Guideline Exceeded</span>
                 }
               </div>
             </td>
@@ -138,7 +154,7 @@
             <td class="action-cell">
               @if (claim.status === 'Pending') {
                 <div class="icon-actions-group">
-                  <button type="button" class="action-icon-btn reject-btn" title="Reject claim" aria-label="Reject claim" (click)="takeAction(claim, 'Reject')">
+                  <button type="button" class="action-icon-btn reject-btn" title="Reject claim" aria-label="Reject claim" (click)="openRejectModal(claim)">
                     &times;
                   </button>
                   <button type="button" class="action-icon-btn approve-btn" title="Approve claim" aria-label="Approve claim" (click)="takeAction(claim, 'Approve')">
@@ -235,9 +251,34 @@
         <div class="modal-footer">
           <button type="button" class="btn-secondary" (click)="closeReceiptModal()">Close</button>
           @if (claim.status === 'Pending') {
-            <button type="button" class="btn-danger-outline" (click)="takeAction(claim, 'Reject'); closeReceiptModal()">Reject Claim</button>
+            <button type="button" class="btn-danger-outline" (click)="closeReceiptModal(); openRejectModal(claim)">Reject Claim</button>
             <button type="button" class="btn-dark" (click)="takeAction(claim, 'Approve'); closeReceiptModal()">Verify &amp; Approve Claim</button>
           }
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Reject Reason Modal -->
+  @if (rejectTarget(); as target) {
+    <div class="modal-backdrop fade-in" (click)="closeRejectModal()">
+      <div class="modal-card reject-modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Reject Expense Claim &mdash; {{ target.requestCode }}</h3>
+          <button type="button" class="close-x-btn" (click)="closeRejectModal()" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="reject-hint">Provide a clear reason so {{ target.employeeName }} can correct and resubmit this {{ target.category }} claim ({{ target.amount | currency:'INR':'symbol':'1.0-0' }}).</p>
+          <div class="preset-chips">
+            @for (preset of ['Unclear / missing GST receipt', 'Exceeds category policy cap', 'Non-reimbursable expense', 'Potential duplicate claim']; track preset) {
+              <button type="button" class="preset-chip" (click)="rejectionReason = preset">{{ preset }}</button>
+            }
+          </div>
+          <input type="text" [(ngModel)]="rejectionReason" class="form-input" placeholder="Enter rejection reason..." aria-label="Rejection reason" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" (click)="closeRejectModal()">Cancel</button>
+          <button type="button" class="btn-danger-outline" (click)="confirmReject()">Confirm Rejection</button>
         </div>
       </div>
     </div>

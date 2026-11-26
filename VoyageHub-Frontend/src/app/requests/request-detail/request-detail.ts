@@ -60,12 +60,29 @@ export class RequestDetail implements OnInit {
   };
 
   // New Expense Model
+  readonly resubmittingExpenseId = signal<string | null>(null);
+  readonly fxRatesToInr: Record<string, number> = {
+    INR: 1,
+    USD: 84.5,
+    EUR: 91.2,
+    GBP: 107.4,
+    SGD: 63.1,
+    AED: 23.0,
+    NZD: 50.4,
+    JPY: 0.56
+  };
   expenseForm = {
     category: 'Meals',
     amount: 0,
+    currency: 'INR',
     description: '',
     proofPath: ''
   };
+
+  get convertedInrPreview(): number {
+    const rate = this.fxRatesToInr[this.expenseForm.currency] ?? 1;
+    return Math.round((Number(this.expenseForm.amount) || 0) * rate);
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -200,6 +217,10 @@ export class RequestDetail implements OnInit {
     return this.canEditTrip(d) && d.status !== 'Completed' && d.status !== 'Rejected' && d.status !== 'Cancelled';
   }
 
+  hasPendingExpenses(d: TravelRequestDetail): boolean {
+    return (d.expenses || []).some((e) => e.status === 'Pending');
+  }
+
   isOwnRequest(d: TravelRequestDetail): boolean {
     const userId = this.authService.currentUser()?.id;
     return !!userId && userId.toLowerCase() === d.employeeId.toLowerCase();
@@ -283,6 +304,22 @@ export class RequestDetail implements OnInit {
 
   // Expense
   openExpenseModal(): void {
+    this.resubmittingExpenseId.set(null);
+    this.expenseForm = { category: 'Meals', amount: 0, currency: 'INR', description: '', proofPath: '' };
+    this.selectedProofFile.set(null);
+    this.selectedProofFileName.set(null);
+    this.showExpenseModal.set(true);
+  }
+
+  openResubmitExpenseModal(e: ExpenseItem): void {
+    this.resubmittingExpenseId.set(e.id);
+    this.expenseForm = {
+      category: e.category || 'Meals',
+      amount: e.originalAmount && e.originalAmount > 0 ? e.originalAmount : e.amount,
+      currency: e.originalCurrency || 'INR',
+      description: '',
+      proofPath: e.proofPath || ''
+    };
     this.selectedProofFile.set(null);
     this.selectedProofFileName.set(null);
     this.showExpenseModal.set(true);
@@ -290,6 +327,7 @@ export class RequestDetail implements OnInit {
 
   closeExpenseModal(): void {
     this.showExpenseModal.set(false);
+    this.resubmittingExpenseId.set(null);
     this.selectedProofFile.set(null);
     this.selectedProofFileName.set(null);
   }
@@ -333,21 +371,32 @@ export class RequestDetail implements OnInit {
   }
 
   private executeExpensePost(d: TravelRequestDetail, proofPath: string): void {
-    this.voyageService.submitExpense({
+    const resubmitId = this.resubmittingExpenseId();
+    const payload = {
       requestId: d.id,
       category: this.expenseForm.category,
       amount: this.expenseForm.amount,
+      currency: this.expenseForm.currency,
       description: this.expenseForm.description,
       proofPath: proofPath
-    }).subscribe({
+    };
+
+    const req$ = resubmitId
+      ? this.voyageService.resubmitExpense(resubmitId, payload)
+      : this.voyageService.submitExpense(payload);
+
+    req$.subscribe({
       next: (created: any) => {
-        if (created && created.id) {
+        if (!resubmitId && created && created.id) {
           this.detail.update((curr) =>
             curr ? { ...curr, expenses: [created, ...(curr.expenses || [])] } : curr
           );
         }
         this.closeExpenseModal();
         this.activeTab.set('Expenses');
+        if (resubmitId) {
+          this.showToast('Expense claim resubmitted for Finance review.');
+        }
         this.loadDetail(d.id);
       },
       error: (err: any) => {
@@ -423,12 +472,17 @@ export class RequestDetail implements OnInit {
   closeTrip(): void {
     const d = this.detail();
     if (!d) return;
+    if (this.hasPendingExpenses(d)) {
+      this.showToast('Cannot close trip while expense claims are still pending Finance review.');
+      return;
+    }
     if (confirm(`Mark trip ${d.requestCode} as Completed and close request?`)) {
       this.voyageService.closeRequest(d.id).subscribe({
         next: () => {
           this.loadDetail(d.id);
         },
-        error: () => {
+        error: (err: any) => {
+          this.showToast(err?.error?.message || 'Unable to close travel request.');
           this.loadDetail(d.id);
         }
       });

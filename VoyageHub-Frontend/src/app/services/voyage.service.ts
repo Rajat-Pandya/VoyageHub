@@ -67,6 +67,12 @@ export interface ExpenseItem {
   tripClaimedTotal?: number;
   corporatePaidAmount?: number;
   isOverBudget?: boolean;
+  rejectionReason?: string;
+  originalCurrency?: string;
+  originalAmount?: number;
+  exchangeRate?: number;
+  isPotentialDuplicate?: boolean;
+  policyWarning?: string;
 }
 
 export interface ReimbursementLineItem {
@@ -77,6 +83,10 @@ export interface ReimbursementLineItem {
   status: string;
   date: string;
   proofPath?: string;
+  rejectionReason?: string;
+  originalCurrency?: string;
+  originalAmount?: number;
+  exchangeRate?: number;
 }
 
 export interface TripReimbursementReport {
@@ -251,8 +261,12 @@ export class VoyageService {
   }
 
   // Expenses (Employee submission + Finance review)
-  submitExpense(payload: { requestId: string; category: string; amount: number; description?: string; proofPath?: string }): Observable<any> {
+  submitExpense(payload: { requestId: string; category: string; amount: number; description?: string; proofPath?: string; currency?: string; exchangeRate?: number }): Observable<any> {
     return this.http.post(`${this.baseUrl}/expenses`, payload);
+  }
+
+  resubmitExpense(id: string, payload: { requestId: string; category: string; amount: number; description?: string; proofPath?: string; currency?: string; exchangeRate?: number }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/expenses/${id}/resubmit`, payload);
   }
 
   getPendingExpenses(category?: string, highPriorityOnly?: boolean, status: string = 'Pending'): Observable<ExpenseReviewSummary> {
@@ -271,12 +285,17 @@ export class VoyageService {
     return this.http.get<TripReimbursementReport[]>(`${this.baseUrl}/expenses/my-reports`);
   }
 
-  takeExpenseAction(id: string, action: 'Approve' | 'Reject'): Observable<any> {
-    return this.http.post(`${this.baseUrl}/expenses/${id}/action`, { action });
+  takeExpenseAction(id: string, action: 'Approve' | 'Reject', comment?: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/expenses/${id}/action`, { action, comment });
   }
 
   batchPayout(expenseIds?: string[]): Observable<any> {
     return this.http.post(`${this.baseUrl}/expenses/batch-payout`, { expenseIds });
+  }
+
+  exportPayoutCsv(status: string = 'Reimbursed'): Observable<Blob> {
+    const params = new HttpParams().set('status', status);
+    return this.http.get(`${this.baseUrl}/expenses/export-payout`, { params, responseType: 'blob' });
   }
 
   uploadExpenseProof(file: File): Observable<{ success: boolean; proofPath: string; fileName: string; fileUrl: string }> {

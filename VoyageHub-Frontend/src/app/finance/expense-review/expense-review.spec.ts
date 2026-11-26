@@ -55,7 +55,12 @@ describe('ExpenseReview', () => {
     expect(component.totalPending()).toBe(5000);
 
     component.takeAction(sampleClaim, 'Approve');
-    expect(mockVoyageService.takeExpenseAction).toHaveBeenCalledWith('exp-1', 'Approve');
+    expect(mockVoyageService.takeExpenseAction).toHaveBeenCalledWith('exp-1', 'Approve', undefined);
+
+    component.openRejectModal(sampleClaim);
+    component.rejectionReason = 'Missing GST number';
+    component.confirmReject();
+    expect(mockVoyageService.takeExpenseAction).toHaveBeenCalledWith('exp-1', 'Reject', 'Missing GST number');
 
     component.batchPayout();
     expect(mockVoyageService.batchPayout).toHaveBeenCalled();

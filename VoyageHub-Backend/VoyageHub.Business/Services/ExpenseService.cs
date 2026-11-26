@@ -138,7 +138,11 @@ public class ExpenseService : IExpenseService
                 Amount = exp.Amount,
                 Status = exp.Status,
                 Date = exp.SubmittedAt,
-                ProofPath = exp.ProofPath
+                ProofPath = exp.ProofPath,
+                RejectionReason = exp.RejectionReason,
+                OriginalCurrency = string.IsNullOrWhiteSpace(exp.OriginalCurrency) ? "INR" : exp.OriginalCurrency,
+                OriginalAmount = exp.OriginalAmount > 0 ? exp.OriginalAmount : exp.Amount,
+                ExchangeRate = exp.ExchangeRate > 0 ? exp.ExchangeRate : 1m
             });
         }
 
@@ -184,6 +188,33 @@ public class ExpenseService : IExpenseService
         };
     }
 
+    private static readonly Dictionary<string, decimal> DefaultFxRatesToInr = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["INR"] = 1.00m,
+        ["USD"] = 84.50m,
+        ["EUR"] = 91.20m,
+        ["GBP"] = 107.40m,
+        ["SGD"] = 63.10m,
+        ["AED"] = 23.00m,
+        ["NZD"] = 50.40m,
+        ["JPY"] = 0.56m
+    };
+
+    private static (string Currency, decimal Rate, decimal InrAmount) ConvertToInr(decimal rawAmount, string? currency, decimal? overrideRate)
+    {
+        var code = string.IsNullOrWhiteSpace(currency) ? "INR" : currency.Trim().ToUpperInvariant();
+        if (code == "INR")
+        {
+            return ("INR", 1m, Math.Round(rawAmount, 2));
+        }
+
+        var rate = overrideRate.HasValue && overrideRate.Value > 0
+            ? overrideRate.Value
+            : (DefaultFxRatesToInr.TryGetValue(code, out var known) ? known : 1m);
+
+        return (code, rate, Math.Round(rawAmount * rate, 2));
+    }
+
     private static ExpenseItemDto MapToExpenseItemDto(Expense e)
     {
         var req = e.Request;
@@ -191,6 +222,9 @@ public class ExpenseService : IExpenseService
         decimal actualSpend;
         decimal claimedTotal;
         decimal corporatePaid;
+        var isPotentialDuplicate = false;
+        string? policyWarning = null;
+
         if (req == null)
         {
             actualSpend = e.Amount;
@@ -203,6 +237,21 @@ public class ExpenseService : IExpenseService
             claimedTotal = activeExpenses.Sum(x => x.Amount);
             corporatePaid = unclaimedSegments.Sum(s => s.Cost) + unclaimedStays.Sum(st => st.Cost);
             actualSpend = corporatePaid + claimedTotal;
+
+            isPotentialDuplicate = activeExpenses.Any(x =>
+                x.Id != e.Id &&
+                string.Equals(x.Category, e.Category, StringComparison.OrdinalIgnoreCase) &&
+                x.Amount == e.Amount);
+
+            var tripDays = Math.Max(1, (req.EndDate - req.StartDate).Days + 1);
+            if (string.Equals(e.Category, "Meals", StringComparison.OrdinalIgnoreCase) && e.Amount > 2500m * tripDays)
+            {
+                policyWarning = $"Meals exceed ₹2,500/day guideline (₹{2500m * tripDays:N0} for {tripDays}d).";
+            }
+            else if (string.Equals(e.Category, "Transport", StringComparison.OrdinalIgnoreCase) && e.Amount > 5000m)
+            {
+                policyWarning = "Local transport exceeds ₹5,000 guideline.";
+            }
         }
 
         return new ExpenseItemDto
@@ -222,7 +271,13 @@ public class ExpenseService : IExpenseService
             ActualSpend = actualSpend,
             TripClaimedTotal = claimedTotal,
             CorporatePaidAmount = corporatePaid,
-            IsOverBudget = approvedBudget > 0 && actualSpend > approvedBudget
+            IsOverBudget = approvedBudget > 0 && actualSpend > approvedBudget,
+            RejectionReason = e.RejectionReason,
+            OriginalCurrency = string.IsNullOrWhiteSpace(e.OriginalCurrency) ? "INR" : e.OriginalCurrency,
+            OriginalAmount = e.OriginalAmount > 0 ? e.OriginalAmount : e.Amount,
+            ExchangeRate = e.ExchangeRate > 0 ? e.ExchangeRate : 1m,
+            IsPotentialDuplicate = isPotentialDuplicate,
+            PolicyWarning = policyWarning
         };
     }
 
@@ -254,11 +309,16 @@ public class ExpenseService : IExpenseService
             return (false, "Expenses can only be submitted for Approved travel requests.", null);
         }
 
+        var (origCurrency, fxRate, inrAmount) = ConvertToInr(dto.Amount, dto.Currency, dto.ExchangeRate);
+
         var expense = new Expense
         {
             RequestId = dto.RequestId,
             Category = string.IsNullOrWhiteSpace(dto.Category) ? "Airfare" : dto.Category,
-            Amount = dto.Amount,
+            Amount = inrAmount,
+            OriginalCurrency = origCurrency,
+            OriginalAmount = Math.Round(dto.Amount, 2),
+            ExchangeRate = fxRate,
             ProofPath = string.IsNullOrWhiteSpace(dto.ProofPath) ? null : dto.ProofPath.Trim(),
             Status = "Pending",
             SubmittedAt = DateTime.UtcNow
@@ -291,6 +351,9 @@ public class ExpenseService : IExpenseService
 
         var isApprove = string.Equals(dto.Action, "Approve", StringComparison.OrdinalIgnoreCase);
         expense.Status = isApprove ? "Reimbursed" : "Rejected";
+        expense.RejectionReason = isApprove
+            ? null
+            : (string.IsNullOrWhiteSpace(dto.Comment) ? "Rejected by Finance" : dto.Comment.Trim());
 
         await _auditService.LogAsync(
             entityType: "EXPENSE",
@@ -298,13 +361,109 @@ public class ExpenseService : IExpenseService
             action: isApprove ? "Reimbursed Claim" : "Rejected Claim",
             actorId: _currentUserService.UserId,
             actorName: _currentUserService.UserName ?? "Finance Officer",
-            changeDetail: $"Processed ₹{expense.Amount:N0} {expense.Category} claim for {expense.Request?.RequestCode} ({expense.Status})",
+            changeDetail: $"Processed ₹{expense.Amount:N0} {expense.Category} claim for {expense.Request?.RequestCode} ({expense.Status})" +
+                          (isApprove || string.IsNullOrWhiteSpace(expense.RejectionReason) ? "" : $" — {expense.RejectionReason}"),
             severity: "LOW",
             cancellationToken: cancellationToken);
 
         await _expenseRepository.SaveChangesAsync(cancellationToken);
 
         return (true, $"Expense claim {expense.Status.ToLower()}.");
+    }
+
+    public async Task<(bool Success, string Message, Expense? Expense)> ResubmitExpenseAsync(Guid id, SubmitExpenseDto? dto, CancellationToken cancellationToken = default)
+    {
+        var expense = await _expenseRepository.GetByIdWithRequestAsync(id, cancellationToken);
+        if (expense == null)
+        {
+            return (false, "Expense claim not found.", null);
+        }
+
+        if (expense.Request != null && !IsOwnerOrAdmin(expense.Request.EmployeeId))
+        {
+            return (false, "You can only resubmit your own expense claims.", null);
+        }
+
+        if (!string.Equals(expense.Status, "Rejected", StringComparison.OrdinalIgnoreCase))
+        {
+            return (false, "Only rejected expense claims can be resubmitted.", null);
+        }
+
+        if (expense.Request != null && !string.Equals(expense.Request.Status, "Approved", StringComparison.OrdinalIgnoreCase))
+        {
+            return (false, "Expenses can only be resubmitted for Approved travel requests.", null);
+        }
+
+        if (dto != null)
+        {
+            if (dto.Amount > 0)
+            {
+                var (origCurrency, fxRate, inrAmount) = ConvertToInr(dto.Amount, dto.Currency, dto.ExchangeRate);
+                expense.Amount = inrAmount;
+                expense.OriginalCurrency = origCurrency;
+                expense.OriginalAmount = Math.Round(dto.Amount, 2);
+                expense.ExchangeRate = fxRate;
+            }
+            if (!string.IsNullOrWhiteSpace(dto.Category))
+            {
+                expense.Category = dto.Category.Trim();
+            }
+            if (!string.IsNullOrWhiteSpace(dto.ProofPath))
+            {
+                expense.ProofPath = dto.ProofPath.Trim();
+            }
+        }
+
+        expense.Status = "Pending";
+        expense.RejectionReason = null;
+        expense.SubmittedAt = DateTime.UtcNow;
+
+        await _auditService.LogAsync(
+            entityType: "EXPENSE",
+            entityId: expense.Id,
+            action: "Resubmit Expense",
+            actorId: _currentUserService.UserId ?? expense.Request?.EmployeeId,
+            actorName: _currentUserService.UserName ?? "Employee",
+            changeDetail: $"Resubmitted ₹{expense.Amount:N0} {expense.Category} claim for {expense.Request?.RequestCode}",
+            severity: "LOW",
+            cancellationToken: cancellationToken);
+
+        await _expenseRepository.SaveChangesAsync(cancellationToken);
+        return (true, "Expense claim resubmitted for Finance review.", expense);
+    }
+
+    public async Task<string> ExportPayoutCsvAsync(string? status, CancellationToken cancellationToken = default)
+    {
+        var normalizedStatus = string.IsNullOrWhiteSpace(status) ? "Reimbursed" : status.Trim();
+        var items = await _expenseRepository.GetExpensesByFilterAsync(normalizedStatus, null, null, cancellationToken);
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("RequestCode,EmployeeName,Department,Category,OriginalCurrency,OriginalAmount,ExchangeRate,AmountINR,Status,SubmittedAt");
+
+        foreach (var e in items)
+        {
+            var reqCode = EscapeCsv(e.Request?.RequestCode ?? "");
+            var emp = EscapeCsv(e.Request?.Employee?.Name ?? "");
+            var dept = EscapeCsv(e.Request?.Employee?.Department?.Name ?? "");
+            var cat = EscapeCsv(e.Category);
+            var origCurr = EscapeCsv(string.IsNullOrWhiteSpace(e.OriginalCurrency) ? "INR" : e.OriginalCurrency);
+            var origAmt = (e.OriginalAmount > 0 ? e.OriginalAmount : e.Amount).ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
+            var rate = (e.ExchangeRate > 0 ? e.ExchangeRate : 1m).ToString("F4", System.Globalization.CultureInfo.InvariantCulture);
+            var amtInr = e.Amount.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
+            var st = EscapeCsv(e.Status);
+            var dt = e.SubmittedAt.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            sb.AppendLine($"{reqCode},{emp},{dept},{cat},{origCurr},{origAmt},{rate},{amtInr},{st},{dt}");
+        }
+
+        return sb.ToString();
+    }
+
+    private static string EscapeCsv(string val)
+    {
+        if (val.Contains(',') || val.Contains('"') || val.Contains('\n'))
+        {
+            return $"\"{val.Replace("\"", "\"\"")}\"";
+        }
+        return val;
     }
 
     public async Task<(bool Success, string Message)> BatchPayoutAsync(BatchPayoutDto? dto, CancellationToken cancellationToken = default)

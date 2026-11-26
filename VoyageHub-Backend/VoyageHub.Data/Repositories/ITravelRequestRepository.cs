@@ -21,5 +21,6 @@ public interface ITravelRequestRepository : IRepository<TravelRequest>
     Task AddApprovalStepAsync(ApprovalStep step, CancellationToken cancellationToken = default);
     Task AddSegmentAsync(ItinerarySegment segment, CancellationToken cancellationToken = default);
     Task AddStayAsync(Stay stay, CancellationToken cancellationToken = default);
+    Task<bool> HasPendingExpensesAsync(Guid requestId, CancellationToken cancellationToken = default);
 }
 

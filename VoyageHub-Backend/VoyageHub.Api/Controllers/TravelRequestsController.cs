@@ -142,7 +142,14 @@ public class TravelRequestsController : ControllerBase
     public async Task<IActionResult> CloseRequest(Guid id)
     {
         var result = await _travelRequestService.CloseRequestAsync(id);
-        if (!result.Success) return NotFound(new { message = result.Message });
+        if (!result.Success)
+        {
+            if (result.Message.Contains("not found", StringComparison.OrdinalIgnoreCase))
+            {
+                return NotFound(new { message = result.Message });
+            }
+            return BadRequest(new { message = result.Message });
+        }
         return Ok(new { success = true, message = result.Message });
     }
 }

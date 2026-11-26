@@ -88,6 +88,19 @@ public class ExpensesController : ControllerBase
         return Ok(new { success = true, message });
     }
 
+    [HttpPost("{id}/resubmit")]
+    [Authorize(Roles = "Employee,Manager,Finance,Admin")]
+    public async Task<IActionResult> ResubmitExpense(Guid id, [FromBody] SubmitExpenseDto? dto, CancellationToken cancellationToken)
+    {
+        var (success, message, expense) = await _expenseService.ResubmitExpenseAsync(id, dto, cancellationToken);
+        if (!success)
+        {
+            return BadRequest(new { message });
+        }
+
+        return Ok(expense);
+    }
+
     [HttpPost("batch-payout")]
     [Authorize(Roles = "Finance,Admin")]
     public async Task<IActionResult> BatchPayout([FromBody] BatchPayoutDto? dto, CancellationToken cancellationToken)
@@ -99,6 +112,15 @@ public class ExpensesController : ControllerBase
         }
 
         return Ok(new { success = true, message });
+    }
+
+    [HttpGet("export-payout")]
+    [Authorize(Roles = "Finance,Admin")]
+    public async Task<IActionResult> ExportPayoutCsv([FromQuery] string? status = "Reimbursed", CancellationToken cancellationToken = default)
+    {
+        var csv = await _expenseService.ExportPayoutCsvAsync(status, cancellationToken);
+        var bytes = System.Text.Encoding.UTF8.GetBytes(csv);
+        return File(bytes, "text/csv", $"voyagehub_payout_{DateTime.UtcNow:yyyyMMdd}.csv");
     }
 
     [HttpPost("upload-proof")]

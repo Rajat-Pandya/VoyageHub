@@ -176,5 +176,10 @@ public class TravelRequestRepository : Repository<TravelRequest>, ITravelRequest
     {
         await Context.Stays.AddAsync(stay, cancellationToken);
     }
+
+    public async Task<bool> HasPendingExpensesAsync(Guid requestId, CancellationToken cancellationToken = default)
+    {
+        return await Context.Expenses.AnyAsync(e => e.RequestId == requestId && e.Status == "Pending", cancellationToken);
+    }
 }
 

@@ -27,6 +27,9 @@ export class ExpenseReview implements OnInit {
 
   // Receipt preview modal
   readonly previewClaim = signal<ExpenseItem | null>(null);
+  // Reject reason modal
+  readonly rejectTarget = signal<ExpenseItem | null>(null);
+  rejectionReason = '';
 
   ngOnInit(): void {
     this.loadExpenses();
@@ -48,10 +51,43 @@ export class ExpenseReview implements OnInit {
     });
   }
 
-  takeAction(claim: ExpenseItem, action: 'Approve' | 'Reject'): void {
-    this.voyageService.takeExpenseAction(claim.id, action).subscribe({
+  takeAction(claim: ExpenseItem, action: 'Approve' | 'Reject', comment?: string): void {
+    this.voyageService.takeExpenseAction(claim.id, action, comment).subscribe({
       next: () => this.loadExpenses(),
       error: () => this.loadExpenses()
+    });
+  }
+
+  openRejectModal(claim: ExpenseItem): void {
+    this.rejectTarget.set(claim);
+    this.rejectionReason = '';
+  }
+
+  closeRejectModal(): void {
+    this.rejectTarget.set(null);
+    this.rejectionReason = '';
+  }
+
+  confirmReject(): void {
+    const claim = this.rejectTarget();
+    if (!claim) return;
+    const reason = this.rejectionReason.trim() || 'Rejected by Finance';
+    this.closeRejectModal();
+    this.takeAction(claim, 'Reject', reason);
+  }
+
+  exportCsv(): void {
+    const status = this.selectedStatus === 'All' ? 'Reimbursed' : this.selectedStatus;
+    this.voyageService.exportPayoutCsv(status).subscribe({
+      next: (blob) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `voyagehub_payout_${status.toLowerCase()}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+      },
+      error: () => this.showToast('Failed to export payout CSV.')
     });
   }
 

@@ -73,7 +73,12 @@
           <button type="button" class="btn-secondary" (click)="openSegmentModal()">
             + Add Segment
           </button>
-          <button type="button" class="btn-dark" (click)="closeTrip()">
+          <button
+            type="button"
+            class="btn-dark"
+            (click)="closeTrip()"
+            [disabled]="hasPendingExpenses(d)"
+            [title]="hasPendingExpenses(d) ? 'Resolve pending expense claims before closing this trip' : 'Mark Completed & Close'">
             Mark Completed &amp; Close
           </button>
         }
@@ -380,10 +385,18 @@
                   <div class="confirmation-code">
                     <span>Receipt: {{ e.proofPath || 'No proof attached' }}</span>
                   </div>
+                  @if (e.status === 'Rejected' && e.rejectionReason) {
+                    <div class="rejection-reason-note">Rejection Reason: {{ e.rejectionReason }}</div>
+                  }
                 </div>
               </div>
               <div class="segment-right">
-                <span class="segment-price">{{ e.amount | currency:'INR':'symbol':'1.0-0' }}</span>
+                <span class="segment-price">
+                  {{ e.amount | currency:'INR':'symbol':'1.0-0' }}
+                  @if (e.originalCurrency && e.originalCurrency !== 'INR') {
+                    <small class="fx-sub">({{ e.originalAmount }} {{ e.originalCurrency }})</small>
+                  }
+                </span>
                 <span class="badge-status" [ngClass]="{
                   'status-approved': e.status === 'Reimbursed' || e.status === 'Approved',
                   'status-in-review': e.status === 'Pending',
@@ -407,6 +420,11 @@
                         <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
                       </svg>
                       {{ e.proofPath ? 'Replace' : 'Upload Proof' }}
+                    </button>
+                  }
+                  @if (canSubmitExpense(d) && e.status === 'Rejected') {
+                    <button type="button" class="proof-attach-btn" (click)="openResubmitExpenseModal(e)" title="Update and resubmit rejected claim">
+                      Resubmit
                     </button>
                   }
                 </div>
@@ -554,7 +572,7 @@
       <div class="modal-backdrop fade-in" (click)="closeExpenseModal()">
         <div class="modal-card" (click)="$event.stopPropagation()">
           <div class="modal-header">
-            <h3>Submit Expense Claim with Proof</h3>
+            <h3>{{ resubmittingExpenseId() ? 'Resubmit Rejected Expense Claim' : 'Submit Expense Claim with Proof' }}</h3>
             <button type="button" class="close-x-btn" (click)="closeExpenseModal()" title="Close dialog" aria-label="Close dialog">&times;</button>
           </div>
           <div class="modal-body">
@@ -570,8 +588,24 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="expAmount">Amount (₹ INR)</label>
+                <label for="expCurrency">Currency</label>
+                <select id="expCurrency" [(ngModel)]="expenseForm.currency" class="form-select" title="Currency" aria-label="Currency">
+                  <option value="INR">INR (₹)</option>
+                  <option value="USD">USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="SGD">SGD (S$)</option>
+                  <option value="AED">AED</option>
+                  <option value="NZD">NZD</option>
+                  <option value="JPY">JPY (¥)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="expAmount">Amount ({{ expenseForm.currency }})</label>
                 <input id="expAmount" type="number" [(ngModel)]="expenseForm.amount" class="form-input" placeholder="0.00" title="Amount" />
+                @if (expenseForm.currency !== 'INR' && expenseForm.amount > 0) {
+                  <small class="fx-preview">≈ {{ convertedInrPreview | currency:'INR':'symbol':'1.0-0' }} INR (Rate: {{ fxRatesToInr[expenseForm.currency] }})</small>
+                }
               </div>
             </div>
             <div class="form-group">

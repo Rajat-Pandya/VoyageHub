@@ -125,6 +125,13 @@ describe('RequestDetail', () => {
 
     vi.spyOn(window, 'confirm').mockReturnValue(true);
     component.closeTrip();
+    expect(mockVoyageService.closeRequest).not.toHaveBeenCalled();
+
+    component.detail.set({
+      ...sampleDetail,
+      expenses: [{ ...sampleDetail.expenses[0], status: 'Reimbursed' }]
+    });
+    component.closeTrip();
     expect(mockVoyageService.closeRequest).toHaveBeenCalledWith('req-1');
 
     component.openProofModal(sampleDetail.expenses[0]);

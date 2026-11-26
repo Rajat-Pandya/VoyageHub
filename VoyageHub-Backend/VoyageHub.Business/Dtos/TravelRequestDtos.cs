@@ -74,6 +74,12 @@ public class ExpenseItemDto
     public decimal TripClaimedTotal { get; set; }
     public decimal CorporatePaidAmount { get; set; }
     public bool IsOverBudget { get; set; }
+    public string? RejectionReason { get; set; }
+    public string OriginalCurrency { get; set; } = "INR";
+    public decimal OriginalAmount { get; set; }
+    public decimal ExchangeRate { get; set; } = 1m;
+    public bool IsPotentialDuplicate { get; set; }
+    public string? PolicyWarning { get; set; }
 }
 
 public class ReimbursementLineItemDto
@@ -85,6 +91,10 @@ public class ReimbursementLineItemDto
     public string Status { get; set; } = string.Empty; // Corporate-Paid, Pending, Reimbursed, Rejected
     public DateTime Date { get; set; }
     public string? ProofPath { get; set; }
+    public string? RejectionReason { get; set; }
+    public string OriginalCurrency { get; set; } = "INR";
+    public decimal OriginalAmount { get; set; }
+    public decimal ExchangeRate { get; set; } = 1m;
 }
 
 public class TripReimbursementReportDto
@@ -209,6 +219,8 @@ public class SubmitExpenseDto
 
     public string? ProofPath { get; set; }
     public string? Description { get; set; }
+    public string Currency { get; set; } = "INR";
+    public decimal? ExchangeRate { get; set; }
 }
 
 public class AddSegmentDto

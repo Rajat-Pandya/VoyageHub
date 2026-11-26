@@ -45,6 +45,7 @@ public class ExpenseReviewSummaryDto
 public class ExpenseActionDto
 {
     public string Action { get; set; } = "Approve"; // Approve, Reject
+    public string? Comment { get; set; }
 }
 
 public class BatchPayoutDto
