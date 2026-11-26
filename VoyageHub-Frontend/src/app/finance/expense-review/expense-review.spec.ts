@@ -1,6 +1,7 @@
 import '@angular/compiler';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { ExpenseReview } from './expense-review';
 import { VoyageService } from '../../services/voyage.service';
@@ -41,7 +42,7 @@ describe('ExpenseReview', () => {
 
     await TestBed.configureTestingModule({
       imports: [ExpenseReview],
-      providers: [{ provide: VoyageService, useValue: mockVoyageService }]
+      providers: [provideRouter([]), { provide: VoyageService, useValue: mockVoyageService }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExpenseReview);

@@ -83,7 +83,10 @@
             <td>
               <div class="trip-id-block">
                 <strong>{{ claim.tripPurpose }}</strong>
-                <span class="id-tag">{{ claim.requestCode }}</span>
+                <div class="trip-meta-row">
+                  <a [routerLink]="['/requests', claim.requestId]" class="id-tag id-link" title="View full trip details">{{ claim.requestCode }}</a>
+                  <span class="submitted-meta">&bull; {{ claim.submittedAt | date:'dd MMM, yyyy' }}</span>
+                </div>
               </div>
             </td>
             <td>
@@ -107,6 +110,11 @@
             <td class="amount-cell">
               <div class="amount-stack">
                 <span>{{ claim.amount | currency:'INR':'symbol':'1.0-0' }}</span>
+                @if (claim.approvedBudget) {
+                  <span class="budget-context-sub">
+                    Trip: {{ claim.actualSpend | currency:'INR':'symbol':'1.0-0' }} / {{ claim.approvedBudget | currency:'INR':'symbol':'1.0-0' }}
+                  </span>
+                }
                 @if (claim.isOverBudget) {
                   <span class="over-budget-badge" title="Trip actual spend ({{ claim.actualSpend | currency:'INR':'symbol':'1.0-0' }}) exceeds approved budget ({{ claim.approvedBudget | currency:'INR':'symbol':'1.0-0' }})">
                     Over Trip Budget

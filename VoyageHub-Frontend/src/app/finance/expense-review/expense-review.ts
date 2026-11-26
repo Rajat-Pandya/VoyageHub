@@ -1,13 +1,14 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { VoyageService, ExpenseItem } from '../../services/voyage.service';
 import { getUserInitials } from '../../services/auth.service';
 
 @Component({
   selector: 'app-expense-review',
-  imports: [CommonModule, CurrencyPipe, FormsModule],
+  imports: [CommonModule, CurrencyPipe, DatePipe, RouterLink, FormsModule],
   templateUrl: './expense-review.html',
   styleUrl: './expense-review.css'
 })
