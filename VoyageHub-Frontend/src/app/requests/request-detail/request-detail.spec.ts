@@ -91,6 +91,7 @@ describe('RequestDetail', () => {
     expect(component.canSubmitExpense({ ...sampleDetail, status: 'Draft' })).toBe(false);
     expect(component.canModifyItinerary(sampleDetail)).toBe(true);
     expect(component.canModifyItinerary({ ...sampleDetail, status: 'Completed' })).toBe(false);
+    expect(component.backRoute).toBe('/requests');
   });
 
   it('handles modals and mutations', () => {

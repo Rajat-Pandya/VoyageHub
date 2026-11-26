@@ -8,7 +8,7 @@
     <!-- Top Bar matching Page 5 -->
     <header class="page-header detail-header">
       <div class="header-left">
-        <a routerLink="/requests" class="back-link" title="Back to Requests" aria-label="Back to Requests">
+        <a [routerLink]="backRoute" class="back-link" title="Back" aria-label="Back">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
             <path d="m15 18-6-6 6-6"/>
           </svg>
@@ -78,7 +78,7 @@
           </button>
         }
 
-        @if (d.status !== 'Draft' && d.status !== 'Completed' && d.status !== 'Rejected' && !authService.isManager() && !authService.isFinance()) {
+        @if (d.status !== 'Draft' && d.status !== 'Completed' && d.status !== 'Rejected' && d.status !== 'Cancelled' && canEditTrip(d)) {
           <button type="button" class="btn-secondary" (click)="cancelRequest()">Cancel Request</button>
         }
       </div>
@@ -200,8 +200,8 @@
       </div>
     }
 
-    <!-- Active Trip Banner if Approved -->
-    @if (d.status === 'Approved') {
+    <!-- Active Trip Banner if Approved (Owner only) -->
+    @if (d.status === 'Approved' && isOwnRequest(d)) {
       <div class="active-banner fade-in">
         <div class="active-icon">✓</div>
         <div class="active-text">
@@ -384,7 +384,7 @@
                       View Proof
                     </button>
                   }
-                  @if (canEditTrip(d)) {
+                  @if (canEditTrip(d) && d.status === 'Approved' && e.status === 'Pending') {
                     <button type="button" class="proof-attach-btn" (click)="openAttachProofModal(e)" title="Attach or replace receipt document">
                       <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
@@ -397,7 +397,7 @@
             </div>
           } @empty {
             <p class="empty-note">
-              @if (canEditTrip(d)) {
+              @if (canSubmitExpense(d)) {
                 No expenses submitted yet for this trip. Click <strong>+ Submit Expense Claim</strong> to add one.
               } @else {
                 No expenses have been submitted for this trip yet.

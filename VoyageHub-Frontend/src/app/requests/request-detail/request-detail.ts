@@ -155,6 +155,10 @@ export class RequestDetail implements OnInit {
     return !!userId && userId.toLowerCase() === d.employeeId.toLowerCase();
   }
 
+  get backRoute(): string {
+    return this.authService.isFinance() ? '/approvals' : '/requests';
+  }
+
   submitDraft(): void {
     const d = this.detail();
     if (!d || this.isSubmitting()) return;
