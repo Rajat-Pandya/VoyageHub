@@ -396,7 +396,37 @@ tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.A
 
 hh ,<
 jj kk ll mm nn pp+ 5
-pp qq ó	
+pp qq ´
+tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\ApprovalsController.cs
+
+  (
+& 6  ,$$' 7
+0 ? *
+
+= E
+ $; E
+  G K
+ +M ^
+  
+
+""% /
+""5 ;$$H N
+""Z ]$$P S
+	""q Ç$$U f
+$$ %% 
+$$ ''" )**( /≤
+tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AuditLogsController.cs
+
+  
+# 0  &
+- 9 $
+
+7 >
+ $4 <
+ &> H
+ J O
+ +Q b
+  ó	
 oC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AuthController.cs
   + ^
 " . ++/ ;== &GG/ ;[[/ ;pp/ ;
@@ -464,19 +494,7 @@ oC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.A
 êê $
 
 èè !
-êê& .≤
-tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AuditLogsController.cs
-
-  
-# 0  &
-- 9 $
-
-7 >
- $4 <
- &> H
- J O
- +Q b
-  Ù
+êê& .Ù
 tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AnalyticsController.cs
 
   2
@@ -493,22 +511,4 @@ tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.A
 
 &&: H
 &&[ l((G X
-(( )) ´
-tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\ApprovalsController.cs
-
-  (
-& 6  ,$$' 7
-0 ? *
-
-= E
- $; E
-  G K
- +M ^
-  
-
-""% /
-""5 ;$$H N
-""Z ]$$P S
-	""q Ç$$U f
-$$ %% 
-$$ ''" )**( /
+(( )) 

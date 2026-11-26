@@ -7053,183 +7053,7 @@ entityType> H
 ) 
 ; 
 }   
-}!! ·
-tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AnalyticsController.cs
-	namespace		 	
-	VoyageHub		
- 
-.		 
-Api		 
-.		 
-Controllers		 #
-;		# $
-[ 
-ApiController 
-] 
-[ 
-Route 
-( 
-$str 
-) 
-] 
-[ 
-	Authorize 
-
-(
- 
-Roles 
-= 
-$str *
-)* +
-]+ ,
-public 
-class 
-AnalyticsController  
-:! "
-ControllerBase# 1
-{ 
-private 
-readonly 
-IAnalyticsService &
-_analyticsService' 8
-;8 9
-public 
-
-AnalyticsController 
-( 
-IAnalyticsService 0
-analyticsService1 A
-)A B
-{ 
-_analyticsService 
-= 
-analyticsService ,
-;, -
-} 
-[ 
-HttpGet 
-( 
-$str 
-) 
-] 
-public 
-
-async 
-Task 
-< 
-ActionResult "
-<" # 
-AnalyticsOverviewDto# 7
->7 8
->8 9
-GetOverview: E
-(E F
-CancellationTokenF W
-cancellationTokenX i
-)i j
-{ 
-var 
-overview 
-= 
-await 
-_analyticsService .
-.. /
-GetOverviewAsync/ ?
-(? @
-cancellationToken@ Q
-)Q R
-;R S
-return 
-Ok 
-( 
-overview 
-) 
-; 
-} 
-[ 
-HttpGet 
-( 
-$str 
-)  
-]  !
-public 
-
-async 
-Task 
-< 
-ActionResult "
-<" #
-List# '
-<' ("
-EmployeeSpendReportDto( >
->> ?
->? @
->@ A
-GetEmployeeReportsB T
-(T U
-CancellationTokenU f
-cancellationTokeng x
-)x y
-{   
-var!! 
-reports!! 
-=!! 
-await!! 
-_analyticsService!! -
-.!!- .'
-GetEmployeeSpendReportAsync!!. I
-(!!I J
-cancellationToken!!J [
-)!![ \
-;!!\ ]
-return"" 
-Ok"" 
-("" 
-reports"" 
-)"" 
-;"" 
-}## 
-[%% 
-HttpGet%% 
-(%% 
-$str%% 
-)%% 
-]%% 
-public&& 
-
-async&& 
-Task&& 
-<&& 
-ActionResult&& "
-<&&" # 
-CostSummaryReportDto&&# 7
->&&7 8
->&&8 9
-GetCostReports&&: H
-(&&H I
-CancellationToken&&I Z
-cancellationToken&&[ l
-)&&l m
-{'' 
-var(( 
-report(( 
-=(( 
-await(( 
-_analyticsService(( ,
-.((, -%
-GetCostSummaryReportAsync((- F
-(((F G
-cancellationToken((G X
-)((X Y
-;((Y Z
-return)) 
-Ok)) 
-()) 
-report)) 
-))) 
-;)) 
-}** 
-}++ œ
+}!! œ
 tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\ApprovalsController.cs
 	namespace		 	
 	VoyageHub		
@@ -7422,4 +7246,180 @@ TakeAction""% /
 )**1 2
 ;**2 3
 }++ 
-},, 
+},, ·
+tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AnalyticsController.cs
+	namespace		 	
+	VoyageHub		
+ 
+.		 
+Api		 
+.		 
+Controllers		 #
+;		# $
+[ 
+ApiController 
+] 
+[ 
+Route 
+( 
+$str 
+) 
+] 
+[ 
+	Authorize 
+
+(
+ 
+Roles 
+= 
+$str *
+)* +
+]+ ,
+public 
+class 
+AnalyticsController  
+:! "
+ControllerBase# 1
+{ 
+private 
+readonly 
+IAnalyticsService &
+_analyticsService' 8
+;8 9
+public 
+
+AnalyticsController 
+( 
+IAnalyticsService 0
+analyticsService1 A
+)A B
+{ 
+_analyticsService 
+= 
+analyticsService ,
+;, -
+} 
+[ 
+HttpGet 
+( 
+$str 
+) 
+] 
+public 
+
+async 
+Task 
+< 
+ActionResult "
+<" # 
+AnalyticsOverviewDto# 7
+>7 8
+>8 9
+GetOverview: E
+(E F
+CancellationTokenF W
+cancellationTokenX i
+)i j
+{ 
+var 
+overview 
+= 
+await 
+_analyticsService .
+.. /
+GetOverviewAsync/ ?
+(? @
+cancellationToken@ Q
+)Q R
+;R S
+return 
+Ok 
+( 
+overview 
+) 
+; 
+} 
+[ 
+HttpGet 
+( 
+$str 
+)  
+]  !
+public 
+
+async 
+Task 
+< 
+ActionResult "
+<" #
+List# '
+<' ("
+EmployeeSpendReportDto( >
+>> ?
+>? @
+>@ A
+GetEmployeeReportsB T
+(T U
+CancellationTokenU f
+cancellationTokeng x
+)x y
+{   
+var!! 
+reports!! 
+=!! 
+await!! 
+_analyticsService!! -
+.!!- .'
+GetEmployeeSpendReportAsync!!. I
+(!!I J
+cancellationToken!!J [
+)!![ \
+;!!\ ]
+return"" 
+Ok"" 
+("" 
+reports"" 
+)"" 
+;"" 
+}## 
+[%% 
+HttpGet%% 
+(%% 
+$str%% 
+)%% 
+]%% 
+public&& 
+
+async&& 
+Task&& 
+<&& 
+ActionResult&& "
+<&&" # 
+CostSummaryReportDto&&# 7
+>&&7 8
+>&&8 9
+GetCostReports&&: H
+(&&H I
+CancellationToken&&I Z
+cancellationToken&&[ l
+)&&l m
+{'' 
+var(( 
+report(( 
+=(( 
+await(( 
+_analyticsService(( ,
+.((, -%
+GetCostSummaryReportAsync((- F
+(((F G
+cancellationToken((G X
+)((X Y
+;((Y Z
+return)) 
+Ok)) 
+()) 
+report)) 
+))) 
+;)) 
+}** 
+}++ 

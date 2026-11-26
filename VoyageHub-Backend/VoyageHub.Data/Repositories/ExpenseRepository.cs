@@ -56,7 +56,7 @@ public class ExpenseRepository : Repository<Expense>, IExpenseRepository
     public async Task<List<Expense>> GetExpensesByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         return await DbSet
-            .AsNoTracking()
+            .AsNoTrackingWithIdentityResolution()
             .Include(e => e.Request)
                 .ThenInclude(r => r!.Employee)
                     .ThenInclude(u => u!.Department)

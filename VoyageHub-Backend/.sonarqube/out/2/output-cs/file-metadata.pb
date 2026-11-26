@@ -15,5 +15,5 @@ sC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.A
 tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\EmployeesController.csutf-8x
 oC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AuthController.csutf-8}
 tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AuditLogsController.csutf-8}
-tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AnalyticsController.csutf-8}
-tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\ApprovalsController.csutf-8
+tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\ApprovalsController.csutf-8}
+tC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Api\Controllers\AnalyticsController.csutf-8

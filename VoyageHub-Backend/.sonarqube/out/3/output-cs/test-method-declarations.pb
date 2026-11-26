@@ -3,15 +3,18 @@ sC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.T
 ,VoyageHub.Tests.TravelRequestValidationTestsCCreateRequestAsync_WhenStartDateAfterEndDate_ReturnsValidationError{
 ,VoyageHub.Tests.TravelRequestValidationTestsKCreateRequestAsync_WhenEstimatedBudgetZeroOrNegative_ReturnsValidationErrors
 ,VoyageHub.Tests.TravelRequestValidationTestsCCreateRequestAsync_WhenBudgetExceedsPolicyLimit_AutoFlagsCompliancer
-,VoyageHub.Tests.TravelRequestValidationTestsBSubmitExpenseAsync_WhenAmountZeroOrNegative_ReturnsValidationErrorÎ
+,VoyageHub.Tests.TravelRequestValidationTestsBSubmitExpenseAsync_WhenAmountZeroOrNegative_ReturnsValidationError‚
+gC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\RetryPolicyTests.csVoyageHub.Testsf
+ VoyageHub.Tests.RetryPolicyTestsBSqlServerConfiguration_EnablesExecutionStrategyAndTransientRetriesÇ
 iC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\PolicyServiceTests.csVoyageHub.Testsh
 "VoyageHub.Tests.PolicyServiceTestsBCreatePolicyAsync_WhenDepartmentAlreadyHasPolicy_ReturnsBadRequestn
 "VoyageHub.Tests.PolicyServiceTestsHCreatePolicyAsync_ValidDepartmentWithoutPolicy_CreatesPolicyAndLogsAudit]
 "VoyageHub.Tests.PolicyServiceTests7UpdatePolicyAsync_ValidPolicy_UpdatesLimitsAndLogsAuditW
 "VoyageHub.Tests.PolicyServiceTests1DeletePolicyAsync_WhenPolicyNotFound_ReturnsFalse[
-"VoyageHub.Tests.PolicyServiceTests5PolicyEvaluator_EvaluatesDomesticVsInternationalLimit‚
-gC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\RetryPolicyTests.csVoyageHub.Testsf
- VoyageHub.Tests.RetryPolicyTestsBSqlServerConfiguration_EnablesExecutionStrategyAndTransientRetriesú
+"VoyageHub.Tests.PolicyServiceTests5PolicyEvaluator_EvaluatesDomesticVsInternationalLimitb
+"VoyageHub.Tests.PolicyServiceTests<GetAvailableDepartmentsAsync_ReturnsDepartmentsWithoutPolicyZ
+"VoyageHub.Tests.PolicyServiceTests4GetMyPolicyAsync_ReturnsCurrentUsersDepartmentPolicyU
+"VoyageHub.Tests.PolicyServiceTests/GetMyPolicyAsync_WhenNoUserOrPolicy_ReturnsNull“
 jC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\ExpenseServiceTests.csVoyageHub.TestsS
 #VoyageHub.Tests.ExpenseServiceTests,GetPendingSummaryAsync_ReturnsAggregatedDataN
 #VoyageHub.Tests.ExpenseServiceTests'SubmitExpenseAsync_NullDto_ReturnsFalse[
@@ -27,17 +30,9 @@ jC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.T
 #VoyageHub.Tests.ExpenseServiceTests/SubmitExpenseAsync_NonOwnerManager_ReturnsFalseT
 #VoyageHub.Tests.ExpenseServiceTests-AttachProofAsync_NonOwnerManager_ReturnsFalseZ
 #VoyageHub.Tests.ExpenseServiceTests3SubmitExpenseAsync_WhenTripNotApproved_ReturnsFalse]
-#VoyageHub.Tests.ExpenseServiceTests6SubmitExpenseAsync_WhenNoProofPath_LeavesProofPathNull»
-kC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\EmployeeServiceTests.csVoyageHub.Testsc
-$VoyageHub.Tests.EmployeeServiceTests;CreateEmployeeAsync_ValidInput_CreatesEmployeeAndDepartmentT
-$VoyageHub.Tests.EmployeeServiceTests,CreateEmployeeAsync_EmptyName_ReturnsFailureW
-$VoyageHub.Tests.EmployeeServiceTests/CreateEmployeeAsync_InvalidEmail_ReturnsFailureY
-$VoyageHub.Tests.EmployeeServiceTests1CreateEmployeeAsync_DuplicateEmail_ReturnsFailureZ
-$VoyageHub.Tests.EmployeeServiceTests2GetEmployeesAsync_FiltersBySearchDepartmentAndRolea
-$VoyageHub.Tests.EmployeeServiceTests9UpdateEmployeeAsync_ValidUpdate_UpdatesEmployeePropertiesU
-$VoyageHub.Tests.EmployeeServiceTests-DeleteEmployeeAsync_SelfDeletion_ReturnsErrorf
-$VoyageHub.Tests.EmployeeServiceTests>DeleteEmployeeAsync_ValidEmployee_DeletesFromDatabaseAndAudits[
-$VoyageHub.Tests.EmployeeServiceTests3BatchUploadCsvAsync_ValidCsvStream_CreatesEmployeesﬁ
+#VoyageHub.Tests.ExpenseServiceTests6SubmitExpenseAsync_WhenNoProofPath_LeavesProofPathNullQ
+#VoyageHub.Tests.ExpenseServiceTests*GetExpensesSummaryAsync_MapsOverBudgetFlaga
+#VoyageHub.Tests.ExpenseServiceTests:GetMyExpensesAsync_ReturnsUserExpensesOrEmptyWhenAnonymousè
 nC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\ExpensesControllerTests.csVoyageHub.TestsQ
 'VoyageHub.Tests.ExpensesControllerTests&UploadProof_NullFile_ReturnsBadRequest\
 'VoyageHub.Tests.ExpensesControllerTests1UploadProof_DisallowedExtension_ReturnsBadRequestU
@@ -45,7 +40,9 @@ nC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.T
 'VoyageHub.Tests.ExpensesControllerTests&AttachProof_NullFile_ReturnsBadRequestY
 'VoyageHub.Tests.ExpensesControllerTests.AttachProof_NonExistentExpense_ReturnsNotFound]
 'VoyageHub.Tests.ExpensesControllerTests2AttachProof_ValidExpense_AttachesProofAndReturnsOkJ
-'VoyageHub.Tests.ExpensesControllerTestsGetPending_ReturnsOkWithSummaryN
+'VoyageHub.Tests.ExpensesControllerTestsGetPending_ReturnsOkWithSummaryg
+'VoyageHub.Tests.ExpensesControllerTests<GetPending_WithReimbursedStatus_CallsGetExpensesSummaryAsyncF
+'VoyageHub.Tests.ExpensesControllerTestsGetMyExpenses_ReturnsOkListN
 'VoyageHub.Tests.ExpensesControllerTests#TakeAction_CallsServiceAndReturnsOkY
 'VoyageHub.Tests.ExpensesControllerTests.UploadProof_InvalidExtension_ReturnsBadRequestR
 'VoyageHub.Tests.ExpensesControllerTests'UploadProof_EmptyFile_ReturnsBadRequest`
@@ -73,12 +70,17 @@ oC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.T
 (VoyageHub.Tests.EmployeesControllerTests'BatchUpload_EmptyFile_ReturnsBadRequestR
 (VoyageHub.Tests.EmployeesControllerTests&BatchUpload_NullFile_ReturnsBadRequestP
 (VoyageHub.Tests.EmployeesControllerTests$BatchUpload_ValidCsv_ReturnsOkResultX
-(VoyageHub.Tests.EmployeesControllerTests,DownloadCsvTemplate_ReturnsFileContentResultÔ
-gC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\AuthServiceTests.csVoyageHub.Testsb
- VoyageHub.Tests.AuthServiceTests>Login_WithEmptyEmailOrPassword_Returns400WithDocumentedMessageM
- VoyageHub.Tests.AuthServiceTests)Login_WithWrongPassword_IsRejectedWith401^
- VoyageHub.Tests.AuthServiceTests:Login_WhenPasswordHashIsPlaintext_CannotLogInWithPlaintext`
- VoyageHub.Tests.AuthServiceTests<Login_WithCorrectPassword_WhenHashIsBCrypt_IsAcceptedWith200†
+(VoyageHub.Tests.EmployeesControllerTests,DownloadCsvTemplate_ReturnsFileContentResult»
+kC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\EmployeeServiceTests.csVoyageHub.Testsc
+$VoyageHub.Tests.EmployeeServiceTests;CreateEmployeeAsync_ValidInput_CreatesEmployeeAndDepartmentT
+$VoyageHub.Tests.EmployeeServiceTests,CreateEmployeeAsync_EmptyName_ReturnsFailureW
+$VoyageHub.Tests.EmployeeServiceTests/CreateEmployeeAsync_InvalidEmail_ReturnsFailureY
+$VoyageHub.Tests.EmployeeServiceTests1CreateEmployeeAsync_DuplicateEmail_ReturnsFailureZ
+$VoyageHub.Tests.EmployeeServiceTests2GetEmployeesAsync_FiltersBySearchDepartmentAndRolea
+$VoyageHub.Tests.EmployeeServiceTests9UpdateEmployeeAsync_ValidUpdate_UpdatesEmployeePropertiesU
+$VoyageHub.Tests.EmployeeServiceTests-DeleteEmployeeAsync_SelfDeletion_ReturnsErrorf
+$VoyageHub.Tests.EmployeeServiceTests>DeleteEmployeeAsync_ValidEmployee_DeletesFromDatabaseAndAudits[
+$VoyageHub.Tests.EmployeeServiceTests3BatchUploadCsvAsync_ValidCsvStream_CreatesEmployees†
 iC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\AuthorizationTests.csVoyageHub.Testsd
 "VoyageHub.Tests.AuthorizationTests>Employee_CannotReadAnotherEmployeesRequest_ReturnsForbidOrNull\
 "VoyageHub.Tests.AuthorizationTests6Employee_CannotReadAnotherEmployeesStats_ReturnsForbid^
@@ -87,7 +89,12 @@ kC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.T
 $VoyageHub.Tests.ApprovalServiceTests-TakeActionAsync_WhenStepNotFound_ReturnsFalses
 $VoyageHub.Tests.ApprovalServiceTestsKTakeActionAsync_ManagerApprove_RoutesToFinanceReviewAndActivatesFinanceStepb
 $VoyageHub.Tests.ApprovalServiceTests:TakeActionAsync_FinanceApprove_SetsRequestStatusToApprovedk
-$VoyageHub.Tests.ApprovalServiceTestsCTakeActionAsync_Reject_CancelsRemainingStepsAndMarksRequestRejected≈
+$VoyageHub.Tests.ApprovalServiceTestsCTakeActionAsync_Reject_CancelsRemainingStepsAndMarksRequestRejectedÔ
+gC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\AuthServiceTests.csVoyageHub.Testsb
+ VoyageHub.Tests.AuthServiceTests>Login_WithEmptyEmailOrPassword_Returns400WithDocumentedMessageM
+ VoyageHub.Tests.AuthServiceTests)Login_WithWrongPassword_IsRejectedWith401^
+ VoyageHub.Tests.AuthServiceTests:Login_WhenPasswordHashIsPlaintext_CannotLogInWithPlaintext`
+ VoyageHub.Tests.AuthServiceTests<Login_WithCorrectPassword_WhenHashIsBCrypt_IsAcceptedWith200≈
 nC:\Users\rajat\Downloads\Rishabh Soft\Project.NET\VoyageHub-Backend\VoyageHub.Tests\AcceptanceCriteriaTests.csVoyageHub.TestsÜ
 'VoyageHub.Tests.AcceptanceCriteriaTests[TravelRequest_Creation_OverBudget_SetsInReview_Flagged_CodeTRFormat_AndCreatesApprovalStepsc
 'VoyageHub.Tests.AcceptanceCriteriaTests8TravelRequest_SubmitDraftAsync_OnlyAllowedForDraftStatusa
