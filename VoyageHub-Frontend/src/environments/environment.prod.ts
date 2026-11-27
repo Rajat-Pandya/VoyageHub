@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://REPLACE-ME.azurewebsites.net/api',
+  apiUrl: 'https://voyagehub-api-f7dzcjbgdmb5e6gv.centralindia-01.azurewebsites.net',
   demoPassword: '',
   demoPersonas: [] as const
 };

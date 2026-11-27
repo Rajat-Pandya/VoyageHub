@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration static",
     "build:static": "ng build --configuration static",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --no-watch --coverage --coverage-reporters=lcov",
