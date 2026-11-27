@@ -16,11 +16,16 @@ namespace VoyageHub.Api.Controllers;
 public class SupportController : ControllerBase
 {
     private readonly ISupportService _supportService;
+    private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<SupportController> _logger;
 
-    public SupportController(ISupportService supportService, ILogger<SupportController> logger)
+    public SupportController(
+        ISupportService supportService,
+        ICurrentUserService currentUserService,
+        ILogger<SupportController> logger)
     {
         _supportService = supportService;
+        _currentUserService = currentUserService;
         _logger = logger;
     }
 
@@ -34,6 +39,15 @@ public class SupportController : ControllerBase
     {
         try
         {
+            if (User.IsInRole("Employee"))
+            {
+                var callerId = _currentUserService.UserId;
+                if (userId.HasValue && callerId.HasValue && userId.Value != callerId.Value)
+                {
+                    return Forbid();
+                }
+            }
+
             var tickets = await _supportService.GetTicketsAsync(status, userId, search, cancellationToken);
             return Ok(tickets);
         }
@@ -54,6 +68,15 @@ public class SupportController : ControllerBase
             if (ticket == null)
             {
                 return NotFound(new { message = "Support ticket not found." });
+            }
+
+            if (User.IsInRole("Employee"))
+            {
+                var callerId = _currentUserService.UserId;
+                if (callerId.HasValue && ticket.UserId != callerId.Value)
+                {
+                    return Forbid();
+                }
             }
 
             return Ok(ticket);

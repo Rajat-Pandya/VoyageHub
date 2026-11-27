@@ -101,6 +101,16 @@ public class ExpenseRepository : Repository<Expense>, IExpenseRepository
             .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
 
+    public async Task<Expense?> GetByProofFileNameAsync(string fileName, CancellationToken cancellationToken = default)
+    {
+        var relativePath = $"/api/expenses/proof/{fileName}";
+        return await DbSet
+            .AsNoTracking()
+            .Include(e => e.Request)
+                .ThenInclude(r => r!.Employee)
+            .FirstOrDefaultAsync(e => e.ProofPath == relativePath || e.ProofPath == fileName, cancellationToken);
+    }
+
     public async Task<List<Expense>> GetPendingExpensesByIdsAsync(List<Guid>? expenseIds, CancellationToken cancellationToken = default)
     {
         if (expenseIds != null && expenseIds.Count > 0)

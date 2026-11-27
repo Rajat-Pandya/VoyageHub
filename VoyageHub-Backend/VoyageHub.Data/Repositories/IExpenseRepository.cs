@@ -15,5 +15,6 @@ public interface IExpenseRepository : IRepository<Expense>
     Task<decimal> GetTotalPendingAmountAsync(CancellationToken cancellationToken = default);
     Task<TravelRequest?> FindTravelRequestWithEmployeeAsync(Guid requestId, CancellationToken cancellationToken = default);
     Task<Expense?> GetByIdWithRequestAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<Expense?> GetByProofFileNameAsync(string fileName, CancellationToken cancellationToken = default);
     Task<List<Expense>> GetPendingExpensesByIdsAsync(List<Guid>? expenseIds, CancellationToken cancellationToken = default);
 }

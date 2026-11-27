@@ -259,7 +259,8 @@ public class TravelRequestService : ITravelRequestService
         var callerId = _currentUserService.UserId;
         var callerRole = _currentUserService.UserRole;
 
-        var empId = string.Equals(callerRole, "Employee", StringComparison.OrdinalIgnoreCase) && callerId.HasValue
+        var empId = (string.Equals(callerRole, "Employee", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(callerRole, "Manager", StringComparison.OrdinalIgnoreCase)) && callerId.HasValue
             ? callerId.Value
             : (employeeId.HasValue && employeeId != Guid.Empty
                 ? employeeId.Value

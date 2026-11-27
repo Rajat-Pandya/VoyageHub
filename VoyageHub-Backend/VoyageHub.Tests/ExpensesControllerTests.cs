@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Moq;
 using VoyageHub.Api.Controllers;
 using VoyageHub.Business.Dtos;
 using VoyageHub.Business.Services;
+using VoyageHub.Data.Entities;
 using Xunit;
 
 namespace VoyageHub.Tests;
@@ -315,36 +317,155 @@ public class ExpensesControllerTests : IDisposable
     }
 
     [Fact]
-    public void GetProofFile_EmptyFileName_ReturnsBadRequest()
+    public async Task GetProofFile_EmptyFileName_ReturnsBadRequest()
     {
-        var result = _controller.GetProofFile("");
+        var result = await _controller.GetProofFile("");
 
         var badRequest = Assert.IsType<BadRequestObjectResult>(result);
         Assert.NotNull(badRequest.Value);
     }
 
     [Fact]
-    public void GetProofFile_FileNotFound_ReturnsNotFound()
+    public async Task GetProofFile_FileNotFound_ReturnsNotFound()
     {
-        var result = _controller.GetProofFile("nonexistent_receipt.pdf");
+        var result = await _controller.GetProofFile("nonexistent_receipt.pdf");
 
         var notFound = Assert.IsType<NotFoundObjectResult>(result);
         Assert.NotNull(notFound.Value);
     }
 
     [Fact]
-    public void GetProofFile_FileExists_ReturnsFileStreamResult()
+    public async Task GetProofFile_FileExists_Owner_ReturnsFileStreamResult()
     {
+        var ownerId = Guid.NewGuid();
+        SetUser(ownerId, "Employee");
+        _expenseServiceMock
+            .Setup(s => s.GetExpenseByProofFileNameAsync("sample_receipt.pdf", It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Expense
+            {
+                ProofPath = "/api/expenses/proof/sample_receipt.pdf",
+                Request = new TravelRequest { EmployeeId = ownerId }
+            });
+
         var receiptsDir = Path.Combine(_tempDirectory, "App_Data", "Receipts");
         Directory.CreateDirectory(receiptsDir);
         var testFilePath = Path.Combine(receiptsDir, "sample_receipt.pdf");
         File.WriteAllBytes(testFilePath, new byte[] { 0x25, 0x50, 0x44, 0x46 });
 
-        var result = _controller.GetProofFile("sample_receipt.pdf");
+        var result = await _controller.GetProofFile("sample_receipt.pdf");
 
         var fileResult = Assert.IsType<FileStreamResult>(result);
         Assert.Equal("application/pdf", fileResult.ContentType);
         Assert.Equal("sample_receipt.pdf", fileResult.FileDownloadName);
         fileResult.FileStream.Dispose();
+    }
+
+    [Fact]
+    public async Task GetProofFile_OtherEmployee_ReturnsForbid()
+    {
+        var ownerId = Guid.NewGuid();
+        var otherEmployeeId = Guid.NewGuid();
+        SetUser(otherEmployeeId, "Employee");
+        _expenseServiceMock
+            .Setup(s => s.GetExpenseByProofFileNameAsync("sample_receipt.pdf", It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Expense
+            {
+                ProofPath = "/api/expenses/proof/sample_receipt.pdf",
+                Request = new TravelRequest { EmployeeId = ownerId }
+            });
+
+        var result = await _controller.GetProofFile("sample_receipt.pdf");
+
+        Assert.IsType<ForbidResult>(result);
+    }
+
+    [Fact]
+    public async Task GetProofFile_OwnersManager_ReturnsFileStreamResult()
+    {
+        var ownerId = Guid.NewGuid();
+        var managerId = Guid.NewGuid();
+        SetUser(managerId, "Manager");
+        _expenseServiceMock
+            .Setup(s => s.GetExpenseByProofFileNameAsync("mgr_receipt.pdf", It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Expense
+            {
+                ProofPath = "/api/expenses/proof/mgr_receipt.pdf",
+                Request = new TravelRequest
+                {
+                    EmployeeId = ownerId,
+                    Employee = new User { Id = ownerId, ManagerId = managerId }
+                }
+            });
+
+        var receiptsDir = Path.Combine(_tempDirectory, "App_Data", "Receipts");
+        Directory.CreateDirectory(receiptsDir);
+        File.WriteAllBytes(Path.Combine(receiptsDir, "mgr_receipt.pdf"), new byte[] { 0x25, 0x50, 0x44, 0x46 });
+
+        var result = await _controller.GetProofFile("mgr_receipt.pdf");
+
+        var fileResult = Assert.IsType<FileStreamResult>(result);
+        fileResult.FileStream.Dispose();
+    }
+
+    [Fact]
+    public async Task GetProofFile_UnrelatedManager_ReturnsForbid()
+    {
+        var ownerId = Guid.NewGuid();
+        var actualManagerId = Guid.NewGuid();
+        var unrelatedManagerId = Guid.NewGuid();
+        SetUser(unrelatedManagerId, "Manager");
+        _expenseServiceMock
+            .Setup(s => s.GetExpenseByProofFileNameAsync("sample_receipt.pdf", It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Expense
+            {
+                ProofPath = "/api/expenses/proof/sample_receipt.pdf",
+                Request = new TravelRequest
+                {
+                    EmployeeId = ownerId,
+                    Employee = new User { Id = ownerId, ManagerId = actualManagerId }
+                }
+            });
+
+        var result = await _controller.GetProofFile("sample_receipt.pdf");
+
+        Assert.IsType<ForbidResult>(result);
+    }
+
+    [Theory]
+    [InlineData("Finance")]
+    [InlineData("Admin")]
+    public async Task GetProofFile_FinanceOrAdmin_ReturnsFileStreamResult(string role)
+    {
+        var ownerId = Guid.NewGuid();
+        SetUser(Guid.NewGuid(), role);
+        _expenseServiceMock
+            .Setup(s => s.GetExpenseByProofFileNameAsync("fin_receipt.pdf", It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Expense
+            {
+                ProofPath = "/api/expenses/proof/fin_receipt.pdf",
+                Request = new TravelRequest { EmployeeId = ownerId }
+            });
+
+        var receiptsDir = Path.Combine(_tempDirectory, "App_Data", "Receipts");
+        Directory.CreateDirectory(receiptsDir);
+        File.WriteAllBytes(Path.Combine(receiptsDir, "fin_receipt.pdf"), new byte[] { 0x25, 0x50, 0x44, 0x46 });
+
+        var result = await _controller.GetProofFile("fin_receipt.pdf");
+
+        var fileResult = Assert.IsType<FileStreamResult>(result);
+        fileResult.FileStream.Dispose();
+    }
+
+    private void SetUser(Guid userId, string role)
+    {
+        var identity = new ClaimsIdentity(new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+            new Claim(ClaimTypes.Role, role)
+        }, "TestAuth");
+        _controller.ControllerContext = new ControllerContext
+        {
+            HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal(identity) }
+        };
     }
 }

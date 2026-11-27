@@ -27,7 +27,14 @@ public class SupportService : ISupportService
 
     public async Task<List<SupportTicketDto>> GetTicketsAsync(string? status, Guid? userId, string? search, CancellationToken cancellationToken = default)
     {
-        var tickets = await _supportTicketRepository.GetTicketsAsync(status, userId, search, cancellationToken);
+        var effectiveUserId = userId;
+        if (string.Equals(_currentUserService.UserRole, "Employee", StringComparison.OrdinalIgnoreCase) &&
+            _currentUserService.UserId.HasValue)
+        {
+            effectiveUserId = _currentUserService.UserId.Value;
+        }
+
+        var tickets = await _supportTicketRepository.GetTicketsAsync(status, effectiveUserId, search, cancellationToken);
 
         return tickets.Select(t => new SupportTicketDto
         {
@@ -98,11 +105,12 @@ public class SupportService : ISupportService
             }
         }
 
-        // Find user if provided
+        // Always bind ticket ownership to the authenticated caller (ignore dto.UserId)
         User? user = null;
-        if (dto.UserId.HasValue && dto.UserId.Value != Guid.Empty)
+        var callerId = _currentUserService.UserId;
+        if (callerId.HasValue && callerId.Value != Guid.Empty)
         {
-            user = await _supportTicketRepository.FindUserByIdAsync(dto.UserId.Value, cancellationToken);
+            user = await _supportTicketRepository.FindUserByIdAsync(callerId.Value, cancellationToken);
         }
 
         var ticket = new SupportTicket
@@ -118,7 +126,7 @@ public class SupportService : ISupportService
             CallbackNumber = dto.CallbackNumber?.Trim(),
             Status = "Open",
             AssignedAgent = "Corporate Travel Desk",
-            UserId = user?.Id ?? dto.UserId,
+            UserId = user?.Id,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };

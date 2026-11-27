@@ -91,7 +91,7 @@ public class TravelRequestsController : ControllerBase
     {
         if (dto == null) return BadRequest(new { message = "Invalid request data." });
 
-        if (User.IsInRole("Employee"))
+        if (User.IsInRole("Employee") || User.IsInRole("Manager"))
         {
             employeeId = _currentUserService.UserId;
         }

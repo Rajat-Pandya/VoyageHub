@@ -19,4 +19,5 @@ public interface IExpenseService
     Task<(bool Success, string Message)> BatchPayoutAsync(BatchPayoutDto? dto, CancellationToken cancellationToken = default);
     Task<string> ExportPayoutCsvAsync(string? status, CancellationToken cancellationToken = default);
     Task<(bool Success, string Message, string? ProofPath)> AttachProofAsync(Guid id, string proofPath, CancellationToken cancellationToken = default);
+    Task<Expense?> GetExpenseByProofFileNameAsync(string fileName, CancellationToken cancellationToken = default);
 }

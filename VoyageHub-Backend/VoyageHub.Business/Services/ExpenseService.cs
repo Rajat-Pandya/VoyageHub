@@ -519,6 +519,11 @@ public class ExpenseService : IExpenseService
         return (true, "Proof document attached successfully.", proofPath);
     }
 
+    public async Task<Expense?> GetExpenseByProofFileNameAsync(string fileName, CancellationToken cancellationToken = default)
+    {
+        return await _expenseRepository.GetByProofFileNameAsync(fileName, cancellationToken);
+    }
+
     private bool IsOwnerOrAdmin(Guid requestOwnerId)
     {
         var callerId = _currentUserService.UserId;

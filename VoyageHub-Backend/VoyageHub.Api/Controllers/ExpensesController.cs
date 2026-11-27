@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -206,7 +207,7 @@ public class ExpensesController : ControllerBase
 
     [HttpGet("proof/{fileName}")]
     [Authorize(Roles = "Employee,Manager,Finance,Admin")]
-    public IActionResult GetProofFile(string fileName)
+    public async Task<IActionResult> GetProofFile(string fileName, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(fileName))
         {
@@ -214,6 +215,17 @@ public class ExpensesController : ControllerBase
         }
 
         var cleanName = Path.GetFileName(fileName);
+        var expense = await _expenseService.GetExpenseByProofFileNameAsync(cleanName, cancellationToken);
+        if (expense == null)
+        {
+            return NotFound(new { message = "Receipt document not found." });
+        }
+
+        if (!CanAccessExpenseProof(expense))
+        {
+            return Forbid();
+        }
+
         var receiptsDir = Path.Combine(_environment.ContentRootPath, "App_Data", "Receipts");
         var filePath = Path.Combine(receiptsDir, cleanName);
 
@@ -234,5 +246,35 @@ public class ExpensesController : ControllerBase
 
         var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
         return File(stream, contentType, cleanName, enableRangeProcessing: true);
+    }
+
+    private bool CanAccessExpenseProof(VoyageHub.Data.Entities.Expense expense)
+    {
+        if (User.IsInRole("Finance") || User.IsInRole("Admin"))
+        {
+            return true;
+        }
+
+        var callerIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            ?? User.FindFirst("sub")?.Value
+            ?? User.FindFirst("id")?.Value;
+
+        if (!Guid.TryParse(callerIdStr, out var callerId))
+        {
+            return false;
+        }
+
+        var ownerId = expense.Request?.EmployeeId;
+        if (ownerId.HasValue && ownerId.Value == callerId)
+        {
+            return true;
+        }
+
+        if (User.IsInRole("Manager") && expense.Request?.Employee?.ManagerId == callerId)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
