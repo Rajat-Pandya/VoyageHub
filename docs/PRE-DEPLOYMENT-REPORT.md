@@ -283,3 +283,70 @@ cd VoyageHub-Frontend && npm run build:static
 ### Audit Cleanup Confirmed
 - Throwaway database `VoyageHub_PreDeploy` on `.\SQLEXPRESS06` was **dropped** (`DB_ID('VoyageHub_PreDeploy')` = `NULL`).
 - Temporary directory `%TEMP%\voyagehub-predeploy` was **removed** (`TEMP_EXISTS=False`).
+
+---
+
+## Re-Audit (Post-Fix Verification)
+
+**Branch:** `feature/pre-deploy-fixes` (commits `0992102` .. `912408a`)  
+**Verdict:** **GO WITH FIXES** — All 5 blockers and all actionable hardening warnings are resolved and verified. One deploy-time action remains (`environment.prod.ts` `apiUrl`), plus two environment-dependent checks marked `NOT VERIFIED`.
+
+### Status of Earlier Blockers & Warnings
+
+| Item | Previous Status | Current Status | Verification Evidence |
+| :--- | :---: | :---: | :--- |
+| Schema mismatch (`IsInternational`, `RejectionReason`, `OriginalCurrency`, `OriginalAmount`, `ExchangeRate`) | BLOCKER | **PASS** | Added to `database/VoyageHub_Schema.azure.sql` & `database/VoyageHub_Schema.sql`; duplicate root script deleted; `SchemaScriptMatchesModelTests` passes (`107/107` backend tests); populated-DB `SET NOEXEC ON` guard verified in `sqlcmd`. |
+| Connection string fail-fast bypassed (`appsettings.json`) | BLOCKER | **PASS** | Removed `ConnectionStrings` from `appsettings.json`; Production startup from `publish/` without `ConnectionStrings__DefaultConnection` fails fast (`InvalidOperationException`). |
+| CORS fail-fast missing (`Program.cs`) | BLOCKER | **PASS** | Production startup without `Cors__AllowedOrigins` fails fast (`InvalidOperationException`). |
+| Unauthenticated endpoints (`personas`, `csv-template`) | BLOCKER | **PASS** | `GET /api/auth/personas` returns `404` outside Development unless `Features:EnableDemoPersonas=true`; `PRESET_PERSONAS` stripped from prod JS bundle (`vikram.malhotra@voyagehub.in -> False`); `GET /api/employees/csv-template` returns `401` anonymous, `403` Employee, `200` Admin. |
+| IDOR / missing ownership (`SupportService`, `GetProofFile`, Manager `Create`) | BLOCKER | **PASS** | `OwnershipAuthorizationTests` & `ExpensesControllerTests` pass; dry-run `GET /api/support/tickets/{otherId}` returns `403`, `POST /api/travelrequests` for Manager forces token `UserId`. |
+| Forwarded headers & HSTS (`Program.cs`) | WARNING | **PASS** | `UseForwardedHeaders` (`XForwardedFor \| XForwardedProto`) + `UseHsts()` outside Development added. |
+| Exception message leak in 500s (`AuthController`, `SupportController`) | WARNING | **PASS** | Replaced `$"Database error: {ex.Message}"` with generic message; exception still logged via `ILogger`. |
+| Hardcoded JWT fallback key (`Program.cs`, `JwtTokenService`, `appsettings.example.json`) | WARNING | **PASS** | Removed fallback key; dev uses `dotnet user-secrets` (`Jwt:Key` present). |
+| `.gitignore` gaps (`publish/`, `.env`, `.env.*`, `secrets.json`) | WARNING | **PASS** | Added to `.gitignore`. |
+| Stale test counts in docs | WARNING | **PASS** | Updated `README.md`, `CHANGELOG.md`, `context.md`. |
+| `environment.prod.ts` `apiUrl` placeholder | ACTION REQUIRED | **ACTION REQUIRED (at deploy)** | Must replace `https://REPLACE-ME.azurewebsites.net/api` with real App Service URL before final `npm run build:static`. |
+| Frontend bundle budget warning (`736.30 kB` vs `500 kB`) | WARNING | **WARNING (non-blocking)** | Build succeeds; estimated transfer size `157.65 kB`. |
+| Linux container dry run (`mcr.microsoft.com/dotnet/aspnet:10.0`) | NOT VERIFIED | **NOT VERIFIED** | Docker Desktop Linux Engine daemon not running (`open //./pipe/dockerDesktopLinuxEngine`). |
+| SonarQube live scan | NOT VERIFIED | **NOT VERIFIED** | Local SonarQube (`localhost:9000`) not running. |
+
+### Re-Verification Summary
+- **Backend Build & Tests:** `dotnet build -c Release` (`0` warnings, `0` errors); `dotnet test` (**107 passed**, `0` failed, `0` skipped).
+- **Frontend Tests & Static Build:** `npm test` (**69 passed**, `0` failed); `npm run build:static` succeeded (`736.30 kB` raw / `157.65 kB` transfer).
+- **Production Dry Run (`VoyageHub_PreDeploy` on `.\SQLEXPRESS06`, port `5199`):**
+  - `GET /` -> `200` (`651 ms`), `/swagger/index.html` -> `404`, `/api/auth/personas` -> `404`, `/api/employees/csv-template` -> `401` (anon) / `403` (Emp) / `200` (Adm).
+  - Manager list (`200`, 7 items), Manager spoofed create (`201`), full E2E flow (`POST /api/travelrequests` `201` -> Manager approve `200` -> Finance approve `200` -> `POST /api/expenses` `200` -> Finance reimburse `200` -> `GET /api/auditlogs` recorded all 6 events).
+- **Secrets Scan:** 0 secrets in tracked files.
+
+### Final Azure App Service Settings Table
+
+| Name | Example Value | Secret |
+| :--- | :--- | :---: |
+| `ASPNETCORE_ENVIRONMENT` | `Production` | No |
+| `ConnectionStrings__DefaultConnection` | `Server=tcp:<server>.database.windows.net,1433;Database=voyagehub-db;User ID=<user>;Password=<pw>;Encrypt=True;TrustServerCertificate=False;` | Yes |
+| `Jwt__Key` | `<48-byte-random-base64-string>` | Yes |
+| `Jwt__Issuer` | `VoyageHub.Api` | No |
+| `Jwt__Audience` | `VoyageHub.Client` | No |
+| `Jwt__ExpiryMinutes` | `1440` | No |
+| `Cors__AllowedOrigins__0` | `https://<your-static-app>.azurestaticapps.net` | No |
+| `Swagger__Enabled` | `false` | No |
+| `Features__EnableDemoPersonas` | `false` | No |
+| `FrontendUrl` | `https://<your-static-app>.azurestaticapps.net` | No |
+
+### Exact Deployment Commands
+
+```powershell
+# 1. Backend publish & forward-slash zip for Azure App Service Linux
+dotnet publish VoyageHub-Backend/VoyageHub.Api/VoyageHub.Api.csproj -c Release -o ./publish
+python -c "import os, zipfile; z=zipfile.ZipFile('api-deploy.zip','w',zipfile.ZIP_DEFLATED); [z.write(os.path.join(r,f), os.path.relpath(os.path.join(r,f),'publish').replace(os.sep,'/')) for r,_,fs in os.walk('publish') for f in fs]; z.close()"
+az webapp deploy --resource-group rg-voyagehub-free --name <api-app-name> --src-path ./api-deploy.zip --type zip
+
+# 2. Frontend static build (after updating environment.prod.ts apiUrl)
+cd VoyageHub-Frontend
+npm run build:static
+# Deploy VoyageHub-Frontend/dist/AngularBasics/browser/ to Azure Static Web Apps
+```
+
+### Cleanup Confirmed
+- Throwaway database `VoyageHub_PreDeploy` dropped (`DB_ID('VoyageHub_PreDeploy') = NULL`).
+- Temporary directory `%TEMP%\voyagehub-predeploy` removed (`TEMP_EXISTS=False`).
