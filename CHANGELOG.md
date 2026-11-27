@@ -10,11 +10,11 @@ All notable changes to the VoyageHub project implemented across branches are doc
   - Authored comprehensive unit tests in `VoyageHub.Tests/ExpenseServiceTests.cs` (10 tests) covering pending summaries, expense submission validations, single claim approval/rejection, and batch reimbursement payouts.
   - Authored comprehensive unit tests in `VoyageHub.Tests/EmployeeServiceTests.cs` (9 tests) covering employee creation validations, database uniqueness checks, updates, deletions, and CSV stream processing.
   - Authored comprehensive controller tests in `VoyageHub.Tests/EmployeesControllerTests.cs` (13 tests) and `VoyageHub.Tests/ExpensesControllerTests.cs` (17 tests) covering file validations, error handling, and proof document streaming.
-  - Expanded backend test suite from 48 to 77 passing xUnit tests.
+  - Expanded backend test suite with `ExpenseServiceTests`, `EmployeeServiceTests`, `EmployeesControllerTests`, and `ExpensesControllerTests`.
 - **Frontend Test Suite & Coverage Reporting**:
   - Integrated `@vitest/coverage-v8` (`^4.1.12`) to enable V8 code coverage collection during `ng test`.
   - Configured LCOV coverage report generation (`coverage/AngularBasics/lcov.info`) and wired `sonar.javascript.lcov.reportPaths` in `sonar-project.properties`.
-  - Authored unit test suites for `AuthService` and `EmployeeManagementComponent`, expanding frontend tests to 49 passing Vitest tests.
+  - Authored unit test suites for `AuthService` and `EmployeeManagementComponent`.
 
 ### Fixed & Refactored
 - **ReDoS Vulnerability Prevention** (`7e80d4f`): Added explicit 250ms execution timeouts to regex evaluation in `EmployeeService.cs` (`csharpsquid:S6444`).

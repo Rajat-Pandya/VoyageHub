@@ -54,7 +54,7 @@ public class SupportController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error fetching support tickets");
-            return StatusCode(500, new { message = $"Database error: {ex.Message}" });
+            return StatusCode(500, new { message = "An unexpected error occurred. Please try again later." });
         }
     }
 
@@ -84,7 +84,7 @@ public class SupportController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error fetching support ticket");
-            return StatusCode(500, new { message = $"Database error: {ex.Message}" });
+            return StatusCode(500, new { message = "An unexpected error occurred. Please try again later." });
         }
     }
 
@@ -105,7 +105,7 @@ public class SupportController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error creating support ticket");
-            return StatusCode(500, new { message = $"Database error: {ex.Message}" });
+            return StatusCode(500, new { message = "An unexpected error occurred. Please try again later." });
         }
     }
 
@@ -126,7 +126,7 @@ public class SupportController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error updating support ticket status");
-            return StatusCode(500, new { message = $"Database error: {ex.Message}" });
+            return StatusCode(500, new { message = "An unexpected error occurred. Please try again later." });
         }
     }
 }

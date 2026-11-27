@@ -23,10 +23,14 @@ project.assets.json
 
 # Local and environment appsettings
 appsettings.*.local.json
+.env
+.env.*
+secrets.json
 
 # Build results
 [Dd]ebug/
 [Rr]elease/
+publish/
 x64/
 x86/
 [Aa]rm/

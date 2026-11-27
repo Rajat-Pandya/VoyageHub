@@ -149,14 +149,14 @@ npm start
 ```powershell
 dotnet test VoyageHub-Backend\VoyageHub.Tests\VoyageHub.Tests.csproj
 ```
-*(Runs 77 passing unit and integration tests covering services, controllers, and authorization logic.)*
+*(Runs the xUnit unit and integration test suite covering services, controllers, and authorization logic.)*
 
 #### Frontend Tests (Vitest)
 ```powershell
 cd VoyageHub-Frontend
 npm test
 ```
-*(Runs 49 passing Vitest tests and outputs coverage report to `coverage/AngularBasics/lcov.info`.)*
+*(Runs the Vitest test suite and outputs coverage report to `coverage/AngularBasics/lcov.info`.)*
 
 ---
 
@@ -181,7 +181,7 @@ Both projects in VoyageHub adhere to strict SonarQube Clean as You Code (CaYC) s
 | Metric | Backend (`VoyageHub-Backend`) | Frontend (`VoyageHub-Frontend`) | Quality Gate Threshold | Status |
 | :--- | :---: | :---: | :---: | :---: |
 | **Quality Gate Status** | **OK (PASSED)** | **OK (PASSED)** | All conditions passing | **PASSED** |
-| **Automated Tests** | **77 passed** (0 failed) | **49 passed** (0 failed) | 100% passing | **PASSED** |
+| **Automated Tests** | **100% passing** (0 failed) | **100% passing** (0 failed) | 100% passing | **PASSED** |
 | **Coverage on New Code** | **83.1%** | **100.0%** | $\ge 80.0\%$ | **PASSED** |
 | **Duplications on New Code** | **0.0%** | **0.0%** | $\le 3.0\%$ | **PASSED** |
 | **New Open Violations** | **0** | **0** | $= 0$ | **PASSED** |

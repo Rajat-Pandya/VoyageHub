@@ -49,7 +49,7 @@ public class AuthController : ControllerBase
             return StatusCode(500, new AuthResponseDto
             {
                 Success = false,
-                Message = $"Database error: {ex.Message}"
+                Message = "An unexpected error occurred. Please try again later."
             });
         }
     }
@@ -83,7 +83,7 @@ public class AuthController : ControllerBase
             return StatusCode(500, new AuthResponseDto
             {
                 Success = false,
-                Message = $"Database error: {ex.Message}"
+                Message = "An unexpected error occurred. Please try again later."
             });
         }
     }
@@ -103,7 +103,7 @@ public class AuthController : ControllerBase
             return StatusCode(500, new AuthResponseDto
             {
                 Success = false,
-                Message = $"Database error: {ex.Message}"
+                Message = "An unexpected error occurred. Please try again later."
             });
         }
     }
@@ -129,7 +129,7 @@ public class AuthController : ControllerBase
             return StatusCode(500, new ForgotPasswordResponseDto
             {
                 Success = false,
-                Message = $"Database error: {ex.Message}"
+                Message = "An unexpected error occurred. Please try again later."
             });
         }
     }

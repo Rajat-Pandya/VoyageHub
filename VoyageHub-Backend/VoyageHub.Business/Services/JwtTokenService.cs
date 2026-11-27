@@ -20,7 +20,11 @@ public class JwtTokenService : IJwtTokenService
 
     public string GenerateToken(User user)
     {
-        var keyString = _configuration["Jwt:Key"] ?? "VoyageHubSuperSecretKeyForJwtAuthenticationTokenSigning2026!";
+        var keyString = _configuration["Jwt:Key"];
+        if (string.IsNullOrWhiteSpace(keyString))
+        {
+            throw new InvalidOperationException("JWT signing key ('Jwt:Key') is missing or not configured.");
+        }
         var issuer = _configuration["Jwt:Issuer"] ?? "VoyageHub.Api";
         var audience = _configuration["Jwt:Audience"] ?? "VoyageHub.Client";
         var expiryMinutes = int.TryParse(_configuration["Jwt:ExpiryMinutes"], out var exp) ? exp : 1440;

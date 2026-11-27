@@ -1,5 +1,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
@@ -59,8 +60,12 @@ if (!builder.Environment.IsDevelopment())
 }
 else
 {
+    if (string.IsNullOrWhiteSpace(jwtKey) || jwtKey.Length < 32)
+    {
+        throw new InvalidOperationException("Startup failed: JWT signing key ('Jwt:Key') must be configured via user-secrets or environment variables (minimum 32 characters).");
+    }
+
     // Fallback for local development when not yet in user-secrets or appsettings
-    jwtKey ??= "VoyageHubSuperSecretKeyForJwtAuthenticationTokenSigning2026!";
     connectionString ??= "Server=(localdb)\\MSSQLLocalDB;Database=AngularAuthDb;Trusted_Connection=True;TrustServerCertificate=True;";
 }
 
@@ -179,6 +184,13 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
 var app = builder.Build();
 
 var swaggerEnabled = builder.Configuration.GetValue<bool>("Swagger:Enabled", builder.Environment.IsDevelopment());
@@ -197,6 +209,13 @@ if (swaggerEnabled)
 app.MapGet("/", () => swaggerEnabled
     ? Results.Redirect("/swagger")
     : Results.Text("VoyageHub API is running.", "text/plain"));
+
+app.UseForwardedHeaders();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
 
 app.UseCors("AllowAngularApp");
 
