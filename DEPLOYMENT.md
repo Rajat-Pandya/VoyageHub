@@ -59,6 +59,7 @@ flowchart TD
    - `Jwt__Audience`: `VoyageHub.Client`
    - `Swagger__Enabled`: `false` (or `true` if inspecting endpoints in staging)
    - `Cors__AllowedOrigins__0`: `https://<your-static-app>.azurestaticapps.net`
+   - `FrontendUrl`: `https://<your-static-app>.azurestaticapps.net`
 3. Publish and deploy:
    ```powershell
    cd VoyageHub-Backend\VoyageHub.Api

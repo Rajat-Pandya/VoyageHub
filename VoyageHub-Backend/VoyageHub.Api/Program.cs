@@ -15,9 +15,28 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 var jwtKey = builder.Configuration["Jwt:Key"];
 var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "VoyageHub.Api";
 var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "VoyageHub.Client";
+var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
 
 if (!builder.Environment.IsDevelopment())
 {
+    var envOrigins = Environment.GetEnvironmentVariables().Keys
+        .Cast<string>()
+        .Where(k => k.StartsWith("Cors__AllowedOrigins", StringComparison.OrdinalIgnoreCase) ||
+                    k.StartsWith("Cors:AllowedOrigins", StringComparison.OrdinalIgnoreCase))
+        .Select(k => Environment.GetEnvironmentVariable(k))
+        .Where(v => !string.IsNullOrWhiteSpace(v))
+        .Select(v => v!)
+        .ToArray();
+
+    if (envOrigins.Length > 0)
+    {
+        corsOrigins = envOrigins;
+    }
+    else
+    {
+        corsOrigins = corsOrigins.Where(o => !o.Contains("localhost", StringComparison.OrdinalIgnoreCase) && !o.Contains("127.0.0.1")).ToArray();
+    }
+
     if (string.IsNullOrWhiteSpace(connectionString))
     {
         throw new InvalidOperationException("Startup failed: Database connection string 'ConnectionStrings:DefaultConnection' is missing or not configured.");
@@ -31,6 +50,11 @@ if (!builder.Environment.IsDevelopment())
     if (jwtKey.Length < 32)
     {
         throw new InvalidOperationException($"Startup failed: JWT signing key ('Jwt:Key') must be at least 32 characters long (found {jwtKey.Length}).");
+    }
+
+    if (corsOrigins.Length == 0)
+    {
+        throw new InvalidOperationException("Startup failed: CORS allowed origins ('Cors:AllowedOrigins') are missing or not configured.");
     }
 }
 else
@@ -111,29 +135,6 @@ builder.Services.AddControllers()
     });
 
 // 4. Configure CORS policy for Angular frontend
-var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
-
-if (!builder.Environment.IsDevelopment())
-{
-    var envOrigins = Environment.GetEnvironmentVariables().Keys
-        .Cast<string>()
-        .Where(k => k.StartsWith("Cors__AllowedOrigins", StringComparison.OrdinalIgnoreCase) ||
-                    k.StartsWith("Cors:AllowedOrigins", StringComparison.OrdinalIgnoreCase))
-        .Select(k => Environment.GetEnvironmentVariable(k))
-        .Where(v => !string.IsNullOrWhiteSpace(v))
-        .Select(v => v!)
-        .ToArray();
-
-    if (envOrigins.Length > 0)
-    {
-        corsOrigins = envOrigins;
-    }
-    else
-    {
-        corsOrigins = corsOrigins.Where(o => !o.Contains("localhost", StringComparison.OrdinalIgnoreCase) && !o.Contains("127.0.0.1")).ToArray();
-    }
-}
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
