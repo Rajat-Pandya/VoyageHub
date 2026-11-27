@@ -100,7 +100,6 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpGet("csv-template")]
-    [AllowAnonymous]
     public IActionResult DownloadCsvTemplate()
     {
         var csvBuilder = new StringBuilder();

@@ -58,6 +58,12 @@ public class AuthController : ControllerBase
     [AllowAnonymous]
     public async Task<ActionResult<List<UserProfileDto>>> GetQuickPersonas(CancellationToken cancellationToken)
     {
+        var enabled = _configuration.GetValue<bool>("Features:EnableDemoPersonas", _environment.IsDevelopment());
+        if (!enabled)
+        {
+            return NotFound();
+        }
+
         var users = await _authService.GetPersonasAsync(cancellationToken);
         return Ok(users);
     }
