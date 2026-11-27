@@ -68,6 +68,7 @@ CREATE TABLE dbo.TRAVEL_REQUESTS (
     RequestCode NVARCHAR(50) NOT NULL UNIQUE, -- e.g. #TR-2048
     EmployeeId UNIQUEIDENTIFIER NOT NULL,
     Destination NVARCHAR(200) NOT NULL,
+    IsInternational BIT NOT NULL DEFAULT 0,
     Purpose NVARCHAR(500) NOT NULL,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
@@ -133,7 +134,11 @@ CREATE TABLE dbo.EXPENSES (
     Category NVARCHAR(50) NOT NULL, -- Airfare, Hotel, Meals, Transport
     Amount DECIMAL(18,2) NOT NULL,
     ProofPath NVARCHAR(500) NULL,
-    Status NVARCHAR(50) NOT NULL DEFAULT 'Pending', -- Pending, Approved, Rejected
+    Status NVARCHAR(50) NOT NULL DEFAULT 'Pending', -- Pending, Reimbursed, Rejected
+    RejectionReason NVARCHAR(500) NULL,
+    OriginalCurrency NVARCHAR(10) NOT NULL DEFAULT 'INR',
+    OriginalAmount DECIMAL(18,2) NOT NULL DEFAULT 0.00,
+    ExchangeRate DECIMAL(18,4) NOT NULL DEFAULT 1.0000,
     SubmittedAt DATETIME2 DEFAULT SYSUTCDATETIME(),
     CONSTRAINT FK_EXPENSES_REQUESTS FOREIGN KEY (RequestId) REFERENCES dbo.TRAVEL_REQUESTS(Id) ON DELETE CASCADE
 );

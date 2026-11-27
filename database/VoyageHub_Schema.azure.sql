@@ -1,7 +1,18 @@
 -- ====================================================================
--- VoyageHub: Enterprise Corporate Travel & Expense Management Database
--- Database: AngularAuthDb
+-- WARNING: DESTRUCTIVE SCRIPT!
+-- This script DROPS ALL VoyageHub tables and recreates them from scratch.
+-- It refuses to execute if dbo.USERS already contains rows.
 -- ====================================================================
+-- VoyageHub: Enterprise Corporate Travel & Expense Management Database
+-- Database: Azure SQL Database (voyagehub-db)
+-- ====================================================================
+
+IF OBJECT_ID('dbo.USERS', 'U') IS NOT NULL AND EXISTS (SELECT 1 FROM dbo.USERS)
+BEGIN
+    RAISERROR('ABORTED: dbo.USERS already contains rows. Refusing to run destructive schema script on a populated database.', 16, 1);
+    SET NOEXEC ON;
+END
+GO
 
 -- 1. Drop existing VoyageHub tables in reverse foreign key order if needed
 IF OBJECT_ID('dbo.SUPPORT_TICKETS', 'U') IS NOT NULL DROP TABLE dbo.SUPPORT_TICKETS;
@@ -59,6 +70,7 @@ CREATE TABLE dbo.TRAVEL_REQUESTS (
     RequestCode NVARCHAR(50) NOT NULL UNIQUE, -- e.g. #TR-2048
     EmployeeId UNIQUEIDENTIFIER NOT NULL,
     Destination NVARCHAR(200) NOT NULL,
+    IsInternational BIT NOT NULL DEFAULT 0,
     Purpose NVARCHAR(500) NOT NULL,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
@@ -124,7 +136,11 @@ CREATE TABLE dbo.EXPENSES (
     Category NVARCHAR(50) NOT NULL, -- Airfare, Hotel, Meals, Transport
     Amount DECIMAL(18,2) NOT NULL,
     ProofPath NVARCHAR(500) NULL,
-    Status NVARCHAR(50) NOT NULL DEFAULT 'Pending', -- Pending, Approved, Rejected
+    Status NVARCHAR(50) NOT NULL DEFAULT 'Pending', -- Pending, Reimbursed, Rejected
+    RejectionReason NVARCHAR(500) NULL,
+    OriginalCurrency NVARCHAR(10) NOT NULL DEFAULT 'INR',
+    OriginalAmount DECIMAL(18,2) NOT NULL DEFAULT 0.00,
+    ExchangeRate DECIMAL(18,4) NOT NULL DEFAULT 1.0000,
     SubmittedAt DATETIME2 DEFAULT SYSUTCDATETIME(),
     CONSTRAINT FK_EXPENSES_REQUESTS FOREIGN KEY (RequestId) REFERENCES dbo.TRAVEL_REQUESTS(Id) ON DELETE CASCADE
 );
@@ -269,4 +285,7 @@ INSERT INTO dbo.AUDIT_LOGS (Id, EntityType, EntityId, Action, ActorId, ActorName
 GO
 
 PRINT 'VoyageHub Schema & Seed Data populated successfully!';
+GO
+
+SET NOEXEC OFF;
 GO
