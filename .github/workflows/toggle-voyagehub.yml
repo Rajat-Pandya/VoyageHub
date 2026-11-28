@@ -15,34 +15,16 @@ jobs:
   toggle:
     runs-on: ubuntu-latest
     steps:
-      - name: Set Web App State
-        env:
-          PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          ACTION: ${{ inputs.action }}
-          APP_NAME: voyagehub-api
-          SCM_HOST: voyagehub-api-f7dzcjbgdmb5e6gv.scm.centralindia-01.azurewebsites.net
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Start or Stop Web App
         run: |
-          set -e
-
-          # Extract publish credentials from the publish profile XML
-          USER_NAME=$(echo "$PUBLISH_PROFILE" | python3 -c "import sys, xml.etree.ElementTree as ET; root = ET.fromstring(sys.stdin.read()); p = root.find(\".//publishProfile[@publishMethod='MSDeploy']\"); print(p.attrib.get('userName', ''))")
-          USER_PWD=$(echo "$PUBLISH_PROFILE" | python3 -c "import sys, xml.etree.ElementTree as ET; root = ET.fromstring(sys.stdin.read()); p = root.find(\".//publishProfile[@publishMethod='MSDeploy']\"); print(p.attrib.get('userPWD', ''))")
-
-          if [ -z "$USER_NAME" ] || [ -z "$USER_PWD" ]; then
-            echo "Could not parse MSDeploy credentials from AZURE_WEBAPP_PUBLISH_PROFILE"
-            exit 1
-          fi
-
-          if [ "$ACTION" = "stop" ]; then
-            TARGET_STATE="Stopped"
+          if [ "${{ inputs.action }}" = "stop" ]; then
+            az webapp stop --name voyagehub-api --resource-group voyagehub-rg
           else
-            TARGET_STATE="Running"
+            az webapp start --name voyagehub-api --resource-group voyagehub-rg
           fi
-
-          curl -fsSL -u "$USER_NAME:$USER_PWD" \
-            -X POST "https://$SCM_HOST/api/webapp" \
-            -H "Content-Type: application/json" \
-            -d "{\"state\":\"$TARGET_STATE\"}"
-
-          echo ""
-          echo "Requested state '$TARGET_STATE' for $APP_NAME."
+          az webapp show --name voyagehub-api --resource-group voyagehub-rg --query "{name:name,state:state}" -o table
